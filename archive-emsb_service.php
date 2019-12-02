@@ -1,5 +1,16 @@
 <?php 
 get_header();
+
+if(isset($_POST["submit"])){
+  $to = $_POST['email']; //sendto@example.com
+  $subject = 'The subject';
+  $body = 'The email body content';
+  $headers = array('Content-Type: text/html; charset=UTF-8');
+
+  wp_mail( $to, $subject, $body, $headers );
+
+}
+
 ?>
     
   <div class="em-services-container">
@@ -201,10 +212,6 @@ get_header();
                 <button id="pmButton"  class="btn btn-light mb-2 em-pm-button ml-1" ><span>After noon ( PM )</span></button>
             </div>
 
-            
-
-            <!-- <ul id="emShowAM" class="dynamic-slot slots list-group"></ul> -->
-
             <div class="slots-container">
                 <ul class="slots list-group" id="emShowAM"></ul>
                 <ul class="slots list-group" id="emShowPM"></ul>
@@ -214,7 +221,7 @@ get_header();
         </div>
 
         <div class="em-booking-form-container">
-          <form class="needs-validation" novalidate>
+          <form method="post" class="needs-validation" novalidate>
             <div class="em-booking-form-fields">
               <div class="form-row">
                 <div class="col-md-12 mb-3">
