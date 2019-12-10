@@ -44,43 +44,43 @@ if ( !class_exists( 'emsb_service_booking_plugin_base_class' ) ) {
 
         public function emsb_service_post_type() {
 
-            $type               = 'emsb_service';
-            $slug               = 'emsb_service';
-            $name               = 'Booking Services';
-            $singular_name      = 'Booking Service';
-            
-            $labels = array(
-                'name'                  => $name,
-                'singular_name'         => $singular_name,
-                'add_new'               => 'Add New',
-                'add_new_item'          => 'Add New '   . $singular_name,
-                'edit_item'             => 'Edit '      . $singular_name,
-                'new_item'              => 'New '       . $singular_name,
-                'all_items'             => 'All '       . $name,
-                'view_item'             => 'View '      . $name,
-                'search_items'          => 'Search '    . $name,
-                'not_found'             => 'No '        . strtolower($name) . ' found',
-                'not_found_in_trash'    => 'No '        . strtolower($name) . ' found in Trash',
-                'parent_item_colon'     => '',
-                'menu_name'             => $name
-            );
-            $args = array(
-                'labels'                => $labels,
-                'public'                => true,
-                'publicly_queryable'    => true,
-                'show_ui'               => true,
-                'show_in_menu'          => true,
-                'query_var'             => true,
-                'rewrite'               => array( 'slug' => $slug ),
-                'capability_type'       => 'post',
-                'has_archive'           => true,
-                'hierarchical'          => true,
-                'menu_icon'             => 'dashicons-buddicons-buddypress-logo',
-                'menu_position'         => 26,
-                'supports'              => array( 'title', 'excerpt', 'thumbnail', 'author'),
-                'show_in_rest'          => true
-            );
-            register_post_type( $type, $args );
+                $type               = 'emsb_service';
+                $slug               = 'emsb_service';
+                $name               = 'Booking Services';
+                $singular_name      = 'Booking Service';
+                
+                $labels = array(
+                    'name'                  => $name,
+                    'singular_name'         => $singular_name,
+                    'add_new'               => 'Add New',
+                    'add_new_item'          => 'Add New '   . $singular_name,
+                    'edit_item'             => 'Edit '      . $singular_name,
+                    'new_item'              => 'New '       . $singular_name,
+                    'all_items'             => 'All '       . $name,
+                    'view_item'             => 'View '      . $name,
+                    'search_items'          => 'Search '    . $name,
+                    'not_found'             => 'No '        . strtolower($name) . ' found',
+                    'not_found_in_trash'    => 'No '        . strtolower($name) . ' found in Trash',
+                    'parent_item_colon'     => '',
+                    'menu_name'             => $name
+                );
+                $args = array(
+                    'labels'                => $labels,
+                    'public'                => true,
+                    'publicly_queryable'    => true,
+                    'show_ui'               => true,
+                    'show_in_menu'          => true,
+                    'query_var'             => true,
+                    'rewrite'               => array( 'slug' => $slug ),
+                    'capability_type'       => 'post',
+                    'has_archive'           => true,
+                    'hierarchical'          => true,
+                    'menu_icon'             => 'dashicons-buddicons-buddypress-logo',
+                    'menu_position'         => 26,
+                    'supports'              => array( 'title', 'excerpt', 'thumbnail', 'author'),
+                    'show_in_rest'          => true
+                );
+                register_post_type( $type, $args );
         }
 
         //adding meta box to save additional meta data for the content type
@@ -289,10 +289,6 @@ if ( !class_exists( 'emsb_service_booking_plugin_base_class' ) ) {
 
             // *************** Service Provider Email Address **************//
             $email_address = get_bloginfo('admin_email');
-            // if( !( $_POST[ 'emsb_service_provider_email' ] ) ) {
-            //     update_post_meta( $post_id, 'emsb_service_provider_email', $email_address );
-                
-            // } 
             if(isset( $_POST[ 'emsb_service_provider_email' ] )) {
                 update_post_meta( $post_id, 'emsb_service_provider_email', $_POST[ 'emsb_service_provider_email' ] );
             } else {
@@ -305,7 +301,7 @@ if ( !class_exists( 'emsb_service_booking_plugin_base_class' ) ) {
 
         
         
-        function get_custom_post_type_template( $archive_template ) {
+        function get_emsb_archive_template( $archive_template ) {
             global $post;
         
             if ( is_post_type_archive ( 'emsb_service' ) ) {
@@ -319,120 +315,88 @@ if ( !class_exists( 'emsb_service_booking_plugin_base_class' ) ) {
 
         function em_reservation_enqueue_public_scripts(){
   
-                wp_enqueue_style('bootstrap-css', plugin_dir_url(__FILE__) . 'assets/public/css/bootstrap.min.css', array(), '1.1', false );
+                wp_enqueue_style('bootstrap-css', plugin_dir_url(__FILE__) . 'assets/css/bootstrap.min.css', array(), '1.1', false );
                 wp_enqueue_style('aicon-style', plugin_dir_url(__FILE__) . 'calendar/aicon/style.css', array(), '1.1', false );
                 wp_enqueue_style('pseudo-ripple', plugin_dir_url(__FILE__) . 'calendar/css/jquery-pseudo-ripple.css', array(), '1.1', false );
                 wp_enqueue_style('nao-calendar', plugin_dir_url(__FILE__) . 'calendar/css/jquery-nao-calendar.css', array(), '1.1', false );
                 wp_enqueue_style('emr-style', plugin_dir_url(__FILE__) . 'assets/public/css/style.css', array(), '1.1', false );
 
-                wp_enqueue_script('jquery-js', plugin_dir_url(__FILE__) . 'assets/public/js/jquery.min.js', array(), '1.1', true );
-                wp_enqueue_script('popper-js', plugin_dir_url(__FILE__) . 'assets/public/js/popper.min.js', array(), '1.1', true );
-                wp_enqueue_script('bootstrap-js', plugin_dir_url(__FILE__) . 'assets/public/js/bootstrap.min.js', array(), '1.1', true );
+                wp_enqueue_script('jquery-js', plugin_dir_url(__FILE__) . 'assets/js/jquery.min.js', array(), '1.1', true );
+                wp_localize_script( 'jquery-js', 'frontend_ajax_object',
+                    array( 
+                        'ajaxurl' => admin_url( 'admin-ajax.php' ),
+                        'data_var_1' => 'value 1',
+                        'data_var_2' => 'value 2',
+                    )
+                );
+                wp_enqueue_script('popper-js', plugin_dir_url(__FILE__) . 'assets/js/popper.min.js', array(), '1.1', true );
+                wp_enqueue_script('bootstrap-js', plugin_dir_url(__FILE__) . 'assets/js/bootstrap.min.js', array(), '1.1', true );
                 wp_enqueue_script('pseudo-ripple-js', plugin_dir_url(__FILE__) . 'calendar/jquery-pseudo-ripple.js', array(), '1.1', true );
                 wp_enqueue_script('nao-calendar-js', plugin_dir_url(__FILE__) . 'calendar/jquery-nao-calendar.js', array(), '1.1', true );
                 wp_enqueue_script('emr-script-js', plugin_dir_url(__FILE__) . 'assets/public/js/script.js', array(), '1.1', true );
+                
 
         }
 
-        /**
-         * food_menu constructor.
-         *
-         * When class is instantiated
-         */
-        public function __construct() {
-            // Register the post type
-            add_action('init', array($this, 'emsb_service_post_type'));
-            add_action('add_meta_boxes', array($this,'emsb_add_meta_boxes_to_booking_service')); //add meta boxes
-            add_action('save_post', array($this,'emsb_save_all_posts_types_meta_fields_meta')); //add meta boxes
-            add_filter( 'archive_template',  array($this,'get_custom_post_type_template') ) ; //add meta boxes
-            add_action( 'wp_enqueue_scripts', array($this,'em_reservation_enqueue_public_scripts')  );
-            
 
-        }
-        
-        
-        
-    }
+                /**
+                 * 
+                 *
+                 * When class is instantiated
+                 */
+                public function __construct() {
+                    
+                    add_action('init', array($this, 'emsb_service_post_type'));// Register the post type
+                    add_action('add_meta_boxes', array($this,'emsb_add_meta_boxes_to_booking_service')); //add meta boxes
+                    add_action('save_post', array($this,'emsb_save_all_posts_types_meta_fields_meta')); //add meta boxes
+                    add_filter( 'archive_template',  array($this,'get_emsb_archive_template') ) ; //add meta boxes
+                    add_action( 'wp_enqueue_scripts', array($this,'em_reservation_enqueue_public_scripts')  );
+                    
+
+                }
+                
+                
+                
+            }
 }
 /**
- * Instantiate class, creating post type
+ * Instantiate class
  */
 $emsb_service_booking_plugin = new emsb_service_booking_plugin_base_class();
 
 
 
+class emsb_database {
+    public function __construct() {
+        register_activation_hook( __FILE__, array($this,'create_emsb_table'));
+    }
+
+    public function create_emsb_table(){
+            global $wpdb;
+            $sql_enquiry = "CREATE TABLE IF NOT EXISTS {$wpdb->prefix}emsb_bookings (
+            `id` int(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+            `service_id` int(11) NOT NULL,
+            `service_name` varchar(200),
+            `service_price` text,
+            `booked_slot_id` text,
+            `booked_date` text,
+            `booked_time_slot` text,
+            `customer_name` varchar(200),
+            `customer_email` text,
+            `customer_phone` text
+            ) ENGINE=MyISAM DEFAULT CHARSET=utf8";
 
 
+        require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+        dbDelta( $sql_enquiry );
 
-// add_filter('template_include', 'emsb_service_booking_template');
+    }
+}
+$wpuf = new emsb_database();
 
-// function emsb_service_booking_template( $template ) {
-//   if ( is_post_type_archive('emsb_service') ) {
-//     $theme_files = array('archive-emsb_service.php', 'EM-Reservation/archive-emsb_service.php');
-//     $exists_in_theme = locate_template($theme_files, false);
-//     if ( $exists_in_theme != '' ) {
-//       return $exists_in_theme;
-//     } else {
-//       return plugin_dir_path(__FILE__) . 'archive-emsb_service.php';
-//     }
-//   }
-//   return $template;
-// }
-
-// function get_custom_post_type_template( $archive_template ) {
-//     global $post;
-
-//     if ( is_post_type_archive ( 'emsb_service' ) ) {
-//          $archive_template = dirname( __FILE__ ) . '/archive-emsb_service.php';
-//     }
-//     return $archive_template;
-// }
-
-// add_filter( 'archive_template', 'get_custom_post_type_template' ) ;
-
-// $archive_template = dirname( __FILE__ ) . '/archive-emsb_service.php';
-// var_dump($archive_template);
-
-
+include( plugin_dir_path( __FILE__ ) . 'emsb-ajax-calls.php');
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//  add_action( 'wp_enqueue_scripts', 'em_reservation_enqueue_public_scripts' );
-
-// function em_reservation_enqueue_public_scripts(){
-
-//     wp_enqueue_style('bootstrap-css', plugin_dir_url(__FILE__) . 'assets/public/css/bootstrap.min.css');
-//     wp_enqueue_style('aicon-style', plugin_dir_url(__FILE__) . 'calendar/aicon/style.css');
-//     wp_enqueue_style('pseudo-ripple', plugin_dir_url(__FILE__) . 'calendar/css/jquery-pseudo-ripple.css');
-//     wp_enqueue_style('nao-calendar', plugin_dir_url(__FILE__) . 'calendar/css/jquery-nao-calendar.css');
-//     wp_enqueue_style('emr-style', plugin_dir_url(__FILE__) . 'assets/public/css/style.css');
-
-
-//     wp_enqueue_script('jquery-js', plugin_dir_url(__FILE__) . 'assets/public/js/jquery.min.js');
-//     wp_enqueue_script('popper-js', plugin_dir_url(__FILE__) . 'assets/public/js/popper.min.js');
-//     wp_enqueue_script('bootstrap-js', plugin_dir_url(__FILE__) . 'assets/public/js/bootstrap.min.js');
-//     wp_enqueue_script('nao-calendar-js', plugin_dir_url(__FILE__) . 'calendar/jquery-nao-calendar.js');
-//     wp_enqueue_script('pseudo-ripple-js', plugin_dir_url(__FILE__) . 'calendar/jquery-pseudo-ripple.js');
-//     wp_enqueue_script('emr-script-js', plugin_dir_url(__FILE__) . 'assets/public/js/script.js');
-
-
-// }

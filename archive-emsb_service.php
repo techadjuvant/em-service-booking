@@ -1,16 +1,82 @@
 <?php 
-get_header();
 
-if(isset($_POST["submit"])){
-  $to = $_POST['email']; //sendto@example.com
-  $subject = 'The subject';
-  $body = 'The email body content';
+
+if(isset($_POST['submit'])){
+  
+  global $wpdb;
+
+  $service_id = $_POST['emsb_selected_service_id'];
+  $service_name = $_POST['emsb_selected_service'];
+  $service_price = $_POST['emsb_selected_service_price'];
+  $booked_slot_id = $_POST["emsb_selected_slot_id"];
+  $booked_date = $_POST["emsb_selected_service_date"];
+  $booked_time_slot = $_POST["emsb_selected_time_slot"];
+
+  $customer_name = $_POST['fullName'];
+  $customer_email = $_POST['email'];
+  $customer_phone = $_POST["telephone"];
+
+  $table_name = $wpdb->prefix . "emsb_bookings";
+
+  $dataInsert = $wpdb->insert( $table_name, array(
+      'service_id' => $service_id,
+      'service_name' => $service_name,
+      'service_price' => $service_price,
+      'booked_slot_id' => $booked_slot_id,
+      'booked_date' => $booked_date,
+      'booked_time_slot' => $booked_time_slot,
+      'customer_name' => $customer_name,
+      'customer_email' => $customer_email,
+      'customer_phone' => $customer_phone
+  ) );
+
+
+
+
   $headers = array('Content-Type: text/html; charset=UTF-8');
 
-  wp_mail( $to, $subject, $body, $headers );
+
+  $name = $_POST["fullName"];
+  $phone = $_POST["telephone"];
+  $email = $_POST["email"];
+
+
+  $admin_email_address = "motahar1201123@gmail.com";
+  $admin_email_subject = "A booking is placed";
+
+  $customer_email_address = $email;
+  $customer_email_subject = "Booking confirmed";
+
+  // prepare email body text
+
+  $email_Body .= "Name: " .$name ."\n";
+  $email_Body .= "Mobile Phone No. : " .$phone ."\n";
+  $email_Body .= "Email: " .$email ."\n";
+
+
+  $wp_customer_mail = wp_mail( $customer_email_address, $customer_email_subject, $email_Body, $headers );
+
+  $wp_admin_mail = wp_mail( $admin_email_address, $admin_email_subject, $email_Body, $headers );
+
+
+  // if($wp_customer_mail){
+  //   echo "wp_customer_mail works";
+  // } else {
+  //   echo "wp_customer_mail doesn't works";
+  // }
+
+
+  // if($wp_admin_mail){
+  //   echo "wp_admin_mail works";
+  // } else {
+  //   echo "wp_admin_mail doesn't works";
+  // }
+
+  
 
 }
 
+get_header();
 ?>
     
   <div class="em-services-container">
@@ -18,18 +84,19 @@ if(isset($_POST["submit"])){
       <div class="row">
         <div class="col-lg-8 offset-lg-2"> 
           <header class="d-flex justify-content-center py-4"> <h2> Book Apointment </h2> </header>
-
+          
           <?php
 		    /* Start the Loop */
 		    while ( have_posts() ) : the_post(); ?>
           <article id="post-<?php the_ID(); ?>"  class="em-service">
+              
                 <div class="em-service-excerpt d-flex align-items-center">
                     <?php if ( has_post_thumbnail() ) : ?>
                         <?php the_post_thumbnail(); ?>
                     <?php endif; ?>
                     <div class="em-service-excerpt-info">
-                      <h4> <?php the_title(); ?> </h4> 
-                      
+                      <h4 id="emsb-service-name"> <?php the_title(); ?> </h4> 
+                      <label id="emsb-service-id" class="d-none"> <input type="number" value="<?php the_ID(); ?>"> </label>
                       <p>
                           <?php 
                             $emsb_display_service_title = get_post_meta( get_the_ID(), 'emsb_display_service_title', true );
@@ -48,7 +115,7 @@ if(isset($_POST["submit"])){
                         <?php 
                           $emsb_display_service_price = get_post_meta( get_the_ID(), 'emsb_display_service_price', true );
                           if($emsb_display_service_price){ ?>
-                            <p class="em-reservation-service-price">Price: <b> <?php echo $emsb_display_service_price; ?> </b> </p>
+                            <p class="em-reservation-service-price">Price: <b id="emsb-service-price"> <?php echo $emsb_display_service_price; ?> </b> </p>
                         <?php 
                             }
                         ?>
@@ -200,12 +267,16 @@ if(isset($_POST["submit"])){
         <!-- All Selected Info Ends  -->
 
         <div class="em-calendar-wrapper">
+          
           <div class="em-reservation-calendar"></div>
         </div>
         
 
 
         <div class="em-timer">
+            <div class="emsb-loading-gif">
+              <img src="<?php echo plugin_dir_url( __FILE__ ) . 'assets/img/loading.gif'; ?>">
+            </div>
           <div id="em-accordion" class="my-3 em-am-time ">
             <div class="am-or-pm">
                 <button id="amButton"  class="btn btn-light mb-2 em-am-button active mr-1"><span>Before noon ( AM )</span></button>
@@ -213,6 +284,7 @@ if(isset($_POST["submit"])){
             </div>
 
             <div class="slots-container">
+              
                 <ul class="slots list-group" id="emShowAM"></ul>
                 <ul class="slots list-group" id="emShowPM"></ul>
             </div>
@@ -270,16 +342,31 @@ if(isset($_POST["submit"])){
                       </div>
                     </div>
                 </fieldset>
-                
             </div>
-            <button id="submitForm" class="btn btn-light em-confirm-booking-button" type="submit"> Coifirm Booking </button>
+            <div class="emsb-hidden-fields d-none">
+                <fieldset class="form-group">
+                    <input type="number" name="emsb_selected_service_id" id="emsb_selected_service_id" value="112" >
+                    <input type="text" name="emsb_selected_service" id="emsb_selected_service" value="service-one" >
+                    <input type="text" name="emsb_selected_slot_id" id="emsb_selected_slot_id" value="AM112" >
+                    <input type="text" name="emsb_selected_service_provider_email" id="emsb_selected_service_provider_email" value="motahar1201123@gmail.com" >
+                    <input type="text" name="emsb_selected_service_date" id="emsb_selected_service_date" value="12/12/2019" >
+                    <input type="text" name="emsb_selected_time_slot" id="emsb_selected_time_slot" value="12:30 PM - 1:30 PM" >
+                    <input type="text" name="emsb_selected_service_price" id="emsb_selected_service_price" value="$1000" >
+                    <input name="emsb-create-nonce" id="emsb-create-nonce" value="<?php echo wp_create_nonce("emsb_booked_slot_nonce"); ?>" >
+                </fieldset>
+            </div>
+
+            <button id="submitForm" class="btn btn-light em-confirm-booking-button" name="submit" type="submit" value="Submit"> Confirm Booking </button>
           </form>
         </div>
         
-
+        
     </div>
+    
+    
   </div>
+  
 
 <?php
-get_footer();
+  get_footer();
 ?>

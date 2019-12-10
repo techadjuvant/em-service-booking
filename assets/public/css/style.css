@@ -161,6 +161,7 @@ article.em-service main {
 
 .em-timer {
     display: none;
+    position: relative;
 }
 
 .em-selected-date {
@@ -345,18 +346,18 @@ article.em-service main {
     padding: 15px;
     color: #9b9b9b;
 }
-
-.em-calendar-wrapper .nao-month td.active {
-    box-shadow: 0 0 0 2px #fff inset;
-    background-color: #8382ff;
-    color: #fff;
-    overflow: hidden;
-}
 .em-calendar-wrapper .nao-month td.today {
     box-shadow: 0 0 0 2px #ffffff inset;
     overflow: hidden;
-    background-color: #e3e3e3;
+    background-color: #b9ffc9;
 }
+.em-calendar-wrapper .nao-month td.active {
+    box-shadow: 0 0 0 2px #fff inset;
+    background-color: #c5c5ff;
+    color: #fff;
+    overflow: hidden;
+}
+
 .em-timer .list-group-item {
     position: relative;
     margin: 0px;
@@ -409,14 +410,44 @@ article.em-service main {
 }
 .off-day {
     cursor: not-allowed !important;
-    background-color: rgb(243, 243, 243) !important;
+    background-color: rgb(255, 230, 230) !important;
     color: red !important;
+    box-shadow: rgb(255, 255, 255) 0px 0px 0px 2px inset !important;
+}
+.passed-day {
+    cursor: not-allowed !important;
+    background-color: rgb(241, 241, 241) !important;
+    color: rgb(225, 225, 225) !important;
     box-shadow: rgb(255, 255, 255) 0px 0px 0px 2px inset !important;
 }
 
 .em-service-meta-info {
     display: none;
 }
+.em-calendar-wrapper {
+    position: relative;
+}
+.slots-container {
+    position: relative;
+}
+.emsb-loading-gif {
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    background-color: #fff;
+    opacity: .9;
+    
+}
+
+.emsb-loading-gif img {
+    width: 50px;
+}
+
 
 /* Responsiveness */
 

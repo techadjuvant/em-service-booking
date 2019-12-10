@@ -3,6 +3,8 @@ $(document).ready(function() {
 
     $(".em-reservation-div-position").css("display","none");
     $("#emShowPM").css("display","none");
+    // $(".emsb-loading-gif").css("display","none");
+    
     
 
     // Select a service
@@ -21,10 +23,7 @@ $(document).ready(function() {
         $('.em-get-selected-service').html(selectedService);
         
         setTimeout(disableOffDays,500);
-
-        setTimeout(amSlotCalculate,2000);
-
-        setTimeout(pmSlotCalculate,2000);
+        disablePassedDays();
 
         
         
@@ -87,9 +86,11 @@ $(document).ready(function() {
     var selectedYear = "";
     var months = "";
     var selectedMonth = "";
+    var selectedMonthNumber = "";
     var selectedDate = "";
     var days = "";
     var selectedDay = "";
+    var selectedDateMonthYear = "";
 
     $('.em-reservation-calendar').calendar({
 
@@ -105,39 +106,79 @@ $(document).ready(function() {
 
             selectedMonth = months[date.getMonth()];
 
+            selectedMonthNumber = date.getMonth();
+
             selectedDate = date.getDate();
 
             days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
 
             selectedDay = days[date.getDay()];
 
+            selectedDateMonthYear = selectedDate + selectedMonthNumber + selectedYear;
+
+        }
+    });
+// Disable Off days
+function disablePassedDays(){
+
+    // Return today's date and time
+    var currentTime = new Date();
+
+    // returns the day of the month (from 1 to 31)
+    var currentDate = currentTime.getDate();
+    console.log(currentDate);
+
+    // returns the month (from 0 to 11)
+    var currentMonth = currentTime.getMonth() + 1;
+
+    // returns the year (four digits)
+    var currentYear = currentTime.getFullYear();
+
+    var activeYearValue = $(".em-reservation-calendar .year-month .month-head div").text();
+    activeYearValue = parseInt(activeYearValue, 10);
+    
+    var activeMonthValue = $(".em-reservation-calendar .year-body tr td.active").data("month");
+    activeMonthValue = parseInt(activeMonthValue, 10);
+
+    var todayDateValue = $(".em-reservation-calendar tbody.month-days tr td.today").data("date");
+    var eachDateValue = $(".em-reservation-calendar tbody.month-days tr td").data("date");
+
+    if(currentYear === activeYearValue && currentMonth === activeMonthValue){
+        for(i=1;i<todayDateValue; i++){
+            passedDay = $(".em-reservation-calendar tbody.month-days tr td[data-date='" + eachDateValue++ +"']").addClass("off-day passed-day").attr('disabled', true).attr('title', 'Date Passed');
+        }
+    }
+
+
+    // Onclick on arrow button
+    $(".em-reservation-calendar button.ic").on("click", function(){
+        var activeYearValue = $(".em-reservation-calendar .year-month .month-head div").text();
+        activeYearValue = parseInt(activeYearValue, 10);
+
+        var activeMonthValue = $(".em-reservation-calendar .year-body tr td.active").data("month");
+        activeMonthValue = parseInt(activeMonthValue, 10);
+
+        var todayDateValue = $(".em-reservation-calendar tbody.month-days tr td.today").data("date");
+        var eachDateValue = $(".em-reservation-calendar tbody.month-days tr td").data("date");
+
+        var i = 0;
+        if(currentYear == activeYearValue && currentMonth == activeMonthValue){
+            for(i;i<todayDateValue; i++){
+                passedDay = $(".em-reservation-calendar tbody.month-days tr td[data-date='" + eachDateValue++ +"']").addClass("off-day passed-day").attr('disabled', true).attr('title', 'Date Passed');
+            }
+        } else if(currentYear >= activeYearValue && currentMonth >= activeMonthValue){
+            todayDateValue = 1;
+            console.log(todayDateValue);
+            for(i;i<todayDateValue; i++){
+                passedDay = $(".em-reservation-calendar tbody.month-days tr td").addClass("off-day passed-day").attr('disabled', true).attr('title', 'Date Passed');
+            }
         }
     });
 
-    $(".em-reservation-calendar td.ripple-element").on("click", function(){
 
-        var isDisabled = $(this).hasClass("off-day"); 
-
-        if(!isDisabled){
-
-            $('.date').html(selectedDay + ',  ' + selectedDate + ' ' + selectedMonth + ' ' + selectedYear);
-
-            $(".em-calendar-wrapper").css("display","none");
-
-            $(".em-timer").slideDown(800);
-
-            $(".em-change-date-btn").slideDown("slow");
-
-            $(".em-selected-date-wrapper").slideDown("slow");
-
-        };
-    });
-
-
-
+}
 
     // Disable Off days
-
     function disableOffDays(){
 
         var offDays;
@@ -148,8 +189,7 @@ $(document).ready(function() {
 
         }).get();
         
-        // console.log(offDays);
-
+        console.log(offDays);
         jQuery.each( offDays, function( i, val ) {
 
             offDay = $(".em-reservation-calendar tbody.month-days tr").children('td:nth-child('+ val +')').addClass("off-day").attr('disabled', true).attr('title', 'Off Day');
@@ -183,6 +223,11 @@ $(document).ready(function() {
 
                     $(".em-selected-date-wrapper").slideDown("slow");
 
+                    $(".emsb-loading-gif").css("display","flex");
+
+                    setTimeout(amSlotCalculate,400);
+                    setTimeout(pmSlotCalculate,400);
+
                 };
             });
         
@@ -191,6 +236,44 @@ $(document).ready(function() {
     }
 
     // Disable Off days Ends
+
+
+
+    // Date selection
+    
+    $(".em-reservation-calendar td.ripple-element").on("click", function(){
+        
+        var isDisabled = $(this).hasClass("off-day"); 
+
+        if(!isDisabled){
+
+            
+
+            $('.date').html(selectedDay + ',  ' + selectedDate + ' ' + selectedMonth + ' ' + selectedYear);
+
+            $(".em-calendar-wrapper").css("display","none");
+
+            $(".em-timer").slideDown(800);
+
+            $(".em-change-date-btn").slideDown("slow");
+
+            $(".em-selected-date-wrapper").slideDown("slow");
+
+            $(".emsb-loading-gif").css("display","flex");
+
+            setTimeout(amSlotCalculate,400);
+            setTimeout(pmSlotCalculate,400);
+
+            
+
+        };
+
+
+        
+
+    });
+
+    
 
 
 
@@ -212,12 +295,13 @@ $(document).ready(function() {
 
     function amSlotCalculate() {
         
-            // Get Selected Service Slot Duration
+        
+        // Get Selected Service Slot Duration
         var amTimeSlotSelected = parseInt($("article.em-service.selected .am-time-slot .amSlotDuration").val(), 10);
 
             amTimeSlot = amTimeSlotSelected;
 
-            // Get Selected Service Start and End Time (AM)
+        // Get Selected Service Start and End Time (AM)
         var amTimeOne = $("article.em-service.selected #amSlotStarts").val().split(':'), amTimeTwo = $("article.em-service.selected #amSlotEnds").val().split(':');
         
         var amHoursOne = parseInt(amTimeOne[0], 10), 
@@ -257,7 +341,6 @@ $(document).ready(function() {
 
         // Create starting Total Mins from provided starting time by the admin ( amHoursOne, amMinsDiffers )
         var amStartingHourToMins = amHoursOne*60 + amMinsOne - amTimeSlot;
-        console.log(amMinsOne);
 
         // Create Ending Total Mins from provided starting time by the admin ( amHoursOne, amMinsDiffers )
         var amEndingHourToMins = amHoursOne*60 + amMinsOne;
@@ -270,6 +353,8 @@ $(document).ready(function() {
         var amEndingHour;
 
         var amEndingMins;
+        // Make empty before appending the slots
+        var amSlot = $('#emShowAM').empty();
 
         // Start for loop for SlotNumber times
         for(i=1; i<=amTimeSlotNumber; ++i){
@@ -330,7 +415,43 @@ $(document).ready(function() {
 
             }
 
-            var amSlot = $('#emShowAM').append('<li class="list-group-item"> <label> <span> '+ amShowStartingHour +':'+ amShowStartingMins +' AM </span> - <span> '+ showAmEndingHour +':'+ showAmEndingMins +' AM </span> </label> <button type="button" class="btn btn-light em-select-slot-button available">Select Slot</button>  </li>');
+            // Slot Id
+            var emsb_selected_service_id = $("article.em-service.selected #emsb-service-id input").val();
+            var amSlotId = i + "AM"+ emsb_selected_service_id +  selectedDateMonthYear;
+            
+            /// check slot availabilty with ajax
+            var emsb_create_nonce = $("#emsb-create-nonce").val();
+            var time_slot = amSlotId;
+            var data = {
+                'action': 'emsb_booked_slot',
+                'security': emsb_create_nonce,
+                'check_availability': time_slot
+            };
+
+            // We can also pass the url value separately from ajaxurl for front end AJAX implementations
+            var add_check_class;
+            $.ajax({
+                type: 'POST',
+                url: frontend_ajax_object.ajaxurl,
+                data: data,
+                success: function(response) {
+
+                    var check_availability = $.trim(response);
+                    
+                    if(check_availability == "available"){
+                        add_check_class = "available";
+                        amSlot = $('#emShowAM').append('<li class="list-group-item" data-slotId="'+ amSlotId +'"> <label> <input class="d-none" type="text" value="'+ amSlotId +'"> <span> '+ amShowStartingHour +':'+ amShowStartingMins +' AM </span> - <span> '+ showAmEndingHour +':'+ showAmEndingMins +' AM </span> </label> <button type="button" class="btn btn-light em-select-slot-button available">Available</button>  </li>');
+                    } else if(check_availability == "booked") {
+                        add_check_class = "booked";
+                        amSlot = $('#emShowAM').append('<li class="list-group-item" data-slotId="'+ amSlotId +'"> <label> <input class="d-none" type="text" value="'+ amSlotId +'"> <span> '+ amShowStartingHour +':'+ amShowStartingMins +' AM </span> - <span> '+ showAmEndingHour +':'+ showAmEndingMins +' AM </span> </label> <button type="button" class="btn btn-light em-select-slot-button booked">Booked</button>  </li>');
+                    }
+                    
+                },
+                async: false
+
+              });
+            
+            
 
         };
 
@@ -339,12 +460,11 @@ $(document).ready(function() {
     }
     // Create dynamic time slot for AM Ends 
 
-    //***********************************************/
-    // Create dynamic time slot for PM
-    //***********************************************/
+    //***********************************************/ 
+    // Create dynamic time slot for PM 
+    //***********************************************/ 
 
     function pmSlotCalculate() {
-
             // Get Selected Service Slot Duration
         var pmTimeSlotSelected = parseInt($("article.em-service.selected .pm-time-slot .pmSlotDuration").val(), 10);
 
@@ -402,6 +522,9 @@ $(document).ready(function() {
         var pmEndingHour;
 
         var pmEndingMins;
+
+        // Make empty before appending the slots
+        var pmSlot = $('#emShowPM').empty();
 
         // Start for loop for SlotNumber times
         for(i=1; i<=pmTimeSlotNumber; ++i){
@@ -478,11 +601,47 @@ $(document).ready(function() {
 
             }
 
+            // Slot Id
+            var emsb_selected_service_id = $("article.em-service.selected #emsb-service-id input").val();
+            var pmSlotId = i + "PM"+ emsb_selected_service_id +  selectedDateMonthYear;
+            console.log(pmSlotId);
+
+            /// check slot availabilty with ajax
+            var emsb_create_nonce = $("#emsb-create-nonce").val();
+            var time_slot = pmSlotId;
+            var data = {
+                'action': 'emsb_booked_slot',
+                'security': emsb_create_nonce,
+                'check_availability': time_slot
+            };
+
+            // We can also pass the url value separately from ajaxurl for front end AJAX implementations
+            var add_check_class;
+            $.ajax({
+                type: 'POST',
+                url: frontend_ajax_object.ajaxurl,
+                data: data,
+                success: function(response) {
+                    var check_availability = $.trim(response);
+                    if(check_availability == "available"){
+                        add_check_class = "available";
+                        pmSlot = $('#emShowPM').append('<li class="list-group-item" data-slotId="'+ pmSlotId +'"> <label> <input class="d-none" type="text" value="'+ pmSlotId +'"> <span> '+ pmShowStartingHour +':'+ pmShowStartingMins +' PM </span> - <span> '+ showPmEndingHour +':'+ showPmEndingMins +' PM </span> </label> <button type="button" class="btn btn-light em-select-slot-button available">Available</button>  </li>'); 
+                    } else if(check_availability == "booked") {
+                        add_check_class = "booked";
+                        pmSlot = $('#emShowPM').append('<li class="list-group-item" data-slotId="'+ pmSlotId +'"> <label> <input class="d-none" type="text" value="'+ pmSlotId +'"> <span> '+ pmShowStartingHour +':'+ pmShowStartingMins +' PM </span> - <span> '+ showPmEndingHour +':'+ showPmEndingMins +' PM </span> </label> <button type="button" class="btn btn-light em-select-slot-button booked">Booked</button>  </li>');
+                    }
+                    
+                },
+                async: false
+
+              });
+
+              $(".emsb-loading-gif").fadeOut(2000);
+                
             
-
-            var amSlot = $('#emShowPM').append('<li class="list-group-item"> <label> <span> '+ pmShowStartingHour +':'+ pmShowStartingMins +' PM </span> - <span> '+ showPmEndingHour +':'+ showPmEndingMins +' PM </span> </label> <button type="button" class="btn btn-light em-select-slot-button available">Select Slot</button>  </li>');
-
         };
+
+        
         SlotSelection();
 
     }
@@ -506,7 +665,7 @@ $(document).ready(function() {
 
             $(".em-selected-time-slot-wrapper").slideDown("slow");
 
-            console.log("Motahar");
+            
 
             $("#fullName").focus();
 
@@ -524,6 +683,26 @@ $(document).ready(function() {
             $("#email").val(userEmail);
 
             $("#telephone").val(userTelephone);
+
+
+            // Hidden Form Fields
+            var emsb_selected_service_id = $("article.em-service.selected #emsb-service-id input").val();
+            var emsb_selected_service = $(".em-selected-service #emsb-service-name").text();
+            var emsb_admin_email = $("article.em-service.selected .emsb-service-provider-email input").val();
+            var emsb_booked_date = $(".em-selected-date label").text();
+            var emsb_booked_time_slot = $(".em-selected-time-slot label").text();
+            var emsb_booked_service_price = $(".em-selected-service #emsb-service-price").text();
+            var emsb_selected_slot_id = $(".em-selected-time-slot label.time-slot input").val();
+
+            console.log(emsb_selected_service_id);
+
+            $("#emsb_selected_service_id").val(emsb_selected_service_id);
+            $("#emsb_selected_service").val(emsb_selected_service);
+            $("#emsb_selected_service_provider_email").val(emsb_admin_email);
+            $("#emsb_selected_service_date").val(emsb_booked_date);
+            $("#emsb_selected_time_slot").val(emsb_booked_time_slot);
+            $("#emsb_selected_service_price").val(emsb_booked_service_price);
+            $("#emsb_selected_slot_id").val(emsb_selected_slot_id);
 
             changeTimeSlot();
 
@@ -613,6 +792,10 @@ $(document).ready(function() {
         }, false);
   
     })();
+
+
+    
+    
     
 
 });
@@ -620,5 +803,5 @@ $(document).ready(function() {
 // Ends Basic Front-end ends
 
 
-    
+
 
