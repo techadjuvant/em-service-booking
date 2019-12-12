@@ -46,7 +46,7 @@ if ( !class_exists( 'emsb_service_booking_plugin_base_class' ) ) {
 
                 $type               = 'emsb_service';
                 $slug               = 'emsb_service';
-                $name               = 'Booking Services';
+                $name               = 'Services';
                 $singular_name      = 'Booking Service';
                 
                 $labels = array(
@@ -69,7 +69,7 @@ if ( !class_exists( 'emsb_service_booking_plugin_base_class' ) ) {
                     'public'                => true,
                     'publicly_queryable'    => true,
                     'show_ui'               => true,
-                    'show_in_menu'          => true,
+                    'show_in_menu'          => false,
                     'query_var'             => true,
                     'rewrite'               => array( 'slug' => $slug ),
                     'capability_type'       => 'post',
@@ -100,21 +100,24 @@ if ( !class_exists( 'emsb_service_booking_plugin_base_class' ) ) {
         //displays the back-end admin output for the event information
         public function emsb_callback_to_show_the_service_meta_boxes( $post ) {
             wp_nonce_field( basename( __FILE__ ), 'emsb_nonce' );
-          $emsb_service_stored_meta = get_post_meta( $post->ID );
+            $emsb_service_stored_meta = get_post_meta( $post->ID );
         ?>
           
-          <p>
-            <label for="emsb_display_service_title" class="emsb-row-title"><?php _e( "Service Title:", 'emsb' )?></label>
-            <input type="text" name="emsb_display_service_title" id="emsb_display_service_title" value="<?php if ( isset ( $emsb_service_stored_meta['emsb_display_service_title'] ) ) echo $emsb_service_stored_meta['emsb_display_service_title'][0]; ?>" />
-          </p>
-          <p>
-            <label for="emsb_display_service_location" class="emsb-row-location"><?php _e( "Service Location:", 'emsb' )?></label>
-            <input type="text" name="emsb_display_service_location" id="emsb_display_service_location" value="<?php if ( isset ( $emsb_service_stored_meta['emsb_display_service_location'] ) ) echo $emsb_service_stored_meta['emsb_display_service_location'][0]; ?>" />
-          </p>
-          <p>
-            <label for="emsb_display_service_price" class="emsb-row-price"><?php _e( "Service Price:", 'emsb' )?></label>
-            <input type="text" name="emsb_display_service_price" id="emsb_display_service_price" value="<?php if ( isset ( $emsb_service_stored_meta['emsb_display_service_price'] ) ) echo $emsb_service_stored_meta['emsb_display_service_price'][0]; ?>" />
-          </p>
+          <div class="emsb-service-header-info">
+                <label for="emsb-service-header-info"> <h3> Service Main Info </h3> </label>
+                <p>
+                    <label for="emsb_display_service_title" class="emsb-row-title"><?php _e( "Service Sub Title:", 'emsb' )?></label>
+                    <input type="text" name="emsb_display_service_title" id="emsb_display_service_title" value="<?php if ( isset ( $emsb_service_stored_meta['emsb_display_service_title'] ) ) echo $emsb_service_stored_meta['emsb_display_service_title'][0]; ?>" />
+                </p>
+                <p>
+                    <label for="emsb_display_service_location" class="emsb-row-location"><?php _e( "Location:", 'emsb' )?></label>
+                    <input type="text" name="emsb_display_service_location" id="emsb_display_service_location" value="<?php if ( isset ( $emsb_service_stored_meta['emsb_display_service_location'] ) ) echo $emsb_service_stored_meta['emsb_display_service_location'][0]; ?>" />
+                </p>
+                <p>
+                    <label for="emsb_display_service_price" class="emsb-row-price"><?php _e( "Service Price:", 'emsb' )?></label>
+                    <input type="text" name="emsb_display_service_price" id="emsb_display_service_price" value="<?php if ( isset ( $emsb_service_stored_meta['emsb_display_service_price'] ) ) echo $emsb_service_stored_meta['emsb_display_service_price'][0]; ?>" />
+                </p>
+            </div>
           
           <!-- weekly Off-days  -->
           <div class="emsb-off-days">
@@ -301,7 +304,7 @@ if ( !class_exists( 'emsb_service_booking_plugin_base_class' ) ) {
 
         
         
-        function get_emsb_archive_template( $archive_template ) {
+        public function get_emsb_archive_template( $archive_template ) {
             global $post;
         
             if ( is_post_type_archive ( 'emsb_service' ) ) {
@@ -313,51 +316,51 @@ if ( !class_exists( 'emsb_service_booking_plugin_base_class' ) ) {
         
          
 
-        function em_reservation_enqueue_public_scripts(){
+        public function em_reservation_enqueue_public_scripts(){
   
-                wp_enqueue_style('bootstrap-css', plugin_dir_url(__FILE__) . 'assets/css/bootstrap.min.css', array(), '1.1', false );
-                wp_enqueue_style('aicon-style', plugin_dir_url(__FILE__) . 'calendar/aicon/style.css', array(), '1.1', false );
-                wp_enqueue_style('pseudo-ripple', plugin_dir_url(__FILE__) . 'calendar/css/jquery-pseudo-ripple.css', array(), '1.1', false );
-                wp_enqueue_style('nao-calendar', plugin_dir_url(__FILE__) . 'calendar/css/jquery-nao-calendar.css', array(), '1.1', false );
-                wp_enqueue_style('emr-style', plugin_dir_url(__FILE__) . 'assets/public/css/style.css', array(), '1.1', false );
+            wp_enqueue_style('bootstrap-css', plugin_dir_url(__FILE__) . 'assets/css/bootstrap.min.css', array(), '1.1', false );
+            wp_enqueue_style('aicon-style', plugin_dir_url(__FILE__) . 'calendar/aicon/style.css', array(), '1.1', false );
+            wp_enqueue_style('pseudo-ripple', plugin_dir_url(__FILE__) . 'calendar/css/jquery-pseudo-ripple.css', array(), '1.1', false );
+            wp_enqueue_style('nao-calendar', plugin_dir_url(__FILE__) . 'calendar/css/jquery-nao-calendar.css', array(), '1.1', false );
+            wp_enqueue_style('emr-style', plugin_dir_url(__FILE__) . 'assets/public/css/style.css', array(), '1.1', false );
 
-                wp_enqueue_script('jquery-js', plugin_dir_url(__FILE__) . 'assets/js/jquery.min.js', array(), '1.1', true );
-                wp_localize_script( 'jquery-js', 'frontend_ajax_object',
-                    array( 
-                        'ajaxurl' => admin_url( 'admin-ajax.php' ),
-                        'data_var_1' => 'value 1',
-                        'data_var_2' => 'value 2',
-                    )
-                );
-                wp_enqueue_script('popper-js', plugin_dir_url(__FILE__) . 'assets/js/popper.min.js', array(), '1.1', true );
-                wp_enqueue_script('bootstrap-js', plugin_dir_url(__FILE__) . 'assets/js/bootstrap.min.js', array(), '1.1', true );
-                wp_enqueue_script('pseudo-ripple-js', plugin_dir_url(__FILE__) . 'calendar/jquery-pseudo-ripple.js', array(), '1.1', true );
-                wp_enqueue_script('nao-calendar-js', plugin_dir_url(__FILE__) . 'calendar/jquery-nao-calendar.js', array(), '1.1', true );
-                wp_enqueue_script('emr-script-js', plugin_dir_url(__FILE__) . 'assets/public/js/script.js', array(), '1.1', true );
-                
+            wp_enqueue_script('jquery-js', plugin_dir_url(__FILE__) . 'assets/js/jquery.min.js', array(), '1.1', true );
+            wp_localize_script( 'jquery-js', 'frontend_ajax_object',
+                array( 
+                    'ajaxurl' => admin_url( 'admin-ajax.php' ),
+                    'data_var_1' => 'value 1',
+                    'data_var_2' => 'value 2',
+                )
+            );
+            wp_enqueue_script('popper-js', plugin_dir_url(__FILE__) . 'assets/js/popper.min.js', array(), '1.1', true );
+            wp_enqueue_script('bootstrap-js', plugin_dir_url(__FILE__) . 'assets/js/bootstrap.min.js', array(), '1.1', true );
+            wp_enqueue_script('pseudo-ripple-js', plugin_dir_url(__FILE__) . 'calendar/jquery-pseudo-ripple.js', array(), '1.1', true );
+            wp_enqueue_script('nao-calendar-js', plugin_dir_url(__FILE__) . 'calendar/jquery-nao-calendar.js', array(), '1.1', true );
+            wp_enqueue_script('emr-script-js', plugin_dir_url(__FILE__) . 'assets/public/js/script.js', array(), '1.1', true );
+            
 
         }
 
 
-                /**
-                 * 
-                 *
-                 * When class is instantiated
-                 */
-                public function __construct() {
-                    
-                    add_action('init', array($this, 'emsb_service_post_type'));// Register the post type
-                    add_action('add_meta_boxes', array($this,'emsb_add_meta_boxes_to_booking_service')); //add meta boxes
-                    add_action('save_post', array($this,'emsb_save_all_posts_types_meta_fields_meta')); //add meta boxes
-                    add_filter( 'archive_template',  array($this,'get_emsb_archive_template') ) ; //add meta boxes
-                    add_action( 'wp_enqueue_scripts', array($this,'em_reservation_enqueue_public_scripts')  );
-                    
 
-                }
+        /**
+         * When class is instantiated
+         */
+        public function __construct() {
+            
+            add_action('init', array($this, 'emsb_service_post_type'));// Register the post type
+            add_action('add_meta_boxes', array($this,'emsb_add_meta_boxes_to_booking_service')); //add meta boxes
+            add_action('save_post', array($this,'emsb_save_all_posts_types_meta_fields_meta')); //add meta boxes
+            add_filter( 'archive_template',  array($this,'get_emsb_archive_template') ) ; //add meta boxes
+            add_action( 'wp_enqueue_scripts', array($this,'em_reservation_enqueue_public_scripts')  );
+            
+            
+
+        }
                 
                 
                 
-            }
+    }
 }
 /**
  * Instantiate class
@@ -392,9 +395,15 @@ class emsb_database {
 
     }
 }
-$wpuf = new emsb_database();
+$emsb_database = new emsb_database();
+
+
+
+
+
 
 include( plugin_dir_path( __FILE__ ) . 'emsb-ajax-calls.php');
+include( plugin_dir_path( __FILE__ ) . 'emsb-admin-pages.php');
 
 
 

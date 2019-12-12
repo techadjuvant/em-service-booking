@@ -1,0 +1,181 @@
+#wpcontent {
+  height: 100%;
+  padding-left: 0;
+  background: #f1f1f1;
+}
+.emsb-admin-main-page-header-wrapper .jumbotron {
+  padding: 20px 10px;
+  border-radius: 0;
+  margin-bottom: 0;
+  background: #7979ef;
+  color: #fff;
+}
+
+.emsb-admin-main-page-header-wrapper .display-5 {
+  font-weight: 300;
+  line-height: 1.2;
+  color: #fff;
+}
+.emsb-admin-main-page-wrapper .tabs > ul {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.emsb-admin-main-page-wrapper .tabs > ul .indicator {
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  width: 20%;
+  background: #1e88e5;
+  transform: translateZ(0) translateX(0);
+  transition: all 0.3s ease;
+}
+.emsb-admin-main-page-wrapper .tabs > ul li {
+  font-size: 14px;
+  width: 100%;
+}
+.emsb-admin-main-page-wrapper .tabs > ul li a {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  padding: 15px;
+  text-decoration: none;
+  text-align: center;
+  color: white;
+  transition: all 0.3s ease 0.4s;
+  background-color: rgba(77, 77, 249, 0.4);
+  border-right: 1px solid #fff;
+}
+.emsb-admin-main-page-wrapper .tabs > ul li a.active{
+  background: #f1f1f1;
+  color: #111111;
+}
+.emsb-admin-main-page-wrapper .tabs > ul li a:before {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  background: #1e88e5;
+  transform: translateZ(0) translateY(100%);
+  transition: all 0.3s ease 0.3s;
+  z-index: -1;
+}
+.emsb-admin-main-page-wrapper .tabs > ul li a[aria-selected] {
+  color: white;
+}
+.emsb-admin-main-page-wrapper .tabs > ul li a[aria-selected]:before {
+  transform: translateZ(0) translateY(0);
+}
+.emsb-admin-main-page-wrapper .tabs > section[aria-hidden="true"] {
+  display: none;
+}
+
+
+
+
+/* Booking Table list  */
+.emsb-table-wrapper {
+    font-size: 14px;
+    font-weight: 300;
+}
+.emsb-table-wrapper .emsb-container {
+  width: 100% !important;
+}
+.wp-admin .emsb-table-wrapper select {
+  font-size: 13px;
+  color: #32373c;
+  border-color: #7e8993;
+  box-shadow: none;
+  border-radius: 0 !important;
+  background-color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.emsb-table-wrapper input[type=color], 
+.emsb-table-wrapper input[type=date], 
+.emsb-table-wrapper input[type=datetime-local], 
+.emsb-table-wrapper input[type=datetime], 
+.emsb-table-wrapper input[type=email], 
+.emsb-table-wrapper input[type=month], 
+.emsb-table-wrapper input[type=number], 
+.emsb-table-wrapper input[type=password], 
+.emsb-table-wrapper input[type=search], 
+.emsb-table-wrapper input[type=tel], 
+.emsb-table-wrapper input[type=text], 
+.emsb-table-wrapper input[type=time], 
+.emsb-table-wrapper input[type=url], 
+.emsb-table-wrapper input[type=week], 
+.emsb-table-wrapper select, 
+.emsb-table-wrapper textarea {
+  box-shadow: 0 0 0 transparent;
+  border-radius: 0;
+  border: 1px solid #7e8993;
+  background-color: rgba(255, 255, 255, .5);
+  color: #32373c;
+}
+.emsb-table-wrapper table th , table td{
+    text-align: left;
+}
+
+.emsb-table-wrapper table tr:nth-child(even){
+    background-color: rgba(255, 255, 255, 0.5);
+}
+.emsb-table-wrapper .table-striped tbody tr:nth-of-type(odd) {
+  background-color: rgba(255, 255, 255, .6);
+}
+
+.emsb-table-wrapper th {
+  background: #7979ef;
+  color: #fff;
+  font-weight: 300;
+  font-size: 15px;
+}
+
+.emsb-table-wrapper .pagination {
+  margin: 0;
+}
+
+.emsb-table-wrapper .pagination li:hover{
+    cursor: pointer;
+}
+
+.emsb-table-wrapper .header_wrap {
+  padding:30px 0;
+}
+.emsb-table-wrapper .num_rows {
+  width: 20%;
+  float:left;
+}
+.emsb-table-wrapper .tb_search{
+  width: 20%;
+  float:right;
+}
+.emsb-table-wrapper .pagination-container {
+  width: 70%;
+  float:left;
+}
+
+.emsb-table-wrapper .rows_count {
+  width: 20%;
+  float:right;
+  text-align:right;
+  color: #999;
+}
+
+.emsb-table-wrapper .active .page-link {
+    background-color: #7979ef;
+    color: #fff;
+}
+input#search_input_all {
+  height: 35px !important;
+  font-size: 14px;
+}
