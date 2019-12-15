@@ -4,6 +4,14 @@ $(document).ready(function() {
     $(".em-reservation-div-position").css("display","none");
     $("#emShowPM").css("display","none");
     // $(".emsb-loading-gif").css("display","none");
+
+    var serviceAndFormContainer = $(".emsb-booking-ticket-container");
+    if(serviceAndFormContainer){
+        $(".emsb-booking-ticket-container").parent().children(".emsb-services-and-form-container").css("display","none");;
+        console.log("found");
+    } else {
+        console.log("Not found");
+    }
     
     
 
@@ -667,37 +675,39 @@ function disablePassedDays(){
 
             
 
-            $("#fullName").focus();
+            $("#emsb_user_fullName").focus();
 
             // Cookie Decoded by getCookie function written below
-            var userFullName = getCookie("username");
+            var emsb_user_cookie_FullName = getCookie("emsb_user_fullName");
             
-            var userEmail = getCookie("email");
+            var emsb_user_cookie_Email = getCookie("emsb_user_email");
 
-            var userTelephone = getCookie("telephone");
+            var emsb_user_cookie_telephone = getCookie("emsb_user_telephone");
 
 
             // Fill the form fields with cookies
-            $("#fullName").val(userFullName);
+            $("#emsb_user_fullName").val(emsb_user_cookie_FullName);
 
-            $("#email").val(userEmail);
+            $("#emsb_user_email").val(emsb_user_cookie_Email);
 
-            $("#telephone").val(userTelephone);
+            $("#emsb_user_telephone").val(emsb_user_cookie_telephone);
 
 
             // Hidden Form Fields
             var emsb_selected_service_id = $("article.em-service.selected #emsb-service-id input").val();
             var emsb_selected_service = $(".em-selected-service #emsb-service-name").text();
+            var emsb_selected_service_title = $(".em-selected-service .emsb-service-title").text();
+            var emsb_selected_service_location = $(".em-selected-service .emsb-service-location").text();
             var emsb_admin_email = $("article.em-service.selected .emsb-service-provider-email input").val();
             var emsb_booked_date = $(".em-selected-date label").text();
             var emsb_booked_time_slot = $(".em-selected-time-slot label").text();
             var emsb_booked_service_price = $(".em-selected-service #emsb-service-price").text();
             var emsb_selected_slot_id = $(".em-selected-time-slot label.time-slot input").val();
 
-            console.log(emsb_selected_service_id);
-
             $("#emsb_selected_service_id").val(emsb_selected_service_id);
             $("#emsb_selected_service").val(emsb_selected_service);
+            $("#emsb_selected_service_title").val(emsb_selected_service_title);
+            $("#emsb_selected_service_location").val(emsb_selected_service_location);
             $("#emsb_selected_service_provider_email").val(emsb_admin_email);
             $("#emsb_selected_service_date").val(emsb_booked_date);
             $("#emsb_selected_time_slot").val(emsb_booked_time_slot);
@@ -755,23 +765,26 @@ function disablePassedDays(){
         }
         return "";
     }
+        
 
     function checkCookie() {
-        var user = $("#fullName").val();
-        var email = $("#email").val();
-        var telephone = $("#telephone").val();
-        if (user != "" && user != null) {
-            setCookie("username", user, 30);
+        var emsb_user_fullName= $("#emsb_user_fullName").val();
+        var emsb_user_email = $("#emsb_user_email").val();
+        var emsb_user_telephone = $("#emsb_user_telephone").val();
+        var emsbCookieDuration = $("#emsb_cookie_duration").val();
+        console.log(emsbCookieDuration);
+        if (emsb_user_fullName!= "" && emsb_user_fullName!= null) {
+            setCookie("emsb_user_fullName", emsb_user_fullName, emsbCookieDuration);
         }
-        if (email != "" && email != null) {
-            setCookie("email", email, 30);
+        if (emsb_user_email != "" && emsb_user_email != null) {
+            setCookie("emsb_user_email", emsb_user_email, emsbCookieDuration);
         }
-        if (telephone != "" && telephone != null) {
-            setCookie("telephone", telephone, 30);
+        if (emsb_user_telephone != "" && emsb_user_telephone != null) {
+            setCookie("emsb_user_telephone", emsb_user_telephone, emsbCookieDuration);
         }
         
     }
-
+    // Browser Cookie ( On form submission set the browser cookies ) Ends
 
     (function() {
         'use strict';
@@ -794,6 +807,22 @@ function disablePassedDays(){
     })();
 
 
+    // Create PDF of Booking Ticket
+    $("#createPDF").on("click", function(){
+        var pdf = new jsPDF('p', 'pt', 'letter');
+        source = $("#emsb_booking_ticket")[0];
+        pdf.addHTML(
+            source, 
+            function (dispose) {
+                pdf.save('Ticket.pdf');
+            }
+        );
+
+    });
+
+    $("#goBackButton").on("click", function(){
+        history.back();
+    });
     
     
     

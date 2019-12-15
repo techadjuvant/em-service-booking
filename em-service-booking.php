@@ -304,13 +304,23 @@ if ( !class_exists( 'emsb_service_booking_plugin_base_class' ) ) {
 
         
         
-        public function get_emsb_archive_template( $archive_template ) {
+        public function emsb_get_archive_template( $archive_template ) {
             global $post;
         
             if ( is_post_type_archive ( 'emsb_service' ) ) {
                  $archive_template = dirname( __FILE__ ) . '/archive-emsb_service.php';
             }
             return $archive_template;
+        }
+
+        public function emsb_get_single_template( $emsb_single_service ) {
+            global $post;
+            // global $post_type;
+        
+            if ( is_singular( 'emsb_service' ) ) {
+                 $emsb_single_service = dirname( __FILE__ ) . '/single-emsb_service.php';
+            }
+            return $emsb_single_service;
         }
 
         
@@ -336,6 +346,9 @@ if ( !class_exists( 'emsb_service_booking_plugin_base_class' ) ) {
             wp_enqueue_script('bootstrap-js', plugin_dir_url(__FILE__) . 'assets/js/bootstrap.min.js', array(), '1.1', true );
             wp_enqueue_script('pseudo-ripple-js', plugin_dir_url(__FILE__) . 'calendar/jquery-pseudo-ripple.js', array(), '1.1', true );
             wp_enqueue_script('nao-calendar-js', plugin_dir_url(__FILE__) . 'calendar/jquery-nao-calendar.js', array(), '1.1', true );
+            wp_enqueue_script('html2canvas', plugin_dir_url(__FILE__) . 'assets/public/js/html2canvas.js', array(), '1.1', true );
+            wp_enqueue_script('jsPDF', plugin_dir_url(__FILE__) . 'assets/public/js/jsPDF.js', array(), '1.1', true );
+            
             wp_enqueue_script('emr-script-js', plugin_dir_url(__FILE__) . 'assets/public/js/script.js', array(), '1.1', true );
             
 
@@ -351,11 +364,10 @@ if ( !class_exists( 'emsb_service_booking_plugin_base_class' ) ) {
             add_action('init', array($this, 'emsb_service_post_type'));// Register the post type
             add_action('add_meta_boxes', array($this,'emsb_add_meta_boxes_to_booking_service')); //add meta boxes
             add_action('save_post', array($this,'emsb_save_all_posts_types_meta_fields_meta')); //add meta boxes
-            add_filter( 'archive_template',  array($this,'get_emsb_archive_template') ) ; //add meta boxes
+            add_filter( 'archive_template',  array($this,'emsb_get_archive_template') ) ; 
+            add_filter( 'single_template',  array($this,'emsb_get_single_template') ) ; 
             add_action( 'wp_enqueue_scripts', array($this,'em_reservation_enqueue_public_scripts')  );
             
-            
-
         }
                 
                 
@@ -371,10 +383,14 @@ $emsb_service_booking_plugin = new emsb_service_booking_plugin_base_class();
 
 class emsb_database {
     public function __construct() {
-        register_activation_hook( __FILE__, array($this,'create_emsb_table'));
+        register_activation_hook( __FILE__, array($this,'create_emsb_bookings_table'));
+        register_activation_hook( __FILE__, array($this,'emsb_default_booking'));
+        register_activation_hook( __FILE__, array($this,'create_emsb_settings_table'));
+        register_activation_hook( __FILE__, array($this,'emsb_settings_default_data'));
+        
     }
 
-    public function create_emsb_table(){
+    public function create_emsb_bookings_table(){
             global $wpdb;
             $sql_enquiry = "CREATE TABLE IF NOT EXISTS {$wpdb->prefix}emsb_bookings (
             `id` int(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -392,20 +408,91 @@ class emsb_database {
 
         require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
         dbDelta( $sql_enquiry );
+        
 
     }
+
+    public function emsb_default_booking(){
+        global $wpdb;
+        $emsb_bookings_table_name = $wpdb->prefix . "emsb_bookings";
+    
+        $dataInsert = $wpdb->insert( $emsb_bookings_table_name, array(
+            'service_id' => 0,
+            'service_name' => "Default Data",
+            'service_price' => "Default Data",
+            'booked_slot_id' => "Default Data",
+            'booked_date' => "Default Data",
+            'booked_time_slot' => "Default Data",
+            'customer_name' => "Default Data",
+            'customer_email' => "Default Data",
+            'customer_phone' => "Default Data"
+        ) );
+    
+
+    }
+
+    public function create_emsb_settings_table(){
+            global $wpdb;
+            $sql_enquiry_notifiction_table = "CREATE TABLE IF NOT EXISTS {$wpdb->prefix}emsb_settings (
+            `id` int(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+            `date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            `admin_mail_subject` text,
+            `admin_mail_body` text,
+            `customer_mail_subject` text,
+            `customer_mail_body` text,
+            `customer_cookie_duration` int(11)
+            ) ENGINE=MyISAM DEFAULT CHARSET=utf8";
+
+
+        require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+        dbDelta( $sql_enquiry_notifiction_table );
+
+    }
+    public function emsb_settings_default_data() {
+		global $wpdb;
+        $emsb_settings_data = $wpdb->prefix . 'emsb_settings';
+		$wpdb->insert($emsb_settings_data, array(
+            'admin_mail_subject' => "Service provider's email subject",
+            'admin_mail_body' => "Service provider's email message body",
+            'customer_mail_subject' => "Customer's email subject",
+            'customer_mail_body' => "Customer's email message body",
+            'customer_cookie_duration' => 30
+        ));
+
+    }
+    
+
 }
 $emsb_database = new emsb_database();
 
 
+class emsb_post_pages {
+    public function __construct() {
+        $emsb_page_slug = get_page_by_path( 'emsb_service' );
+        if(!$emsb_page_slug){
+            register_activation_hook( __FILE__, array($this,'emsb_create_archive_page'));
+        } 
+        
+        
+    }
 
+    public function emsb_create_archive_page(){
 
+        $my_post  = array( 'post_title'     => 'Servie-Archive',
+                        'post_type'      => 'page',
+                        'post_name'      => 'emsb_service',
+                        'post_status'    => 'publish',
+                        'comment_status' => 'closed'
+                    );
+
+        $PageID = wp_insert_post( $my_post, FALSE ); // Get Post ID - FALSE to return 0 instead of wp_error.
+
+    }
+
+    
+}
+$emsb_post_pages = new emsb_post_pages();
 
 
 include( plugin_dir_path( __FILE__ ) . 'emsb-ajax-calls.php');
 include( plugin_dir_path( __FILE__ ) . 'emsb-admin-pages.php');
-
-
-
-
-

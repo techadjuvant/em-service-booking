@@ -179,3 +179,35 @@ input#search_input_all {
   height: 35px !important;
   font-size: 14px;
 }
+
+
+.card {
+  padding: 0;
+  max-width: 100%;
+  font-weight: 300;
+}
+.card-header {
+  background-color: #7979ef;
+  color: #fff;
+  font-size: 18px;
+}
+.form-control {
+  border-radius: 0;
+  border: 1px solid blue;
+  font-weight: 300;
+}
+input[type=date], input[type=datetime-local], input[type=datetime], input[type=email], input[type=month], input[type=number], input[type=password], input[type=search], input[type=tel], input[type=text], input[type=time], input[type=url], input[type=week] {
+  border-radius: 0;
+  border: 1px solid blue;
+}
+.form-control:focus {
+  border-color: #007cba;
+  box-shadow: 0 0 0 1px #007cba;
+  outline: 2px solid transparent;
+}
+.btn-primary {
+  color: #fff;
+  border-radius: 0;
+  width: 140px;
+  font-weight: 300;
+}

@@ -1,4 +1,6 @@
 <?php
+
+
 add_action( 'admin_menu', array ( 'emsb_Admin_Page', 'emsb_admin_menu' ) );
 /**
  * Register three admin pages and add a stylesheet and a javascript to two of
@@ -71,7 +73,7 @@ class emsb_Admin_Page
         $emsb_bookings = add_submenu_page(
 			'emsb_admin_page',                         // parent slug
 			'EMSB bookings',                           // page title
-			'bookings',                                // menu title
+			'All Bookings',                                // menu title
 			'manage_options',                          // capability
 			'emsb_admin_bookings_page',                // menu slug
 			array ( __CLASS__, 'emsb_admin_bookings_page_func' )         // callback function, same as above
@@ -117,9 +119,9 @@ class emsb_Admin_Page
                         <div class="tabs">
                             <ul>
                                 <li><a href="admin.php?page=emsb_admin_page" > Dashboard </a></li>
-                                <li><a href="edit.php?post_type=emsb_service" class="active">Services</a></li>
+                                <li><a href="edit.php?post_type=emsb_service" class="active">All Services</a></li>
                                 <li><a href="post-new.php?post_type=emsb_service">Add Service</a></li>
-                                <li><a href="admin.php?page=emsb_admin_bookings_page">Bookings</a></li>
+                                <li><a href="admin.php?page=emsb_admin_bookings_page">All Bookings</a></li>
                                 
                             </ul>
                         </div>
@@ -144,9 +146,9 @@ class emsb_Admin_Page
                         <div class="tabs">
                             <ul>
                                 <li><a href="admin.php?page=emsb_admin_page" > Dashboard </a></li>
-                                <li><a href="edit.php?post_type=emsb_service" >Services</a></li>
+                                <li><a href="edit.php?post_type=emsb_service" >All Services</a></li>
                                 <li><a href="post-new.php?post_type=emsb_service" class="active">Add Service</a></li>
-                                <li><a href="admin.php?page=emsb_admin_bookings_page">Bookings</a></li>
+                                <li><a href="admin.php?page=emsb_admin_bookings_page">All Bookings</a></li>
                                 
                             </ul>
                         </div>
@@ -234,6 +236,43 @@ class emsb_Admin_Page
 	 */
 	public static function emsb_admin_main_page()
 	{
+        global $wpdb;
+        $emsb_settings_data = $wpdb->prefix . 'emsb_settings';
+        
+        if(isset($_POST['emsb_save_admin_email_data'])){
+            $admin_mail_subject = stripslashes_deep($_POST['emsb_admin_email_subject']);
+            $admin_mail_body = stripslashes_deep($_POST['emsb_admin_email_body']);
+            $customer_mail_subject = stripslashes_deep($_POST['emsb_customer_email_subject']);
+            $customer_mail_body = stripslashes_deep($_POST['emsb_customer_email_body']);
+            $customer_cookie_duration = stripslashes_deep($_POST['emsb_customer_cookie_duration']);
+            // Securly insert data with $wpdb->inert method preventing the sql injection and also escaping strings
+            $wpdb->insert($emsb_settings_data, array(
+                'admin_mail_subject' => $admin_mail_subject,
+                'admin_mail_body' => $admin_mail_body,
+                'customer_mail_subject' => $customer_mail_subject,
+                'customer_mail_body' => $customer_mail_body,
+                'customer_cookie_duration' => $customer_cookie_duration
+            ));
+            
+        };
+
+        // When the page loads fetch data from database
+        $emsb_settings_data_fetch = $wpdb->get_row( "SELECT * FROM $emsb_settings_data ORDER BY id DESC LIMIT 1" );
+
+        // When settings data is changed fetch new data from database
+        $emsb_check_changes = isset($_POST['emsb_save_admin_email_data']);
+
+        if($emsb_check_changes){
+            $emsb_settings_data_fetch = $wpdb->get_row( "SELECT * FROM $emsb_settings_data ORDER BY id DESC LIMIT 1" );
+        }
+
+        $admin_mail_subject = $emsb_settings_data_fetch->admin_mail_subject;
+        $admin_mail_body = $emsb_settings_data_fetch->admin_mail_body;
+        $customer_mail_subject = $emsb_settings_data_fetch->customer_mail_subject;
+        $customer_mail_body = $emsb_settings_data_fetch->customer_mail_body;
+        $customer_cookie_duration = $emsb_settings_data_fetch->customer_cookie_duration;
+        
+
         ?>
         <div class="emsb-container">
             <header class="emsb-admin-main-page-header-wrapper">
@@ -245,17 +284,83 @@ class emsb_Admin_Page
                 <div class="tabs">
                     <ul>
                         <li><a href="admin.php?page=emsb_admin_page" class="active"> Dashboard </a></li>
-                        <li><a href="edit.php?post_type=emsb_service">Services</a></li>
+                        <li><a href="edit.php?post_type=emsb_service">All Services</a></li>
                         <li><a href="post-new.php?post_type=emsb_service">Add Service</a></li>
-                        <li><a href="admin.php?page=emsb_admin_bookings_page">Bookings</a></li>
+                        <li><a href="admin.php?page=emsb_admin_bookings_page">All Bookings</a></li>
                     </ul>
                 </div>
+                <form method="post">
+                    <div class="emsb-email-notification-data-wrapper container">
+                    <!-- Admin Email Notification data starts-->
+                        <div class="emsb-admin-email-data-form">
+                            <div class="card">
+                                <div class="card-header">
+                                    Admin Email Notification
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label for="emsb_admin_email_subject">Admin Email Subject</label>
+                                        <input type="text" name="emsb_admin_email_subject" class="form-control" id="emsb_admin_email_subject" value="<?php echo $admin_mail_subject; ?>" placeholder="Example: A Booking has been placed">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="emsb_admin_email_body">Admin Email Body</label>
+                                        <textarea class="form-control" name="emsb_admin_email_body" id="emsb_admin_email_body" rows="5" placeholder="Your message body"><?php echo $admin_mail_body; ?></textarea>
+                                    </div>
+                                <footer class="blockquote-footer">Check the bookings list to see the customer data </footer>
+                                </div>
+                            </div>
+                        </div>
+                         <!-- Admin Email Notification ends -->
+
+                        <!-- Customer Email Notification data starts -->
+                        <div class="emsb-customer-email-data-form mt-5">
+                            <div class="card">
+                                <div class="card-header">
+                                    Customer Email Notification
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label for="emsb_customer_email_subject">Customer Email Subject</label>
+                                        <input type="text" name="emsb_customer_email_subject" class="form-control" id="emsb_customer_email_subject" value="<?php echo $customer_mail_subject; ?>" placeholder="Example: A Booking is confirmed">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="emsb_customer_email_body">Customer Email Body</label>
+                                        <textarea class="form-control" name="emsb_customer_email_body" id="emsb_customer_email_body" rows="5" placeholder="Your message body"><?php echo $customer_mail_body; ?></textarea>
+                                    </div>
+                                    <footer class="blockquote-footer">Customers will receive a token with booking details with the email </footer>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Customer Email Notification data ends -->
+
+                        <!-- User Cookie data starts -->
+                        <div class="emsb-customer-email-data-form mt-5">
+                            <div class="card">
+                                <div class="card-header">
+                                    User Cookie
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label for="emsb_customer_cookie_duration">How many days do you want to save the customer info on their browser cookie?</label>
+                                        <input type="number" name="emsb_customer_cookie_duration"id="emsb_customer_cookie_duration" value="<?php echo $customer_cookie_duration; ?>" class="form-control"  placeholder="30">
+                                    </div>
+                                    <footer class="blockquote-footer"> Don't change it freequently </footer>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- User Cookie data ends -->
+                        <button name="emsb_save_admin_email_data" type="submit" class="btn btn-primary mt-3">Save Changes</button>
+                    </div>
+                    
+                </form>
             </main>
         </div>
         
             
         <?php
+
     }
+
     
     public static function emsb_admin_bookings_page_func() {
             global $title;
@@ -276,9 +381,9 @@ class emsb_Admin_Page
                     <div class="tabs">
                         <ul>
                             <li><a href="admin.php?page=emsb_admin_page" > Dashboard </a></li>
-                            <li><a href="edit.php?post_type=emsb_service">Services</a></li>
+                            <li><a href="edit.php?post_type=emsb_service">All Services</a></li>
                             <li><a href="post-new.php?post_type=emsb_service">Add Service</a></li>
-                            <li><a href="admin.php?page=emsb_admin_bookings_page" class="active">Bookings</a></li>
+                            <li><a href="admin.php?page=emsb_admin_bookings_page" class="active">All Bookings</a></li>
                         </ul>
                     </div>
                     <div class="emsb-table-wrapper container text-center">
@@ -339,7 +444,7 @@ class emsb_Admin_Page
                                 </div>
                             <div class="rows_count">Showing 11 to 20 of 91 entries</div>
                         
-                        </div> <!-- 		End of Container -->
+                        </div> <!-- End of Container -->
 
                     </div>
 
