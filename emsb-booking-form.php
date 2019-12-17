@@ -19,6 +19,7 @@
         $service_title = $_POST['emsb_selected_service_title'];
         $service_location = $_POST['emsb_selected_service_location'];
         $service_price = $_POST['emsb_selected_service_price'];
+        $booked_date_id = $_POST["emsb_selected_service_date_id"];
         $booked_slot_id = $_POST["emsb_selected_slot_id"];
         $booked_date = $_POST["emsb_selected_service_date"];
         $booked_time_slot = $_POST["emsb_selected_time_slot"];
@@ -34,6 +35,7 @@
             'service_id' => $service_id,
             'service_name' => $service_name,
             'service_price' => $service_price,
+            'booked_date_id' => $booked_date_id,
             'booked_slot_id' => $booked_slot_id,
             'booked_date' => $booked_date,
             'booked_time_slot' => $booked_time_slot,

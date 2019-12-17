@@ -98,6 +98,11 @@ get_header();
                       <?php } ?>
                           
                     </div>
+                    <div class="full-day-reservation">
+                      <?php 
+                          $emsb_service_for_full_day = get_post_meta( get_the_ID(), 'emsb_service_for_full_day', true ); ?>
+                          <input type="checkbox" name="emsb_fullDayReserve" id="emsb_fullDayReserve" <?php echo $emsb_service_for_full_day; ?> />
+                    </div>
                     <div class="em-time-slot">
                       <div class="am-time-slot">
                           <?php 
@@ -193,11 +198,11 @@ get_header();
           <!-- All Selected Info Ends  -->
 
           <div class="em-calendar-wrapper">
-            
+              <div class="emsb-calender-loading-gif">
+                <img src="<?php echo plugin_dir_url( __FILE__ ) . 'assets/img/loading.gif'; ?>">
+              </div>
             <div class="em-reservation-calendar"></div>
           </div>
-          
-
 
           <div class="em-timer">
               <div class="emsb-loading-gif">
@@ -254,6 +259,7 @@ get_header();
                       <input type="text" name="emsb_selected_service" id="emsb_selected_service" value="service-one" >
                       <input type="text" name="emsb_selected_service_title" id="emsb_selected_service_title" value="" >
                       <input type="text" name="emsb_selected_service_location" id="emsb_selected_service_location" value="service-one" >
+                      <input type="text" name="emsb_selected_service_date_id" id="emsb_selected_service_date_id" value="123123" >
                       <input type="text" name="emsb_selected_slot_id" id="emsb_selected_slot_id" value="AM112" >
                       <input type="text" name="emsb_selected_service_provider_email" id="emsb_selected_service_provider_email" value="motahar1201123@gmail.com" >
                       <input type="text" name="emsb_selected_service_date" id="emsb_selected_service_date" value="12/12/2019" >

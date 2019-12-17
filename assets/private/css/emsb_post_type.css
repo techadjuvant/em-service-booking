@@ -107,7 +107,7 @@ div#emsb_service_meta_box h3 {
   font-size: 16px;
   font-weight: 300;
 }
-.emsb-service-header-info, .emsb-off-days, .emsb-am-time-slot {
+.emsb-service-header-info, .emsb-off-days, .emsb-service-meta-field {
   background-color: #ededed;
   padding: 20px 15px;
   margin-bottom: 30px;
@@ -119,7 +119,7 @@ div#emsb_service_meta_box label.emsb-row-off_days {
   width: 90px !important;
   margin-bottom: 2px;
 }
-.emsb-service-header-info p, .emsb-am-time-slot p {
+.emsb-service-header-info p, .emsb-service-meta-field p {
     padding: 10px 15px;
     background-color: rgba(255, 255, 255, 0.91);
 }

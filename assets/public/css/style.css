@@ -420,6 +420,12 @@ article.em-service main {
     color: rgb(225, 225, 225) !important;
     box-shadow: rgb(255, 255, 255) 0px 0px 0px 2px inset !important;
 }
+.already-booked {
+    cursor: not-allowed !important;
+    background-color: #ffedb9 !important;
+    color: #000000 !important;
+    box-shadow: rgb(255, 255, 255) 0px 0px 0px 2px inset !important;
+}
 
 .em-service-meta-info {
     display: none;
@@ -448,6 +454,22 @@ article.em-service main {
     width: 50px;
 }
 
+.emsb-calender-loading-gif {
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    background-color: #fff;
+    display: none;
+    opacity: .9;
+}
+.emsb-calender-loading-gif img {
+    width: 50px;
+}
 #emsb_booking_ticket {
     margin: 0;
     padding: 0;

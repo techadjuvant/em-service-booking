@@ -149,26 +149,37 @@ if ( !class_exists( 'emsb_service_booking_plugin_base_class' ) ) {
           </div>
             <!-- weekly Off-days ends  -->
 
-             <!-- AM Time Slot  -->
-          <div class="emsb-am-time-slot">
-              <label for="emsb-time-slot"> <h3> AM Time Slot </h3> </label>
-            <p>
-                <label for="emsb_service_am_starting_time" class="emsb-row-time_slot"><?php _e( "Starting Time:", 'emsb' )?></label>
-                <input min='00:00' max= '11:00' type="time" name="emsb_service_am_starting_time" id="emsb_service_am_starting_time" value="<?php if ( isset ( $emsb_service_stored_meta['emsb_service_am_starting_time'] ) ) echo $emsb_service_stored_meta['emsb_service_am_starting_time'][0]; ?>" />
-            </p>
-            <p>
-                <label for="emsb_service_am_ending_time" class="emsb-row-time_slot"><?php _e( "Ending Time:", 'emsb' )?></label>
-                <input min='01:00' max= '11:59' type="time" name="emsb_service_am_ending_time" id="emsb_service_am_ending_time" value="<?php if ( isset ( $emsb_service_stored_meta['emsb_service_am_ending_time'] ) ) echo $emsb_service_stored_meta['emsb_service_am_ending_time'][0]; ?>" />
-            </p>
-            <p>
-                <label for="emsb_service_am_slot_duration" class="emsb-row-time_slot"><?php _e( "Slot Duration in Munites:", 'emsb' )?></label>
-                <input type="number" name="emsb_service_am_slot_duration" id="emsb_service_am_slot_duration" value="<?php if ( isset ( $emsb_service_stored_meta['emsb_service_am_slot_duration'] ) ) echo $emsb_service_stored_meta['emsb_service_am_slot_duration'][0]; ?>" />
-            </p>
-          </div>
-          <!-- AM Time Slot Ends  -->
+            <!-- service reservation duration -->
+            <div class="emsb-servation-duration-container emsb-service-meta-field"> 
+                <label for="emsb-time-slot"> <h3> Full Day Reservation </h3> </label> 
+                <p>
+                    <label for="emsb_service_for_full_day" class="emsb-row-time_slot"><?php _e( "Is this service for full day reservation? ( 24 hours ) ", 'emsb' )?></label>
+                    <!-- <input type="checkbox" name="emsb_service_for_full_day" id="emsb_service_for_full_day" value="<?php //if ( isset ( $emsb_service_stored_meta['emsb_service_for_full_day'] ) ) echo $emsb_service_stored_meta['emsb_service_for_full_day'][0]; ?> /> -->
+                    <input type="checkbox" name="emsb_service_for_full_day" id="emsb_service_for_full_day" value="checked" <?php if ( isset ( $emsb_service_stored_meta['emsb_service_for_full_day'] ) ) checked( $emsb_service_stored_meta['emsb_service_for_full_day'][0], 'checked' ); ?> />
+                </p>
+            </div>
+            
 
-          <!-- PM Time Slot Starts  -->
-            <div class="emsb-am-time-slot">
+             <!-- AM Time Slot  -->
+            <div class="emsb-service-meta-field emsb-time-slot-container">
+                <label for="emsb-time-slot"> <h3> AM Time Slot </h3> </label>
+                <p>
+                    <label for="emsb_service_am_starting_time" class="emsb-row-time_slot"><?php _e( "Starting Time:", 'emsb' )?></label>
+                    <input min='00:00' max= '11:00' type="time" name="emsb_service_am_starting_time" id="emsb_service_am_starting_time" value="<?php if ( isset ( $emsb_service_stored_meta['emsb_service_am_starting_time'] ) ) echo $emsb_service_stored_meta['emsb_service_am_starting_time'][0]; ?>" />
+                </p>
+                <p>
+                    <label for="emsb_service_am_ending_time" class="emsb-row-time_slot"><?php _e( "Ending Time:", 'emsb' )?></label>
+                    <input min='01:00' max= '11:59' type="time" name="emsb_service_am_ending_time" id="emsb_service_am_ending_time" value="<?php if ( isset ( $emsb_service_stored_meta['emsb_service_am_ending_time'] ) ) echo $emsb_service_stored_meta['emsb_service_am_ending_time'][0]; ?>" />
+                </p>
+                <p>
+                    <label for="emsb_service_am_slot_duration" class="emsb-row-time_slot"><?php _e( "Slot Duration in Munites:", 'emsb' )?></label>
+                    <input type="number" name="emsb_service_am_slot_duration" id="emsb_service_am_slot_duration" value="<?php if ( isset ( $emsb_service_stored_meta['emsb_service_am_slot_duration'] ) ) echo $emsb_service_stored_meta['emsb_service_am_slot_duration'][0]; ?>" />
+                </p>
+            </div>
+            <!-- AM Time Slot Ends  -->
+
+            <!-- PM Time Slot Starts  -->
+            <div class="emsb-service-meta-field emsb-time-slot-container">
                 <label for="emsb-time-slot"> <h3> PM Time Slot </h3> </label>
                 <p>
                     <label for="emsb_service_pm_starting_time" class="emsb-row-time_slot"><?php _e( "Starting Time:", 'emsb' )?></label>
@@ -186,7 +197,7 @@ if ( !class_exists( 'emsb_service_booking_plugin_base_class' ) ) {
           <!-- PM Time Slot Ends  -->
 
           <!-- Service Provider Email Address Starts  -->
-          <div class="emsb-am-time-slot">
+          <div class="emsb-service-meta-field">
                 <label for="emsb-time-slot"> <h3> Service Provider Email Address </h3> </label>
                 <p>
                     <label for="emsb_service_provider_email" class="emsb-row-email"><?php _e( "Email Address: ", 'emsb' )?><?php echo get_the_author_meta('user_email'); ?></label>
@@ -201,18 +212,18 @@ if ( !class_exists( 'emsb_service_booking_plugin_base_class' ) ) {
 
         // *************** Save all post types meta fields ************* //
         public function emsb_save_all_posts_types_meta_fields_meta( $post_id ) {
-            // Checks save status
+            // Checks save status 
             $is_autosave = wp_is_post_autosave( $post_id );
             $is_revision = wp_is_post_revision( $post_id );
             $is_valid_nonce = ( isset( $_POST[ 'emsb_nonce' ] ) && wp_verify_nonce( $_POST[ 'emsb_nonce' ], basename( __FILE__ ) ) ) ? 'true' : 'false';
 
-            // Exits script depending on save status
+            // Exits script depending on save status 
             if ( $is_autosave || $is_revision || !$is_valid_nonce ) {
                 return;
             }
         // *************** post-type: Reviews **************//
 
-        // Checks for input and sanitizes/saves if needed
+            // Checks for input and sanitizes/saves if needed 
             if( isset( $_POST[ 'emsb_display_service_title' ] ) ) {
                 update_post_meta( $post_id, 'emsb_display_service_title', $_POST[ 'emsb_display_service_title' ] );
             }
@@ -266,6 +277,10 @@ if ( !class_exists( 'emsb_service_booking_plugin_base_class' ) ) {
                 update_post_meta( $post_id, 'emsb_service_off_day_sat', '' );
             }
 
+            // *************** Full Day Reservation **************//
+            if( isset( $_POST[ 'emsb_service_for_full_day' ] ) ) {
+                update_post_meta( $post_id, 'emsb_service_for_full_day', $_POST[ 'emsb_service_for_full_day' ] );
+            }
 
             // *************** AM Time slot **************//
             if( isset( $_POST[ 'emsb_service_am_starting_time' ] ) ) {
@@ -397,6 +412,7 @@ class emsb_database {
             `service_id` int(11) NOT NULL,
             `service_name` varchar(200),
             `service_price` text,
+            `booked_date_id` text,
             `booked_slot_id` text,
             `booked_date` text,
             `booked_time_slot` text,
@@ -420,6 +436,7 @@ class emsb_database {
             'service_id' => 0,
             'service_name' => "Default Data",
             'service_price' => "Default Data",
+            'booked_date_id' => "Default Data",
             'booked_slot_id' => "Default Data",
             'booked_date' => "Default Data",
             'booked_time_slot' => "Default Data",

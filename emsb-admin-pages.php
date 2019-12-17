@@ -181,6 +181,8 @@ class emsb_Admin_Page
                 );
                 wp_enqueue_script('popper-js', plugin_dir_url(__FILE__) . 'assets/js/popper.min.js', array(), '1.1', true );
                 wp_enqueue_script('bootstrap-js', plugin_dir_url(__FILE__) . 'assets/js/bootstrap.min.js', array(), '1.1', true );
+                wp_register_script( 'emsb-admin-scripts', plugins_url( 'assets/private/js/emsb-admin-scripts.js', __FILE__ ), array(), FALSE, TRUE);
+		        wp_enqueue_script( 'emsb-admin-scripts' );
                 
             }
         }
@@ -224,7 +226,12 @@ class emsb_Admin_Page
         wp_enqueue_script( 'bootstrap' );
         
         wp_register_script( 'emsb-bookings', plugins_url( 'assets/private/js/emsb-bookings-table-scripts.js', __FILE__ ), array(), FALSE, TRUE);
-		wp_enqueue_script( 'emsb-bookings' );
+        wp_enqueue_script( 'emsb-bookings' );
+
+        wp_register_script( 'emsb-admin-scripts', plugins_url( 'assets/private/js/emsb-admin-scripts.js', __FILE__ ), array(), FALSE, TRUE);
+		wp_enqueue_script( 'emsb-admin-scripts' );
+        
+        
 	}
 
 	/**
