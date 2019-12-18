@@ -118,6 +118,20 @@ if ( !class_exists( 'emsb_service_booking_plugin_base_class' ) ) {
                     <input type="text" name="emsb_display_service_price" id="emsb_display_service_price" value="<?php if ( isset ( $emsb_service_stored_meta['emsb_display_service_price'] ) ) echo $emsb_service_stored_meta['emsb_display_service_price'][0]; ?>" />
                 </p>
             </div>
+
+            <!-- service reservation duration -->
+            <div class="emsb-servation-availability-container emsb-service-meta-field"> 
+                <label for="emsb-time-slot"> <h3> Service Availability </h3> </label> 
+                <p>
+                    <label for="emsb_service_availability_starts_at" class="emsb-row-date-availability"><?php _e( "Will be Available From: ", 'emsb' )?></label>
+                    <input type="date" name="emsb_service_availability_starts_at" id="emsb_service_availability_starts_at" value="<?php if ( isset ( $emsb_service_stored_meta['emsb_service_availability_starts_at'] ) ) echo $emsb_service_stored_meta['emsb_service_availability_starts_at'][0]; ?>" />
+                </p>
+                <p>
+                    <label for="emsb_service_availability_ends_at" class="emsb-row-date-availability"><?php _e( "Will be Unavailable From: ", 'emsb' )?></label>
+                    <input type="date" name="emsb_service_availability_ends_at" id="emsb_service_availability_ends_at" value="<?php if ( isset ( $emsb_service_stored_meta['emsb_service_availability_ends_at'] ) ) echo $emsb_service_stored_meta['emsb_service_availability_ends_at'][0]; ?>" />
+                </p>
+                <footer class="blockquote-footer"> If you don't set these value, this service will always be available for future 1 year </footer>
+            </div>
           
           <!-- weekly Off-days  -->
           <div class="emsb-off-days">
@@ -154,7 +168,6 @@ if ( !class_exists( 'emsb_service_booking_plugin_base_class' ) ) {
                 <label for="emsb-time-slot"> <h3> Full Day Reservation </h3> </label> 
                 <p>
                     <label for="emsb_service_for_full_day" class="emsb-row-time_slot"><?php _e( "Is this service for full day reservation? ( 24 hours ) ", 'emsb' )?></label>
-                    <!-- <input type="checkbox" name="emsb_service_for_full_day" id="emsb_service_for_full_day" value="<?php //if ( isset ( $emsb_service_stored_meta['emsb_service_for_full_day'] ) ) echo $emsb_service_stored_meta['emsb_service_for_full_day'][0]; ?> /> -->
                     <input type="checkbox" name="emsb_service_for_full_day" id="emsb_service_for_full_day" value="checked" <?php if ( isset ( $emsb_service_stored_meta['emsb_service_for_full_day'] ) ) checked( $emsb_service_stored_meta['emsb_service_for_full_day'][0], 'checked' ); ?> />
                 </p>
             </div>
@@ -232,6 +245,16 @@ if ( !class_exists( 'emsb_service_booking_plugin_base_class' ) ) {
             }
             if( isset( $_POST[ 'emsb_display_service_price' ] ) ) {
                 update_post_meta( $post_id, 'emsb_display_service_price', $_POST[ 'emsb_display_service_price' ] );
+            }
+
+            // *************** Service Availability starts at **************//
+            if( isset( $_POST[ 'emsb_service_availability_starts_at' ] ) ) {
+                update_post_meta( $post_id, 'emsb_service_availability_starts_at', $_POST[ 'emsb_service_availability_starts_at' ] );
+            }
+
+            // *************** Service Availability starts at **************//
+            if( isset( $_POST[ 'emsb_service_availability_ends_at' ] ) ) {
+                update_post_meta( $post_id, 'emsb_service_availability_ends_at', $_POST[ 'emsb_service_availability_ends_at' ] );
             }
 
             // *************** Off-days **************//

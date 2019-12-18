@@ -408,6 +408,12 @@ article.em-service main {
     font-size: 20px;
     color: #8382ff;
 }
+.emsb-service-date-unavailable {
+    cursor: not-allowed !important;
+    background-color: #17a2b8 !important;
+    color: rgb(255, 255, 255) !important;
+    box-shadow: rgb(255, 255, 255) 0px 0px 0px 2px inset !important;
+}
 .off-day {
     cursor: not-allowed !important;
     background-color: rgb(255, 230, 230) !important;

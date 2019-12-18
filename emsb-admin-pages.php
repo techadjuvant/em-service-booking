@@ -313,7 +313,7 @@ class emsb_Admin_Page
                                         <label for="emsb_admin_email_body">Admin Email Body</label>
                                         <textarea class="form-control" name="emsb_admin_email_body" id="emsb_admin_email_body" rows="5" placeholder="Your message body"><?php echo $admin_mail_body; ?></textarea>
                                     </div>
-                                <footer class="blockquote-footer">Check the bookings list to see the customer data </footer>
+                                    <footer class="blockquote-footer">Check the bookings list to see the customer data </footer>
                                 </div>
                             </div>
                         </div>

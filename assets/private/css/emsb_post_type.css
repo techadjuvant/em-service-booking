@@ -255,6 +255,10 @@ legend.inline-edit-legend {
 .emsb-admin-main-page-wrapper .tabs > section[aria-hidden="true"] {
   display: none;
 }
-
+.blockquote-footer {
+  display: block;
+  font-size: 90%;
+  color: #6c757d;
+}
 
 

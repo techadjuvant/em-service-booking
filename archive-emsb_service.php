@@ -67,6 +67,27 @@ get_header();
                       </div>
                   </div>
                   <div class="em-service-meta-info">
+                      <div class="emsb-service-available-on-calendar">
+                              <!-- starting date  -->
+                            <?php $emsb_service_availability_starts_at = get_post_meta( get_the_ID(), 'emsb_service_availability_starts_at', true ); 
+                            if($emsb_service_availability_starts_at){
+                            ?>
+                              <input type="text" name="emsb_service_availability_starts_at" class="emsb_service_availability_starts_at" value="<?php echo $emsb_service_availability_starts_at; ?>"/>
+                            <?php } else { ?>
+                              <input type="text" name="emsb_service_availability_starts_at" class="emsb_service_availability_starts_at" value="<?php echo date("Y-m-d"); ?>"/>
+                            <?php } ?>
+                              <!-- ending date  -->
+                            <?php $emsb_service_availability_ends_at = get_post_meta( get_the_ID(), 'emsb_service_availability_ends_at', true ); 
+                            if($emsb_service_availability_ends_at){ ?>
+                              <input type="text" name="emsb_service_availability_ends_at" class="emsb_service_availability_ends_at" value="<?php echo $emsb_service_availability_ends_at; ?>"/>
+                            <?php 
+                              } else { ?>
+                                <input type="text" name="emsb_service_availability_ends_at" class="emsb_service_availability_ends_at" value="<?php echo date('Y-m-d', strtotime('+1 years')); ?>"/>
+                              <?php }
+                            ?>
+                            
+                            
+                      </div>
                     <div class="em-off-days">
                       <?php $emsb_service_off_day_sun = get_post_meta( get_the_ID(), 'emsb_service_off_day_sun', true );
                           if($emsb_service_off_day_sun){ ?>
