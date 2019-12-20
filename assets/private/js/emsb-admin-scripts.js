@@ -1,4 +1,5 @@
 $(document).ready(function() {
+
     if($("#emsb_service_for_full_day").is(":checked")) {
         $(".emsb-time-slot-container").hide();
     }
@@ -9,4 +10,6 @@ $(document).ready(function() {
             $(".emsb-time-slot-container").slideDown();
         }
     });
+
+      
 });

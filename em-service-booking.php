@@ -120,7 +120,7 @@ if ( !class_exists( 'emsb_service_booking_plugin_base_class' ) ) {
             </div>
 
             <!-- service reservation duration -->
-            <div class="emsb-servation-availability-container emsb-service-meta-field"> 
+            <div class="emsb-service-availability-container emsb-service-meta-field"> 
                 <label for="emsb-time-slot"> <h3> Service Availability </h3> </label> 
                 <p>
                     <label for="emsb_service_availability_starts_at" class="emsb-row-date-availability"><?php _e( "Will be Available From: ", 'emsb' )?></label>
@@ -132,35 +132,33 @@ if ( !class_exists( 'emsb_service_booking_plugin_base_class' ) ) {
                 </p>
                 <footer class="blockquote-footer"> If you don't set these value, this service will always be available for future 1 year </footer>
             </div>
-          
-          <!-- weekly Off-days  -->
-          <div class="emsb-off-days">
-              <label for="emsb-off-days"> <h3> Weekly Off Days </h3> </label>
-            <p>
-                
-                <input type="checkbox" name="emsb_service_off_day_sun" id="emsb_service_off_day_sun" value="1" <?php if ( isset ( $emsb_service_stored_meta['emsb_service_off_day_sun'] ) ) checked( $emsb_service_stored_meta['emsb_service_off_day_sun'][0], '1' ); ?> />
-                <label for="emsb_service_off_day_sun" class="emsb-row-off_days"><?php _e( "Sunday:", 'emsb' )?></label>
-                
-                <input type="checkbox" name="emsb_service_off_day_mon" id="emsb_service_off_day_mon" value="2" <?php if ( isset ( $emsb_service_stored_meta['emsb_service_off_day_mon'] ) ) checked( $emsb_service_stored_meta['emsb_service_off_day_mon'][0], '2' ); ?> />
-                <label for="emsb_service_off_day_mon" class="emsb-row-off_days"><?php _e( "Monday:", 'emsb' )?></label>
-                
-                <input type="checkbox" name="emsb_service_off_day_tues" id="emsb_service_off_day_tues" value="3" <?php if ( isset ( $emsb_service_stored_meta['emsb_service_off_day_tues'] ) ) checked( $emsb_service_stored_meta['emsb_service_off_day_tues'][0], '3' ); ?> />
-                <label for="emsb_service_off_day_tues" class="emsb-row-off_days"><?php _e( "Tuesday:", 'emsb' )?></label>
-                
-                <input type="checkbox" name="emsb_service_off_day_wed" id="emsb_service_off_day_wed" value="4" <?php if ( isset ( $emsb_service_stored_meta['emsb_service_off_day_wed'] ) ) checked( $emsb_service_stored_meta['emsb_service_off_day_wed'][0], '4' ); ?> />
-                <label for="emsb_service_off_day_wed" class="emsb-row-off_days"><?php _e( "Wednesday:", 'emsb' )?></label>
-                
-                <input type="checkbox" name="emsb_service_off_day_thurs" id="emsb_service_off_day_thurs" value="5" <?php if ( isset ( $emsb_service_stored_meta['emsb_service_off_day_thurs'] ) ) checked( $emsb_service_stored_meta['emsb_service_off_day_thurs'][0], '5' ); ?> />
-                <label for="emsb_service_off_day_thurs" class="emsb-row-off_days"><?php _e( "Thursday:", 'emsb' )?></label>
-                
-                <input type="checkbox" name="emsb_service_off_day_fri" id="emsb_service_off_day_fri" value="6" <?php if ( isset ( $emsb_service_stored_meta['emsb_service_off_day_fri'] ) ) checked( $emsb_service_stored_meta['emsb_service_off_day_fri'][0], '6' ); ?> />
-                <label for="emsb_service_off_day_fri" class="emsb-row-off_days"><?php _e( "Friday:", 'emsb' )?></label>
-                
-                <input type="checkbox" name="emsb_service_off_day_sat" id="emsb_service_off_day_sat" value="7" <?php if ( isset ( $emsb_service_stored_meta['emsb_service_off_day_sat'] ) ) checked( $emsb_service_stored_meta['emsb_service_off_day_sat'][0], '7' ); ?> />
-                <label for="emsb_service_off_day_sat" class="emsb-row-off_days"><?php _e( "Saturday:", 'emsb' )?></label>
 
-            </p>
-          </div>
+            <!-- weekly Off-days  -->
+            <div class="emsb-off-days">
+              <label for="emsb-off-days"> <h3> Weekly Off Days </h3> </label>
+                <p>
+                    <input type="checkbox" name="emsb_service_off_day_sun" id="emsb_service_off_day_sun" value="1" <?php if ( isset ( $emsb_service_stored_meta['emsb_service_off_day_sun'] ) ) checked( $emsb_service_stored_meta['emsb_service_off_day_sun'][0], '1' ); ?> />
+                    <label for="emsb_service_off_day_sun" class="emsb-row-off_days"><?php _e( "Sunday:", 'emsb' )?></label>
+                    
+                    <input type="checkbox" name="emsb_service_off_day_mon" id="emsb_service_off_day_mon" value="2" <?php if ( isset ( $emsb_service_stored_meta['emsb_service_off_day_mon'] ) ) checked( $emsb_service_stored_meta['emsb_service_off_day_mon'][0], '2' ); ?> />
+                    <label for="emsb_service_off_day_mon" class="emsb-row-off_days"><?php _e( "Monday:", 'emsb' )?></label>
+                    
+                    <input type="checkbox" name="emsb_service_off_day_tues" id="emsb_service_off_day_tues" value="3" <?php if ( isset ( $emsb_service_stored_meta['emsb_service_off_day_tues'] ) ) checked( $emsb_service_stored_meta['emsb_service_off_day_tues'][0], '3' ); ?> />
+                    <label for="emsb_service_off_day_tues" class="emsb-row-off_days"><?php _e( "Tuesday:", 'emsb' )?></label>
+                    
+                    <input type="checkbox" name="emsb_service_off_day_wed" id="emsb_service_off_day_wed" value="4" <?php if ( isset ( $emsb_service_stored_meta['emsb_service_off_day_wed'] ) ) checked( $emsb_service_stored_meta['emsb_service_off_day_wed'][0], '4' ); ?> />
+                    <label for="emsb_service_off_day_wed" class="emsb-row-off_days"><?php _e( "Wednesday:", 'emsb' )?></label>
+                    
+                    <input type="checkbox" name="emsb_service_off_day_thurs" id="emsb_service_off_day_thurs" value="5" <?php if ( isset ( $emsb_service_stored_meta['emsb_service_off_day_thurs'] ) ) checked( $emsb_service_stored_meta['emsb_service_off_day_thurs'][0], '5' ); ?> />
+                    <label for="emsb_service_off_day_thurs" class="emsb-row-off_days"><?php _e( "Thursday:", 'emsb' )?></label>
+                    
+                    <input type="checkbox" name="emsb_service_off_day_fri" id="emsb_service_off_day_fri" value="6" <?php if ( isset ( $emsb_service_stored_meta['emsb_service_off_day_fri'] ) ) checked( $emsb_service_stored_meta['emsb_service_off_day_fri'][0], '6' ); ?> />
+                    <label for="emsb_service_off_day_fri" class="emsb-row-off_days"><?php _e( "Friday:", 'emsb' )?></label>
+                    
+                    <input type="checkbox" name="emsb_service_off_day_sat" id="emsb_service_off_day_sat" value="7" <?php if ( isset ( $emsb_service_stored_meta['emsb_service_off_day_sat'] ) ) checked( $emsb_service_stored_meta['emsb_service_off_day_sat'][0], '7' ); ?> />
+                    <label for="emsb_service_off_day_sat" class="emsb-row-off_days"><?php _e( "Saturday:", 'emsb' )?></label>
+                </p>
+            </div>
             <!-- weekly Off-days ends  -->
 
             <!-- service reservation duration -->
@@ -252,7 +250,7 @@ if ( !class_exists( 'emsb_service_booking_plugin_base_class' ) ) {
                 update_post_meta( $post_id, 'emsb_service_availability_starts_at', $_POST[ 'emsb_service_availability_starts_at' ] );
             }
 
-            // *************** Service Availability starts at **************//
+            // *************** Service Availability ends at **************//
             if( isset( $_POST[ 'emsb_service_availability_ends_at' ] ) ) {
                 update_post_meta( $post_id, 'emsb_service_availability_ends_at', $_POST[ 'emsb_service_availability_ends_at' ] );
             }

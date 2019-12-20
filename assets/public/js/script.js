@@ -107,8 +107,9 @@ $(document).ready(function() {
         }
     });
 
-
     
+    var monthYearOnCalendar = "";
+
     // Disable passed dates
     function disablePassedDays(){
 
@@ -138,7 +139,7 @@ $(document).ready(function() {
         var i = 1;
         for(i=1;i<=31; i++){
             passedDay = $(".em-reservation-calendar tbody.month-days tr td[data-date='" + i +"']").attr('data-servicedateid', emsb_selected_service_each_date_id +'-'+ i).attr('title', 'Not-Available').addClass("unavailable emsb-service-date-unavailable").attr('disabled', true);
-            // console.log("activeYearValue: "+ emsb_selected_service_each_date_id +'-'+ i);
+            
         }
 
 
@@ -158,14 +159,15 @@ $(document).ready(function() {
         var emsbServiceEndingDateGetDate = new Date(emsbServiceEndingDate);
         var emsbServiceEndingDateGetDateTime = emsbServiceEndingDateGetDate.getTime();
 
-        var monthYearOnCalendar = eachActiveYearString +'-'+ eachActiveMonthString;
+        monthYearOnCalendar = eachActiveYearString +'-'+ eachActiveMonthString;
+
         for(i=1;i<=31; i++){
             var datesOnCalendar = monthYearOnCalendar +'-'+ i;
             var datesOnCalendarGetDate = new Date(datesOnCalendar);
             var datesOnCalendarGetDateTime = datesOnCalendarGetDate.getTime();
             if(emsbServiceStartingDateGetDateTime <= datesOnCalendarGetDateTime && datesOnCalendarGetDateTime <= emsbServiceEndingDateGetDateTime){
                 $(".em-reservation-calendar tbody.month-days tr td[data-date='" + i +"']").attr('title', 'Available').removeClass("unavailable emsb-service-date-unavailable").addClass("emsb-service-date-available");
-                console.log(datesOnCalendarGetDateTime <= emsbServiceEndingDateGetDateTime); // prints true (correct)
+                // console.log(datesOnCalendarGetDateTime <= emsbServiceEndingDateGetDateTime); // prints true (correct)
             }  
             
         }
@@ -190,7 +192,8 @@ $(document).ready(function() {
             var emsb_selected_service_each_date_id = emsb_selected_service_id +'-'+ eachActiveYearString +'-'+ eachActiveMonthString;
 
             for(i=1;i<=31; i++){
-                $(".em-reservation-calendar tbody.month-days tr td[data-date='" + i +"']").attr('data-servicedateid', emsb_selected_service_each_date_id +'-'+ i).attr('title', 'Not-Available').addClass("unavailable emsb-service-date-unavailable").attr('disabled', true);
+                $(".em-reservation-calendar tbody.month-days tr td[data-date='" + i +"']").attr('title', 'Not-Available').addClass("unavailable emsb-service-date-unavailable").attr('disabled', true).attr('data-servicedateid', emsb_selected_service_each_date_id +'-'+ i); 
+
             }
 
 
@@ -218,18 +221,18 @@ $(document).ready(function() {
             var emsbServiceEndingDateGetDate = new Date(emsbServiceEndingDate);
             var emsbServiceEndingDateGetDateTime = emsbServiceEndingDateGetDate.getTime();
 
-            var monthYearOnCalendar = eachActiveYearString +'-'+ eachActiveMonthString;
+            monthYearOnCalendar = eachActiveYearString +'-'+ eachActiveMonthString;
+
             for(i=1;i<=31; i++){
                 var datesOnCalendar = monthYearOnCalendar +'-'+ i;
                 var datesOnCalendarGetDate = new Date(datesOnCalendar);
                 var datesOnCalendarGetDateTime = datesOnCalendarGetDate.getTime();
                 if(emsbServiceStartingDateGetDateTime <= datesOnCalendarGetDateTime && datesOnCalendarGetDateTime <= emsbServiceEndingDateGetDateTime){
                     $(".em-reservation-calendar tbody.month-days tr td[data-date='" + i +"']").attr('title', 'Available').removeClass("unavailable emsb-service-date-unavailable").addClass("emsb-service-date-available");
-                    console.log(datesOnCalendarGetDateTime <= emsbServiceEndingDateGetDateTime); // prints true (correct)
+                    
                 }  
-                
-            }
 
+            }
 
 
         });
@@ -262,19 +265,26 @@ $(document).ready(function() {
                 bookedDates.forEach(alreadyBookedDates);
                 function alreadyBookedDates(bookedDateId) {
                     $(".em-reservation-calendar tbody.month-days tr td[data-servicedateid='" + bookedDateId +"']").addClass("unavailable already-booked").attr('title', 'Already Booked');
+                    
                 }
+                
                 $(".emsb-calender-loading-gif").fadeOut(1000);
+                
             }
             
 
-          });
-        
+        });
+
         $(".em-reservation-calendar button.ic").on("click", function(){
-            // Disable already booked dates on changing the months
-            bookedDates.forEach(alreadyBookedDates);
-            function alreadyBookedDates(item, index) {
-                $(".em-reservation-calendar tbody.month-days tr td[data-servicedateid='" + item +"']").addClass("unavailable already-booked").attr('title', 'Already Booked');
-            }
+
+                bookedDates.forEach(alreadyBookedDates);
+                function alreadyBookedDates(item, index) {
+                    var id = $("td[data-servicedateid='"+item+"']").data("servicedateid");
+                    $(".em-reservation-calendar tbody.month-days tr td[data-servicedateid='" + item +"']").addClass("unavailable already-booked").attr('title', 'Already Booked');  
+                    // console.log("Id: "+ id);
+                }
+            
+            
         
         });
 
@@ -330,19 +340,19 @@ $(document).ready(function() {
 
                 };
             });
-        
+
         });
+
 
     }
 
     // Disable Off days Ends
-
+    
 
 
 
     // Date selection
-    
-    
+
     $(".em-reservation-calendar td.ripple-element").on("click", function(){
         
         var isDisabled = $(this).hasClass("unavailable"); 
