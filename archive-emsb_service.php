@@ -119,12 +119,7 @@ get_header();
                       <?php } ?>
                           
                     </div>
-                    <!-- special off days  -->
-                    <div class="emsb-special-off-days-container">
-                      <?php 
-                          $emsb_service_special_off_day = get_post_meta( get_the_ID(), 'emsb_service_special_off_day', true ); ?>
-                          <input type="text" name="emsb_service_special_off_day" class="emsb_service_special_off_day" value="<?php echo $emsb_service_special_off_day; ?>" />
-                    </div>
+                    
                     <div class="full-day-reservation">
                       <?php 
                           $emsb_service_for_full_day = get_post_meta( get_the_ID(), 'emsb_service_for_full_day', true ); ?>

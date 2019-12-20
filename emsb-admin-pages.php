@@ -190,12 +190,6 @@ class emsb_Admin_Page
         
     }
 
-    
-    public static function my_admin_enqueue_scripts() {
-        wp_register_script( 'emsb-bookings', plugins_url( 'assets/private/js/emsb-bookings-table-scripts.js', __FILE__ ), array(), FALSE, TRUE);
-		wp_enqueue_script( 'emsb-bookings' );
-    }
-    
     /**
 	 * Load stylesheet on our admin page only.
 	 *

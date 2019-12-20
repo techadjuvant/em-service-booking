@@ -70,6 +70,7 @@ if ( !class_exists( 'emsb_service_booking_plugin_base_class' ) ) {
                     'publicly_queryable'    => true,
                     'show_ui'               => true,
                     'show_in_menu'          => false,
+                    'show_in_admin_bar'         => true,
                     'query_var'             => true,
                     'rewrite'               => array( 'slug' => $slug ),
                     'capability_type'       => 'post',
@@ -77,7 +78,7 @@ if ( !class_exists( 'emsb_service_booking_plugin_base_class' ) ) {
                     'hierarchical'          => true,
                     'menu_icon'             => 'dashicons-buddicons-buddypress-logo',
                     'menu_position'         => 26,
-                    'supports'              => array( 'title', 'excerpt', 'thumbnail', 'author'),
+                    'supports'              => array( 'title', 'thumbnail', 'excerpt', 'editor'),
                     'show_in_rest'          => true
                 );
                 register_post_type( $type, $args );
@@ -359,6 +360,13 @@ if ( !class_exists( 'emsb_service_booking_plugin_base_class' ) ) {
             return $emsb_single_service;
         }
 
+        public function mytheme_disable_gutenberg_pages( $can_edit, $post_type ) {
+            if ( 'emsb_service' === $post_type ) {
+              return false;
+            }
+            return $can_edit;
+          }
+
         
          
 
@@ -366,16 +374,14 @@ if ( !class_exists( 'emsb_service_booking_plugin_base_class' ) ) {
   
             wp_enqueue_style('bootstrap-css', plugin_dir_url(__FILE__) . 'assets/css/bootstrap.min.css', array(), '1.1', false );
             wp_enqueue_style('aicon-style', plugin_dir_url(__FILE__) . 'calendar/aicon/style.css', array(), '1.1', false );
-            wp_enqueue_style('pseudo-ripple', plugin_dir_url(__FILE__) . 'calendar/css/jquery-pseudo-ripple.css', array(), '1.1', false );
-            wp_enqueue_style('nao-calendar', plugin_dir_url(__FILE__) . 'calendar/css/jquery-nao-calendar.css', array(), '1.1', false );
+            wp_enqueue_style('pseudo-ripple', plugin_dir_url(__FILE__) . 'calendar/jquery-pseudo-ripple.css', array(), '1.1', false );
+            wp_enqueue_style('nao-calendar', plugin_dir_url(__FILE__) . 'calendar/jquery-nao-calendar.css', array(), '1.1', false );
             wp_enqueue_style('emr-style', plugin_dir_url(__FILE__) . 'assets/public/css/style.css', array(), '1.1', false );
 
             wp_enqueue_script('jquery-js', plugin_dir_url(__FILE__) . 'assets/js/jquery.min.js', array(), '1.1', true );
             wp_localize_script( 'jquery-js', 'frontend_ajax_object',
                 array( 
-                    'ajaxurl' => admin_url( 'admin-ajax.php' ),
-                    'data_var_1' => 'value 1',
-                    'data_var_2' => 'value 2',
+                    'ajaxurl' => admin_url( 'admin-ajax.php' )
                 )
             );
             wp_enqueue_script('popper-js', plugin_dir_url(__FILE__) . 'assets/js/popper.min.js', array(), '1.1', true );
@@ -402,9 +408,16 @@ if ( !class_exists( 'emsb_service_booking_plugin_base_class' ) ) {
             add_action('save_post', array($this,'emsb_save_all_posts_types_meta_fields_meta')); //add meta boxes
             add_filter( 'archive_template',  array($this,'emsb_get_archive_template') ) ; 
             add_filter( 'single_template',  array($this,'emsb_get_single_template') ) ; 
+            add_filter( 'use_block_editor_for_post_type', array($this,'mytheme_disable_gutenberg_pages'), 10, 2 );
             add_action( 'wp_enqueue_scripts', array($this,'em_reservation_enqueue_public_scripts')  );
+            // add_action( 'gutenberg_can_edit_post_type', array($this,'mytheme_disable_gutenberg_pages')  );
+            
             
         }
+
+        
+          
+          
                 
                 
                 
