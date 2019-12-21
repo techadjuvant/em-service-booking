@@ -8,7 +8,7 @@ get_header();
 ?>
 
 <!-- emsb container  -->
-<div class="emsb-plugin-container">
+<div class="emsb-plugin-container emsb-single-service-page">
 <!-- emsb-services-and-form-container -->
   <div class="emsb-services-and-form-container">
   <!-- emsb-services container -->
@@ -16,18 +16,8 @@ get_header();
       <div class="container">
         <div class="row">
           <div class="col-lg-8 offset-lg-2"> 
-            <header class="d-flex justify-content-center py-4"> 
-              <h2> 
-                <?php 
-                      $emsb_page_slug = get_page_by_path( 'emsb_service' );
-                      if($emsb_page_slug){
-                        echo get_the_title( $emsb_page_slug );
-                      }  
-                ?> 
-            </h2> 
-            </header>
 
-            <?php
+          <?php
           /* Start the Loop */
           while ( have_posts() ) : the_post(); ?>
             <article id="post-<?php the_ID(); ?>"  class="em-service">
@@ -63,10 +53,30 @@ get_header();
                           ?>
                           
                         
-                        
+                          <button type="button" class="btn btn-light mb-2 em-select-service-button"> Book Now </button>
                       </div>
                   </div>
                   <div class="em-service-meta-info">
+                      <div class="emsb-service-available-on-calendar">
+                              <!-- starting date  -->
+                            <?php $emsb_service_availability_starts_at = get_post_meta( get_the_ID(), 'emsb_service_availability_starts_at', true ); 
+                            if($emsb_service_availability_starts_at){
+                            ?>
+                              <input type="text" name="emsb_service_availability_starts_at" class="emsb_service_availability_starts_at" value="<?php echo $emsb_service_availability_starts_at; ?>"/>
+                            <?php } else { ?>
+                              <input type="text" name="emsb_service_availability_starts_at" class="emsb_service_availability_starts_at" value="<?php echo date("Y-m-d"); ?>"/>
+                            <?php } ?>
+                              <!-- ending date  -->
+                            <?php $emsb_service_availability_ends_at = get_post_meta( get_the_ID(), 'emsb_service_availability_ends_at', true ); 
+                            if($emsb_service_availability_ends_at){ ?>
+                              <input type="text" name="emsb_service_availability_ends_at" class="emsb_service_availability_ends_at" value="<?php echo $emsb_service_availability_ends_at; ?>"/>
+                            <?php 
+                              } else { ?>
+                                <input type="text" name="emsb_service_availability_ends_at" class="emsb_service_availability_ends_at" value="<?php echo date('Y-m-d', strtotime('+1 years')); ?>"/>
+                              <?php }
+                            ?>
+
+                      </div>
                     <div class="em-off-days">
                       <?php $emsb_service_off_day_sun = get_post_meta( get_the_ID(), 'emsb_service_off_day_sun', true );
                           if($emsb_service_off_day_sun){ ?>
@@ -98,24 +108,30 @@ get_header();
                       <?php } ?>
                           
                     </div>
+                    
+                    <div class="full-day-reservation">
+                      <?php 
+                          $emsb_service_full_day_reservation = get_post_meta( get_the_ID(), 'emsb_service_full_day_reservation', true ); ?>
+                          <input type="checkbox" name="emsb_fullDayReserve" id="emsb_fullDayReserve" <?php echo $emsb_service_full_day_reservation; ?> />
+                    </div>
                     <div class="em-time-slot">
                       <div class="am-time-slot">
                           <?php 
                               $emsb_service_am_starting_time = get_post_meta( get_the_ID(), 'emsb_service_am_starting_time', true );
                               if($emsb_service_am_starting_time){ ?>
-                                  <input id="amSlotStarts" class="amSlotStarts" value="<?php echo $emsb_service_am_starting_time; ?>" />
+                                  <input class="amSlotStarts" value="<?php echo $emsb_service_am_starting_time; ?>" />
                           <?php } ?>
 
                           <?php 
                               $emsb_service_am_ending_time = get_post_meta( get_the_ID(), 'emsb_service_am_ending_time', true );
                               if($emsb_service_am_ending_time){ ?>
-                                  <input id="amSlotEnds" class="amSlotEnds" value="<?php echo $emsb_service_am_ending_time; ?>" />
+                                  <input class="amSlotEnds" value="<?php echo $emsb_service_am_ending_time; ?>" />
                           <?php } ?>
 
                           <?php 
                               $emsb_service_am_slot_duration = get_post_meta( get_the_ID(), 'emsb_service_am_slot_duration', true );
                               if($emsb_service_am_slot_duration){ ?>
-                                  <input id="amSlotDuration" class="amSlotDuration" type="text" name="amSlotDuration" value="<?php echo $emsb_service_am_slot_duration; ?>">
+                                  <input class="amSlotDuration" type="text" name="amSlotDuration" value="<?php echo $emsb_service_am_slot_duration; ?>">
                           <?php } ?>
                               
                       </div>
@@ -123,19 +139,19 @@ get_header();
                           <?php 
                               $emsb_service_pm_starting_time = get_post_meta( get_the_ID(), 'emsb_service_pm_starting_time', true );
                               if($emsb_service_pm_starting_time){ ?>
-                                  <input id="pmSlotStarts" class="pmSlotStarts" value="<?php echo $emsb_service_pm_starting_time; ?>" />
+                                  <input class="pmSlotStarts" value="<?php echo $emsb_service_pm_starting_time; ?>" />
                           <?php } ?>
 
                           <?php 
                               $emsb_service_pm_ending_time = get_post_meta( get_the_ID(), 'emsb_service_pm_ending_time', true );
                               if($emsb_service_pm_ending_time){ ?>
-                                  <input id="pmSlotEnds" class="pmSlotEnds" value="<?php echo $emsb_service_pm_ending_time; ?>" />
+                                  <input class="pmSlotEnds" value="<?php echo $emsb_service_pm_ending_time; ?>" />
                           <?php } ?>
 
                           <?php 
                               $emsb_service_pm_slot_duration = get_post_meta( get_the_ID(), 'emsb_service_pm_slot_duration', true );
                               if($emsb_service_pm_slot_duration){ ?>
-                                  <input id="pmSlotDuration" class="pmSlotDuration" type="text" name="pmSlotDuration" value="<?php echo $emsb_service_pm_slot_duration; ?>">
+                                  <input class="pmSlotDuration" type="text" name="pmSlotDuration" value="<?php echo $emsb_service_pm_slot_duration; ?>">
                           <?php } ?>
 
                       </div>
@@ -151,7 +167,19 @@ get_header();
                         ?>
                     </div>
                   </div>
-                  <button type="button" class="btn btn-light mb-2 em-select-service-button">Select</button>
+                   <!-- service description -->
+                   <div class="emsb-service-description">
+                      <?php 
+                        $emsbtexteditor_check = get_post_meta( get_the_ID(), 'emsbtexteditor_check', true );
+                        if($emsbtexteditor_check){
+                            $emsbtexteditor = get_post_meta( get_the_ID(), 'emsbtexteditor', true );
+                            if($emsbtexteditor){ 
+                              echo $emsbtexteditor; 
+                              
+                            }
+                        }
+                      ?>
+                    </div>
                 
             </article>
 
@@ -173,7 +201,7 @@ get_header();
               <div class="em-get-selected-service em-service-excerpt d-flex align-items-center">
                   
               </div>
-              <button  class="btn btn-light em-change-service-btn">Change Service</button>
+              <button  class="btn btn-light em-change-service-btn">See Details</button>
             </div>
             <div class="em-selected-date-wrapper">
               <div class="em-selected-date d-flex align-items-center">
@@ -193,11 +221,11 @@ get_header();
           <!-- All Selected Info Ends  -->
 
           <div class="em-calendar-wrapper">
-            
+              <div class="emsb-calender-loading-gif">
+                <img src="<?php echo plugin_dir_url( __FILE__ ) . 'assets/img/loading.gif'; ?>">
+              </div>
             <div class="em-reservation-calendar"></div>
           </div>
-          
-
 
           <div class="em-timer">
               <div class="emsb-loading-gif">
@@ -254,6 +282,7 @@ get_header();
                       <input type="text" name="emsb_selected_service" id="emsb_selected_service" value="service-one" >
                       <input type="text" name="emsb_selected_service_title" id="emsb_selected_service_title" value="" >
                       <input type="text" name="emsb_selected_service_location" id="emsb_selected_service_location" value="service-one" >
+                      <input type="text" name="emsb_selected_service_date_id" id="emsb_selected_service_date_id" value="123123" >
                       <input type="text" name="emsb_selected_slot_id" id="emsb_selected_slot_id" value="AM112" >
                       <input type="text" name="emsb_selected_service_provider_email" id="emsb_selected_service_provider_email" value="motahar1201123@gmail.com" >
                       <input type="text" name="emsb_selected_service_date" id="emsb_selected_service_date" value="12/12/2019" >

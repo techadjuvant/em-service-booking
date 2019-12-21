@@ -78,7 +78,7 @@ if ( !class_exists( 'emsb_service_booking_plugin_base_class' ) ) {
                     'hierarchical'          => true,
                     'menu_icon'             => 'dashicons-buddicons-buddypress-logo',
                     'menu_position'         => 26,
-                    'supports'              => array( 'title', 'thumbnail', 'excerpt', 'editor'),
+                    'supports'              => array( 'title', 'thumbnail'),
                     'show_in_rest'          => true
                 );
                 register_post_type( $type, $args );
@@ -102,8 +102,9 @@ if ( !class_exists( 'emsb_service_booking_plugin_base_class' ) ) {
         public function emsb_callback_to_show_the_service_meta_boxes( $post ) {
             wp_nonce_field( basename( __FILE__ ), 'emsb_nonce' );
             $emsb_service_stored_meta = get_post_meta( $post->ID );
+            $emsbtexteditor = get_post_meta( $post->ID, 'emsbtexteditor', true );
         ?>
-          
+            
           <div class="emsb-service-header-info">
                 <label for="emsb-service-header-info"> <h3> Service Main Info </h3> </label>
                 <p>
@@ -166,8 +167,8 @@ if ( !class_exists( 'emsb_service_booking_plugin_base_class' ) ) {
             <div class="emsb-servation-duration-container emsb-service-meta-field"> 
                 <label for="emsb-time-slot"> <h3> Full Day Reservation </h3> </label> 
                 <p>
-                    <label for="emsb_service_for_full_day" class="emsb-row-time_slot"><?php _e( "Is this service for full day reservation? ( 24 hours ) ", 'emsb' )?></label>
-                    <input type="checkbox" name="emsb_service_for_full_day" id="emsb_service_for_full_day" value="checked" <?php if ( isset ( $emsb_service_stored_meta['emsb_service_for_full_day'] ) ) checked( $emsb_service_stored_meta['emsb_service_for_full_day'][0], 'checked' ); ?> />
+                    <label for="emsb_service_full_day_reservation" class="emsb-row-time_slot"><?php _e( "Is this service for full day reservation? ( 24 hours ) ", 'emsb' )?></label>
+                    <input type="checkbox" name="emsb_service_full_day_reservation" id="emsb_service_full_day_reservation" value="checked" <?php if ( isset ( $emsb_service_stored_meta['emsb_service_full_day_reservation'] ) ) checked( $emsb_service_stored_meta['emsb_service_full_day_reservation'][0], 'checked' ); ?> />
                 </p>
             </div>
             
@@ -210,7 +211,7 @@ if ( !class_exists( 'emsb_service_booking_plugin_base_class' ) ) {
 
           <!-- Service Provider Email Address Starts  -->
           <div class="emsb-service-meta-field">
-                <label for="emsb-time-slot"> <h3> Service Provider Email Address </h3> </label>
+                <label for="emsb_service_provider_email"> <h3> Service Provider Email Address </h3> </label>
                 <p>
                     <label for="emsb_service_provider_email" class="emsb-row-email"><?php _e( "Email Address: ", 'emsb' )?><?php echo get_the_author_meta('user_email'); ?></label>
                     <input type="email" name="emsb_service_provider_email" id="emsb_service_provider_email" value="<?php if ( isset ( $emsb_service_stored_meta['emsb_service_provider_email'] ) ) echo $emsb_service_stored_meta['emsb_service_provider_email'][0]; ?>" />
@@ -218,6 +219,24 @@ if ( !class_exists( 'emsb_service_booking_plugin_base_class' ) ) {
 
             </div>
           <!-- Service Provider Email Address Ends  -->
+
+          <!-- Service description -->
+            <div class="emsb-service-meta-field emsb-service-description-container">
+                <label for="emsbtexteditor_check"> <h3> <?php// _e( "Service Description ", 'emsb' ) ?> </h3> </label>
+                <p>
+                    <label for="emsbtexteditor_check" class="emsb-row-time_slot"><?php _e( "Has description for single service page? ", 'emsb' );?></label>
+                    <input type="checkbox" name="emsbtexteditor_check" id="emsbtexteditor_check" value="description" <?php if ( isset ( $emsb_service_stored_meta['emsbtexteditor_check'] ) ) checked( $emsb_service_stored_meta['emsbtexteditor_check'][0], 'description' ); ?> />
+                </p>
+                <div id="emsb-texteditor-container">
+                    <?php
+                        wp_editor(
+                            wpautop( $emsbtexteditor ),
+                            'emsbtexteditor',
+                            array( 'wpautop' => false )
+                        );
+                    ?>
+                </div>
+            </div>
           
           
         <?php }
@@ -299,10 +318,14 @@ if ( !class_exists( 'emsb_service_booking_plugin_base_class' ) ) {
                 update_post_meta( $post_id, 'emsb_service_off_day_sat', '' );
             }
 
-            // *************** Full Day Reservation **************//
-            if( isset( $_POST[ 'emsb_service_for_full_day' ] ) ) {
-                update_post_meta( $post_id, 'emsb_service_for_full_day', $_POST[ 'emsb_service_for_full_day' ] );
+
+            // *************** Full Day Reservation **************// 
+            if( isset( $_POST[ 'emsb_service_full_day_reservation' ] ) ) {
+                update_post_meta( $post_id, 'emsb_service_full_day_reservation', 'checked' );
+            } else {
+                update_post_meta( $post_id, 'emsb_service_full_day_reservation', '' );
             }
+            
 
             // *************** AM Time slot **************//
             if( isset( $_POST[ 'emsb_service_am_starting_time' ] ) ) {
@@ -335,8 +358,20 @@ if ( !class_exists( 'emsb_service_booking_plugin_base_class' ) ) {
                 update_post_meta( $post_id, 'emsb_service_provider_email', $email_address );
             }
             
+            // *************** emsbtexteditor **************//
+            if( isset( $_POST[ 'emsbtexteditor_check' ] ) ) {
+                update_post_meta( $post_id, 'emsbtexteditor_check', 'description' );
+            } else {
+                update_post_meta( $post_id, 'emsbtexteditor_check', '' );
+            }
+            // if( isset( $_POST[ 'emsbtexteditor_check' ] ) ) {
+            //     update_post_meta( $post_id, 'emsbtexteditor_check', $_POST[ 'emsbtexteditor_check' ] );
+            // }
+            if( isset( $_POST[ 'emsbtexteditor' ] ) ) {
+                update_post_meta( $post_id, 'emsbtexteditor', $_POST[ 'emsbtexteditor' ] );
+            }
 
-
+            
         }
 
         

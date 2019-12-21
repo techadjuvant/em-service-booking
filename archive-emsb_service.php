@@ -85,8 +85,7 @@ get_header();
                                 <input type="text" name="emsb_service_availability_ends_at" class="emsb_service_availability_ends_at" value="<?php echo date('Y-m-d', strtotime('+1 years')); ?>"/>
                               <?php }
                             ?>
-                            
-                            
+
                       </div>
                     <div class="em-off-days">
                       <?php $emsb_service_off_day_sun = get_post_meta( get_the_ID(), 'emsb_service_off_day_sun', true );
@@ -122,27 +121,27 @@ get_header();
                     
                     <div class="full-day-reservation">
                       <?php 
-                          $emsb_service_for_full_day = get_post_meta( get_the_ID(), 'emsb_service_for_full_day', true ); ?>
-                          <input type="checkbox" name="emsb_fullDayReserve" id="emsb_fullDayReserve" <?php echo $emsb_service_for_full_day; ?> />
+                          $emsb_service_full_day_reservation = get_post_meta( get_the_ID(), 'emsb_service_full_day_reservation', true ); ?>
+                          <input type="checkbox" name="emsb_fullDayReserve" id="emsb_fullDayReserve" <?php echo $emsb_service_full_day_reservation; ?> />
                     </div>
                     <div class="em-time-slot">
                       <div class="am-time-slot">
                           <?php 
                               $emsb_service_am_starting_time = get_post_meta( get_the_ID(), 'emsb_service_am_starting_time', true );
                               if($emsb_service_am_starting_time){ ?>
-                                  <input id="amSlotStarts" class="amSlotStarts" value="<?php echo $emsb_service_am_starting_time; ?>" />
+                                  <input class="amSlotStarts" value="<?php echo $emsb_service_am_starting_time; ?>" />
                           <?php } ?>
 
                           <?php 
                               $emsb_service_am_ending_time = get_post_meta( get_the_ID(), 'emsb_service_am_ending_time', true );
                               if($emsb_service_am_ending_time){ ?>
-                                  <input id="amSlotEnds" class="amSlotEnds" value="<?php echo $emsb_service_am_ending_time; ?>" />
+                                  <input class="amSlotEnds" value="<?php echo $emsb_service_am_ending_time; ?>" />
                           <?php } ?>
 
                           <?php 
                               $emsb_service_am_slot_duration = get_post_meta( get_the_ID(), 'emsb_service_am_slot_duration', true );
                               if($emsb_service_am_slot_duration){ ?>
-                                  <input id="amSlotDuration" class="amSlotDuration" type="text" name="amSlotDuration" value="<?php echo $emsb_service_am_slot_duration; ?>">
+                                  <input class="amSlotDuration" type="text" name="amSlotDuration" value="<?php echo $emsb_service_am_slot_duration; ?>">
                           <?php } ?>
                               
                       </div>
@@ -150,19 +149,19 @@ get_header();
                           <?php 
                               $emsb_service_pm_starting_time = get_post_meta( get_the_ID(), 'emsb_service_pm_starting_time', true );
                               if($emsb_service_pm_starting_time){ ?>
-                                  <input id="pmSlotStarts" class="pmSlotStarts" value="<?php echo $emsb_service_pm_starting_time; ?>" />
+                                  <input class="pmSlotStarts" value="<?php echo $emsb_service_pm_starting_time; ?>" />
                           <?php } ?>
 
                           <?php 
                               $emsb_service_pm_ending_time = get_post_meta( get_the_ID(), 'emsb_service_pm_ending_time', true );
                               if($emsb_service_pm_ending_time){ ?>
-                                  <input id="pmSlotEnds" class="pmSlotEnds" value="<?php echo $emsb_service_pm_ending_time; ?>" />
+                                  <input class="pmSlotEnds" value="<?php echo $emsb_service_pm_ending_time; ?>" />
                           <?php } ?>
 
                           <?php 
                               $emsb_service_pm_slot_duration = get_post_meta( get_the_ID(), 'emsb_service_pm_slot_duration', true );
                               if($emsb_service_pm_slot_duration){ ?>
-                                  <input id="pmSlotDuration" class="pmSlotDuration" type="text" name="pmSlotDuration" value="<?php echo $emsb_service_pm_slot_duration; ?>">
+                                  <input class="pmSlotDuration" type="text" name="pmSlotDuration" value="<?php echo $emsb_service_pm_slot_duration; ?>">
                           <?php } ?>
 
                       </div>

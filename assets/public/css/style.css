@@ -39,16 +39,34 @@
 .em-services-container,
 .em-reservation-process-container { 
     overflow-x: visible !important;
-    /* overflow-y: scroll;  */
     font-family: "Alegreya Sans", sans-serif;
     font-weight: 300;
     
 }
+.em-services-container{
+    opacity: 1;
+    height: 100%;
+    transform: scale(1); 
+}
+.em-reservation-process-container { 
+    opacity: 0;
+    height: 0;
+    transform: scale(0.8); 
+}
+.em-reservation-div-position{
+    display: block;
+}
+.emsb-show-form-container{
+    transform: scale(1); 
+    display: block;
+}
+
 article.em-service {
     padding: 20px;
     overflow: hidden;
     box-shadow: 5px 5px 20px rgba(49, 46, 255, 0.15);
-    margin-bottom: 25px;
+    margin-bottom: 30px;
+    border-radius: 5px;
 }
 
 .em-service img, .em-selected-service img {
@@ -69,6 +87,9 @@ article.em-service {
     color: gray;
     font-size: 24px;
     font-weight: 300;
+    margin: 0 0 10px 0;
+    letter-spacing: 0.05px;
+    line-height: 1;
 }
 .em-service-excerpt-info p {
     margin-bottom: 5px;
@@ -146,11 +167,11 @@ article.em-service main {
 }
 .em-selected-all-wrapper .em-service-excerpt-info h4 {
     font-family: inherit;
-    font-size: 40px;
-    font-weight: 300;
-    opacity: .5;
+    font-size: 30px;
+    font-weight: 500;
+    opacity: .75;
     line-height: 40px;
-    color: #312eff;
+    color: #5451e0;
     margin: 0;
 }
 .em-selected-all-wrapper .em-service-excerpt-info p {
@@ -168,7 +189,7 @@ article.em-service main {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 12px 0;
+    padding: 8px 0;
     border-bottom: 1px solid rgba(221, 221, 221, 0.8);
 }
 .em-change-date-btn {
@@ -177,8 +198,13 @@ article.em-service main {
 
 
 
-.em-reservation-calendar.nao-month td {
-    padding: 15px;
+.em-reservation-calendar.nao-month td, .em-reservation-calendar.nao-month th {
+    padding: 10px 0;
+    border: 0;
+    width: 40px;
+    border-radius: 0px;
+    font-size: 14px;
+    font-weight: 300;
   }
   
   .em-reservation-calendar .month-head>div,
@@ -194,7 +220,7 @@ article.em-service main {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 12px 0;
+    padding: 8px 0;
     border-bottom: 1px solid rgba(221, 221, 221, 0.8);
 }
 .em-change-time-slot-btn {
@@ -243,11 +269,11 @@ article.em-service main {
 /* Styling  */
 .em-selected-all-wrapper .date, .em-selected-all-wrapper .time-slot {
     font-family: inherit;
-    font-size: 36px;
+    font-size: 24px;
     font-weight: 300;
-    opacity: .5;
-    line-height: 36px;
-    color: #312eff;
+    opacity: .75;
+    line-height: 30px;
+    color: #5451e0;
     margin: 0;
     margin-left: 75px;
 }
@@ -270,11 +296,24 @@ article.em-service main {
 }
 
 .em-reservation-process-container .btn-light, .em-services-container .btn-light {
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: 8px 10px;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     color: rgb(131, 130, 255);
     background-color: rgb(248, 249, 250);
     border-color: rgb(248, 249, 250);
     transition: all .7s;
     font-weight: 300;
+    font-size: 14px;
 }
 .em-reservation-process-container .btn-light:hover, .em-services-container .btn-light:hover {
     color: rgb(131, 130, 255);
@@ -300,17 +339,20 @@ article.em-service main {
     text-align: left;
 }
 
-.em-booking-form-container input {
+.em-booking-form-container input#emsb_user_fullName, .em-booking-form-container input#emsb_user_email, .em-booking-form-container input#emsb_user_telephone {
+    font-family: inherit;
     font-size: 25px;
+    line-height: 25px !important;
     font-weight: 100;
     margin-bottom: 0;
-    border: none;
-    border-bottom: 1px solid rgba(49, 46, 255, 0.6);
-    outline: none;
-    padding: 0;
+    border: none !important;
+    border-bottom: 0.8px solid rgba(49, 46, 255, 0.2) !important;
+    outline: none !important;
+    padding: 0px !important;
     color: #312eff;
-    background: transparent;
-    border-radius: 0;
+    border-radius: 0 !important;
+    background: #fff !important;
+    height: 40px;
 }
 .em-booking-form-container .form-control:focus {
     color: #8382ff;
@@ -338,7 +380,7 @@ article.em-service main {
     transition: all .7s;
 }
 .em-calendar-wrapper thead.month-week tr th {
-    font-size: 16px !important;
+    font-size: 14px;
     color: #9b9b9b;
     font-weight: 300;
 }
@@ -359,6 +401,8 @@ article.em-service main {
 }
 
 .em-timer .list-group-item {
+    font-size: 16px;
+    line-height: 16px;
     position: relative;
     margin: 0px;
     padding: 7px 0px 7px 80px;
@@ -398,6 +442,7 @@ article.em-service main {
     border-color: rgb(248, 249, 250);
     transition: all .7s;
     font-weight: 300;
+    font-size: 14px;
 }
 .em-reservation-process-container .btn-light:hover, .em-services-container .btn-light:focus {
     box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0);
@@ -405,13 +450,14 @@ article.em-service main {
 .em-selected-all-wrapper .em-service-excerpt-info p.em-reservation-service-price {
     display: block;
     margin: 5px 0px;
-    font-size: 20px;
-    color: #8382ff;
+    font-size: 16px;
+    color: #5451e0;
+    line-height: 16px;
 }
 .emsb-service-date-unavailable {
     cursor: not-allowed !important;
-    background-color: #17a2b8 !important;
-    color: rgb(255, 255, 255) !important;
+    background-color: #00dcff1c !important;
+    color: rgb(0, 0, 0) !important;
     box-shadow: rgb(255, 255, 255) 0px 0px 0px 2px inset !important;
 }
 .off-day {
@@ -635,7 +681,73 @@ article.em-service main {
 #emsb_booking_ticket .emsb-site-name p {
     font-size: 16px;
 }
+#emsb-service-price {
+    font-weight: 600 !important;
+}
 
+/* Single Page  */
+
+.emsb-single-service-page .em-service {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    justify-content: left;
+}
+ .emsb-single-service-page article.em-service {
+    padding: 20px;
+    overflow: hidden;
+    box-shadow: none;
+    margin-bottom: 25px;
+}
+.emsb-single-service-page .em-service img {
+    width: 200px;
+    height: 200px;
+    border-radius: 5px;
+    border: .09px solid gray;
+    display: flex;
+    align-self: flex-start;
+    margin-top: 5px;
+}
+.emsb-single-service-page .em-service-excerpt-info {
+    margin-left: 30px;
+    margin-bottom: 45px;
+}
+
+.emsb-plugin-container button.btn.em-select-service-button {
+    color: #ffffff;
+    background-color: #8382ff;
+    border: 1px solid #8382ff;
+    transition: all .7s;
+    font-weight: 400;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 7px;
+    padding-bottom: 9px;
+    border-radius: 0;
+    text-align: left;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+.emsb-plugin-container .em-confirm-booking-button {
+    width: 175px !important;
+}
+
+.emsb-single-service-page .em-service-excerpt {
+    width: 100%;
+}
+.emsb-single-service-page .em-selected-service .em-select-service-button {
+    display: none;
+}
+.emsb-single-service-page .em-select-service-button {
+    margin-bottom: 0 !important;
+    margin-top: 25px;
+    width: auto;
+}
+.emsb-single-service-page .emsb-service-description {
+    font-size: 16px;
+}
 
 
 /* Responsiveness */
