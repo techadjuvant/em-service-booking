@@ -757,14 +757,34 @@ article.em-service main {
 }
 
     /* Pagination */
-    .emsb-archive-pagination .page-numbers {
-        padding: 10px;
-    }
-    
+
     .emsb-archive-pagination {
         margin: 30px 0;
         padding: 20px 0;
         overflow: hidden;
+    }
+    
+    .emsb-archive-pagination .page-numbers {
+        padding: 10px;
+    }
+
+    .emsb-single-page-pagination {
+        /* width: 250px; */
+        margin: 0 auto;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    
+    .emsb-single-page-pagination .emsb-next-prev {
+        padding: 0px;
+        margin: 15px;
+    }
+    
+    .emsb-single-page-pagination .emsb-next-prev a {
+        margin: 0 5px;
+        font-size: 16px;
+        color: gray;
     }
 
 

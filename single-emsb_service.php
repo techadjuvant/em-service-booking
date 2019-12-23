@@ -184,6 +184,17 @@ get_header();
             </article>
 
             <?php endwhile; ?> <!-- End of the loop. -->
+
+            <div class="emsb-single-page-pagination">
+              <div class="emsb-next-prev emsb-next-service">
+                  <?php next_post_link( '&laquo %link', 'Next' ); ?>
+              </div>
+              <div class="emsb-next-prev emsb-prev-service">
+                  <?php previous_post_link( '%link &raquo;', 'Prev' ); ?>
+              </div>
+              
+            </div>
+            
             
 
             </div>
