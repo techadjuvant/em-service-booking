@@ -70,9 +70,14 @@ if ( !class_exists( 'emsb_service_booking_plugin_base_class' ) ) {
                     'publicly_queryable'    => true,
                     'show_ui'               => true,
                     'show_in_menu'          => false,
-                    'show_in_admin_bar'         => true,
+                    'show_in_admin_bar'     => true,
                     'query_var'             => true,
-                    'rewrite'               => array( 'slug' => $slug ),
+                    'rewrite'               => array( 
+                                                    'slug'        => 'book-service',
+                                                    'with_front'  => true,
+                                                    'pages'       => true,
+                                                    'feeds'       => true
+                                                ),
                     'capability_type'       => 'post',
                     'has_archive'           => true,
                     'hierarchical'          => true,
@@ -82,6 +87,7 @@ if ( !class_exists( 'emsb_service_booking_plugin_base_class' ) ) {
                     'show_in_rest'          => true
                 );
                 register_post_type( $type, $args );
+                flush_rewrite_rules();
         }
 
         //adding meta box to save additional meta data for the content type
@@ -554,7 +560,7 @@ $emsb_database = new emsb_database();
 
 class emsb_post_pages {
     public function __construct() {
-        $emsb_page_slug = get_page_by_path( 'emsb_service' );
+        $emsb_page_slug = get_page_by_path( 'book-service' );
         if(!$emsb_page_slug){
             register_activation_hook( __FILE__, array($this,'emsb_create_archive_page'));
         } 
@@ -564,12 +570,13 @@ class emsb_post_pages {
 
     public function emsb_create_archive_page(){
 
-        $my_post  = array( 'post_title'     => 'Servie-Archive',
-                        'post_type'      => 'page',
-                        'post_name'      => 'emsb_service',
-                        'post_status'    => 'publish',
-                        'comment_status' => 'closed'
-                    );
+        $my_post  = array( 
+                            'post_title'     => 'Book-Service',
+                            'post_type'      => 'page',
+                            'post_name'      => 'book-service',
+                            'post_status'    => 'publish',
+                            'comment_status' => 'closed'
+                        );
 
         $PageID = wp_insert_post( $my_post, FALSE ); // Get Post ID - FALSE to return 0 instead of wp_error.
 

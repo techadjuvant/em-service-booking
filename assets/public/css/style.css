@@ -126,6 +126,13 @@ article.em-service main {
     border: 1px;
     color: #fff !important;
 }
+.em-reservation-process-container #amButton span, .em-reservation-process-container #pmButton span {
+    color: rgb(131, 130, 255);
+}
+
+.em-reservation-process-container .am-or-pm button.active span {
+    color: #fff !important;
+}
 
 .am-or-pm .btn-secondary:not(:disabled):not(.disabled).active:focus, 
 .am-or-pm .btn-secondary:not(:disabled):not(.disabled):active:focus {
@@ -286,7 +293,7 @@ article.em-service main {
 }
 
 .em-reservation-process-container .btn, .em-services-container .btn {
-    width: 140px;
+    /* width: 140px; */
 }
 
 .em-timer li.list-group-item {
@@ -306,7 +313,7 @@ article.em-service main {
     border: 1px solid transparent;
     padding: 8px 10px;
     line-height: 1.5;
-    border-radius: .25rem;
+    border-radius: 3px;
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     color: rgb(131, 130, 255);
     background-color: rgb(248, 249, 250);
@@ -314,6 +321,7 @@ article.em-service main {
     transition: all .7s;
     font-weight: 300;
     font-size: 14px;
+    margin: 0;
 }
 .em-reservation-process-container .btn-light:hover, .em-services-container .btn-light:hover {
     color: rgb(131, 130, 255);
@@ -703,7 +711,7 @@ article.em-service main {
 .emsb-single-service-page .em-service img {
     width: 200px;
     height: 200px;
-    border-radius: 5px;
+    border-radius: 3px;
     border: .09px solid gray;
     display: flex;
     align-self: flex-start;
@@ -720,14 +728,13 @@ article.em-service main {
     border: 1px solid #8382ff;
     transition: all .7s;
     font-weight: 400;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
     padding-top: 7px;
     padding-bottom: 9px;
-    border-radius: 0;
+    border-radius: 3px;
     text-align: left;
     font-size: 16px;
-    border-radius: 5px;
 }
 
 .emsb-plugin-container .em-confirm-booking-button {
@@ -748,6 +755,19 @@ article.em-service main {
 .emsb-single-service-page .emsb-service-description {
     font-size: 16px;
 }
+
+    /* Pagination */
+    .emsb-archive-pagination .page-numbers {
+        padding: 10px;
+    }
+    
+    .emsb-archive-pagination {
+        margin: 30px 0;
+        padding: 20px 0;
+        overflow: hidden;
+    }
+
+
 
 
 /* Responsiveness */

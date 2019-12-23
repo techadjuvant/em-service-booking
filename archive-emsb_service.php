@@ -19,7 +19,7 @@ get_header();
             <header class="d-flex justify-content-center py-4"> 
               <h2> 
                 <?php 
-                      $emsb_page_slug = get_page_by_path( 'emsb_service' );
+                      $emsb_page_slug = get_page_by_path( 'book-service' );
                       if($emsb_page_slug){
                         echo get_the_title( $emsb_page_slug );
                       }  
@@ -28,9 +28,31 @@ get_header();
             </header>
 
             <?php
-          /* Start the Loop */
-          while ( have_posts() ) : the_post(); ?>
-            <article id="post-<?php the_ID(); ?>"  class="em-service">
+              //Protect against arbitrary paged values
+              $per_page = 2;
+              $page = isset( $_GET['page'] ) ? abs( (int) $_GET['page'] ) : 1;
+              $current_page = $page;
+
+              if ($page > 0) {
+                $offset = $page * $per_page - $per_page;
+              } else {
+                $offset = $page;
+              }
+
+              $args = array(
+                'posts_per_page' => $per_page,
+                'post_type' => 'emsb_service',
+                'offset' => $offset
+              );
+
+              $the_query = new WP_Query( $args );
+
+              if ( $the_query->have_posts() ) :
+            /* Start the Loop */
+            while ( $the_query->have_posts() ) :
+              $the_query->the_post();
+            ?>
+              <article id="post-<?php the_ID(); ?>"  class="em-service">
                 
                   <div class="em-service-excerpt d-flex align-items-center">
                       <?php if ( has_post_thumbnail() ) : ?>
@@ -179,9 +201,27 @@ get_header();
                   </div>
                   <button type="button" class="btn btn-light mb-2 em-select-service-button">Select</button>
                 
-            </article>
+              </article>
+                <!-- Ends the loop  -->
+            <?php endwhile; 
 
-            <?php endwhile; ?> <!-- End of the loop. -->
+                $total_pages = $the_query->max_num_pages;
+
+                echo '<div class="emsb-archive-pagination">';
+                echo paginate_links(array(
+                    'base' => add_query_arg('page', '%#%'),
+                    'format' => '',
+                    'prev_text' => __('&laquo;'),
+                    'next_text' => __('&raquo;'),
+                    'total' => $total_pages,
+                    'current' => $current_page
+                  ));
+                echo '</div>';
+
+                wp_reset_postdata();
+
+                endif;
+            ?>
             
 
             </div>
