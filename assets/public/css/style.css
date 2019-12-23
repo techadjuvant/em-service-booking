@@ -292,17 +292,13 @@ article.em-service main {
     display: none;
 }
 
-.em-reservation-process-container .btn, .em-services-container .btn {
-    /* width: 140px; */
-}
-
 .em-timer li.list-group-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.em-reservation-process-container .btn-light, .em-services-container .btn-light {
+.em-reservation-process-container .btn, .em-services-container .btn {
     display: inline-block;
     text-align: center;
     vertical-align: middle;
@@ -311,23 +307,45 @@ article.em-service main {
     -ms-user-select: none;
     user-select: none;
     border: 1px solid transparent;
-    padding: 8px 10px;
     line-height: 1.5;
     border-radius: 3px;
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     color: rgb(131, 130, 255);
-    background-color: rgb(248, 249, 250);
-    border-color: rgb(248, 249, 250);
+    /* background-color: rgb(248, 249, 250); */
+    /* border-color: rgb(248, 249, 250); */
     transition: all .7s;
     font-weight: 300;
     font-size: 14px;
     margin: 0;
+}
+.em-reservation-process-container .button:hover,
+.em-reservation-process-container button:hover,
+.em-services-container .button:hover,
+.em-services-container button:hover,
+.em-reservation-process-container .button:focus,
+.em-reservation-process-container button:focus,
+.em-services-container .button:focus,
+.em-services-container button:focus {
+    background: #1110;
+    cursor: pointer;
+    outline-offset: 0;
+    outline: 0;
+    box-shadow: none;
 }
 .em-reservation-process-container .btn-light:hover, .em-services-container .btn-light:hover {
     color: rgb(131, 130, 255);
     background-color: rgb(231, 231, 231);
     border-color: rgb(231, 231, 231);
     transition: all .7s;
+}
+.em-reservation-process-container .em-change-service-btn {
+    width: 150px;
+    text-align: right;
+}
+.em-select-slot-button {
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 100px;
 }
 
 .em-reservation-process-container .btn-light:not(:disabled):not(.disabled).active, 
@@ -342,10 +360,6 @@ article.em-service main {
     transition: all .7s;
 }
 
-#amButton, #pmButton {
-    width: 150px;
-    text-align: left;
-}
 
 .em-booking-form-container input#emsb_user_fullName, .em-booking-form-container input#emsb_user_email, .em-booking-form-container input#emsb_user_telephone {
     font-family: inherit;
@@ -451,6 +465,8 @@ article.em-service main {
     transition: all .7s;
     font-weight: 300;
     font-size: 14px;
+    width: 150px;
+    text-align: center;
 }
 .em-reservation-process-container .btn-light:hover, .em-services-container .btn-light:focus {
     box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0);
@@ -723,11 +739,7 @@ article.em-service main {
 }
 
 .emsb-plugin-container button.btn.em-select-service-button {
-    color: #ffffff;
-    background-color: #8382ff;
-    border: 1px solid #8382ff;
     transition: all .7s;
-    font-weight: 400;
     padding-left: 15px;
     padding-right: 15px;
     padding-top: 7px;
@@ -755,37 +767,40 @@ article.em-service main {
 .emsb-single-service-page .emsb-service-description {
     font-size: 16px;
 }
+.emsb-single-service-page .em-selected-service .em-service-excerpt-info {
+    margin-left: 15px;
+    margin-bottom: 0;
+}
 
-    /* Pagination */
+/* Pagination */
 
-    .emsb-archive-pagination {
-        margin: 30px 0;
-        padding: 20px 0;
-        overflow: hidden;
-    }
-    
-    .emsb-archive-pagination .page-numbers {
-        padding: 10px;
-    }
+.emsb-archive-pagination {
+    margin: 30px 0;
+    padding: 20px 0;
+    overflow: hidden;
+}
 
-    .emsb-single-page-pagination {
-        /* width: 250px; */
-        margin: 0 auto;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-    }
-    
-    .emsb-single-page-pagination .emsb-next-prev {
-        padding: 0px;
-        margin: 15px;
-    }
-    
-    .emsb-single-page-pagination .emsb-next-prev a {
-        margin: 0 5px;
-        font-size: 16px;
-        color: gray;
-    }
+.emsb-archive-pagination .page-numbers {
+    padding: 10px;
+}
+
+.emsb-single-page-pagination {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.emsb-single-page-pagination .emsb-next-prev {
+    padding: 0px;
+    margin: 15px;
+}
+
+.emsb-single-page-pagination .emsb-next-prev a {
+    margin: 0 5px;
+    font-size: 16px;
+    color: gray;
+}
 
 
 

@@ -29,7 +29,7 @@ get_header();
 
             <?php
               //Protect against arbitrary paged values
-              $per_page = 2;
+              $per_page = 10;
               $page = isset( $_GET['page'] ) ? abs( (int) $_GET['page'] ) : 1;
               $current_page = $page;
 
@@ -239,18 +239,18 @@ get_header();
               <div class="em-get-selected-service em-service-excerpt d-flex align-items-center">
                   
               </div>
-              <button  class="btn btn-light em-change-service-btn">Change Service</button>
+              <button  class="btn em-change-service-btn">Change Service</button>
             </div>
             <div class="em-selected-date-wrapper">
               <div class="em-selected-date d-flex align-items-center">
                   <label class="date"></label>
-                  <button  class="btn btn-light ml-sm-5 em-change-date-btn">Change Date</button>
+                  <button  class="btn ml-sm-5 em-change-date-btn">Change Date</button>
               </div>
             </div>
             <div class="em-selected-time-slot-wrapper">
               <div class="em-selected-time-slot d-flex align-items-center">
                   <label class="time-slot"></label>
-                  <button  class="btn btn-light ml-sm-5 em-change-time-slot-btn">Change Slot</button>
+                  <button  class="btn ml-sm-5 em-change-time-slot-btn">Change Slot</button>
               </div>
             </div>
 
@@ -337,7 +337,7 @@ get_header();
 
       </div>
     </div>
-    <!-- emsb-reservation-process container -->
+    <!-- emsb-reservation-process container ends -->
   </div>
   <!-- emsb services and reservation-process container ends -->
   <?php include( plugin_dir_path( __FILE__ ) . 'emsb-booking-form.php'); ?>
