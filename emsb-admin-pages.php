@@ -85,13 +85,18 @@ class emsb_Admin_Page
     public static function emsb_services_header_html() {
         global $pagenow ,$post;
         global $post_type;
+        $emcc_plugin_path = plugin_dir_url( __FILE__ );
+        $emcc_icon_url = $emcc_plugin_path . 'assets/img/service-booking.png';
 
         if( $post_type == 'emsb_service' && ($pagenow == 'edit.php' || $pagenow == 'post.php') ) {
             ?>
                 <div class="emsb-container">
                     <header class="emsb-admin-main-page-header-wrapper">
                         <div class="jumbotron text-center">
-                            <h2 class="display-5"> <?php _e( 'Service Booking ', 'service-booking' ); ?></h2>
+                            <div class="emsb-admin-plugin-title">
+                                <img src="<?php echo $emcc_icon_url; ?>" alt="Service Booking Icon">
+                                <h2 class="display-5"> <?php _e( 'Service Booking ', 'service-booking' ); ?></h2>
+                            </div>
                         </div>
                     </header>
 
@@ -117,8 +122,10 @@ class emsb_Admin_Page
                 <div class="emsb-container">
                     <header class="emsb-admin-main-page-header-wrapper">
                         <div class="jumbotron text-center">
-                            <h2 class="display-5"><?php _e( 'EM Service Booking ', 'service-booking' ); ?></h2>
-                            <!-- <hr> -->
+                            <div class="emsb-admin-plugin-title">
+                                <img src="<?php echo $emcc_icon_url; ?>" alt="Service Booking Icon">
+                                <h2 class="display-5"> <?php _e( 'Service Booking ', 'service-booking' ); ?></h2>
+                            </div>
                         </div>
                     </header>
 
@@ -150,7 +157,7 @@ class emsb_Admin_Page
         if ( $hook == 'post-new.php' || $hook == 'post.php' || $hook == 'edit.php' ) {
             if ( 'emsb_service' === $post_type ) {     
                 wp_enqueue_style('bootstrap-css', plugin_dir_url(__FILE__) . 'assets/css/bootstrap.min.css', array(), '1.1', false );
-                wp_enqueue_style('style-css', plugin_dir_url(__FILE__) . 'assets/private/css/emsb_post_type.css', array(), '1.1', false );
+                wp_enqueue_style('style-css', plugin_dir_url(__FILE__) . 'assets/private/css/emsb-admin.css', array(), '1.1', false );
                 wp_enqueue_script('jquery-js', plugin_dir_url(__FILE__) . 'assets/js/jquery.min.js', array(), '1.1', true );
                 wp_localize_script( 'jquery-js', 'frontend_ajax_object',
                     array( 
@@ -179,9 +186,10 @@ class emsb_Admin_Page
 	{
 		wp_register_style('emsb_bootstrap_css', plugins_url( 'assets/css/bootstrap.min.css', __FILE__ ));
         wp_enqueue_style( 'emsb_bootstrap_css' );
+
         
-        wp_register_style('emsb_custom_css', plugins_url( 'assets/private/css/style.css', __FILE__ ));
-		wp_enqueue_style( 'emsb_custom_css' );
+        wp_enqueue_style('style-css', plugin_dir_url(__FILE__) . 'assets/private/css/emsb-admin.css', array(), '1.1', false );
+        
 	}
 	/**
 	 * Load JavaScript on our admin page only.
@@ -213,6 +221,9 @@ class emsb_Admin_Page
 	{
         global $wpdb;
         $emsb_settings_data = $wpdb->prefix . 'emsb_settings';
+
+        $emcc_plugin_path = plugin_dir_url( __FILE__ );
+        $emcc_icon_url = $emcc_plugin_path . 'assets/img/service-booking.png';
         
         if(isset($_POST['emsb_save_admin_email_data'])){
             $admin_mail_subject = stripslashes_deep($_POST['emsb_admin_email_subject']);
@@ -252,7 +263,10 @@ class emsb_Admin_Page
         <div class="emsb-container">
             <header class="emsb-admin-main-page-header-wrapper">
                 <div class="jumbotron text-center">
-                    <h2 class="display-5"><?php _e( 'Service Booking  ', 'service-booking' ); ?></h2>
+                    <div class="emsb-admin-plugin-title">
+                        <img src="<?php echo $emcc_icon_url; ?>" alt="Service Booking Icon">
+                        <h2 class="display-5"> <?php _e( 'Service Booking ', 'service-booking' ); ?></h2>
+                    </div>
                 </div>
             </header>
             <main class="emsb-admin-main-page-wrapper">
@@ -343,21 +357,27 @@ class emsb_Admin_Page
             $emsb_bookings = $wpdb->prefix . 'emsb_bookings';	
             $emsb_all_bookings_from_database = "SELECT * FROM $emsb_bookings ORDER BY id DESC";
             $emcc_order_list = $wpdb->get_results($emsb_all_bookings_from_database, ARRAY_A);
+
+            $emcc_plugin_path = plugin_dir_url( __FILE__ );
+            $emcc_icon_url = $emcc_plugin_path . 'assets/img/service-booking.png';
         ?> 
             <div class="emsb-container">
                 <header class="emsb-admin-main-page-header-wrapper">
                     <div class="jumbotron text-center">
-                        <h2 class="display-5">EM Service Booking</h2>
+                        <div class="emsb-admin-plugin-title">
+                            <img src="<?php echo $emcc_icon_url; ?>" alt="Service Booking Icon">
+                            <h2 class="display-5"> <?php _e( 'Service Booking ', 'service-booking' ); ?></h2>
+                        </div>
                     </div>
                 </header>
 
                 <main class="emsb-admin-main-page-wrapper">
                     <div class="tabs">
                         <ul>
-                            <li><a href="admin.php?page=emsb_admin_page" > Dashboard </a></li>
-                            <li><a href="edit.php?post_type=emsb_service">All Services</a></li>
-                            <li><a href="post-new.php?post_type=emsb_service">Add Service</a></li>
-                            <li><a href="admin.php?page=emsb_admin_bookings_page" class="active">All Bookings</a></li>
+                            <li><a href="admin.php?page=emsb_admin_page" > <?php _e( 'Dashboard', 'service-booking' ); ?></a></li>
+                            <li><a href="edit.php?post_type=emsb_service"> <?php _e( 'All Services', 'service-booking' ); ?></a></li>
+                            <li><a href="post-new.php?post_type=emsb_service"><?php _e( 'Add Service  ', 'service-booking' ); ?></a></li>
+                            <li><a href="admin.php?page=emsb_admin_bookings_page" class="active"><?php _e( 'All Bookings ', 'service-booking' ); ?></a></li>
                         </ul>
                     </div>
                     <div class="emsb-table-wrapper container text-center">
@@ -367,13 +387,12 @@ class emsb_Admin_Page
                                     <div class="form-group"> 	
                                         <!--		Show Numbers Of Rows 		-->
                                             <select class  ="form-control" name="state" id="maxRows">
-                                                <option value="10">10</option>
-                                                <option value="15">15</option>
-                                                <option value="20">20</option>
-                                                <option value="50">50</option>
-                                                <option value="70">70</option>
-                                                <option value="100">100</option>
-                                                <option value="5000">Show ALL Rows</option>
+                                                <option value="15"><?php _e( '15', 'service-booking' ); ?></option>
+                                                <option value="20"><?php _e( '20', 'service-booking' ); ?></option>
+                                                <option value="50"><?php _e( '50', 'service-booking' ); ?></option>
+                                                <option value="70"><?php _e( '70', 'service-booking' ); ?></option>
+                                                <option value="100"><?php _e( '10', 'service-booking' ); ?></option>
+                                                <option value="5000000"><?php _e( 'Show ALL Rows', 'service-booking' ); ?></option>
                                             </select>
                                         </div>
                                     </div>
@@ -384,12 +403,12 @@ class emsb_Admin_Page
                             <table class="table table-striped table-class" id= "table-id">
                                 <thead>
                                     <tr>
-                                        <th>Service Name</th>
-                                        <th>Customer Name</th>
-                                        <th>Phone</th>
-                                        <th>Email</th>
-                                        <th>Booked Date</th>
-                                        <th>Booked Time Slot</th>
+                                        <th><?php _e( 'Service Name ', 'service-booking' ); ?></th>
+                                        <th><?php _e( 'Customer Name ', 'service-booking' ); ?></th>
+                                        <th> <?php _e( 'Phone', 'service-booking' ); ?></th>
+                                        <th> <?php _e( 'Email', 'service-booking' ); ?></th>
+                                        <th><?php _e( 'Booked Date ', 'service-booking' ); ?></th>
+                                        <th> <?php _e( 'Booked Time Slot', 'service-booking' ); ?></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -417,7 +436,7 @@ class emsb_Admin_Page
                                         </ul>
                                     </nav>
                                 </div>
-                            <div class="rows_count">Showing 11 to 20 of 91 entries</div>
+                            <div class="rows_count"><?php _e( 'Showing 11 to 20 of 91 entries ', 'service-booking' ); ?></div>
                         
                         </div> <!-- End of Container -->
 

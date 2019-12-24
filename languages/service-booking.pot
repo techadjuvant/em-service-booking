@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2019-12-24T01:01:59+01:00\n"
+"POT-Creation-Date: 2019-12-24T03:14:06+01:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.3.0\n"
 "X-Domain: service-booking\n"
@@ -217,97 +217,154 @@ msgstr ""
 msgid "Has description for single service page? "
 msgstr ""
 
-#: emsb-admin-pages.php:94
+#: emsb-admin-pages.php:98
+#: emsb-admin-pages.php:127
+#: emsb-admin-pages.php:268
+#: emsb-admin-pages.php:369
 msgid "Service Booking "
 msgstr ""
 
-#: emsb-admin-pages.php:101
-#: emsb-admin-pages.php:128
-#: emsb-admin-pages.php:261
+#: emsb-admin-pages.php:106
+#: emsb-admin-pages.php:135
+#: emsb-admin-pages.php:275
 msgid "Dashboard "
 msgstr ""
 
-#: emsb-admin-pages.php:102
-#: emsb-admin-pages.php:129
+#: emsb-admin-pages.php:107
+#: emsb-admin-pages.php:136
 msgid "All Services "
 msgstr ""
 
-#: emsb-admin-pages.php:103
-#: emsb-admin-pages.php:130
+#: emsb-admin-pages.php:108
+#: emsb-admin-pages.php:137
 msgid "Add Service "
 msgstr ""
 
-#: emsb-admin-pages.php:104
-#: emsb-admin-pages.php:131
+#: emsb-admin-pages.php:109
+#: emsb-admin-pages.php:138
+#: emsb-admin-pages.php:380
 msgid "All Bookings "
 msgstr ""
 
-#: emsb-admin-pages.php:120
-msgid "EM Service Booking "
-msgstr ""
-
-#: emsb-admin-pages.php:255
-msgid "Service Booking  "
-msgstr ""
-
-#: emsb-admin-pages.php:262
+#: emsb-admin-pages.php:276
 msgid "All Services  "
 msgstr ""
 
-#: emsb-admin-pages.php:263
+#: emsb-admin-pages.php:277
+#: emsb-admin-pages.php:379
 msgid "Add Service  "
 msgstr ""
 
-#: emsb-admin-pages.php:264
+#: emsb-admin-pages.php:278
 msgid "All Bookings  "
 msgstr ""
 
-#: emsb-admin-pages.php:273
+#: emsb-admin-pages.php:287
 msgid "DashboAdmin Email Notification ard "
 msgstr ""
 
-#: emsb-admin-pages.php:277
+#: emsb-admin-pages.php:291
 msgid "Admin Email Subject  "
 msgstr ""
 
-#: emsb-admin-pages.php:281
+#: emsb-admin-pages.php:295
 msgid "Admin Email Body  "
 msgstr ""
 
-#: emsb-admin-pages.php:284
+#: emsb-admin-pages.php:298
 msgid "Check the bookings list to see the customer data "
 msgstr ""
 
-#: emsb-admin-pages.php:294
+#: emsb-admin-pages.php:308
 msgid "Customer Email Notification "
 msgstr ""
 
-#: emsb-admin-pages.php:298
+#: emsb-admin-pages.php:312
 msgid "Customer Email Subject  "
 msgstr ""
 
-#: emsb-admin-pages.php:302
+#: emsb-admin-pages.php:316
 msgid "Customer Email Body  "
 msgstr ""
 
-#: emsb-admin-pages.php:305
+#: emsb-admin-pages.php:319
 msgid "Customers will receive a token with booking details with the email "
 msgstr ""
 
-#: emsb-admin-pages.php:315
+#: emsb-admin-pages.php:329
 msgid "User Cookie  "
 msgstr ""
 
-#: emsb-admin-pages.php:319
+#: emsb-admin-pages.php:333
 msgid "How many days do you want to save the customer info on their browser cookie?  "
 msgstr ""
 
-#: emsb-admin-pages.php:322
+#: emsb-admin-pages.php:336
 msgid "Don't change it freequently "
 msgstr ""
 
-#: emsb-admin-pages.php:327
+#: emsb-admin-pages.php:341
 msgid "Save Changes "
+msgstr ""
+
+#: emsb-admin-pages.php:377
+msgid "Dashboard"
+msgstr ""
+
+#: emsb-admin-pages.php:378
+msgid "All Services"
+msgstr ""
+
+#: emsb-admin-pages.php:390
+msgid "15"
+msgstr ""
+
+#: emsb-admin-pages.php:391
+msgid "20"
+msgstr ""
+
+#: emsb-admin-pages.php:392
+msgid "50"
+msgstr ""
+
+#: emsb-admin-pages.php:393
+msgid "70"
+msgstr ""
+
+#: emsb-admin-pages.php:394
+msgid "10"
+msgstr ""
+
+#: emsb-admin-pages.php:395
+msgid "Show ALL Rows"
+msgstr ""
+
+#: emsb-admin-pages.php:406
+msgid "Service Name "
+msgstr ""
+
+#: emsb-admin-pages.php:407
+msgid "Customer Name "
+msgstr ""
+
+#: emsb-admin-pages.php:408
+msgid "Phone"
+msgstr ""
+
+#: emsb-admin-pages.php:409
+msgid "Email"
+msgstr ""
+
+#: emsb-admin-pages.php:410
+msgid "Booked Date "
+msgstr ""
+
+#: emsb-admin-pages.php:411
+msgid "Booked Time Slot"
+msgstr ""
+
+#: emsb-admin-pages.php:439
+msgid "Showing 11 to 20 of 91 entries "
 msgstr ""
 
 #: emsb-booking-form.php:99
