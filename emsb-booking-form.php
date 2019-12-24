@@ -96,40 +96,39 @@
                 <div class="emsb-booked-service">
                     <div class="em-service-excerpt d-flex align-items-center">
                         <div class="em-service-excerpt-info">
-                            <h4 id="emsb-service-name"> Service: <?php echo $service_name;?> </h4> 
-                            <p> Title: <?php echo $service_title; ?>  </p>
-                            <p><?php echo $service_location; ?> </p>
-                            <p class="em-reservation-service-price">Price: <b> <?php echo $service_price; ?> </b> </p>  
+                            <h4 id="emsb-service-name"> <?php _e( 'Service: ', 'service-booking' ); ?> <?php echo $service_name;?> </h4> 
+                            <p> <?php _e( 'Title: ', 'service-booking' ); ?> <?php echo $service_title; ?>  </p>
+                            <p> <?php _e( 'Location: ', 'service-booking' ); ?> <?php echo $service_location; ?> </p>
+                            <p class="em-reservation-service-price"> <?php _e( 'Price: ', 'service-booking' ); ?> <b> <?php echo $service_price; ?> </b> </p>  
                         </div>
                     </div>
                 </div>
                 <div class="emsb-booking-info">
-                    <h4>Booking Info</h4>
+                    <h4> <?php _e( 'Booking Info ', 'service-booking' ); ?></h4>
                     <div class="emsb-booked-id">
-                        <p>Booked Id: <?php echo $emsb_booking_id; ?></p>
+                        <p><?php _e( 'Booking Id: ', 'service-booking' ); ?> <?php echo $emsb_booking_id; ?></p>
                     </div>
                     <div class="emsb-booked-date d-flex align-items-center">
-                        <p class="emsb-date">Booked Date: <?php echo $booked_date; ?></p>
+                        <p class="emsb-date"> <?php _e( 'Booked Date: ', 'service-booking' ); ?> <?php echo $booked_date; ?></p>
                     </div>
                     <div class="em-booked-time-slot d-flex align-items-center">
-                        <p class="emsb-time-slot"> <span> Booked Time-slot: <?php echo  $booked_time_slot; ?></span> </p>
+                        <p class="emsb-time-slot"> <span> <?php _e( 'Booked Time-slot: ', 'service-booking' ); ?> <?php echo  $booked_time_slot; ?></span> </p>
                     </div>
                 </div>
                 <div class="emsb-booking-user-info">
-                    <!-- <label for="emsb-booked-service">User Info</label> -->
                     <div class="d-flex align-items-center">
-                        <p class="emsb-user-name"> Name: <?php echo $customer_name; ?></p>
+                        <p class="emsb-user-name"> <?php _e( 'Name: ', 'service-booking' ); ?> <?php echo $customer_name; ?></p>
                     </div>
                     <div class="d-flex align-items-center">
-                        <p class="emsb-user-phone"> <span> Phone no: <?php echo $customer_phone; ?></span> </p>
+                        <p class="emsb-user-phone"> <span> <?php _e( ' Phone no: ', 'service-booking' ); ?> <?php echo $customer_phone; ?></span> </p>
                     </div>
                 </div>
             </div>
         </div>
         <div class="emsb-ticket-button-wrapper">
-            <h4>Your Booking is Confirmed</h4>
-            <button id="createPDF" class="btn btn-dark emsb-ticket-button" >Download Ticket</button>
-            <button id="goBackButton" class="btn btn-dark emsb-ticket-button">Go Back</button>
+            <h4> <?php _e( 'Your Booking is Confirmed ', 'service-booking' ); ?></h4>
+            <button id="createPDF" class="btn btn-dark emsb-ticket-button" ><?php _e( 'Download Ticket ', 'service-booking' ); ?></button>
+            <button id="goBackButton" class="btn btn-dark emsb-ticket-button"> <?php _e( 'Go Back ', 'service-booking' ); ?></button>
         </div>
         
     </div>

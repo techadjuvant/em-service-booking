@@ -40,20 +40,20 @@ get_header();
                         <?php 
                           $emsb_display_service_location = get_post_meta( get_the_ID(), 'emsb_display_service_location', true );
                           if($emsb_display_service_location){ ?>
-                              <p class="emsb-service-location">Location: <?php echo $emsb_display_service_location; ?> </p>
+                              <p class="emsb-service-location"><?php _e( 'Location: ', 'service-booking' ); ?> <?php echo $emsb_display_service_location; ?> </p>
                           <?php 
                               }
                           ?>
                           <?php 
                             $emsb_display_service_price = get_post_meta( get_the_ID(), 'emsb_display_service_price', true );
                             if($emsb_display_service_price){ ?>
-                              <p class="em-reservation-service-price">Price: <b id="emsb-service-price"> <?php echo $emsb_display_service_price; ?> </b> </p>
+                              <p class="em-reservation-service-price"><?php _e( 'Price: ', 'service-booking' ); ?> <b id="emsb-service-price"> <?php echo $emsb_display_service_price; ?> </b> </p>
                           <?php 
                               }
                           ?>
                           
                         
-                          <button type="button" class="btn btn-light mb-2 em-select-service-button"> Book Now </button>
+                          <button type="button" class="btn btn-light mb-2 em-select-service-button">  <?php _e( 'Book Now ', 'service-booking' ); ?>  </button>
                       </div>
                   </div>
                   <div class="em-service-meta-info">
@@ -212,18 +212,18 @@ get_header();
               <div class="em-get-selected-service em-service-excerpt d-flex align-items-center">
                   
               </div>
-              <button  class="btn em-change-service-btn">Again Details</button>
+              <button  class="btn em-change-service-btn"><?php _e( 'Again Details ', 'service-booking' ); ?> </button>
             </div>
             <div class="em-selected-date-wrapper">
               <div class="em-selected-date d-flex align-items-center">
                   <label class="date"></label>
-                  <button  class="btn ml-sm-5 em-change-date-btn">Change Date</button>
+                  <button  class="btn ml-sm-5 em-change-date-btn"><?php _e( 'Change Date ', 'service-booking' ); ?> </button>
               </div>
             </div>
             <div class="em-selected-time-slot-wrapper">
               <div class="em-selected-time-slot d-flex align-items-center">
                   <label class="time-slot"></label>
-                  <button  class="btn ml-sm-5 em-change-time-slot-btn">Change Slot</button>
+                  <button  class="btn ml-sm-5 em-change-time-slot-btn"><?php _e( 'Change Slot ', 'service-booking' ); ?> </button>
               </div>
             </div>
 
@@ -244,8 +244,8 @@ get_header();
               </div>
             <div id="em-accordion" class="my-3 em-am-time ">
               <div class="am-or-pm">
-                  <button id="amButton"  class="btn btn-light mb-2 em-am-button active mr-1"><span>Before noon ( AM )</span></button>
-                  <button id="pmButton"  class="btn btn-light mb-2 em-pm-button ml-1" ><span>After noon ( PM )</span></button>
+                  <button id="amButton"  class="btn btn-light mb-2 em-am-button active mr-1"><span><?php _e( 'Before noon ( AM ) ', 'service-booking' ); ?> </span></button>
+                  <button id="pmButton"  class="btn btn-light mb-2 em-pm-button ml-1" ><span> <?php _e( 'After noon ( PM ) ', 'service-booking' ); ?> </span></button>
               </div>
 
               <div class="slots-container">
@@ -262,27 +262,27 @@ get_header();
               <div class="em-booking-form-fields">
                 <div class="form-row">
                   <div class="col-md-12 mb-3">
-                    <input name="emsb_user_fullName" type="text" class="form-control" id="emsb_user_fullName" placeholder="Full name" value="" required>
+                    <input name="emsb_user_fullName" type="text" class="form-control" id="emsb_user_fullName" placeholder="<?php _e( 'Your Full Name ', 'service-booking' ); ?>" value="" required>
                     <div class="invalid-feedback">
-                      Please Enter Your Name
+                       <?php _e( 'Please Enter Your Full Name ', 'service-booking' ); ?>
                     </div>
                   </div>
                 </div>
                 <div class="form-row">
                     <div class="col-md-12 mb-3">
                       <div class="input-group">
-                        <input name="emsb_user_email" type="email" class="form-control" id="emsb_user_email" placeholder="Email" aria-describedby="inputGroupPrepend" required>
+                        <input name="emsb_user_email" type="email" class="form-control" id="emsb_user_email" placeholder="<?php _e( 'Your Email Address  ', 'service-booking' ); ?>" aria-describedby="inputGroupPrepend" required>
                         <div class="invalid-feedback">
-                          Please enter an Email.
+                          <?php _e( 'Please Enter Your Valid Email Address  ', 'service-booking' ); ?>
                         </div>
                       </div>
                     </div>
                 </div>
                 <div class="form-row">
                   <div class="col-md-12 mb-3">
-                    <input name="emsb_user_telephone" id="emsb_user_telephone" type="tel" pattern="\d*" maxlength="25" size="40" class="form-control"  placeholder="+880 1812-345678" required>
+                    <input name="emsb_user_telephone" id="emsb_user_telephone" type="tel" pattern="\d*" maxlength="25" size="40" class="form-control"  placeholder="<?php _e( '+880 1812-345678 ', 'service-booking' ); ?>" required>
                     <div class="invalid-feedback">
-                      Please Enter Your Valid Phone Number
+                      <?php _e( 'Please Enter Your Valid Phone Number  ', 'service-booking' ); ?>
                     </div>
                   </div>
                 </div>
@@ -304,7 +304,7 @@ get_header();
                   </fieldset>
               </div>
 
-              <button id="submitForm" class="btn btn-light em-confirm-booking-button" name="emsb_submit_booking" type="submit" value="Submit"> Confirm Booking </button>
+              <button id="submitForm" class="btn btn-light em-confirm-booking-button" name="emsb_submit_booking" type="submit" value="Submit"> <?php _e( 'Confirm Booking ', 'service-booking' ); ?> </button>
             </form>
           </div>
 

@@ -1,12 +1,14 @@
 <?php
 /*
-Plugin Name:	EM-Service-Booking
-Description: 	Plugin for booking feature of your service.
-Author: 		Motahar Hossain
-Version:		1.1.0
-Author URI: 	www.e-motohar.com
-License:      	GNU GENERAL PUBLIC LICENSE Version 3,
-License URI: 	https://www.gnu.org/licenses/gpl-3.0.txt
+ * Plugin Name:	Service-Booking
+ * Description: 	Plugin for booking feature of your service.
+ * Author: 		Motahar Hossain
+ * Version:		1.1.0
+ * Author URI: 	www.e-motohar.com
+ * License:      	GNU GENERAL PUBLIC LICENSE Version 3,
+ * License URI: 	https://www.gnu.org/licenses/gpl-3.0.txt
+ * Text Domain: service-booking
+ * Domain Path: /languages
 */
 
 namespace emsb_service_booking_plugin;
@@ -52,7 +54,7 @@ if ( !class_exists( 'emsb_service_booking_plugin_base_class' ) ) {
                 $labels = array(
                     'name'                  => $name,
                     'singular_name'         => $singular_name,
-                    'add_new'               => 'Add New',
+                    'add_new'               => __('Add New', 'service-booking'),
                     'add_new_item'          => 'Add New '   . $singular_name,
                     'edit_item'             => 'Edit '      . $singular_name,
                     'new_item'              => 'New '       . $singular_name,
@@ -95,7 +97,7 @@ if ( !class_exists( 'emsb_service_booking_plugin_base_class' ) ) {
             //add a meta box
             add_meta_box(
                 'emsb_service_meta_box', //id
-                'Add meta fields of the service', // $title
+                __('Add Service Info', 'service-booking'), //title
                 array($this,'emsb_callback_to_show_the_service_meta_boxes'),  //display function
                 'emsb_service', //content type 
                 'normal', //context
@@ -112,68 +114,68 @@ if ( !class_exists( 'emsb_service_booking_plugin_base_class' ) ) {
         ?>
             
           <div class="emsb-service-header-info">
-                <label for="emsb-service-header-info"> <h3> Service Main Info </h3> </label>
+                <label for="emsb-service-header-info"> <h3> <?php _e( 'Service Main Info', 'service-booking' ); ?> </h3> </label>
                 <p>
-                    <label for="emsb_display_service_title" class="emsb-row-title"><?php _e( "Service Sub Title:", 'emsb' )?></label>
+                    <label for="emsb_display_service_title" class="emsb-row-title"><?php _e( "Service Sub Title:", 'service-booking' ); ?></label>
                     <input type="text" name="emsb_display_service_title" id="emsb_display_service_title" value="<?php if ( isset ( $emsb_service_stored_meta['emsb_display_service_title'] ) ) echo $emsb_service_stored_meta['emsb_display_service_title'][0]; ?>" />
                 </p>
                 <p>
-                    <label for="emsb_display_service_location" class="emsb-row-location"><?php _e( "Location:", 'emsb' )?></label>
+                    <label for="emsb_display_service_location" class="emsb-row-location"><?php _e( "Location:", 'service-booking' ); ?></label>
                     <input type="text" name="emsb_display_service_location" id="emsb_display_service_location" value="<?php if ( isset ( $emsb_service_stored_meta['emsb_display_service_location'] ) ) echo $emsb_service_stored_meta['emsb_display_service_location'][0]; ?>" />
                 </p>
                 <p>
-                    <label for="emsb_display_service_price" class="emsb-row-price"><?php _e( "Service Price:", 'emsb' )?></label>
+                    <label for="emsb_display_service_price" class="emsb-row-price"><?php _e( "Service Price:", 'service-booking' ); ?></label>
                     <input type="text" name="emsb_display_service_price" id="emsb_display_service_price" value="<?php if ( isset ( $emsb_service_stored_meta['emsb_display_service_price'] ) ) echo $emsb_service_stored_meta['emsb_display_service_price'][0]; ?>" />
                 </p>
             </div>
 
             <!-- service reservation duration -->
             <div class="emsb-service-availability-container emsb-service-meta-field"> 
-                <label for="emsb-time-slot"> <h3> Service Availability </h3> </label> 
+                <label for="emsb-time-slot"> <h3> <?php _e( 'Service Availability', 'service-booking' ); ?> </h3> </label> 
                 <p>
-                    <label for="emsb_service_availability_starts_at" class="emsb-row-date-availability"><?php _e( "Will be Available From: ", 'emsb' )?></label>
+                    <label for="emsb_service_availability_starts_at" class="emsb-row-date-availability"><?php _e( "Will be Available From: ", 'service-booking' ); ?></label>
                     <input type="date" name="emsb_service_availability_starts_at" id="emsb_service_availability_starts_at" value="<?php if ( isset ( $emsb_service_stored_meta['emsb_service_availability_starts_at'] ) ) echo $emsb_service_stored_meta['emsb_service_availability_starts_at'][0]; ?>" />
                 </p>
                 <p>
-                    <label for="emsb_service_availability_ends_at" class="emsb-row-date-availability"><?php _e( "Will be Unavailable From: ", 'emsb' )?></label>
+                    <label for="emsb_service_availability_ends_at" class="emsb-row-date-availability"><?php _e( "Will be Unavailable From: ", 'service-booking' ); ?></label>
                     <input type="date" name="emsb_service_availability_ends_at" id="emsb_service_availability_ends_at" value="<?php if ( isset ( $emsb_service_stored_meta['emsb_service_availability_ends_at'] ) ) echo $emsb_service_stored_meta['emsb_service_availability_ends_at'][0]; ?>" />
                 </p>
-                <footer class="blockquote-footer"> If you don't set these value, this service will always be available for future 1 year </footer>
+                <footer class="blockquote-footer"> <?php _e( 'If you don\'t set these value, this service will always be available for future 1 year ', 'service-booking' ); ?> </footer>
             </div>
 
             <!-- weekly Off-days  -->
             <div class="emsb-off-days">
-              <label for="emsb-off-days"> <h3> Weekly Off Days </h3> </label>
+              <label for="emsb-off-days"> <h3> <?php _e( 'Weekly Off Days ', 'service-booking' ); ?> </h3> </label>
                 <p>
                     <input type="checkbox" name="emsb_service_off_day_sun" id="emsb_service_off_day_sun" value="1" <?php if ( isset ( $emsb_service_stored_meta['emsb_service_off_day_sun'] ) ) checked( $emsb_service_stored_meta['emsb_service_off_day_sun'][0], '1' ); ?> />
-                    <label for="emsb_service_off_day_sun" class="emsb-row-off_days"><?php _e( "Sunday:", 'emsb' )?></label>
+                    <label for="emsb_service_off_day_sun" class="emsb-row-off_days"><?php _e( "Sunday:", 'service-booking' )?></label>
                     
                     <input type="checkbox" name="emsb_service_off_day_mon" id="emsb_service_off_day_mon" value="2" <?php if ( isset ( $emsb_service_stored_meta['emsb_service_off_day_mon'] ) ) checked( $emsb_service_stored_meta['emsb_service_off_day_mon'][0], '2' ); ?> />
-                    <label for="emsb_service_off_day_mon" class="emsb-row-off_days"><?php _e( "Monday:", 'emsb' )?></label>
+                    <label for="emsb_service_off_day_mon" class="emsb-row-off_days"><?php _e( "Monday:", 'service-booking' )?></label>
                     
                     <input type="checkbox" name="emsb_service_off_day_tues" id="emsb_service_off_day_tues" value="3" <?php if ( isset ( $emsb_service_stored_meta['emsb_service_off_day_tues'] ) ) checked( $emsb_service_stored_meta['emsb_service_off_day_tues'][0], '3' ); ?> />
-                    <label for="emsb_service_off_day_tues" class="emsb-row-off_days"><?php _e( "Tuesday:", 'emsb' )?></label>
+                    <label for="emsb_service_off_day_tues" class="emsb-row-off_days"><?php _e( "Tuesday:", 'service-booking' )?></label>
                     
                     <input type="checkbox" name="emsb_service_off_day_wed" id="emsb_service_off_day_wed" value="4" <?php if ( isset ( $emsb_service_stored_meta['emsb_service_off_day_wed'] ) ) checked( $emsb_service_stored_meta['emsb_service_off_day_wed'][0], '4' ); ?> />
-                    <label for="emsb_service_off_day_wed" class="emsb-row-off_days"><?php _e( "Wednesday:", 'emsb' )?></label>
+                    <label for="emsb_service_off_day_wed" class="emsb-row-off_days"><?php _e( "Wednesday:", 'service-booking' )?></label>
                     
                     <input type="checkbox" name="emsb_service_off_day_thurs" id="emsb_service_off_day_thurs" value="5" <?php if ( isset ( $emsb_service_stored_meta['emsb_service_off_day_thurs'] ) ) checked( $emsb_service_stored_meta['emsb_service_off_day_thurs'][0], '5' ); ?> />
-                    <label for="emsb_service_off_day_thurs" class="emsb-row-off_days"><?php _e( "Thursday:", 'emsb' )?></label>
+                    <label for="emsb_service_off_day_thurs" class="emsb-row-off_days"><?php _e( "Thursday:", 'service-booking' )?></label>
                     
                     <input type="checkbox" name="emsb_service_off_day_fri" id="emsb_service_off_day_fri" value="6" <?php if ( isset ( $emsb_service_stored_meta['emsb_service_off_day_fri'] ) ) checked( $emsb_service_stored_meta['emsb_service_off_day_fri'][0], '6' ); ?> />
-                    <label for="emsb_service_off_day_fri" class="emsb-row-off_days"><?php _e( "Friday:", 'emsb' )?></label>
+                    <label for="emsb_service_off_day_fri" class="emsb-row-off_days"><?php _e( "Friday:", 'service-booking' )?></label>
                     
                     <input type="checkbox" name="emsb_service_off_day_sat" id="emsb_service_off_day_sat" value="7" <?php if ( isset ( $emsb_service_stored_meta['emsb_service_off_day_sat'] ) ) checked( $emsb_service_stored_meta['emsb_service_off_day_sat'][0], '7' ); ?> />
-                    <label for="emsb_service_off_day_sat" class="emsb-row-off_days"><?php _e( "Saturday:", 'emsb' )?></label>
+                    <label for="emsb_service_off_day_sat" class="emsb-row-off_days"><?php _e( "Saturday:", 'service-booking' )?></label>
                 </p>
             </div>
             <!-- weekly Off-days ends  -->
 
             <!-- service reservation duration -->
             <div class="emsb-servation-duration-container emsb-service-meta-field"> 
-                <label for="emsb-time-slot"> <h3> Full Day Reservation </h3> </label> 
+                <label for="emsb-time-slot"> <h3> <?php _e( 'Full Day Reservation ', 'service-booking' ); ?> </h3> </label> 
                 <p>
-                    <label for="emsb_service_full_day_reservation" class="emsb-row-time_slot"><?php _e( "Is this service for full day reservation? ( 24 hours ) ", 'emsb' )?></label>
+                    <label for="emsb_service_full_day_reservation" class="emsb-row-time_slot"><?php _e( "Is this service for full day reservation? ( 24 hours ) ", 'service-booking' ); ?></label>
                     <input type="checkbox" name="emsb_service_full_day_reservation" id="emsb_service_full_day_reservation" value="checked" <?php if ( isset ( $emsb_service_stored_meta['emsb_service_full_day_reservation'] ) ) checked( $emsb_service_stored_meta['emsb_service_full_day_reservation'][0], 'checked' ); ?> />
                 </p>
             </div>
@@ -181,17 +183,17 @@ if ( !class_exists( 'emsb_service_booking_plugin_base_class' ) ) {
 
              <!-- AM Time Slot  -->
             <div class="emsb-service-meta-field emsb-time-slot-container">
-                <label for="emsb-time-slot"> <h3> AM Time Slot </h3> </label>
+                <label for="emsb-time-slot"> <h3> <?php _e( 'AM Time Slot ', 'service-booking' ); ?> </h3> </label>
                 <p>
-                    <label for="emsb_service_am_starting_time" class="emsb-row-time_slot"><?php _e( "Starting Time:", 'emsb' )?></label>
+                    <label for="emsb_service_am_starting_time" class="emsb-row-time_slot"><?php _e( "Starting Time:", 'service-booking' ); ?></label>
                     <input min='00:00' max= '11:00' type="time" name="emsb_service_am_starting_time" id="emsb_service_am_starting_time" value="<?php if ( isset ( $emsb_service_stored_meta['emsb_service_am_starting_time'] ) ) echo $emsb_service_stored_meta['emsb_service_am_starting_time'][0]; ?>" />
                 </p>
                 <p>
-                    <label for="emsb_service_am_ending_time" class="emsb-row-time_slot"><?php _e( "Ending Time:", 'emsb' )?></label>
+                    <label for="emsb_service_am_ending_time" class="emsb-row-time_slot"><?php _e( "Ending Time:", 'service-booking' ); ?></label>
                     <input min='01:00' max= '11:59' type="time" name="emsb_service_am_ending_time" id="emsb_service_am_ending_time" value="<?php if ( isset ( $emsb_service_stored_meta['emsb_service_am_ending_time'] ) ) echo $emsb_service_stored_meta['emsb_service_am_ending_time'][0]; ?>" />
                 </p>
                 <p>
-                    <label for="emsb_service_am_slot_duration" class="emsb-row-time_slot"><?php _e( "Slot Duration in Munites:", 'emsb' )?></label>
+                    <label for="emsb_service_am_slot_duration" class="emsb-row-time_slot"><?php _e( "Slot Duration in Munites:", 'service-booking' ); ?></label>
                     <input type="number" name="emsb_service_am_slot_duration" id="emsb_service_am_slot_duration" value="<?php if ( isset ( $emsb_service_stored_meta['emsb_service_am_slot_duration'] ) ) echo $emsb_service_stored_meta['emsb_service_am_slot_duration'][0]; ?>" />
                 </p>
             </div>
@@ -199,17 +201,17 @@ if ( !class_exists( 'emsb_service_booking_plugin_base_class' ) ) {
 
             <!-- PM Time Slot Starts  -->
             <div class="emsb-service-meta-field emsb-time-slot-container">
-                <label for="emsb-time-slot"> <h3> PM Time Slot </h3> </label>
+                <label for="emsb-time-slot"> <h3> <?php _e( 'PM Time Slot ', 'service-booking' ); ?> </h3> </label>
                 <p>
-                    <label for="emsb_service_pm_starting_time" class="emsb-row-time_slot"><?php _e( "Starting Time:", 'emsb' )?></label>
+                    <label for="emsb_service_pm_starting_time" class="emsb-row-time_slot"><?php _e( "Starting Time:", 'service-booking' ); ?></label>
                     <input min='12:00' max= '22:59' type="time" name="emsb_service_pm_starting_time" id="emsb_service_pm_starting_time" value="<?php if ( isset ( $emsb_service_stored_meta['emsb_service_pm_starting_time'] ) ) echo $emsb_service_stored_meta['emsb_service_pm_starting_time'][0]; ?>" />
                 </p>
                 <p>
-                    <label for="emsb_service_pm_ending_time" class="emsb-row-time_slot"><?php _e( "Ending Time:", 'emsb' )?></label>
+                    <label for="emsb_service_pm_ending_time" class="emsb-row-time_slot"><?php _e( "Ending Time:", 'service-booking' ); ?></label>
                     <input min='13:00' max= '23:59' type="time" name="emsb_service_pm_ending_time" id="emsb_service_pm_ending_time" value="<?php if ( isset ( $emsb_service_stored_meta['emsb_service_pm_ending_time'] ) ) echo $emsb_service_stored_meta['emsb_service_pm_ending_time'][0]; ?>" />
                 </p>
                 <p>
-                    <label for="emsb_service_pm_slot_duration" class="emsb-row-time_slot"><?php _e( "Slot Duration in Munites:", 'emsb' )?></label>
+                    <label for="emsb_service_pm_slot_duration" class="emsb-row-time_slot"><?php _e( "Slot Duration in Munites:", 'service-booking' ); ?></label>
                     <input type="number" name="emsb_service_pm_slot_duration" id="emsb_service_pm_slot_duration" value="<?php if ( isset ( $emsb_service_stored_meta['emsb_service_pm_slot_duration'] ) ) echo $emsb_service_stored_meta['emsb_service_pm_slot_duration'][0]; ?>" />
                 </p>
             </div>
@@ -217,9 +219,9 @@ if ( !class_exists( 'emsb_service_booking_plugin_base_class' ) ) {
 
           <!-- Service Provider Email Address Starts  -->
           <div class="emsb-service-meta-field">
-                <label for="emsb_service_provider_email"> <h3> Service Provider Email Address </h3> </label>
+                <label for="emsb_service_provider_email"> <h3> <?php _e( 'Service Provider Email Address ', 'service-booking' ); ?> </h3> </label>
                 <p>
-                    <label for="emsb_service_provider_email" class="emsb-row-email"><?php _e( "Email Address: ", 'emsb' )?><?php echo get_the_author_meta('user_email'); ?></label>
+                    <label for="emsb_service_provider_email" class="emsb-row-email"><?php _e( "Email Address: ", 'service-booking' ); ?><?php echo get_the_author_meta('user_email'); ?></label>
                     <input type="email" name="emsb_service_provider_email" id="emsb_service_provider_email" value="<?php if ( isset ( $emsb_service_stored_meta['emsb_service_provider_email'] ) ) echo $emsb_service_stored_meta['emsb_service_provider_email'][0]; ?>" />
                 </p>
 
@@ -228,9 +230,9 @@ if ( !class_exists( 'emsb_service_booking_plugin_base_class' ) ) {
 
           <!-- Service description -->
             <div class="emsb-service-meta-field emsb-service-description-container">
-                <label for="emsbtexteditor_check"> <h3> <?php// _e( "Service Description ", 'emsb' ) ?> </h3> </label>
+                <label for="emsbtexteditor_check"> <h3> <?php _e( "Service Description ", 'service-booking' ); ?> </h3> </label>
                 <p>
-                    <label for="emsbtexteditor_check" class="emsb-row-time_slot"><?php _e( "Has description for single service page? ", 'emsb' );?></label>
+                    <label for="emsbtexteditor_check" class="emsb-row-time_slot"><?php _e( "Has description for single service page? ", 'service-booking' );?></label>
                     <input type="checkbox" name="emsbtexteditor_check" id="emsbtexteditor_check" value="description" <?php if ( isset ( $emsb_service_stored_meta['emsbtexteditor_check'] ) ) checked( $emsb_service_stored_meta['emsbtexteditor_check'][0], 'description' ); ?> />
                 </p>
                 <div id="emsb-texteditor-container">
@@ -451,7 +453,6 @@ if ( !class_exists( 'emsb_service_booking_plugin_base_class' ) ) {
             add_filter( 'single_template',  array($this,'emsb_get_single_template') ) ; 
             add_filter( 'use_block_editor_for_post_type', array($this,'mytheme_disable_gutenberg_pages'), 10, 2 );
             add_action( 'wp_enqueue_scripts', array($this,'em_reservation_enqueue_public_scripts')  );
-            // add_action( 'gutenberg_can_edit_post_type', array($this,'mytheme_disable_gutenberg_pages')  );
             
             
         }
@@ -570,7 +571,7 @@ class emsb_post_pages {
 
     public function emsb_create_archive_page(){
 
-        $my_post  = array( 
+        $booking_services  = array( 
                             'post_title'     => 'Book-Service',
                             'post_type'      => 'page',
                             'post_name'      => 'book-service',
@@ -578,13 +579,28 @@ class emsb_post_pages {
                             'comment_status' => 'closed'
                         );
 
-        $PageID = wp_insert_post( $my_post, FALSE ); // Get Post ID - FALSE to return 0 instead of wp_error.
+        $PageID = wp_insert_post( $booking_services, FALSE ); 
 
     }
 
     
 }
 $emsb_post_pages = new emsb_post_pages();
+
+
+class emsb_internationlization {
+    public function __construct() {
+        add_action('plugins_loaded', array($this, 'emsb_load_plugin_textdomain'));
+        
+    }
+
+    public function emsb_load_plugin_textdomain(){
+        load_plugin_textdomain( 'service-booking', FALSE, basename( dirname( __FILE__ ) ) . '/languages/' );
+    }
+
+    
+}
+$emsb_internationlization = new emsb_internationlization();
 
 
 include( plugin_dir_path( __FILE__ ) . 'emsb-ajax-calls.php');

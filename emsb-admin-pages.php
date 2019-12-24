@@ -2,51 +2,32 @@
 
 
 add_action( 'admin_menu', array ( 'emsb_Admin_Page', 'emsb_admin_menu' ) );
-/**
- * Register three admin pages and add a stylesheet and a javascript to two of
- * them only.
- *
- * @author toscho
- *
- */
+
 class emsb_Admin_Page
 {
-	/**
-	 * Register the pages and the style and script loader callbacks.
-	 *
-	 * @wp-hook admin_menu
-	 * @return  void
-	 */
+
 	public static function emsb_admin_menu()
 	{
-		// $main is now a slug named "toplevel_page_emsb_admin_page"
-		// built with get_plugin_page_hookname( $menu_slug, '' )
+
 		$main = add_menu_page(
-			'EMSB',                         // page title
-			'Service Booking',                         // menu title
-			// Change the capability to make the pages visible for other users.
-			// See http://codex.wordpress.org/Roles_and_Capabilities
-			'manage_options',                  // capability
-			'emsb_admin_page',                         // menu slug
+			'EMSB',                                         // page title
+			'Service Booking',                              // menu title
+			'manage_options',                               // capability
+			'emsb_admin_page',                              // menu slug
             array ( __CLASS__, 'emsb_admin_main_page' ),
             '',
-            26// callback function
+            26                                              // callback function
 		);
-		// $sub is now a slug named "emsb_admin_page_page_emsb_admin_page-sub"
-		// built with get_plugin_page_hookname( $menu_slug, $parent_slug)
+
 		$sub = add_submenu_page(
 			'emsb_admin_page',                         // parent slug
 			'Manage Bookings',                         // page title
-			'Dashboard',                                // menu title
+			'Dashboard',                               // menu title
 			'manage_options',                          // capability
 			'emsb_admin_page',                         // menu slug
 			array ( __CLASS__, 'emsb_admin_main_page' )         // callback function, same as above
 		);
-		/* See http://wordpress.stackexchange.com/a/49994/73 for the difference
-		 * to "'admin_enqueue_scripts', $hook_suffix"
-		 */
-        // $text is now a slug named "emsb_admin_page_page_t5-text-included"
-        // built with get_plugin_page_hookname( $menu_slug, $parent_slug)
+
         
         $emsb_post_type = 'emsb_service';
         /* Get CPT Object */
@@ -54,7 +35,7 @@ class emsb_Admin_Page
         $emsb_services_menu_page = add_submenu_page(
             'emsb_admin_page',                             // parent slug
             $emsb_post_type_obj->labels->name,             // page title
-            'All Services',        // menu title
+            'All Services',                                // menu title
             $emsb_post_type_obj->cap->edit_posts,          // capability
             'edit.php?post_type=' . $emsb_post_type        // menu slug
         );
@@ -73,7 +54,7 @@ class emsb_Admin_Page
         $emsb_bookings = add_submenu_page(
 			'emsb_admin_page',                         // parent slug
 			'EMSB bookings',                           // page title
-			'All Bookings',                                // menu title
+			'All Bookings',                            // menu title
 			'manage_options',                          // capability
 			'emsb_admin_bookings_page',                // menu slug
 			array ( __CLASS__, 'emsb_admin_bookings_page_func' )         // callback function, same as above
@@ -110,18 +91,17 @@ class emsb_Admin_Page
                 <div class="emsb-container">
                     <header class="emsb-admin-main-page-header-wrapper">
                         <div class="jumbotron text-center">
-                            <h2 class="display-5">EM Service Booking</h2>
-                            <!-- <hr> -->
+                            <h2 class="display-5"> <?php _e( 'Service Booking ', 'service-booking' ); ?></h2>
                         </div>
                     </header>
 
                     <main class="emsb-admin-main-page-wrapper">
                         <div class="tabs">
                             <ul>
-                                <li><a href="admin.php?page=emsb_admin_page" > Dashboard </a></li>
-                                <li><a href="edit.php?post_type=emsb_service" class="active">All Services</a></li>
-                                <li><a href="post-new.php?post_type=emsb_service">Add Service</a></li>
-                                <li><a href="admin.php?page=emsb_admin_bookings_page">All Bookings</a></li>
+                                <li><a href="admin.php?page=emsb_admin_page" > <?php _e( 'Dashboard ', 'service-booking' ); ?>  </a></li>
+                                <li><a href="edit.php?post_type=emsb_service" class="active"> <?php _e( 'All Services ', 'service-booking' ); ?></a></li>
+                                <li><a href="post-new.php?post_type=emsb_service"> <?php _e( 'Add Service ', 'service-booking' ); ?></a></li>
+                                <li><a href="admin.php?page=emsb_admin_bookings_page"> <?php _e( 'All Bookings ', 'service-booking' ); ?></a></li>
                                 
                             </ul>
                         </div>
@@ -137,7 +117,7 @@ class emsb_Admin_Page
                 <div class="emsb-container">
                     <header class="emsb-admin-main-page-header-wrapper">
                         <div class="jumbotron text-center">
-                            <h2 class="display-5">EM Service Booking</h2>
+                            <h2 class="display-5"><?php _e( 'EM Service Booking ', 'service-booking' ); ?></h2>
                             <!-- <hr> -->
                         </div>
                     </header>
@@ -145,10 +125,10 @@ class emsb_Admin_Page
                     <main class="emsb-admin-main-page-wrapper">
                         <div class="tabs">
                             <ul>
-                                <li><a href="admin.php?page=emsb_admin_page" > Dashboard </a></li>
-                                <li><a href="edit.php?post_type=emsb_service" >All Services</a></li>
-                                <li><a href="post-new.php?post_type=emsb_service" class="active">Add Service</a></li>
-                                <li><a href="admin.php?page=emsb_admin_bookings_page">All Bookings</a></li>
+                                <li><a href="admin.php?page=emsb_admin_page" > <?php _e( 'Dashboard ', 'service-booking' ); ?></a></li>
+                                <li><a href="edit.php?post_type=emsb_service" > <?php _e( 'All Services ', 'service-booking' ); ?></a></li>
+                                <li><a href="post-new.php?post_type=emsb_service" class="active"> <?php _e( 'Add Service ', 'service-booking' ); ?></a></li>
+                                <li><a href="admin.php?page=emsb_admin_bookings_page"> <?php _e( 'All Bookings ', 'service-booking' ); ?></a></li>
                                 
                             </ul>
                         </div>
@@ -228,13 +208,7 @@ class emsb_Admin_Page
         
 	}
 
-	/**
-	 * Print page output.
-	 *
-	 * @wp-hook toplevel_page_emsb_admin_page In wp-admin/admin.php do_action($page_hook).
-	 * @wp-hook emsb_admin_page_page_emsb_admin_page-sub
-	 * @return  void
-	 */
+
 	public static function emsb_admin_main_page()
 	{
         global $wpdb;
@@ -278,16 +252,16 @@ class emsb_Admin_Page
         <div class="emsb-container">
             <header class="emsb-admin-main-page-header-wrapper">
                 <div class="jumbotron text-center">
-                    <h2 class="display-5">EM Service Booking</h2>
+                    <h2 class="display-5"><?php _e( 'Service Booking  ', 'service-booking' ); ?></h2>
                 </div>
             </header>
             <main class="emsb-admin-main-page-wrapper">
                 <div class="tabs">
                     <ul>
-                        <li><a href="admin.php?page=emsb_admin_page" class="active"> Dashboard </a></li>
-                        <li><a href="edit.php?post_type=emsb_service">All Services</a></li>
-                        <li><a href="post-new.php?post_type=emsb_service">Add Service</a></li>
-                        <li><a href="admin.php?page=emsb_admin_bookings_page">All Bookings</a></li>
+                        <li><a href="admin.php?page=emsb_admin_page" class="active"> <?php _e( 'Dashboard ', 'service-booking' ); ?></a></li>
+                        <li><a href="edit.php?post_type=emsb_service"><?php _e( 'All Services  ', 'service-booking' ); ?></a></li>
+                        <li><a href="post-new.php?post_type=emsb_service"><?php _e( 'Add Service  ', 'service-booking' ); ?></a></li>
+                        <li><a href="admin.php?page=emsb_admin_bookings_page"><?php _e( 'All Bookings  ', 'service-booking' ); ?></a></li>
                     </ul>
                 </div>
                 <form method="post">
@@ -296,18 +270,18 @@ class emsb_Admin_Page
                         <div class="emsb-admin-email-data-form">
                             <div class="card">
                                 <div class="card-header">
-                                    Admin Email Notification
+                                    <?php _e( 'DashboAdmin Email Notification ard ', 'service-booking' ); ?>
                                 </div>
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <label for="emsb_admin_email_subject">Admin Email Subject</label>
+                                        <label for="emsb_admin_email_subject"><?php _e( 'Admin Email Subject  ', 'service-booking' ); ?></label>
                                         <input type="text" name="emsb_admin_email_subject" class="form-control" id="emsb_admin_email_subject" value="<?php echo $admin_mail_subject; ?>" placeholder="Example: A Booking has been placed">
                                     </div>
                                     <div class="form-group">
-                                        <label for="emsb_admin_email_body">Admin Email Body</label>
+                                        <label for="emsb_admin_email_body"><?php _e( 'Admin Email Body  ', 'service-booking' ); ?></label>
                                         <textarea class="form-control" name="emsb_admin_email_body" id="emsb_admin_email_body" rows="5" placeholder="Your message body"><?php echo $admin_mail_body; ?></textarea>
                                     </div>
-                                    <footer class="blockquote-footer">Check the bookings list to see the customer data </footer>
+                                    <footer class="blockquote-footer"><?php _e( 'Check the bookings list to see the customer data ', 'service-booking' ); ?> </footer>
                                 </div>
                             </div>
                         </div>
@@ -317,18 +291,18 @@ class emsb_Admin_Page
                         <div class="emsb-customer-email-data-form mt-5">
                             <div class="card">
                                 <div class="card-header">
-                                    Customer Email Notification
+                                    <?php _e( 'Customer Email Notification ', 'service-booking' ); ?>
                                 </div>
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <label for="emsb_customer_email_subject">Customer Email Subject</label>
+                                        <label for="emsb_customer_email_subject"><?php _e( 'Customer Email Subject  ', 'service-booking' ); ?></label>
                                         <input type="text" name="emsb_customer_email_subject" class="form-control" id="emsb_customer_email_subject" value="<?php echo $customer_mail_subject; ?>" placeholder="Example: A Booking is confirmed">
                                     </div>
                                     <div class="form-group">
-                                        <label for="emsb_customer_email_body">Customer Email Body</label>
+                                        <label for="emsb_customer_email_body"><?php _e( 'Customer Email Body  ', 'service-booking' ); ?></label>
                                         <textarea class="form-control" name="emsb_customer_email_body" id="emsb_customer_email_body" rows="5" placeholder="Your message body"><?php echo $customer_mail_body; ?></textarea>
                                     </div>
-                                    <footer class="blockquote-footer">Customers will receive a token with booking details with the email </footer>
+                                    <footer class="blockquote-footer"> <?php _e( 'Customers will receive a token with booking details with the email ', 'service-booking' ); ?></footer>
                                 </div>
                             </div>
                         </div>
@@ -338,19 +312,19 @@ class emsb_Admin_Page
                         <div class="emsb-customer-email-data-form mt-5">
                             <div class="card">
                                 <div class="card-header">
-                                    User Cookie
+                                    <?php _e( 'User Cookie  ', 'service-booking' ); ?>
                                 </div>
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <label for="emsb_customer_cookie_duration">How many days do you want to save the customer info on their browser cookie?</label>
+                                        <label for="emsb_customer_cookie_duration"><?php _e( 'How many days do you want to save the customer info on their browser cookie?  ', 'service-booking' ); ?></label>
                                         <input type="number" name="emsb_customer_cookie_duration"id="emsb_customer_cookie_duration" value="<?php echo $customer_cookie_duration; ?>" class="form-control"  placeholder="30">
                                     </div>
-                                    <footer class="blockquote-footer"> Don't change it freequently </footer>
+                                    <footer class="blockquote-footer">  <?php _e( 'Don\'t change it freequently ', 'service-booking' ); ?> </footer>
                                 </div>
                             </div>
                         </div>
                         <!-- User Cookie data ends -->
-                        <button name="emsb_save_admin_email_data" type="submit" class="btn btn-primary mt-3">Save Changes</button>
+                        <button name="emsb_save_admin_email_data" type="submit" class="btn btn-primary mt-3"> <?php _e( 'Save Changes ', 'service-booking' ); ?></button>
                     </div>
                     
                 </form>
@@ -374,7 +348,6 @@ class emsb_Admin_Page
                 <header class="emsb-admin-main-page-header-wrapper">
                     <div class="jumbotron text-center">
                         <h2 class="display-5">EM Service Booking</h2>
-                        <!-- <hr> -->
                     </div>
                 </header>
 
@@ -391,7 +364,8 @@ class emsb_Admin_Page
                         <div class="emsb-container">
                             <div class="header_wrap">
                                 <div class="num_rows">
-                                    <div class="form-group"> 	<!--		Show Numbers Of Rows 		-->
+                                    <div class="form-group"> 	
+                                        <!--		Show Numbers Of Rows 		-->
                                             <select class  ="form-control" name="state" id="maxRows">
                                                 <option value="10">10</option>
                                                 <option value="15">15</option>
@@ -455,11 +429,7 @@ class emsb_Admin_Page
         <?php 
     }
 	
-	/**
-	 * List available global variables.
-	 *
-	 * @return void
-	 */
+
 	protected static function list_globals()
 	{
 		print '<h2>Global variables</h2><table class="code">';
@@ -485,12 +455,7 @@ class emsb_Admin_Page
 		}
 		print '</table>';
 	}
-	/**
-	 * Inspect program logic.
-	 *
-	 * @param array $backtrace
-	 * @return void
-	 */
+
 	protected static function list_backtrace( $backtrace )
 	{
 		print '<h2>debug_backtrace()</h2><ol class="code">';

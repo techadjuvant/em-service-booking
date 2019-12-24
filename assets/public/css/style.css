@@ -747,6 +747,7 @@ article.em-service main {
     border-radius: 3px;
     text-align: left;
     font-size: 16px;
+    color: #000;
 }
 
 .emsb-plugin-container .em-confirm-booking-button {
