@@ -275,7 +275,7 @@ get_header();
           </div>
 
           <div class="em-booking-form-container">
-            <form method="post" class="needs-validation" novalidate >
+            <form method="post" class="needs-validation" novalidate <?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?> >
               <div class="em-booking-form-fields">
                 <div class="form-row">
                   <div class="col-md-12 mb-3">

@@ -730,7 +730,7 @@ article.em-service main {
     align-items: center;
 }
 #goBackButton {
-    margin: 0 auto;
+    margin: 15px auto;
 }
 .emsb-ticket-wrapper h5 {
     font-weight: bold;
