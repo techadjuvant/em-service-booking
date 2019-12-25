@@ -568,6 +568,7 @@ article.em-service main {
     margin: 0 auto;
     padding: 25px 0;
     z-index: 9999;
+    border-radius: 5px;
 }
 .emsb-ticket-wrapper {
     width: 80%;
@@ -655,26 +656,19 @@ article.em-service main {
     margin-left: 0;
     font-weight: bold;
 }
+
 .emsb-booking-ticket-container {
-    position: fixed;
-    top: 0;
-    margin: 0 auto;
-    width: 100vw;
-    height: 100vh;
-    background-color: #fff;
-    z-index: 999;
-}
-.emsb-booking-ticket-container {
-    position: fixed;
+    position: absolute;
     margin: 0 auto;
     width: 60vw;
-    height: 60vh;
+    /* height: 100%; */
     top: 10vh;
     left: 20vw;
     background-color: #fff;
     z-index: 999;
     border-radius: 5px;
     box-shadow: 5px 5px 20px rgba(49, 46, 255, 0.15);
+    border: 1px solid #d5d5d5d9;
 }
 #emsb_booking_ticket p {
     font-size: 14px;
@@ -687,11 +681,11 @@ article.em-service main {
 .emsb-ticket-button-wrapper {
     background: #fff;
     text-align: center;
-    position: absolute;
+    /* position: absolute; */
     display: flex;
     flex-direction: column;
     width: 100%;
-    padding-bottom: 30px;
+    padding: 15px 0;
 }
 #emsb_booking_ticket h4 {
     color: black;
@@ -718,7 +712,7 @@ article.em-service main {
     font-size: 16px;
     cursor: pointer;
     font-weight: 700;
-    margin: 5px auto;
+    margin: 15px auto;
 }
 #emsb_booking_ticket .emsb-site-name p {
     font-size: 14px;
@@ -728,10 +722,21 @@ article.em-service main {
 }
 
 .emsb-form-submission-error {
-    position: relative;
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
     text-align: center;
-    top: 20vh;
+    justify-content: center;
+    align-items: center;
 }
+#goBackButton {
+    margin: 0 auto;
+}
+.emsb-ticket-wrapper h5 {
+    font-weight: bold;
+    color: #000;
+}
+
 
 /* Single Page  */
 
@@ -775,7 +780,7 @@ article.em-service main {
 }
 
 .emsb-plugin-container .em-confirm-booking-button {
-    width: 175px !important;
+    width: 20rem !important;
 }
 
 .emsb-single-service-page .em-service-excerpt {

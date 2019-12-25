@@ -461,7 +461,7 @@ $(document).ready(function() {
             // Slot Id
             var emsb_selected_service_date_id_for_creating_slot_id = emsb_selected_service_date_id_for_db;
             var amSlotId = i + "-AM-"+ emsb_selected_service_date_id_for_creating_slot_id;
-            amSlot = $('#emShowAM').append('<li class="list-group-item" data-slotId="'+ amSlotId +'"> <label> <input class="d-none" type="text" value="'+ amSlotId +'"> <span> '+ amShowStartingHour +':'+ amShowStartingMins +' AM </span> - <span> '+ showAmEndingHour +':'+ showAmEndingMins +' AM </span> </label> <button type="button" class="btn btn-light em-select-slot-button available">Available</button>  </li>');
+            amSlot = $('#emShowAM').append('<li class="list-group-item" data-slotId="'+ amSlotId +'"> <label> <input class="d-none" type="text" value="'+ amSlotId +'">  '+ amShowStartingHour +':'+ amShowStartingMins +' AM - '+ showAmEndingHour +':'+ showAmEndingMins +' AM  </label> <button type="button" class="btn btn-light em-select-slot-button available">Available</button>  </li>');
             
         };
 
@@ -568,7 +568,7 @@ $(document).ready(function() {
             var emsb_selected_service_date_id_for_creating_slot_id = emsb_selected_service_date_id_for_db;
             var pmSlotId = i + "-PM-"+ emsb_selected_service_date_id_for_creating_slot_id;
 
-            pmSlot = $('#emShowPM').append('<li class="list-group-item" data-slotId="'+ pmSlotId +'"> <label> <input class="d-none" type="text" value="'+ pmSlotId +'"> <span> '+ pmShowStartingHour +':'+ pmShowStartingMins +' PM </span> - <span> '+ showPmEndingHour +':'+ showPmEndingMins +' PM </span> </label> <button type="button" class="btn btn-light em-select-slot-button available">Available</button>  </li>'); 
+            pmSlot = $('#emShowPM').append('<li class="list-group-item" data-slotId="'+ pmSlotId +'"> <label> <input class="d-none" type="text" value="'+ pmSlotId +'"> '+ pmShowStartingHour +':'+ pmShowStartingMins +' PM - '+ showPmEndingHour +':'+ showPmEndingMins +' PM </label> <button type="button" class="btn btn-light em-select-slot-button available">Available</button>  </li>'); 
             
         };
 
