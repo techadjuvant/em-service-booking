@@ -5,6 +5,10 @@ get_header();
   $emsb_settings_data_fetch = $wpdb->get_row( "SELECT * FROM $emsb_settings_data ORDER BY id DESC LIMIT 1" );
   $customer_cookie_duration = $emsb_settings_data_fetch->customer_cookie_duration;
 
+  $emsb_plugin_path = plugin_dir_url( __FILE__ );
+  $emsb_booking_form_process_url = $emsb_plugin_path . 'emsb-booking-form-process.php';
+
+
 ?>
 
 <!-- emsb container  -->
@@ -18,6 +22,7 @@ get_header();
           <div class="col-lg-8 offset-lg-2"> 
 
           <?php
+          
           /* Start the Loop */
           while ( have_posts() ) : the_post(); ?>
             <article id="post-<?php the_ID(); ?>"  class="em-service">
@@ -108,50 +113,62 @@ get_header();
                       <?php } ?>
                           
                     </div>
-                    
+                    <!-- Full day reservation  -->
                     <div class="full-day-reservation">
                       <?php 
                           $emsb_service_full_day_reservation = get_post_meta( get_the_ID(), 'emsb_service_full_day_reservation', true ); ?>
                           <input type="checkbox" name="emsb_fullDayReserve" id="emsb_fullDayReserve" <?php echo $emsb_service_full_day_reservation; ?> />
                     </div>
+                    
                     <div class="em-time-slot">
+                      <!-- AM Time slot  -->
                       <div class="am-time-slot">
                           <?php 
                               $emsb_service_am_starting_time = get_post_meta( get_the_ID(), 'emsb_service_am_starting_time', true );
                               if($emsb_service_am_starting_time){ ?>
                                   <input class="amSlotStarts" value="<?php echo $emsb_service_am_starting_time; ?>" />
+                          <?php } else { ?>
+                                  <input class="amSlotStarts" value="12:00" />
                           <?php } ?>
-
                           <?php 
                               $emsb_service_am_ending_time = get_post_meta( get_the_ID(), 'emsb_service_am_ending_time', true );
                               if($emsb_service_am_ending_time){ ?>
                                   <input class="amSlotEnds" value="<?php echo $emsb_service_am_ending_time; ?>" />
+                          <?php } else { ?>
+                                  <input class="amSlotEnds" value="12:00" />
                           <?php } ?>
 
                           <?php 
                               $emsb_service_am_slot_duration = get_post_meta( get_the_ID(), 'emsb_service_am_slot_duration', true );
                               if($emsb_service_am_slot_duration){ ?>
                                   <input class="amSlotDuration" type="text" name="amSlotDuration" value="<?php echo $emsb_service_am_slot_duration; ?>">
+                          <?php } else { ?>
+                                  <input class="amSlotDuration" type="text" name="amSlotDuration" value="00">
                           <?php } ?>
                               
                       </div>
+                      <!-- PM Time slot  -->
                       <div class="pm-time-slot">
                           <?php 
                               $emsb_service_pm_starting_time = get_post_meta( get_the_ID(), 'emsb_service_pm_starting_time', true );
                               if($emsb_service_pm_starting_time){ ?>
                                   <input class="pmSlotStarts" value="<?php echo $emsb_service_pm_starting_time; ?>" />
+                          <?php } else { ?>
+                                  <input class="pmSlotStarts" value="12:00" />
                           <?php } ?>
-
                           <?php 
                               $emsb_service_pm_ending_time = get_post_meta( get_the_ID(), 'emsb_service_pm_ending_time', true );
                               if($emsb_service_pm_ending_time){ ?>
                                   <input class="pmSlotEnds" value="<?php echo $emsb_service_pm_ending_time; ?>" />
+                          <?php } else { ?>
+                                  <input class="pmSlotEnds" value="12:00" />
                           <?php } ?>
-
                           <?php 
                               $emsb_service_pm_slot_duration = get_post_meta( get_the_ID(), 'emsb_service_pm_slot_duration', true );
                               if($emsb_service_pm_slot_duration){ ?>
                                   <input class="pmSlotDuration" type="text" name="pmSlotDuration" value="<?php echo $emsb_service_pm_slot_duration; ?>">
+                          <?php } else { ?>
+                            <input class="pmSlotDuration" type="text" name="pmSlotDuration" value="00">
                           <?php } ?>
 
                       </div>
@@ -258,7 +275,7 @@ get_header();
           </div>
 
           <div class="em-booking-form-container">
-            <form method="post" class="needs-validation" novalidate>
+            <form method="post" class="needs-validation" novalidate >
               <div class="em-booking-form-fields">
                 <div class="form-row">
                   <div class="col-md-12 mb-3">
@@ -300,6 +317,7 @@ get_header();
                       <input type="text" name="emsb_selected_time_slot" id="emsb_selected_time_slot" value="12:30 PM - 1:30 PM" >
                       <input type="text" name="emsb_selected_service_price" id="emsb_selected_service_price" value="$1000" >
                       <input type="number" name="emsb_cookie_duration" id="emsb_cookie_duration" value="<?php echo $customer_cookie_duration; ?>" >
+                      <input type="hidden" name="action" value="contact_form">
                       <input name="emsb-create-nonce" id="emsb-create-nonce" value="<?php echo wp_create_nonce("emsb_booked_slot_nonce"); ?>" >
                   </fieldset>
               </div>
@@ -320,5 +338,6 @@ get_header();
   
 
 <?php
+
   get_footer();
 ?>

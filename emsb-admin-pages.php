@@ -85,8 +85,8 @@ class emsb_Admin_Page
     public static function emsb_services_header_html() {
         global $pagenow ,$post;
         global $post_type;
-        $emcc_plugin_path = plugin_dir_url( __FILE__ );
-        $emcc_icon_url = $emcc_plugin_path . 'assets/img/service-booking.png';
+        $emsb_plugin_path = plugin_dir_url( __FILE__ );
+        $emsb_icon_url = $emsb_plugin_path . 'assets/img/service-booking.png';
 
         if( $post_type == 'emsb_service' && ($pagenow == 'edit.php' || $pagenow == 'post.php') ) {
             ?>
@@ -94,7 +94,7 @@ class emsb_Admin_Page
                     <header class="emsb-admin-main-page-header-wrapper">
                         <div class="jumbotron text-center">
                             <div class="emsb-admin-plugin-title">
-                                <img src="<?php echo $emcc_icon_url; ?>" alt="Service Booking Icon">
+                                <img src="<?php echo $emsb_icon_url; ?>" alt="Service Booking Icon">
                                 <h2 class="display-5"> <?php _e( 'Service Booking ', 'service-booking' ); ?></h2>
                             </div>
                         </div>
@@ -123,7 +123,7 @@ class emsb_Admin_Page
                     <header class="emsb-admin-main-page-header-wrapper">
                         <div class="jumbotron text-center">
                             <div class="emsb-admin-plugin-title">
-                                <img src="<?php echo $emcc_icon_url; ?>" alt="Service Booking Icon">
+                                <img src="<?php echo $emsb_icon_url; ?>" alt="Service Booking Icon">
                                 <h2 class="display-5"> <?php _e( 'Service Booking ', 'service-booking' ); ?></h2>
                             </div>
                         </div>
@@ -222,8 +222,8 @@ class emsb_Admin_Page
         global $wpdb;
         $emsb_settings_data = $wpdb->prefix . 'emsb_settings';
 
-        $emcc_plugin_path = plugin_dir_url( __FILE__ );
-        $emcc_icon_url = $emcc_plugin_path . 'assets/img/service-booking.png';
+        $emsb_plugin_path = plugin_dir_url( __FILE__ );
+        $emsb_icon_url = $emsb_plugin_path . 'assets/img/service-booking.png';
         
         if(isset($_POST['emsb_save_admin_email_data'])){
             $admin_mail_subject = stripslashes_deep($_POST['emsb_admin_email_subject']);
@@ -264,7 +264,7 @@ class emsb_Admin_Page
             <header class="emsb-admin-main-page-header-wrapper">
                 <div class="jumbotron text-center">
                     <div class="emsb-admin-plugin-title">
-                        <img src="<?php echo $emcc_icon_url; ?>" alt="Service Booking Icon">
+                        <img src="<?php echo $emsb_icon_url; ?>" alt="Service Booking Icon">
                         <h2 class="display-5"> <?php _e( 'Service Booking ', 'service-booking' ); ?></h2>
                     </div>
                 </div>
@@ -358,14 +358,14 @@ class emsb_Admin_Page
             $emsb_all_bookings_from_database = "SELECT * FROM $emsb_bookings ORDER BY id DESC";
             $emcc_order_list = $wpdb->get_results($emsb_all_bookings_from_database, ARRAY_A);
 
-            $emcc_plugin_path = plugin_dir_url( __FILE__ );
-            $emcc_icon_url = $emcc_plugin_path . 'assets/img/service-booking.png';
+            $emsb_plugin_path = plugin_dir_url( __FILE__ );
+            $emsb_icon_url = $emsb_plugin_path . 'assets/img/service-booking.png';
         ?> 
             <div class="emsb-container">
                 <header class="emsb-admin-main-page-header-wrapper">
                     <div class="jumbotron text-center">
                         <div class="emsb-admin-plugin-title">
-                            <img src="<?php echo $emcc_icon_url; ?>" alt="Service Booking Icon">
+                            <img src="<?php echo $emsb_icon_url; ?>" alt="Service Booking Icon">
                             <h2 class="display-5"> <?php _e( 'Service Booking ', 'service-booking' ); ?></h2>
                         </div>
                     </div>
