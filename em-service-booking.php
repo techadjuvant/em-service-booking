@@ -485,6 +485,7 @@ class emsb_database {
             global $wpdb;
             $sql_enquiry = "CREATE TABLE IF NOT EXISTS {$wpdb->prefix}emsb_bookings (
             `id` int(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+            `approve_booking` BOOLEAN NOT NULL,
             `service_id` int(11) NOT NULL,
             `service_name` varchar(200),
             `service_price` text,
@@ -494,7 +495,9 @@ class emsb_database {
             `booked_time_slot` text,
             `customer_name` varchar(200),
             `customer_email` text,
-            `customer_phone` text
+            `customer_phone` text,
+            `booking_time` TIMESTAMP NOT NULL,
+            `customer_IP` VARCHAR(100) NOT NULL
             ) ENGINE=MyISAM DEFAULT CHARSET=utf8";
 
 

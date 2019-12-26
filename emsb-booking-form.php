@@ -27,6 +27,7 @@
         $customer_email = $_POST['emsb_user_email'];
         $customer_phone = $_POST["emsb_user_telephone"];
         $service_provider_email = $_POST['emsb_selected_service_provider_email'];
+        $customer_IP = '27.147.206.102';
         // Validation Check 
         $valid_customer_name = !empty($customer_name);
         $valid_customer_email = filter_var($customer_email, FILTER_VALIDATE_EMAIL) && !empty($customer_email);
@@ -43,6 +44,7 @@
             $emsb_bookings_table_name = $wpdb->prefix . "emsb_bookings";
     
             $dataInsert = $wpdb->insert( $emsb_bookings_table_name, array(
+                    'approve_booking' => 0,
                     'service_id' => $service_id,
                     'service_name' => $service_name,
                     'service_price' => $service_price,
@@ -52,7 +54,8 @@
                     'booked_time_slot' => $booked_time_slot,
                     'customer_name' => $customer_name,
                     'customer_email' => $customer_email,
-                    'customer_phone' => $customer_phone
+                    'customer_phone' => $customer_phone,
+                    'customer_IP' => $customer_IP
                 ) );
 
             

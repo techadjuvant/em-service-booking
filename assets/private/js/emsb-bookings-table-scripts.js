@@ -68,11 +68,11 @@ getPagination('#table-id');
 			
 
 // SI SETTING
-$(function(){
-	// Just to append id number for each row  
-default_index();
+// $(function(){
+// 	// Just to append id number for each row  
+// default_index();
 					
-});
+// });
 
 //ROWS SHOWING FUNCTION
 function showig_rows_count(maxRows, pageNum, totalRows) {
@@ -84,16 +84,16 @@ function showig_rows_count(maxRows, pageNum, totalRows) {
 }
 
 // CREATING INDEX
-function default_index() {
-  $('table tr:eq(0)').prepend('<th> ID </th>')
+// function default_index() {
+//   $('table tr:eq(0)').prepend('<th> No. </th>')
 
-					var id = 0;
+// 					var id = 0;
 
-					$('table tr:gt(0)').each(function(){	
-						id++
-						$(this).prepend('<td>'+id+'</td>');
-					});
-}
+// 					$('table tr:gt(0)').each(function(){	
+// 						id++
+// 						$(this).prepend('<td>'+id+'</td>');
+// 					});
+// }
 
 // All Table search script
 function FilterkeyWord_all_table() {

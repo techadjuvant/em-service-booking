@@ -92,6 +92,7 @@
 }
 .emsb-table-wrapper .emsb-container {
   width: 100% !important;
+  position: relative;
 }
 .wp-admin .emsb-table-wrapper select {
   font-size: 13px;
@@ -129,10 +130,10 @@
 }
 
 .emsb-table-wrapper table tr:nth-child(even){
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: #f7f7f7;
 }
 .emsb-table-wrapper .table-striped tbody tr:nth-of-type(odd) {
-  background-color: rgba(255, 255, 255, .6);
+  background-color: #fff;
 }
 
 .emsb-table-wrapper th {
@@ -225,12 +226,6 @@ input[type=date], input[type=datetime-local], input[type=datetime], input[type=e
 .emsb-admin-plugin-title img {
   width: 40px;
 }
-
-
-
-/* adfasdfasdf */
-
-
 
 
 
@@ -982,4 +977,89 @@ legend.inline-edit-legend {
 
 .emsb-admin-plugin-title img {
   width: 40px;
+}
+
+/* Booking approval css */
+.emsb-pending-bookings-container {
+  position: relative;
+  background-clip: border-box;
+  border: 1px solid rgba(0,0,0,.125);
+  border-radius: .25rem;
+  background-color: #fff;
+  border-top: 0;
+}
+
+.emsb-pending-bookings-table-container {
+  position: relative;
+}
+.emsb-approval-action {
+  width: 70px;
+  cursor: pointer;
+  color: blue !important;
+  border: 1px solid blue;
+  margin: 0px 10px 0 0;
+  padding: 4px;
+  border-radius: 2px;
+  transition: all .4s;
+}
+.emsb-admin-loading-gif {
+  position: absolute;
+  width: 100%;
+  top: 320px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9;
+}
+
+.emsb-admin-loading-gif img {
+  width: 50px;
+}
+
+.emsb-approval-action:hover, .emsb-approval-action:focus, .emsb-approval-action:active {
+  background-color: #7979ef;
+  border: 1px solid #7979ef;
+  color: #fff !important;
+}
+
+.emsb-approval-actions-wrapper {
+  margin-top: 10px;
+}
+.emsb-approval-action-trush {
+  border: 1px solid #ff9c00;
+}
+.emsb-approval-action-trush:hover, .emsb-approval-action-trush:focus, .emsb-approval-action-trush:active {
+  background-color: #ff9c00;
+  border: 1px solid #ff9c00;
+  color: #fff !important;
+}
+
+.emsb-table-wrapper table tr:hover, 
+.emsb-table-wrapper table  tr:focus, 
+.emsb-table-wrapper table  tr:active {
+  transition: all .4s;
+  background-color: rgba(77, 77, 249, 0.4) !important;
+  color: #fff;
+}
+
+.emsb-table-wrapper table tr:hover .emsb-approval-action, 
+.emsb-table-wrapper table  tr:focus .emsb-approval-action, 
+.emsb-table-wrapper table  tr:active .emsb-approval-action {
+  border: 1px solid #fff !important;
+  color: #fff !important;
+}
+.emsb-table-wrapper table tr.emsb-active-pending-order {
+  transition: all .4s;
+  background-color: rgba(77, 77, 249, 0.4) !important;
+  color: #fff;
+}
+.emsb-table-wrapper table tr.emsb-active-pending-order .emsb-approval-action, 
+.emsb-table-wrapper table tr.emsb-active-pending-order .emsb-approval-action, 
+.emsb-table-wrapper table tr.emsb-active-pending-order .emsb-approval-action {
+  border: 1px solid #fff !important;
+  color: #fff !important;
+}
+.emsb-pending-table-footer {
+  text-align: right;
+  padding: 15px 25px;
 }

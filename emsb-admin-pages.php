@@ -159,7 +159,7 @@ class emsb_Admin_Page
                 wp_enqueue_style('bootstrap-css', plugin_dir_url(__FILE__) . 'assets/css/bootstrap.min.css', array(), '1.1', false );
                 wp_enqueue_style('style-css', plugin_dir_url(__FILE__) . 'assets/private/css/emsb-admin.css', array(), '1.1', false );
                 wp_enqueue_script('jquery-js', plugin_dir_url(__FILE__) . 'assets/js/jquery.min.js', array(), '1.1', true );
-                wp_localize_script( 'jquery-js', 'frontend_ajax_object',
+                wp_localize_script( 'jquery-js', 'backend_ajax_object',
                     array( 
                         'ajaxurl' => admin_url( 'admin-ajax.php' ),
                         'data_var_1' => 'value 1',
@@ -200,6 +200,13 @@ class emsb_Admin_Page
 	{
 		wp_register_script( 'emsb-jquery', plugins_url( 'assets/js/jquery.min.js', __FILE__ ), array(), FALSE, TRUE);
         wp_enqueue_script( 'emsb-jquery' );
+        wp_localize_script( 'emsb-jquery', 'backend_ajax_object',
+                    array( 
+                        'ajaxurl' => admin_url( 'admin-ajax.php' ),
+                        'data_var_1' => 'value 1',
+                        'data_var_2' => 'value 2',
+                    )
+                );
 
         wp_register_script('popper', plugins_url( 'assets/js/popper.min.js', __FILE__ ), array(), FALSE, TRUE );
         wp_enqueue_script( 'popper' );
@@ -278,6 +285,45 @@ class emsb_Admin_Page
                         <li><a href="admin.php?page=emsb_admin_bookings_page"><?php _e( 'All Bookings  ', 'service-booking' ); ?></a></li>
                     </ul>
                 </div>
+                
+                <div class="emsb-table-wrapper container text-center">
+                        <div class="emsb-container">
+                            <div class="header_wrap">
+                                <div class="emsb-approval-nonce-wrapper">
+                                    <input type="hidden" name="emsb_booking_approval_nonce" id="emsb_booking_approval_nonce" value="<?php echo wp_create_nonce("emsb_booking_approval_nonce"); ?>" >
+                                </div>
+                            </div>
+                            <form class="emsb-pending-bookings-container">
+                                <table class="table table-striped table-class" id= "table-id">
+                                    <thead>
+                                        <tr>
+                                            <th><?php _e( 'Select ', 'service-booking' ); ?></th>
+                                            <th><?php _e( 'Booking ID ', 'service-booking' ); ?></th>
+                                            <th><?php _e( 'Service Name ', 'service-booking' ); ?></th>
+                                            <th><?php _e( 'Customer Name ', 'service-booking' ); ?></th>
+                                            <th><?php _e( 'Phone', 'service-booking' ); ?></th>
+                                            <th><?php _e( 'Email', 'service-booking' ); ?></th>
+                                            <th><?php _e( 'Booked Date ', 'service-booking' ); ?></th>
+                                            <th><?php _e( 'Booked Time Slot', 'service-booking' ); ?></th>
+                                            <th><?php _e( 'Status', 'service-booking' ); ?></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="emsbPendingBookings">
+                            
+                                    </tbody>
+                                </table>
+                                <div class="emsb-admin-loading-gif">
+                                    <img src="<?php echo plugin_dir_url( __FILE__ ) . 'assets/img/loading.gif'; ?>">
+                                </div>
+                                <footer class="blockquote-footer emsb-pending-table-footer">  <?php _e( 'Newest 10 Pending Booking Orders', 'service-booking' ); ?> </footer>
+                            </form>                      
+                               
+                        </div> <!-- End of Container -->
+
+                    </div>
+
+
+
                 <form method="post">
                     <div class="emsb-email-notification-data-wrapper container">
                     <!-- Admin Email Notification data starts-->
@@ -355,8 +401,8 @@ class emsb_Admin_Page
             global $title;
             global $wpdb;
             $emsb_bookings = $wpdb->prefix . 'emsb_bookings';	
-            $emsb_all_bookings_from_database = "SELECT * FROM $emsb_bookings ORDER BY id DESC";
-            $emcc_order_list = $wpdb->get_results($emsb_all_bookings_from_database, ARRAY_A);
+            $emsb_all_bookings_from_database = "SELECT * FROM $emsb_bookings WHERE approve_booking = '1' ORDER BY id DESC";
+            $emsb_order_list = $wpdb->get_results($emsb_all_bookings_from_database, ARRAY_A);
 
             $emsb_plugin_path = plugin_dir_url( __FILE__ );
             $emsb_icon_url = $emsb_plugin_path . 'assets/img/service-booking.png';
@@ -399,35 +445,47 @@ class emsb_Admin_Page
                                 <div class="tb_search">
                                     <input type="text" id="search_input_all" onkeyup="FilterkeyWord_all_table()" placeholder="Search.." class="form-control">
                                 </div>
+                                <div class="emsb-approval-nonce-wrapper">
+                                    <input type="hidden" name="emsb_booking_approval_nonce" id="emsb_booking_approval_nonce" value="<?php echo wp_create_nonce("emsb_booking_approval_nonce"); ?>" >
+                                </div>
                             </div>
-                            <table class="table table-striped table-class" id= "table-id">
-                                <thead>
-                                    <tr>
-                                        <th><?php _e( 'Service Name ', 'service-booking' ); ?></th>
-                                        <th><?php _e( 'Customer Name ', 'service-booking' ); ?></th>
-                                        <th> <?php _e( 'Phone', 'service-booking' ); ?></th>
-                                        <th> <?php _e( 'Email', 'service-booking' ); ?></th>
-                                        <th><?php _e( 'Booked Date ', 'service-booking' ); ?></th>
-                                        <th> <?php _e( 'Booked Time Slot', 'service-booking' ); ?></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php  
-                                        foreach($emcc_order_list as $emcc_order_list) : 
-                                    ?>
+                            <form >
+                                <table class="table table-striped table-class" id= "table-id">
+                                    <thead>
                                         <tr>
-                                            <td><?php echo $emcc_order_list['service_name']; ?></td>
-                                            <td><?php echo $emcc_order_list['customer_name']; ?></td>
-                                            <td><?php echo $emcc_order_list['customer_phone']; ?></td>
-                                            <td><?php echo $emcc_order_list['customer_email']; ?></td>
-                                            <td><?php echo $emcc_order_list['booked_date']; ?></td>
-                                            <td><?php echo $emcc_order_list['booked_time_slot']; ?></td>
+                                            <th><?php _e( 'No. ', 'service-booking' ); ?></th>
+                                            <th><?php _e( 'Booking ID ', 'service-booking' ); ?></th>
+                                            <th><?php _e( 'Service Name ', 'service-booking' ); ?></th>
+                                            <th><?php _e( 'Customer Name ', 'service-booking' ); ?></th>
+                                            <th> <?php _e( 'Phone', 'service-booking' ); ?></th>
+                                            <th> <?php _e( 'Email', 'service-booking' ); ?></th>
+                                            <th><?php _e( 'Booked Date ', 'service-booking' ); ?></th>
+                                            <th> <?php _e( 'Booked Time Slot', 'service-booking' ); ?></th>
+                                            <th> <?php _e( 'Status', 'service-booking' ); ?></th>
                                         </tr>
-                                    <?php endforeach; ?>
-                                
-                                <tbody>
-                            </table>
-                        
+                                    </thead>
+                                    <tbody >
+                                        <?php  
+                                            $index = 0;
+                                            foreach($emsb_order_list as $emsb_order_list) : 
+                                                $index = $index + 1;
+                                        ?>
+                                            <tr>
+                                                <td><?php echo $index; ?></td>
+                                                <td><?php echo $emsb_order_list['id']; ?></td>
+                                                <td><?php echo $emsb_order_list['service_name']; ?></td>
+                                                <td><?php echo $emsb_order_list['customer_name']; ?></td>
+                                                <td><?php echo $emsb_order_list['customer_phone']; ?></td>
+                                                <td><?php echo $emsb_order_list['customer_email']; ?></td>
+                                                <td><?php echo $emsb_order_list['booked_date']; ?></td>
+                                                <td><?php echo $emsb_order_list['booked_time_slot']; ?></td>
+                                                <td><span> Confirmed </span></td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    
+                                    <tbody>
+                                </table>
+                            </form>                      
                                 <!--    Start Pagination -->
                                 <div class='pagination-container'>
                                     <nav aria-label="Page navigation example">
