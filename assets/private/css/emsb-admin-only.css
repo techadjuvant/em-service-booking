@@ -1053,15 +1053,24 @@ legend.inline-edit-legend {
   border: 1px solid #fff !important;
   color: #fff !important;
 }
+
 .emsb-table-wrapper table tr.emsb-active-pending-order {
   transition: all .4s;
   background-color: rgba(77, 77, 249, 0.4) !important;
   color: #fff;
 }
-.emsb-table-wrapper table tr.emsb-active-pending-order .emsb-approval-action, 
-.emsb-table-wrapper table tr.emsb-active-pending-order .emsb-approval-action, 
+
 .emsb-table-wrapper table tr.emsb-active-pending-order .emsb-approval-action {
+  transition: all .4s;
   border: 1px solid #fff !important;
+  color: #fff !important;
+}
+
+.emsb-table-wrapper table tr.emsb-active-pending-order .emsb-approval-action:active,
+.emsb-table-wrapper table tr.emsb-active-pending-order .emsb-approval-action:focus {
+  transition: all .4s;
+  background-color: rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   color: #fff !important;
 }
 .emsb-pending-table-footer {

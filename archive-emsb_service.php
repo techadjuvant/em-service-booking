@@ -23,6 +23,7 @@ get_header();
                       if($emsb_page_slug){
                         echo get_the_title( $emsb_page_slug );
                       }  
+                      
                 ?> 
             </h2> 
             </header>

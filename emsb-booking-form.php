@@ -39,8 +39,9 @@
         $valid_booked_slot_id = !empty($booked_slot_id);
         $valid_booked_date = !empty($booked_date);
         $valid_booked_time_slot = !empty($booked_time_slot);
+        $valid_emsb_booking_slot_starts_at = !empty($emsb_booking_slot_starts_at);
 
-        if ($valid_customer_name && $valid_customer_email && $valid_customer_phone && $valid_service_id && $valid_service_name && $valid_booked_date_id && $valid_booked_slot_id && $valid_booked_date && $valid_booked_time_slot ) {
+        if ($valid_customer_name && $valid_customer_email && $valid_customer_phone && $valid_service_id && $valid_service_name && $valid_booked_date_id && $valid_booked_slot_id && $valid_booked_date && $valid_booked_time_slot && $valid_emsb_booking_slot_starts_at ) {
             // If everything is okay then insert the value to database and send emails
             $emsb_bookings_table_name = $wpdb->prefix . "emsb_bookings";
     

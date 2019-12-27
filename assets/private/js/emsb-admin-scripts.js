@@ -51,25 +51,25 @@ $(document).ready(function() {
             data: emsb_booking_approval_action_data,
             dataType:"json",
             success: function(response) {
-                fetchBookings();
+                fetchPendingBookings();
             }
 
         });
 
     });
 
-    fetchBookings();
+    fetchPendingBookings();
 
-    function fetchBookings(){
+    function fetchPendingBookings(){
         var emsb_booking_approval_nonce = $("#emsb_booking_approval_nonce").val();
-        var emsb_fetch_bookings_data = {
-            'action': 'emsb_fetch_bookings',
+        var emsb_fetch_pending_bookings_data = {
+            'action': 'emsb_fetch_pending_bookings',
             'security': emsb_booking_approval_nonce
         };
         $.ajax({
             type: 'POST',
             url: backend_ajax_object.ajaxurl,
-            data: emsb_fetch_bookings_data,
+            data: emsb_fetch_pending_bookings_data,
             dataType:"json",
             success: function(data) {
                 preparePendingBookingTable(data);

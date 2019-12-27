@@ -319,7 +319,7 @@ class emsb_Admin_Page
                                 <div class="emsb-admin-loading-gif">
                                     <img src="<?php echo plugin_dir_url( __FILE__ ) . 'assets/img/loading.gif'; ?>">
                                 </div>
-                                <footer class="blockquote-footer emsb-pending-table-footer">  <?php _e( 'Newest 10 Pending Booking Orders', 'service-booking' ); ?> </footer>
+                                <footer class="blockquote-footer emsb-pending-table-footer">  <?php _e( 'Newest 10 Pending Booking Orders only for upcoming slots from the current time.', 'service-booking' ); ?> </footer>
                             </form>                      
                                
                         </div> <!-- End of Container -->
