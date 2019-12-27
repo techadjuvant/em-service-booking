@@ -326,6 +326,7 @@ get_header();
                       <input type="text" name="emsb_selected_service_date" id="emsb_selected_service_date" value="12/12/2019" >
                       <input type="text" name="emsb_selected_time_slot" id="emsb_selected_time_slot" value="12:30 PM - 1:30 PM" >
                       <input type="text" name="emsb_selected_service_price" id="emsb_selected_service_price" value="$1000" >
+                      <input type="number" name="emsb_booking_slot_starts_at" id="emsb_booking_slot_starts_at" value="" >
                       <input type="number" name="emsb_cookie_duration" id="emsb_cookie_duration" value="<?php echo $customer_cookie_duration; ?>" >
                       <input name="emsb-create-nonce" id="emsb-create-nonce" value="<?php echo wp_create_nonce("emsb_booked_slot_nonce"); ?>" >
                   </fieldset>

@@ -71,6 +71,7 @@ $(document).ready(function() {
     var selectedDay = "";
     var selectedDateMonthYear = "";
     var emsb_selected_service_date_id_for_db = "";
+    var selectedDateMonthYearTimestamp = "";
 
     $('.em-reservation-calendar').calendar({
         date: new Date(),
@@ -85,11 +86,16 @@ $(document).ready(function() {
             selectedDay = days[date.getDay()];
             selectedDateMonthYear = selectedDate + selectedMonthNumber + selectedYear;
 
+            // For creating slot starting time
+            var selectedMonthNumberIncr = selectedMonthNumber + 1;
+            selectedDateMonthYearTimestamp = selectedYear +'-'+ selectedMonthNumberIncr +'-'+ selectedDate;
+
         }
     });
 
     
     var monthYearOnCalendar = "";
+    var emsbServiceStartingDateGetDateTime = "";
 
     // Disable passed dates
     function disablePassedDays(){
@@ -132,7 +138,7 @@ $(document).ready(function() {
         // Availability starts from
         var emsbServiceStartingDate = $("article.em-service.selected .emsb_service_availability_starts_at").val();
         var emsbServiceStartingDateGetDate = new Date(emsbServiceStartingDate);
-        var emsbServiceStartingDateGetDateTime = emsbServiceStartingDateGetDate.getTime();
+        emsbServiceStartingDateGetDateTime = emsbServiceStartingDateGetDate.getTime();
         // Availability ends at
         var emsbServiceEndingDate = $("article.em-service.selected .emsb_service_availability_ends_at").val();
         var emsbServiceEndingDateGetDate = new Date(emsbServiceEndingDate);
@@ -461,7 +467,7 @@ $(document).ready(function() {
             // Slot Id
             var emsb_selected_service_date_id_for_creating_slot_id = emsb_selected_service_date_id_for_db;
             var amSlotId = i + "-AM-"+ emsb_selected_service_date_id_for_creating_slot_id;
-            amSlot = $('#emShowAM').append('<li class="list-group-item" data-slotId="'+ amSlotId +'"> <label> <input class="d-none" type="text" value="'+ amSlotId +'">  '+ amShowStartingHour +':'+ amShowStartingMins +' AM - '+ showAmEndingHour +':'+ showAmEndingMins +' AM  </label> <button type="button" class="btn btn-light em-select-slot-button available">Available</button>  </li>');
+            amSlot = $('#emShowAM').append('<li class="list-group-item" data-slotId="'+ amSlotId +'"> <label> <input class="d-none emsb-slotId" type="text" value="'+ amSlotId +'"> <input class="d-none emsb-slot-starts-at" type="text" value="'+ amShowStartingHour +':'+ amShowStartingMins +'"> '+ amShowStartingHour +':'+ amShowStartingMins +' AM - '+ showAmEndingHour +':'+ showAmEndingMins +' AM  </label> <button type="button" class="btn btn-light em-select-slot-button available">Available</button>  </li>');
             
         };
 
@@ -567,8 +573,9 @@ $(document).ready(function() {
             // Slot Id ( emsb_selected_service_date_id_for_db is a global variable )
             var emsb_selected_service_date_id_for_creating_slot_id = emsb_selected_service_date_id_for_db;
             var pmSlotId = i + "-PM-"+ emsb_selected_service_date_id_for_creating_slot_id;
-
-            pmSlot = $('#emShowPM').append('<li class="list-group-item" data-slotId="'+ pmSlotId +'"> <label> <input class="d-none" type="text" value="'+ pmSlotId +'"> '+ pmShowStartingHour +':'+ pmShowStartingMins +' PM - '+ showPmEndingHour +':'+ showPmEndingMins +' PM </label> <button type="button" class="btn btn-light em-select-slot-button available">Available</button>  </li>'); 
+            var pmSlotStartingTimeInt = parseInt(pmShowStartingHour);
+            var pmSlotStartingTimeHour = 12 + pmSlotStartingTimeInt;
+            pmSlot = $('#emShowPM').append('<li class="list-group-item" data-slotId="'+ pmSlotId +'"> <label> <input class="d-none emsb-slotId" type="text" value="'+ pmSlotId +'"> <input class="d-none emsb-slot-starts-at" type="text" value="'+ pmSlotStartingTimeHour +':'+ pmShowStartingMins +'">  '+ pmShowStartingHour +':'+ pmShowStartingMins +' PM - '+ showPmEndingHour +':'+ showPmEndingMins +' PM </label> <button type="button" class="btn btn-light em-select-slot-button available">Available</button>  </li>'); 
             
         };
 
@@ -643,8 +650,13 @@ $(document).ready(function() {
             var emsb_admin_email = $("article.em-service.selected .emsb-service-provider-email input").val();
             var emsb_booked_date = $(".em-selected-date label").text();
             var emsb_booked_service_price = $(".em-selected-service #emsb-service-price").text();
-            var emsb_selected_slot_id = "Full Day Reserved";
-            var emsb_booked_time_slot = "Full Day Reserved";
+            var emsb_selected_slot_id = "Day Reservation";
+            var emsb_booked_time_slot = "Day Reservation";
+
+            var emsb_slot_starts_at = $(".em-selected-time-slot label.time-slot input.emsb-slot-starts-at").val();
+            var emsb_slot_starts_at_for_db = selectedDateMonthYearTimestamp;
+            var emsb_slot_starts_at_for_db_GetDate = new Date(emsb_slot_starts_at_for_db);
+            var emsb_slot_starts_at_for_db_GetDateTime = emsb_slot_starts_at_for_db_GetDate.getTime();
 
             $("#emsb_selected_service_id").val(emsb_selected_service_id);
             $("#emsb_selected_service").val(emsb_selected_service);
@@ -656,6 +668,7 @@ $(document).ready(function() {
             $("#emsb_selected_service_date_id").val(emsb_selected_service_date_id_for_db);
             $("#emsb_selected_slot_id").val(emsb_selected_slot_id);
             $("#emsb_selected_time_slot").val(emsb_booked_time_slot);
+            $("#emsb_booking_slot_starts_at").val(emsb_slot_starts_at_for_db_GetDateTime);
 
 
     }
@@ -694,7 +707,12 @@ $(document).ready(function() {
             var emsb_booked_date = $(".em-selected-date label").text();
             var emsb_booked_time_slot = $(".em-selected-time-slot label").text();
             var emsb_booked_service_price = $(".em-selected-service #emsb-service-price").text();
-            var emsb_selected_slot_id = $(".em-selected-time-slot label.time-slot input").val();
+            var emsb_selected_slot_id = $(".em-selected-time-slot label.time-slot input.emsb-slotId").val();
+
+            var emsb_slot_starts_at = $(".em-selected-time-slot label.time-slot input.emsb-slot-starts-at").val();
+            var emsb_slot_starts_at_for_db = selectedDateMonthYearTimestamp +' '+ emsb_slot_starts_at;
+            var emsb_slot_starts_at_for_db_GetDate = new Date(emsb_slot_starts_at_for_db);
+            var emsb_slot_starts_at_for_db_GetDateTime = emsb_slot_starts_at_for_db_GetDate.getTime();
 
             $("#emsb_selected_service_id").val(emsb_selected_service_id);
             $("#emsb_selected_service").val(emsb_selected_service);
@@ -706,8 +724,11 @@ $(document).ready(function() {
             $("#emsb_selected_service_price").val(emsb_booked_service_price);
             $("#emsb_selected_slot_id").val(emsb_selected_slot_id);
             $("#emsb_selected_service_date_id").val(emsb_selected_service_date_id_for_db);
+            $("#emsb_booking_slot_starts_at").val(emsb_slot_starts_at_for_db_GetDateTime);
 
             changeTimeSlot();
+
+            
 
         });
 

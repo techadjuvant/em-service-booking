@@ -38,7 +38,6 @@ function emsb_booked_slot() {
 
 
 add_action('wp_ajax_emsb_booking_approval', 'emsb_booking_approval');
-// add_action('wp_ajax_nopriv_emsb_booking_approval', 'emsb_booking_approval');
 
 
 function emsb_booking_approval() {
@@ -57,8 +56,6 @@ function emsb_booking_approval() {
 }
 
 add_action('wp_ajax_emsb_fetch_bookings', 'emsb_fetch_bookings');
-// add_action('wp_ajax_nopriv_emsb_fetch_bookings', 'emsb_fetch_bookings');
-
 
 function emsb_fetch_bookings() {
     check_ajax_referer( 'emsb_booking_approval_nonce', 'security' );

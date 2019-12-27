@@ -495,7 +495,8 @@ class emsb_database {
             `customer_email` text,
             `customer_phone` text,
             `booking_time` TIMESTAMP NOT NULL,
-            `customer_IP` VARCHAR(100) NOT NULL
+            `customer_IP` VARCHAR(100) NOT NULL,
+            `starting_time_ms` BIGINT NOT NULL
             ) ENGINE=MyISAM DEFAULT CHARSET=utf8";
 
 

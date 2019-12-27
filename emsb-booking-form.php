@@ -22,6 +22,7 @@
         $booked_slot_id = $_POST["emsb_selected_slot_id"];
         $booked_date = $_POST["emsb_selected_service_date"];
         $booked_time_slot = $_POST["emsb_selected_time_slot"];
+        $emsb_booking_slot_starts_at = $_POST["emsb_booking_slot_starts_at"];
     
         $customer_name = $_POST['emsb_user_fullName'];
         $customer_email = $_POST['emsb_user_email'];
@@ -55,7 +56,8 @@
                     'customer_name' => $customer_name,
                     'customer_email' => $customer_email,
                     'customer_phone' => $customer_phone,
-                    'customer_IP' => $customer_IP
+                    'customer_IP' => $customer_IP,
+                    'starting_time_ms' => $emsb_booking_slot_starts_at
                 ) );
 
             
