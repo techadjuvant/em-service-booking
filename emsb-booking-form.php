@@ -103,7 +103,7 @@
             <div id="emsb_booking_ticket">
                 <div class="emsb-ticket-wrapper">
                     <div  class="text-center" >
-                        <h5> <?php _e( 'Your Booking is Confirmed', 'service-booking' ); ?> </h5>
+                        <h5> <?php _e( 'Your Booking is Pending', 'service-booking' ); ?> </h5>
                     </div>
                     <div class="emsb-booked-service">
                         <div class="em-service-excerpt d-flex align-items-center">

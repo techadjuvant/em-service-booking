@@ -24,6 +24,7 @@ $(document).ready(function() {
         }
     });
 
+
     $(document).on('click','.emsb-table-wrapper table tr', function(){
         $(this).addClass("emsb-active-pending-order");
         $(this).siblings().removeClass("emsb-active-pending-order");
@@ -33,13 +34,11 @@ $(document).ready(function() {
     });
 
 
-    
     $(document).on('click','.emsb-active-pending-order .emsb-approval-action', function(){
         $(".emsb-admin-loading-gif").css("display","block");
         var emsb_booking_approval_nonce = $("#emsb_booking_approval_nonce").val();
         var emsb_booking_approval_action_value = $(this).children('.emsb-booking-action-value').val();
         var emsb_booking_approval_id = $(this).children('.emsb-booking-approval-id').val();
-        // console.log(emsb_booking_approval_nonce +'Value: '+emsb_booking_approval_id);
         var emsb_booking_approval_action_data = {
             'action': 'emsb_booking_approval',
             'security': emsb_booking_approval_nonce,
@@ -52,7 +51,6 @@ $(document).ready(function() {
             data: emsb_booking_approval_action_data,
             dataType:"json",
             success: function(response) {
-                console.log("Successfully approved");
                 fetchBookings();
             }
 
@@ -74,9 +72,9 @@ $(document).ready(function() {
             data: emsb_fetch_bookings_data,
             dataType:"json",
             success: function(data) {
-                console.log(data);
                 preparePendingBookingTable(data);
                 $(".emsb-admin-loading-gif").css("display","none");
+                fetchPendingBookingsCounts();
             }
 
         });
@@ -116,5 +114,31 @@ $(document).ready(function() {
 
     }
 
+    var timeIntervalForCounting = 1000*60*5;
+
+    jQuery("#toplevel_page_emsb_admin_page .wp-menu-name").append("<span class='emsb-pending-bookings-count'></span>")
+
+    setInterval(fetchPendingBookingsCounts, timeIntervalForCounting);
+    fetchPendingBookingsCounts();
+    function fetchPendingBookingsCounts(){
+        var emsb_fetch_pending_bookings_counts_data = {
+            'action': 'emsb_fetch_pending_bookings_counts'
+        };
+        $.ajax({
+            type: 'POST',
+            url: backend_ajax_object.ajaxurl,
+            data: emsb_fetch_pending_bookings_counts_data,
+            success: function(result) {
+                jQuery("#toplevel_page_emsb_admin_page .wp-menu-name .emsb-pending-bookings-count").text(result);
+                console.log("Success $.ajax ");
+            }
+
+        });
+
+    }
+
+    
+
+    
       
 });

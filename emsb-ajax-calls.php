@@ -38,7 +38,7 @@ function emsb_booked_slot() {
 
 
 add_action('wp_ajax_emsb_booking_approval', 'emsb_booking_approval');
-add_action('wp_ajax_nopriv_emsb_booking_approval', 'emsb_booking_approval');
+// add_action('wp_ajax_nopriv_emsb_booking_approval', 'emsb_booking_approval');
 
 
 function emsb_booking_approval() {
@@ -57,7 +57,7 @@ function emsb_booking_approval() {
 }
 
 add_action('wp_ajax_emsb_fetch_bookings', 'emsb_fetch_bookings');
-add_action('wp_ajax_nopriv_emsb_fetch_bookings', 'emsb_fetch_bookings');
+// add_action('wp_ajax_nopriv_emsb_fetch_bookings', 'emsb_fetch_bookings');
 
 
 function emsb_fetch_bookings() {
@@ -67,6 +67,21 @@ function emsb_fetch_bookings() {
     $results = $wpdb->get_results("SELECT * FROM $table_name WHERE approve_booking = '0' ORDER BY id DESC LIMIT 10", ARRAY_A);
 
     echo json_encode($results);
+
+    wp_die();
+
+
+}
+
+
+add_action('wp_ajax_emsb_fetch_pending_bookings_counts', 'emsb_fetch_pending_bookings_counts');
+
+function emsb_fetch_pending_bookings_counts() {
+    global $wpdb;
+    $table_name = $wpdb->prefix . "emsb_bookings";
+    $result = $wpdb->get_var("SELECT COUNT(*) FROM wp_emsb_bookings WHERE approve_booking = '0'");
+
+    echo $result;
 
     wp_die();
 

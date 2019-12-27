@@ -8,7 +8,6 @@ class emsb_Admin_Page
 
 	public static function emsb_admin_menu()
 	{
-
 		$main = add_menu_page(
 			'EMSB',                                         // page title
 			'Service Booking',                              // menu title
@@ -154,22 +153,28 @@ class emsb_Admin_Page
         global $post;
         global $post_type;
 
+        wp_enqueue_style('emsb-admin-css', plugin_dir_url(__FILE__) . 'assets/private/css/emsb-admin.css', array(), '1.1', false );
+        
+        wp_enqueue_script('jquery-js', plugin_dir_url(__FILE__) . 'assets/js/jquery.min.js', array(), '1.1', true );
+        wp_localize_script( 'jquery-js', 'backend_ajax_object',
+            array( 
+                'ajaxurl' => admin_url( 'admin-ajax.php' ),
+                'data_var_1' => 'value 1',
+                'data_var_2' => 'value 2',
+            )
+        );
+
+        wp_register_script( 'emsb-admin-scripts', plugins_url( 'assets/private/js/emsb-admin-scripts.js', __FILE__ ), array(), FALSE, TRUE);
+        wp_enqueue_script( 'emsb-admin-scripts' );
+        
         if ( $hook == 'post-new.php' || $hook == 'post.php' || $hook == 'edit.php' ) {
             if ( 'emsb_service' === $post_type ) {     
                 wp_enqueue_style('bootstrap-css', plugin_dir_url(__FILE__) . 'assets/css/bootstrap.min.css', array(), '1.1', false );
-                wp_enqueue_style('style-css', plugin_dir_url(__FILE__) . 'assets/private/css/emsb-admin.css', array(), '1.1', false );
-                wp_enqueue_script('jquery-js', plugin_dir_url(__FILE__) . 'assets/js/jquery.min.js', array(), '1.1', true );
-                wp_localize_script( 'jquery-js', 'backend_ajax_object',
-                    array( 
-                        'ajaxurl' => admin_url( 'admin-ajax.php' ),
-                        'data_var_1' => 'value 1',
-                        'data_var_2' => 'value 2',
-                    )
-                );
+                wp_enqueue_style('style-css', plugin_dir_url(__FILE__) . 'assets/private/css/emsb-admin-only.css', array(), '1.1', false );
+                
                 wp_enqueue_script('popper-js', plugin_dir_url(__FILE__) . 'assets/js/popper.min.js', array(), '1.1', true );
                 wp_enqueue_script('bootstrap-js', plugin_dir_url(__FILE__) . 'assets/js/bootstrap.min.js', array(), '1.1', true );
-                wp_register_script( 'emsb-admin-scripts', plugins_url( 'assets/private/js/emsb-admin-scripts.js', __FILE__ ), array(), FALSE, TRUE);
-		        wp_enqueue_script( 'emsb-admin-scripts' );
+               
                 
             }
         }
@@ -187,8 +192,7 @@ class emsb_Admin_Page
 		wp_register_style('emsb_bootstrap_css', plugins_url( 'assets/css/bootstrap.min.css', __FILE__ ));
         wp_enqueue_style( 'emsb_bootstrap_css' );
 
-        
-        wp_enqueue_style('style-css', plugin_dir_url(__FILE__) . 'assets/private/css/emsb-admin.css', array(), '1.1', false );
+        wp_enqueue_style('style-css', plugin_dir_url(__FILE__) . 'assets/private/css/emsb-admin-only.css', array(), '1.1', false );
         
 	}
 	/**
@@ -298,13 +302,13 @@ class emsb_Admin_Page
                                     <thead>
                                         <tr>
                                             <th><?php _e( 'Select ', 'service-booking' ); ?></th>
-                                            <th><?php _e( 'Booking ID ', 'service-booking' ); ?></th>
-                                            <th><?php _e( 'Service Name ', 'service-booking' ); ?></th>
-                                            <th><?php _e( 'Customer Name ', 'service-booking' ); ?></th>
+                                            <th><?php _e( 'ID', 'service-booking' ); ?></th>
+                                            <th><?php _e( 'Service', 'service-booking' ); ?></th>
+                                            <th><?php _e( 'Customer', 'service-booking' ); ?></th>
                                             <th><?php _e( 'Phone', 'service-booking' ); ?></th>
                                             <th><?php _e( 'Email', 'service-booking' ); ?></th>
-                                            <th><?php _e( 'Booked Date ', 'service-booking' ); ?></th>
-                                            <th><?php _e( 'Booked Time Slot', 'service-booking' ); ?></th>
+                                            <th><?php _e( 'Date ', 'service-booking' ); ?></th>
+                                            <th><?php _e( 'Time Slot', 'service-booking' ); ?></th>
                                             <th><?php _e( 'Status', 'service-booking' ); ?></th>
                                         </tr>
                                     </thead>

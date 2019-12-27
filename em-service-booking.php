@@ -372,9 +372,7 @@ if ( !class_exists( 'emsb_service_booking_plugin_base_class' ) ) {
             } else {
                 update_post_meta( $post_id, 'emsbtexteditor_check', '' );
             }
-            // if( isset( $_POST[ 'emsbtexteditor_check' ] ) ) {
-            //     update_post_meta( $post_id, 'emsbtexteditor_check', $_POST[ 'emsbtexteditor_check' ] );
-            // }
+
             if( isset( $_POST[ 'emsbtexteditor' ] ) ) {
                 update_post_meta( $post_id, 'emsbtexteditor', $_POST[ 'emsbtexteditor' ] );
             }
@@ -607,4 +605,4 @@ $emsb_internationlization = new emsb_internationlization();
 
 
 include( plugin_dir_path( __FILE__ ) . 'emsb-ajax-calls.php');
-include( plugin_dir_path( __FILE__ ) . 'emsb-admin-pages.php');
+include( plugin_dir_path( __FILE__ ) . 'em-service-booking-admin.php');
