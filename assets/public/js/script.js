@@ -183,12 +183,13 @@ $(document).ready(function() {
 
         monthYearOnCalendar = eachActiveYearString +'-'+ eachActiveMonthString;
 
+        var emsb_orders_per_slot = $("article.em-service.selected .emsb-service-booking-orders-per-slot input").val();
         for(i=1;i<=31; i++){
             var datesOnCalendar = monthYearOnCalendar +'-'+ i;
             var datesOnCalendarGetDate = new Date(datesOnCalendar);
             var datesOnCalendarGetDateTime = datesOnCalendarGetDate.getTime();
             if(emsbServiceStartingDateGetDateTime <= datesOnCalendarGetDateTime && datesOnCalendarGetDateTime <= emsbServiceEndingDateGetDateTime){
-                $(".em-reservation-calendar tbody.month-days tr td[data-date='" + i +"']").attr('title', 'Available').removeClass("unavailable emsb-service-date-unavailable").addClass("emsb-service-date-available");
+                $(".em-reservation-calendar tbody.month-days tr td[data-date='" + i +"']").attr('title', 'Available '+ emsb_orders_per_slot ).removeClass("unavailable emsb-service-date-unavailable").addClass("emsb-service-date-available");
             }    
         }
         
@@ -210,7 +211,7 @@ $(document).ready(function() {
 
             var i = 0;
             if(currentYear == activeYearValue && currentMonth == activeMonthValue){
-                for(i;i<todayDateValue; i++){
+                for(i=1;i<todayDateValue; i++){
                     $(".em-reservation-calendar tbody.month-days tr td[data-date='" + eachDateValue++ +"']").addClass("unavailable passed-day").attr('disabled', true).attr('title', 'Date Passed');
                 }
                 
@@ -310,6 +311,7 @@ $(document).ready(function() {
     function disableAleadyBookedDates(){
         
         $(".emsb-calender-loading-gif").css("display","flex");
+        
         // check date availabilty with ajax
         var emsb_create_nonce = $("#emsb-create-nonce").val();
         var emsb_selected_service_id = $("article.em-service.selected #emsb-service-id input").val();
@@ -336,6 +338,7 @@ $(document).ready(function() {
                         } else {                      
                             $(".em-reservation-calendar tbody.month-days tr td[data-servicedateid='" + slot.booked_date_id +"']").attr('title', 'Available '+ slot.available_orders);
                         }
+                        
                         console.log("Not passed date");
                     }
                     
