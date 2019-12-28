@@ -110,6 +110,7 @@ get_header();
                             ?>
 
                       </div>
+                      <!-- weekly off-days  -->
                     <div class="em-off-days">
                       <?php $emsb_service_off_day_sun = get_post_meta( get_the_ID(), 'emsb_service_off_day_sun', true );
                           if($emsb_service_off_day_sun){ ?>
@@ -141,30 +142,37 @@ get_header();
                       <?php } ?>
                           
                     </div>
-                    
+                    <!-- Full day reservation  -->
                     <div class="full-day-reservation">
                       <?php 
                           $emsb_service_full_day_reservation = get_post_meta( get_the_ID(), 'emsb_service_full_day_reservation', true ); ?>
                           <input type="checkbox" name="emsb_fullDayReserve" id="emsb_fullDayReserve" <?php echo $emsb_service_full_day_reservation; ?> />
                     </div>
+
+                    <!-- Time slot  -->
                     <div class="em-time-slot">
                       <div class="am-time-slot">
                           <?php 
                               $emsb_service_am_starting_time = get_post_meta( get_the_ID(), 'emsb_service_am_starting_time', true );
                               if($emsb_service_am_starting_time){ ?>
                                   <input class="amSlotStarts" value="<?php echo $emsb_service_am_starting_time; ?>" />
+                          <?php } else { ?>
+                                  <input class="amSlotStarts" value="10:00" />
                           <?php } ?>
-
                           <?php 
                               $emsb_service_am_ending_time = get_post_meta( get_the_ID(), 'emsb_service_am_ending_time', true );
                               if($emsb_service_am_ending_time){ ?>
                                   <input class="amSlotEnds" value="<?php echo $emsb_service_am_ending_time; ?>" />
+                          <?php } else { ?>
+                                  <input class="amSlotEnds" value="11:00" />
                           <?php } ?>
 
                           <?php 
                               $emsb_service_am_slot_duration = get_post_meta( get_the_ID(), 'emsb_service_am_slot_duration', true );
                               if($emsb_service_am_slot_duration){ ?>
                                   <input class="amSlotDuration" type="text" name="amSlotDuration" value="<?php echo $emsb_service_am_slot_duration; ?>">
+                          <?php } else { ?>
+                                  <input class="amSlotDuration" type="text" name="amSlotDuration" value="160" />
                           <?php } ?>
                               
                       </div>
@@ -173,23 +181,43 @@ get_header();
                               $emsb_service_pm_starting_time = get_post_meta( get_the_ID(), 'emsb_service_pm_starting_time', true );
                               if($emsb_service_pm_starting_time){ ?>
                                   <input class="pmSlotStarts" value="<?php echo $emsb_service_pm_starting_time; ?>" />
+                          <?php } else { ?>
+                                  <input class="pmSlotStarts"  value="15:00" />
                           <?php } ?>
 
                           <?php 
                               $emsb_service_pm_ending_time = get_post_meta( get_the_ID(), 'emsb_service_pm_ending_time', true );
                               if($emsb_service_pm_ending_time){ ?>
                                   <input class="pmSlotEnds" value="<?php echo $emsb_service_pm_ending_time; ?>" />
+                          <?php } else { ?>
+                                  <input class="pmSlotEnds"  value="17:00" />
                           <?php } ?>
 
                           <?php 
                               $emsb_service_pm_slot_duration = get_post_meta( get_the_ID(), 'emsb_service_pm_slot_duration', true );
                               if($emsb_service_pm_slot_duration){ ?>
                                   <input class="pmSlotDuration" type="text" name="pmSlotDuration" value="<?php echo $emsb_service_pm_slot_duration; ?>">
+                          <?php } else { ?>
+                                  <input class="pmSlotDuration" type="text" name="pmSlotDuration" value="160" />
                           <?php } ?>
 
                       </div>
 
                     </div>
+
+                    <!--  Orders per slot  -->
+                    <div class="emsb-service-booking-orders-per-slot">
+                        <?php 
+                            $emsb_service_orders_per_slot = get_post_meta( get_the_ID(), 'emsb_service_orders_per_slot', true );
+                            if($emsb_service_orders_per_slot){ ?>
+                              <input type="number" value="<?php echo $emsb_service_orders_per_slot; ?>">
+                        <?php } else {  ?>
+                              <input type="number" value="1">
+                        <?php 
+                          } 
+                        ?>
+                    </div>
+                    <!--  ervice-provider-email  -->
                     <div class="emsb-service-provider-email">
                         <?php 
                             $emsb_service_provider_email = get_post_meta( get_the_ID(), 'emsb_service_provider_email', true );
@@ -323,11 +351,12 @@ get_header();
                       <input type="text" name="emsb_selected_service_location" id="emsb_selected_service_location" value="service-one" >
                       <input type="text" name="emsb_selected_service_date_id" id="emsb_selected_service_date_id" value="123123" >
                       <input type="text" name="emsb_selected_slot_id" id="emsb_selected_slot_id" value="AM112" >
-                      <input type="text" name="emsb_selected_service_provider_email" id="emsb_selected_service_provider_email" value="motahar1201123@gmail.com" >
+                      <input type="text" name="emsb_selected_service_provider_email" id="emsb_selected_service_provider_email" value="xyz@gmail.com" >
                       <input type="text" name="emsb_selected_service_date" id="emsb_selected_service_date" value="12/12/2019" >
                       <input type="text" name="emsb_selected_time_slot" id="emsb_selected_time_slot" value="12:30 PM - 1:30 PM" >
                       <input type="text" name="emsb_selected_service_price" id="emsb_selected_service_price" value="$1000" >
                       <input type="number" name="emsb_booking_slot_starts_at" id="emsb_booking_slot_starts_at" value="" >
+                      <input type="number" name="emsb_service_orders_per_slot" id="emsb_service_orders_per_slot" value="" >
                       <input type="number" name="emsb_cookie_duration" id="emsb_cookie_duration" value="<?php echo $customer_cookie_duration; ?>" >
                       <input name="emsb-create-nonce" id="emsb-create-nonce" value="<?php echo wp_create_nonce("emsb_booked_slot_nonce"); ?>" >
                   </fieldset>

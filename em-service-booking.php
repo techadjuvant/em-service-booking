@@ -217,6 +217,16 @@ if ( !class_exists( 'emsb_service_booking_plugin_base_class' ) ) {
             </div>
           <!-- PM Time Slot Ends  -->
 
+          <!-- Orders per slot  -->
+          <div class="emsb-service-meta-field emsb-permitted-booking-orders-container">
+                <label for="emsb-time-slot"> <h3> <?php _e( 'Orders per Day or Time Slot ', 'service-booking' ); ?> </h3> </label>
+                <p>
+                    <label for="emsb_service_orders_per_slot" class="emsb-row-time_slot"><?php _e( "How many orders do you want per day or time slot? ", 'service-booking' ); ?></label>
+                    <input type="number" min="1" name="emsb_service_orders_per_slot" id="emsb_service_orders_per_slot" value="<?php if ( isset ( $emsb_service_stored_meta['emsb_service_orders_per_slot'] ) ) echo $emsb_service_stored_meta['emsb_service_orders_per_slot'][0]; ?>" />
+                </p>
+            </div>
+          <!-- Orders per slot Ends  -->
+
           <!-- Service Provider Email Address Starts  -->
           <div class="emsb-service-meta-field">
                 <label for="emsb_service_provider_email"> <h3> <?php _e( 'Service Provider Email Address ', 'service-booking' ); ?> </h3> </label>
@@ -336,27 +346,52 @@ if ( !class_exists( 'emsb_service_booking_plugin_base_class' ) ) {
             
 
             // *************** AM Time slot **************//
+            $default_emsb_service_am_starting_time = "09:00";
+            $default_emsb_service_am_ending_time = "11:00";
+            $default_emsb_service_am_slot_duration = "60";
             if( isset( $_POST[ 'emsb_service_am_starting_time' ] ) ) {
                 update_post_meta( $post_id, 'emsb_service_am_starting_time', $_POST[ 'emsb_service_am_starting_time' ] );
+            } else {
+                update_post_meta( $post_id, 'emsb_service_am_starting_time', $default_emsb_service_am_starting_time );
             }
             if( isset( $_POST[ 'emsb_service_am_ending_time' ] ) ) {
                 update_post_meta( $post_id, 'emsb_service_am_ending_time', $_POST[ 'emsb_service_am_ending_time' ] );
+            } else {
+                update_post_meta( $post_id, 'emsb_service_am_ending_time', $default_emsb_service_am_ending_time );
             }
             if( isset( $_POST[ 'emsb_service_am_slot_duration' ] ) ) {
                 update_post_meta( $post_id, 'emsb_service_am_slot_duration', $_POST[ 'emsb_service_am_slot_duration' ] );
+            } else {
+                update_post_meta( $post_id, 'emsb_service_am_slot_duration', $default_emsb_service_am_slot_duration );
             }
 
             // *************** PM Time slot **************//
+            $default_emsb_service_pm_starting_time = "15:00";
+            $default_emsb_service_pm_ending_time = "22:00";
+            $default_emsb_service_pm_slot_duration = "60";
             if( isset( $_POST[ 'emsb_service_pm_starting_time' ] ) ) {
                 update_post_meta( $post_id, 'emsb_service_pm_starting_time', $_POST[ 'emsb_service_pm_starting_time' ] );
+            } else {
+                update_post_meta( $post_id, 'emsb_service_pm_starting_time', $default_emsb_service_pm_starting_time );
             }
             if( isset( $_POST[ 'emsb_service_pm_ending_time' ] ) ) {
                 update_post_meta( $post_id, 'emsb_service_pm_ending_time', $_POST[ 'emsb_service_pm_ending_time' ] );
+            } else {
+                update_post_meta( $post_id, 'emsb_service_pm_ending_time', $default_emsb_service_pm_ending_time );
             }
             if( isset( $_POST[ 'emsb_service_pm_slot_duration' ] ) ) {
                 update_post_meta( $post_id, 'emsb_service_pm_slot_duration', $_POST[ 'emsb_service_pm_slot_duration' ] );
+            } else {
+                update_post_meta( $post_id, 'emsb_service_pm_slot_duration', $default_emsb_service_pm_slot_duration );
             }
 
+            // *************** Orders per slot **************//
+            $default_order_per_slot = 1;
+            if( isset( $_POST[ 'emsb_service_orders_per_slot' ] ) ) {
+                update_post_meta( $post_id, 'emsb_service_orders_per_slot', $_POST[ 'emsb_service_orders_per_slot' ] );
+            } else {
+                update_post_meta( $post_id, 'emsb_service_orders_per_slot', $default_order_per_slot);
+            }
 
             // *************** Service Provider Email Address **************//
             $email_address = get_bloginfo('admin_email');
@@ -496,7 +531,8 @@ class emsb_database {
             `customer_phone` text,
             `booking_time` TIMESTAMP NOT NULL,
             `customer_IP` VARCHAR(100) NOT NULL,
-            `starting_time_ms` BIGINT NOT NULL
+            `starting_time_ms` BIGINT NOT NULL,
+            `available_orders` int(11) NOT NULL
             ) ENGINE=MyISAM DEFAULT CHARSET=utf8";
 
 

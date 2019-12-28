@@ -8,7 +8,7 @@ function emsb_booked_dates() {
     global $wpdb;
     $table_name = $wpdb->prefix . "emsb_bookings";
     $check_availability_of_date = $_POST['check_availability_of_date'];
-    $results = $wpdb->get_results("SELECT booked_date_id FROM $table_name WHERE service_id = $check_availability_of_date", ARRAY_A);
+    $results = $wpdb->get_results("SELECT * FROM $table_name WHERE service_id = '$check_availability_of_date' ORDER BY id ASC", ARRAY_A);
     
     echo json_encode($results);
 
@@ -27,7 +27,7 @@ function emsb_booked_slot() {
     global $wpdb;
     $table_name = $wpdb->prefix . "emsb_bookings";
     $check_slots_availability = $_POST['check_slots_availability'];
-    $bookedSlotIds = $wpdb->get_results("SELECT booked_slot_id FROM $table_name WHERE booked_date_id = '$check_slots_availability'", ARRAY_A);
+    $bookedSlotIds = $wpdb->get_results("SELECT * FROM $table_name WHERE booked_date_id = '$check_slots_availability' ORDER BY id ASC", ARRAY_A);
 
     echo json_encode($bookedSlotIds);
 
