@@ -453,7 +453,7 @@ article.em-service main {
     border-bottom-left-radius: 0;
 }
 .em-select-slot-button.booked {
-    cursor: not-allowed;
+    cursor: not-allowed !important;
     background-color: rgb(252, 252, 252);
     border-color: rgb(252, 252, 252);
     color: rgb(255, 94, 0);
@@ -832,8 +832,25 @@ article.em-service main {
     color: gray;
 }
 
+/* BS tooltip styles  */
 
-
+.tooltip-inner {
+    font-weight: 100;
+    font-size: 0.8em;
+    max-width: 200px;
+    padding: 4px 8px;
+    color: #333;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 3px;
+    box-shadow: 3px 3px 10px rgba(159, 159, 159, 0.5);
+}
+.tooltip.bs-tooltip-auto[x-placement^=top] .arrow::before, .tooltip.bs-tooltip-top .arrow::before {
+    margin-left: -10px;
+    content: "";
+    border-width: 5px 5px 0;
+    border-top-color: #fff;
+}
 
 /* Responsiveness */
 

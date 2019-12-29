@@ -12,6 +12,9 @@ $(document).ready(function() {
         $(".emsb-booking-ticket-container").parent().children(".emsb-services-and-form-container").css("display","none");;
     }
 
+    // Enable BS tooltip feature
+    $("body").tooltip({ selector: '[data-toggle=tooltip]' });
+
 
     // Select a service
     $('.em-select-service-button').on('click', function() {
@@ -96,9 +99,7 @@ $(document).ready(function() {
 
 
     $(document).on('click','.em-reservation-calendar button.ic', function(){
-            addServiceDateId();
-            disableAleadyBookedDates();
-            
+            addServiceDateId();      
     });
 
 
@@ -130,7 +131,7 @@ $(document).ready(function() {
         var emsb_selected_service_each_date_id = emsb_selected_service_id +'-'+ eachActiveYearString +'-'+ eachActiveMonthString;
         var i = 1;
         for(i=1;i<=31; i++){
-            $(".em-reservation-calendar tbody.month-days tr td[data-date='" + i +"']").attr('data-servicedateid', emsb_selected_service_each_date_id +'-'+ i).attr('title', 'Yet Not Available').addClass("unavailable emsb-service-date-unavailable").attr('disabled', true);
+            $(".em-reservation-calendar tbody.month-days tr td[data-date='" + i +"']").attr('data-servicedateid', emsb_selected_service_each_date_id +'-'+ i).attr('title', 'Yet Not Available').addClass("unavailable emsb-service-date-unavailable").attr('disabled', true).attr('data-toggle', 'tooltip');
             
         }
 
@@ -183,13 +184,12 @@ $(document).ready(function() {
 
         monthYearOnCalendar = eachActiveYearString +'-'+ eachActiveMonthString;
 
-        var emsb_orders_per_slot = $("article.em-service.selected .emsb-service-booking-orders-per-slot input").val();
         for(i=1;i<=31; i++){
             var datesOnCalendar = monthYearOnCalendar +'-'+ i;
             var datesOnCalendarGetDate = new Date(datesOnCalendar);
             var datesOnCalendarGetDateTime = datesOnCalendarGetDate.getTime();
             if(emsbServiceStartingDateGetDateTime <= datesOnCalendarGetDateTime && datesOnCalendarGetDateTime <= emsbServiceEndingDateGetDateTime){
-                $(".em-reservation-calendar tbody.month-days tr td[data-date='" + i +"']").attr('title', 'Available '+ emsb_orders_per_slot ).removeClass("unavailable emsb-service-date-unavailable").addClass("emsb-service-date-available");
+                $(".em-reservation-calendar tbody.month-days tr td[data-date='" + i +"']").attr('title', 'Available').removeClass("unavailable emsb-service-date-unavailable").addClass("emsb-service-date-available");
             }    
         }
         
@@ -234,13 +234,12 @@ $(document).ready(function() {
 
             monthYearOnCalendar = eachActiveYearString +'-'+ eachActiveMonthString;
 
-            var emsb_orders_per_slot = $("article.em-service.selected .emsb-service-booking-orders-per-slot input").val();
             for(i=1;i<=31; i++){
                 var datesOnCalendar = monthYearOnCalendar +'-'+ i;
                 var datesOnCalendarGetDate = new Date(datesOnCalendar);
                 var datesOnCalendarGetDateTime = datesOnCalendarGetDate.getTime();
                 if(emsbServiceStartingDateGetDateTime <= datesOnCalendarGetDateTime && datesOnCalendarGetDateTime <= emsbServiceEndingDateGetDateTime){
-                    $(".em-reservation-calendar tbody.month-days tr td[data-date='" + i +"']").attr('title', 'Available '+ emsb_orders_per_slot ).removeClass("unavailable emsb-service-date-unavailable").addClass("emsb-service-date-available");
+                    $(".em-reservation-calendar tbody.month-days tr td[data-date='" + i +"']").attr('title', 'Available').removeClass("unavailable emsb-service-date-unavailable").addClass("emsb-service-date-available");
                     
                 }  
 
@@ -332,6 +331,7 @@ $(document).ready(function() {
                 $.each(response, function(index, slot) {
                     var isPassedDay = $(".em-reservation-calendar tbody.month-days tr td[data-servicedateid='" + slot.booked_date_id +"']").hasClass("passed-day"); 
                     var isWeeklyOffDay = $(".em-reservation-calendar tbody.month-days tr td[data-servicedateid='" + slot.booked_date_id +"']").hasClass("off-day"); 
+                    
                     if(!isPassedDay && !isWeeklyOffDay){
                         if(slot.available_orders == 0){
                             $(".em-reservation-calendar tbody.month-days tr td[data-servicedateid='" + slot.booked_date_id +"']").addClass("unavailable already-booked").attr('title', 'Already Booked');
@@ -349,6 +349,50 @@ $(document).ready(function() {
                 
             }
 
+        });
+
+        $(document).on('click','.em-reservation-calendar button.ic', function(){
+            $(".emsb-calender-loading-gif").css("display","flex");
+        
+            // check date availabilty with ajax
+            var emsb_create_nonce = $("#emsb-create-nonce").val();
+            var emsb_selected_service_id = $("article.em-service.selected #emsb-service-id input").val();
+            var data = {
+                'action': 'emsb_booked_dates',
+                'security': emsb_create_nonce,
+                'check_availability_of_date': emsb_selected_service_id
+            };
+            // Disable the already booked dates with ajax
+            var bookedDates;
+            $.ajax({
+                type: 'POST',
+                url: frontend_ajax_object.ajaxurl,
+                data: data,
+                dataType:"json",
+                success: function(response) {
+                    bookedDates = response;
+                    $.each(response, function(index, slot) {
+                        var isPassedDay = $(".em-reservation-calendar tbody.month-days tr td[data-servicedateid='" + slot.booked_date_id +"']").hasClass("passed-day"); 
+                        var isWeeklyOffDay = $(".em-reservation-calendar tbody.month-days tr td[data-servicedateid='" + slot.booked_date_id +"']").hasClass("off-day"); 
+                        
+                        if(!isPassedDay && !isWeeklyOffDay){
+                            if(slot.available_orders == 0){
+                                $(".em-reservation-calendar tbody.month-days tr td[data-servicedateid='" + slot.booked_date_id +"']").addClass("unavailable already-booked").attr('title', 'Already Booked');
+                            } else {                      
+                                $(".em-reservation-calendar tbody.month-days tr td[data-servicedateid='" + slot.booked_date_id +"']").attr('title', 'Available '+ slot.available_orders);
+                            }
+                            
+                            console.log("Not passed date");
+                        }
+                        
+                    });
+                    
+                    $(".emsb-calender-loading-gif").fadeOut(1000);
+
+                    
+                }
+
+            });
         });
 
         
@@ -504,7 +548,7 @@ $(document).ready(function() {
             // Slot Id
             var emsb_selected_service_date_id_for_creating_slot_id = emsb_selected_service_date_id_for_db;
             var amSlotId = i + "-AM-"+ emsb_selected_service_date_id_for_creating_slot_id;
-            amSlot = $('#emShowAM').append('<li class="list-group-item" data-slotId="'+ amSlotId +'"> <label> <input class="d-none emsb-slotId" type="text" value="'+ amSlotId +'"> <input class="d-none emsb-slot-starts-at" type="text" value="'+ amShowStartingHour +':'+ amShowStartingMins +'"> '+ amShowStartingHour +':'+ amShowStartingMins +' AM - '+ showAmEndingHour +':'+ showAmEndingMins +' AM  </label> <button type="button" class="btn btn-light em-select-slot-button available">Available '+ emsb_orders_per_slot +' </button>  </li>');
+            amSlot = $('#emShowAM').append('<li class="list-group-item" data-slotId="'+ amSlotId +'"> <label> <input class="d-none emsb-slotId" type="text" value="'+ amSlotId +'"> <input class="d-none emsb-slot-starts-at" type="text" value="'+ amShowStartingHour +':'+ amShowStartingMins +'"> '+ amShowStartingHour +':'+ amShowStartingMins +' AM - '+ showAmEndingHour +':'+ showAmEndingMins +' AM  </label> <button type="button" class="btn btn-light em-select-slot-button available" data-toggle="tooltip" title="Available '+ emsb_orders_per_slot +'"> Available </button>  </li>');
             
         };
 
@@ -614,7 +658,7 @@ $(document).ready(function() {
             var pmSlotId = i + "-PM-"+ emsb_selected_service_date_id_for_creating_slot_id;
             var pmSlotStartingTimeInt = parseInt(pmShowStartingHour);
             var pmSlotStartingTimeHour = 12 + pmSlotStartingTimeInt;
-            pmSlot = $('#emShowPM').append('<li class="list-group-item" data-slotId="'+ pmSlotId +'"> <label> <input class="d-none emsb-slotId" type="text" value="'+ pmSlotId +'"> <input class="d-none emsb-slot-starts-at" type="text" value="'+ pmSlotStartingTimeHour +':'+ pmShowStartingMins +'">  '+ pmShowStartingHour +':'+ pmShowStartingMins +' PM - '+ showPmEndingHour +':'+ showPmEndingMins +' PM </label> <button type="button" class="btn btn-light em-select-slot-button available">Available '+ emsb_orders_per_slot +' </button>  </li>'); 
+            pmSlot = $('#emShowPM').append('<li class="list-group-item" data-slotId="'+ pmSlotId +'"> <label> <input class="d-none emsb-slotId" type="text" value="'+ pmSlotId +'"> <input class="d-none emsb-slot-starts-at" type="text" value="'+ pmSlotStartingTimeHour +':'+ pmShowStartingMins +'">  '+ pmShowStartingHour +':'+ pmShowStartingMins +' PM - '+ showPmEndingHour +':'+ showPmEndingMins +' PM </label> <button type="button" class="btn btn-light em-select-slot-button available" data-toggle="tooltip" title="Available '+ emsb_orders_per_slot +'"> Available </button>  </li>'); 
             
         };
 
@@ -645,7 +689,7 @@ $(document).ready(function() {
                     if(slot.available_orders == 0){
                         $(".slots li[data-slotid='" + slot.booked_slot_id +"'] button").addClass("booked").removeClass("available").attr('title', 'Already Booked').text("Booked");
                     } else {
-                        $(".slots li[data-slotid='" + slot.booked_slot_id +"'] button").text("Availabel: "+ slot.available_orders);
+                        $(".slots li[data-slotid='" + slot.booked_slot_id +"'] button").text("Availabel").attr('title', "Availabel: "+ slot.available_orders);
                     }
                     console.log(slot.booked_slot_id);
                 });
