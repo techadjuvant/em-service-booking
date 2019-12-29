@@ -1,5 +1,12 @@
 $(document).ready(function() {
 
+    
+    var pluginsUrl = backend_ajax_object.pluginsUrl;
+    var emsb_pluginUrl = pluginsUrl +"/em-service-booking";
+    var emsb_icon_url = emsb_pluginUrl +"/assets/img/service-booking.png";
+    console.log(emsb_icon_url);
+    $("li#toplevel_page_emsb_admin_page .dashicons-admin-generic").append("<span class='emsb-icon-wrapper'><img src='"+emsb_icon_url+"' alt='EMSB'></span>");
+
     if($("#emsb_service_full_day_reservation").is(":checked")) {
         $(".emsb-time-slot-container").hide();
     }

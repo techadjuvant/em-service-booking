@@ -159,8 +159,8 @@ class emsb_Admin_Page
         wp_localize_script( 'jquery-js', 'backend_ajax_object',
             array( 
                 'ajaxurl' => admin_url( 'admin-ajax.php' ),
-                'data_var_1' => 'value 1',
-                'data_var_2' => 'value 2',
+                'pluginsUrl' => plugins_url()
+                
             )
         );
 
@@ -207,8 +207,7 @@ class emsb_Admin_Page
         wp_localize_script( 'emsb-jquery', 'backend_ajax_object',
                     array( 
                         'ajaxurl' => admin_url( 'admin-ajax.php' ),
-                        'data_var_1' => 'value 1',
-                        'data_var_2' => 'value 2',
+                        'pluginsUrl' => plugins_url()
                     )
                 );
 

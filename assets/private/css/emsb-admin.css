@@ -1,20 +1,35 @@
 li#toplevel_page_emsb_admin_page .dashicons-admin-generic:before {
-    content: "\f484" !important;
-  }
-  .emsb-pending-bookings-count {
-    display: flex;
-    min-width: 18px;
-    height: 18px;
-    background-color: #00ad37;
-    padding: 3px;
-    font-size: 14px;
-    border-radius: 50%;
-    position: absolute;
-    top: -8px;
-    right: 5px;
-    text-align: center;
-    vertical-align: middle;
-    align-self: center;
-    align-items: center;
-    justify-content: center;
+  content: "\f484" !important;
+  display: none;
+}
+.emsb-pending-bookings-count {
+  display: flex;
+  min-width: 18px;
+  height: 18px;
+  background-color: #7979ef;
+  padding: 3px;
+  font-size: 14px;
+  border-radius: 50%;
+  position: absolute;
+  top: -8px;
+  right: 5px;
+  text-align: center;
+  vertical-align: middle;
+  align-self: center;
+  align-items: center;
+  justify-content: center;
+}
+
+li#toplevel_page_emsb_admin_page  .wp-menu-image img {
+  width: 25px;
+  height: 28px;
+  padding: 0 5px 0 5px;
+  margin: 0;
+  position: absolute;
+  top: 3px;
+  left: 0;
+}
+#adminmenu li#toplevel_page_emsb_admin_page .wp-has-current-submenu .wp-menu-image img {
+  width: 33px;
+  height: 25px;
 }

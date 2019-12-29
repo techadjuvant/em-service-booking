@@ -474,6 +474,7 @@ if ( !class_exists( 'emsb_service_booking_plugin_base_class' ) ) {
 
 
 
+
         /**
          * When class is instantiated
          */
