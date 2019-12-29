@@ -37,3 +37,17 @@ li#toplevel_page_emsb_admin_page  .wp-menu-image img {
 .post-php li#toplevel_page_emsb_admin_page .wp-menu-image img {
   width: auto;
 }
+
+#adminmenu li#toplevel_page_emsb_admin_page a.wp-has-current-submenu {
+  background: #0028ad;
+  color: #fff;
+}
+#adminmenu li#toplevel_page_emsb_admin_page:hover, 
+#adminmenu li#toplevel_page_emsb_admin_page>a.menu-top:focus,
+#adminmenu li#toplevel_page_emsb_admin_page>a.menu-top:hover {
+  background: #0028ad;
+  color: #fff;
+}
+#adminmenu li#toplevel_page_emsb_admin_page .wp-submenu{
+  background-color: rgb(29, 38, 107);
+}
