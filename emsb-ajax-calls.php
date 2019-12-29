@@ -61,7 +61,8 @@ function emsb_fetch_pending_bookings() {
 
     $current_time_milliseconds = round(microtime(true) * 1000);
 
-    check_ajax_referer( 'emsb_booking_approval_nonce', 'security' );
+    // check_ajax_referer( 'emsb_booking_approval_nonce', 'security' );
+
     global $wpdb;
     $table_name = $wpdb->prefix . "emsb_bookings";
     $results = $wpdb->get_results("SELECT * FROM $table_name WHERE ( approve_booking = '0' AND starting_time_ms > $current_time_milliseconds) ORDER BY id DESC LIMIT 10", ARRAY_A);
