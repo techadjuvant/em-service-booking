@@ -1053,11 +1053,18 @@ legend.inline-edit-legend {
   border: 1px solid #fff !important;
   color: #fff !important;
 }
+.emsb-table-wrapper table tr {
+  cursor: pointer !important;
+}
 
 .emsb-table-wrapper table tr.emsb-active-pending-order {
   transition: all .4s;
   background-color: rgba(77, 77, 249, 0.4) !important;
   color: #fff;
+  cursor: default !important;
+}
+.emsb-table-wrapper table tr.emsb-active-pending-order td.emsb-pending-order-checkbox input {
+  cursor: default;
 }
 
 .emsb-table-wrapper table tr.emsb-active-pending-order .emsb-approval-action {
