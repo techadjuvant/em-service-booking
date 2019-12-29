@@ -33,3 +33,7 @@ li#toplevel_page_emsb_admin_page  .wp-menu-image img {
   width: 33px;
   height: 25px;
 }
+
+.post-php li#toplevel_page_emsb_admin_page .wp-menu-image img {
+  width: auto;
+}

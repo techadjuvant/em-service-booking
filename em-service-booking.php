@@ -140,7 +140,7 @@ if ( !class_exists( 'emsb_service_booking_plugin_base_class' ) ) {
                     <label for="emsb_service_availability_ends_at" class="emsb-row-date-availability"><?php _e( "Will be Unavailable From: ", 'service-booking' ); ?></label>
                     <input type="date" name="emsb_service_availability_ends_at" id="emsb_service_availability_ends_at" value="<?php if ( isset ( $emsb_service_stored_meta['emsb_service_availability_ends_at'] ) ) echo $emsb_service_stored_meta['emsb_service_availability_ends_at'][0]; ?>" />
                 </p>
-                <footer class="blockquote-footer"> <?php _e( 'If you don\'t set these value, this service will always be available for future 1 year ', 'service-booking' ); ?> </footer>
+                <footer class="blockquote-footer text-danger"> <?php _e( 'If you don\'t set these value, this service will not be available for booking.', 'service-booking' ); ?> </footer>
             </div>
 
             <!-- weekly Off-days  -->

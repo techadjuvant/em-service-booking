@@ -29,7 +29,9 @@ get_header();
             </header>
 
             <?php
-              //Protect against arbitrary paged values
+              //Protected against arbitrary paged values
+
+              $current_time_milliseconds = round(microtime(true) * 1000);
               $per_page = 10;
               $page = isset( $_GET['page'] ) ? abs( (int) $_GET['page'] ) : 1;
               $current_page = $page;
@@ -43,6 +45,7 @@ get_header();
               $args = array(
                 'posts_per_page' => $per_page,
                 'post_type' => 'emsb_service',
+                'status' => 'published',
                 'offset' => $offset
               );
 
@@ -52,185 +55,196 @@ get_header();
             /* Start the Loop */
             while ( $the_query->have_posts() ) :
               $the_query->the_post();
-            ?>
-              <article id="post-<?php the_ID(); ?>"  class="em-service">
-                
-                  <div class="em-service-excerpt d-flex align-items-center">
-                      <?php if ( has_post_thumbnail() ) : ?>
-                          <?php the_post_thumbnail(); ?>
-                      <?php endif; ?>
-                      <div class="em-service-excerpt-info">
-                        <h4 id="emsb-service-name"> <?php the_title(); ?> </h4> 
-                        <label id="emsb-service-id" class="d-none"> <input type="number" value="<?php the_ID(); ?>"> </label>
-                        <p class="emsb-service-title">
+
+              
+                $emsb_service_availability_ends_at = get_post_meta( get_the_ID(), 'emsb_service_availability_ends_at', true ); 
+                if($emsb_service_availability_ends_at){ 
+                  $emsb_service_availability_ends_at = strtotime($emsb_service_availability_ends_at) * 1000;
+                } else { 
+                  $emsb_service_availability_ends_at = $current_time_milliseconds;
+                } 
+
+                if($emsb_service_availability_ends_at > $current_time_milliseconds){
+                ?>
+                  <article id="post-<?php the_ID(); ?>"  class="em-service">
+                    
+                      <div class="em-service-excerpt d-flex align-items-center">
+                          <?php if ( has_post_thumbnail() ) : ?>
+                              <?php the_post_thumbnail(); ?>
+                          <?php endif; ?>
+                          <div class="em-service-excerpt-info">
+                            <h4 id="emsb-service-name"> <?php the_title(); ?> </h4> 
+                            <label id="emsb-service-id" class="d-none"> <input type="number" value="<?php the_ID(); ?>"> </label>
+                            <p class="emsb-service-title">
+                                <?php 
+                                  $emsb_display_service_title = get_post_meta( get_the_ID(), 'emsb_display_service_title', true );
+                                  if($emsb_display_service_title){
+                                    echo $emsb_display_service_title;
+                                  }
+                                ?>
+                            </p>
                             <?php 
-                              $emsb_display_service_title = get_post_meta( get_the_ID(), 'emsb_display_service_title', true );
-                              if($emsb_display_service_title){
-                                echo $emsb_display_service_title;
-                              }
-                            ?>
-                        </p>
-                        <?php 
-                          $emsb_display_service_location = get_post_meta( get_the_ID(), 'emsb_display_service_location', true );
-                          if($emsb_display_service_location){ ?>
-                              <p class="emsb-service-location"><?php _e( 'Location: ', 'service-booking' ); ?> <?php echo $emsb_display_service_location; ?> </p>
-                          <?php 
-                              }
-                          ?>
-                          <?php 
-                            $emsb_display_service_price = get_post_meta( get_the_ID(), 'emsb_display_service_price', true );
-                            if($emsb_display_service_price){ ?>
-                              <p class="em-reservation-service-price"><?php _e( 'Price: ', 'service-booking' ); ?> <b id="emsb-service-price"> <?php echo $emsb_display_service_price; ?> </b> </p>
-                          <?php 
-                              }
-                          ?>
-                          
-                        
-                        
+                              $emsb_display_service_location = get_post_meta( get_the_ID(), 'emsb_display_service_location', true );
+                              if($emsb_display_service_location){ ?>
+                                  <p class="emsb-service-location"><?php _e( 'Location: ', 'service-booking' ); ?> <?php echo $emsb_display_service_location; ?> </p>
+                              <?php 
+                                  }
+                              ?>
+                              <?php 
+                                $emsb_display_service_price = get_post_meta( get_the_ID(), 'emsb_display_service_price', true );
+                                if($emsb_display_service_price){ ?>
+                                  <p class="em-reservation-service-price"><?php _e( 'Price: ', 'service-booking' ); ?> <b id="emsb-service-price"> <?php echo $emsb_display_service_price; ?> </b> </p>
+                              <?php 
+                                  }
+                              ?>
+                              
+                            
+                            
+                          </div>
                       </div>
-                  </div>
-                  <div class="em-service-meta-info">
-                      <div class="emsb-service-available-on-calendar">
-                              <!-- starting date  -->
-                            <?php $emsb_service_availability_starts_at = get_post_meta( get_the_ID(), 'emsb_service_availability_starts_at', true ); 
-                            if($emsb_service_availability_starts_at){
-                            ?>
-                              <input type="text" name="emsb_service_availability_starts_at" class="emsb_service_availability_starts_at" value="<?php echo $emsb_service_availability_starts_at; ?>"/>
-                            <?php } else { ?>
-                              <input type="text" name="emsb_service_availability_starts_at" class="emsb_service_availability_starts_at" value="<?php echo date("Y-m-d"); ?>"/>
-                            <?php } ?>
-                              <!-- ending date  -->
-                            <?php $emsb_service_availability_ends_at = get_post_meta( get_the_ID(), 'emsb_service_availability_ends_at', true ); 
-                            if($emsb_service_availability_ends_at){ ?>
-                              <input type="text" name="emsb_service_availability_ends_at" class="emsb_service_availability_ends_at" value="<?php echo $emsb_service_availability_ends_at; ?>"/>
-                            <?php 
-                              } else { ?>
-                                <input type="text" name="emsb_service_availability_ends_at" class="emsb_service_availability_ends_at" value="<?php echo date('Y-m-d', strtotime('+1 years')); ?>"/>
-                              <?php }
-                            ?>
+                      <div class="em-service-meta-info">
+                          <div class="emsb-service-available-on-calendar">
+                                  <!-- starting date  -->
+                                <?php $emsb_service_availability_starts_at = get_post_meta( get_the_ID(), 'emsb_service_availability_starts_at', true ); 
+                                if($emsb_service_availability_starts_at){
+                                ?>
+                                  <input type="text" name="emsb_service_availability_starts_at" class="emsb_service_availability_starts_at" value="<?php echo $emsb_service_availability_starts_at; ?>"/>
+                                <?php } else { ?>
+                                  <input type="text" name="emsb_service_availability_starts_at" class="emsb_service_availability_starts_at" value="<?php echo date("Y-m-d"); ?>"/>
+                                <?php } ?>
+                                  <!-- ending date  -->
+                                <?php $emsb_service_availability_ends_at = get_post_meta( get_the_ID(), 'emsb_service_availability_ends_at', true ); 
+                                if($emsb_service_availability_ends_at){ ?>
+                                  <input type="text" name="emsb_service_availability_ends_at" class="emsb_service_availability_ends_at" value="<?php echo $emsb_service_availability_ends_at; ?>"/>
+                                <?php 
+                                  } else { ?>
+                                    <input type="text" name="emsb_service_availability_ends_at" class="emsb_service_availability_ends_at" value="<?php echo date("Y-m-d"); ?>"/>
+                                  <?php } 
+                                ?>
 
-                      </div>
-                      <!-- weekly off-days  -->
-                    <div class="em-off-days">
-                      <?php $emsb_service_off_day_sun = get_post_meta( get_the_ID(), 'emsb_service_off_day_sun', true );
-                          if($emsb_service_off_day_sun){ ?>
-                              <input  class="emOffDays" type="text" value="<?php echo $emsb_service_off_day_sun; ?>" placeholder="sunday">
-                      <?php } ?>
-                      <?php $emsb_service_off_day_mon = get_post_meta( get_the_ID(), 'emsb_service_off_day_mon', true );
-                          if($emsb_service_off_day_mon){ ?>
-                              <input  class="emOffDays" type="text" value="<?php echo $emsb_service_off_day_mon; ?>" placeholder="monday">
-                      <?php } ?>
-                      <?php $emsb_service_off_day_tues = get_post_meta( get_the_ID(), 'emsb_service_off_day_tues', true );
-                          if($emsb_service_off_day_tues){ ?>
-                              <input  class="emOffDays" type="text" value="<?php echo $emsb_service_off_day_tues; ?>" placeholder="tuesday">
-                      <?php } ?>
-                      <?php $emsb_service_off_day_wed = get_post_meta( get_the_ID(), 'emsb_service_off_day_wed', true );
-                          if($emsb_service_off_day_wed){ ?>
-                              <input  class="emOffDays" type="text" value="<?php echo $emsb_service_off_day_wed; ?>" placeholder="wednesday">
-                      <?php } ?>
-                      <?php $emsb_service_off_day_thurs = get_post_meta( get_the_ID(), 'emsb_service_off_day_thurs', true );
-                          if($emsb_service_off_day_thurs){ ?>
-                              <input  class="emOffDays" type="text" value="<?php echo $emsb_service_off_day_thurs; ?>" placeholder="thursday">
-                      <?php } ?>
-                      <?php $emsb_service_off_day_fri = get_post_meta( get_the_ID(), 'emsb_service_off_day_fri', true );
-                          if($emsb_service_off_day_fri){ ?>
-                              <input  class="emOffDays" type="text" value="<?php echo $emsb_service_off_day_fri; ?>" placeholder="friday">
-                      <?php } ?>
-                      <?php $emsb_service_off_day_sat = get_post_meta( get_the_ID(), 'emsb_service_off_day_sat', true );
-                          if($emsb_service_off_day_sat){ ?>
-                              <input  class="emOffDays" type="text" value="<?php echo $emsb_service_off_day_sat; ?>" placeholder="saturday">
-                      <?php } ?>
-                          
-                    </div>
-                    <!-- Full day reservation  -->
-                    <div class="full-day-reservation">
-                      <?php 
-                          $emsb_service_full_day_reservation = get_post_meta( get_the_ID(), 'emsb_service_full_day_reservation', true ); ?>
-                          <input type="checkbox" name="emsb_fullDayReserve" id="emsb_fullDayReserve" <?php echo $emsb_service_full_day_reservation; ?> />
-                    </div>
-
-                    <!-- Time slot  -->
-                    <div class="em-time-slot">
-                      <div class="am-time-slot">
-                          <?php 
-                              $emsb_service_am_starting_time = get_post_meta( get_the_ID(), 'emsb_service_am_starting_time', true );
-                              if($emsb_service_am_starting_time){ ?>
-                                  <input class="amSlotStarts" value="<?php echo $emsb_service_am_starting_time; ?>" />
-                          <?php } else { ?>
-                                  <input class="amSlotStarts" value="10:00" />
+                          </div>
+                          <!-- weekly off-days  -->
+                        <div class="em-off-days">
+                          <?php $emsb_service_off_day_sun = get_post_meta( get_the_ID(), 'emsb_service_off_day_sun', true );
+                              if($emsb_service_off_day_sun){ ?>
+                                  <input  class="emOffDays" type="text" value="<?php echo $emsb_service_off_day_sun; ?>" placeholder="sunday">
                           <?php } ?>
-                          <?php 
-                              $emsb_service_am_ending_time = get_post_meta( get_the_ID(), 'emsb_service_am_ending_time', true );
-                              if($emsb_service_am_ending_time){ ?>
-                                  <input class="amSlotEnds" value="<?php echo $emsb_service_am_ending_time; ?>" />
-                          <?php } else { ?>
-                                  <input class="amSlotEnds" value="11:00" />
+                          <?php $emsb_service_off_day_mon = get_post_meta( get_the_ID(), 'emsb_service_off_day_mon', true );
+                              if($emsb_service_off_day_mon){ ?>
+                                  <input  class="emOffDays" type="text" value="<?php echo $emsb_service_off_day_mon; ?>" placeholder="monday">
                           <?php } ?>
-
-                          <?php 
-                              $emsb_service_am_slot_duration = get_post_meta( get_the_ID(), 'emsb_service_am_slot_duration', true );
-                              if($emsb_service_am_slot_duration){ ?>
-                                  <input class="amSlotDuration" type="text" name="amSlotDuration" value="<?php echo $emsb_service_am_slot_duration; ?>">
-                          <?php } else { ?>
-                                  <input class="amSlotDuration" type="text" name="amSlotDuration" value="160" />
+                          <?php $emsb_service_off_day_tues = get_post_meta( get_the_ID(), 'emsb_service_off_day_tues', true );
+                              if($emsb_service_off_day_tues){ ?>
+                                  <input  class="emOffDays" type="text" value="<?php echo $emsb_service_off_day_tues; ?>" placeholder="tuesday">
+                          <?php } ?>
+                          <?php $emsb_service_off_day_wed = get_post_meta( get_the_ID(), 'emsb_service_off_day_wed', true );
+                              if($emsb_service_off_day_wed){ ?>
+                                  <input  class="emOffDays" type="text" value="<?php echo $emsb_service_off_day_wed; ?>" placeholder="wednesday">
+                          <?php } ?>
+                          <?php $emsb_service_off_day_thurs = get_post_meta( get_the_ID(), 'emsb_service_off_day_thurs', true );
+                              if($emsb_service_off_day_thurs){ ?>
+                                  <input  class="emOffDays" type="text" value="<?php echo $emsb_service_off_day_thurs; ?>" placeholder="thursday">
+                          <?php } ?>
+                          <?php $emsb_service_off_day_fri = get_post_meta( get_the_ID(), 'emsb_service_off_day_fri', true );
+                              if($emsb_service_off_day_fri){ ?>
+                                  <input  class="emOffDays" type="text" value="<?php echo $emsb_service_off_day_fri; ?>" placeholder="friday">
+                          <?php } ?>
+                          <?php $emsb_service_off_day_sat = get_post_meta( get_the_ID(), 'emsb_service_off_day_sat', true );
+                              if($emsb_service_off_day_sat){ ?>
+                                  <input  class="emOffDays" type="text" value="<?php echo $emsb_service_off_day_sat; ?>" placeholder="saturday">
                           <?php } ?>
                               
+                        </div>
+                        <!-- Full day reservation  -->
+                        <div class="full-day-reservation">
+                          <?php 
+                              $emsb_service_full_day_reservation = get_post_meta( get_the_ID(), 'emsb_service_full_day_reservation', true ); ?>
+                              <input type="checkbox" name="emsb_fullDayReserve" id="emsb_fullDayReserve" <?php echo $emsb_service_full_day_reservation; ?> />
+                        </div>
+
+                        <!-- Time slot  -->
+                        <div class="em-time-slot">
+                          <div class="am-time-slot">
+                              <?php 
+                                  $emsb_service_am_starting_time = get_post_meta( get_the_ID(), 'emsb_service_am_starting_time', true );
+                                  if($emsb_service_am_starting_time){ ?>
+                                      <input class="amSlotStarts" value="<?php echo $emsb_service_am_starting_time; ?>" />
+                              <?php } else { ?>
+                                      <input class="amSlotStarts" value="10:00" />
+                              <?php } ?>
+                              <?php 
+                                  $emsb_service_am_ending_time = get_post_meta( get_the_ID(), 'emsb_service_am_ending_time', true );
+                                  if($emsb_service_am_ending_time){ ?>
+                                      <input class="amSlotEnds" value="<?php echo $emsb_service_am_ending_time; ?>" />
+                              <?php } else { ?>
+                                      <input class="amSlotEnds" value="11:00" />
+                              <?php } ?>
+
+                              <?php 
+                                  $emsb_service_am_slot_duration = get_post_meta( get_the_ID(), 'emsb_service_am_slot_duration', true );
+                                  if($emsb_service_am_slot_duration){ ?>
+                                      <input class="amSlotDuration" type="text" name="amSlotDuration" value="<?php echo $emsb_service_am_slot_duration; ?>">
+                              <?php } else { ?>
+                                      <input class="amSlotDuration" type="text" name="amSlotDuration" value="160" />
+                              <?php } ?>
+                                  
+                          </div>
+                          <div class="pm-time-slot">
+                              <?php 
+                                  $emsb_service_pm_starting_time = get_post_meta( get_the_ID(), 'emsb_service_pm_starting_time', true );
+                                  if($emsb_service_pm_starting_time){ ?>
+                                      <input class="pmSlotStarts" value="<?php echo $emsb_service_pm_starting_time; ?>" />
+                              <?php } else { ?>
+                                      <input class="pmSlotStarts"  value="15:00" />
+                              <?php } ?>
+
+                              <?php 
+                                  $emsb_service_pm_ending_time = get_post_meta( get_the_ID(), 'emsb_service_pm_ending_time', true );
+                                  if($emsb_service_pm_ending_time){ ?>
+                                      <input class="pmSlotEnds" value="<?php echo $emsb_service_pm_ending_time; ?>" />
+                              <?php } else { ?>
+                                      <input class="pmSlotEnds"  value="17:00" />
+                              <?php } ?>
+
+                              <?php 
+                                  $emsb_service_pm_slot_duration = get_post_meta( get_the_ID(), 'emsb_service_pm_slot_duration', true );
+                                  if($emsb_service_pm_slot_duration){ ?>
+                                      <input class="pmSlotDuration" type="text" name="pmSlotDuration" value="<?php echo $emsb_service_pm_slot_duration; ?>">
+                              <?php } else { ?>
+                                      <input class="pmSlotDuration" type="text" name="pmSlotDuration" value="160" />
+                              <?php } ?>
+
+                          </div>
+
+                        </div>
+
+                        <!--  Orders per slot  -->
+                        <div class="emsb-service-booking-orders-per-slot">
+                            <?php 
+                                $emsb_service_orders_per_slot = get_post_meta( get_the_ID(), 'emsb_service_orders_per_slot', true );
+                                if($emsb_service_orders_per_slot){ ?>
+                                  <input type="number" value="<?php echo $emsb_service_orders_per_slot; ?>">
+                            <?php } else {  ?>
+                                  <input type="number" value="1">
+                            <?php 
+                              } 
+                            ?>
+                        </div>
+                        <!--  ervice-provider-email  -->
+                        <div class="emsb-service-provider-email">
+                            <?php 
+                                $emsb_service_provider_email = get_post_meta( get_the_ID(), 'emsb_service_provider_email', true );
+                                if($emsb_service_provider_email){ ?>
+                                  <input type="email" value="<?php echo $emsb_service_provider_email; ?>">
+                            <?php 
+                              } 
+                            ?>
+                        </div>
                       </div>
-                      <div class="pm-time-slot">
-                          <?php 
-                              $emsb_service_pm_starting_time = get_post_meta( get_the_ID(), 'emsb_service_pm_starting_time', true );
-                              if($emsb_service_pm_starting_time){ ?>
-                                  <input class="pmSlotStarts" value="<?php echo $emsb_service_pm_starting_time; ?>" />
-                          <?php } else { ?>
-                                  <input class="pmSlotStarts"  value="15:00" />
-                          <?php } ?>
-
-                          <?php 
-                              $emsb_service_pm_ending_time = get_post_meta( get_the_ID(), 'emsb_service_pm_ending_time', true );
-                              if($emsb_service_pm_ending_time){ ?>
-                                  <input class="pmSlotEnds" value="<?php echo $emsb_service_pm_ending_time; ?>" />
-                          <?php } else { ?>
-                                  <input class="pmSlotEnds"  value="17:00" />
-                          <?php } ?>
-
-                          <?php 
-                              $emsb_service_pm_slot_duration = get_post_meta( get_the_ID(), 'emsb_service_pm_slot_duration', true );
-                              if($emsb_service_pm_slot_duration){ ?>
-                                  <input class="pmSlotDuration" type="text" name="pmSlotDuration" value="<?php echo $emsb_service_pm_slot_duration; ?>">
-                          <?php } else { ?>
-                                  <input class="pmSlotDuration" type="text" name="pmSlotDuration" value="160" />
-                          <?php } ?>
-
-                      </div>
-
-                    </div>
-
-                    <!--  Orders per slot  -->
-                    <div class="emsb-service-booking-orders-per-slot">
-                        <?php 
-                            $emsb_service_orders_per_slot = get_post_meta( get_the_ID(), 'emsb_service_orders_per_slot', true );
-                            if($emsb_service_orders_per_slot){ ?>
-                              <input type="number" value="<?php echo $emsb_service_orders_per_slot; ?>">
-                        <?php } else {  ?>
-                              <input type="number" value="1">
-                        <?php 
-                          } 
-                        ?>
-                    </div>
-                    <!--  ervice-provider-email  -->
-                    <div class="emsb-service-provider-email">
-                        <?php 
-                            $emsb_service_provider_email = get_post_meta( get_the_ID(), 'emsb_service_provider_email', true );
-                            if($emsb_service_provider_email){ ?>
-                              <input type="email" value="<?php echo $emsb_service_provider_email; ?>">
-                        <?php 
-                          } 
-                        ?>
-                    </div>
-                  </div>
-                  <button type="button" class="btn btn-light mb-2 em-select-service-button"> <?php _e( 'Select', 'service-booking' ); ?> </button>
-                
-              </article>
+                      <button type="button" class="btn btn-light mb-2 em-select-service-button"> <?php _e( 'Select', 'service-booking' ); ?> </button>
+                    
+                  </article>
+                <?php } ?>
                 <!-- Ends the loop  -->
             <?php endwhile; 
 

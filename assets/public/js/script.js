@@ -329,17 +329,15 @@ $(document).ready(function() {
             success: function(response) {
                 bookedDates = response;
                 $.each(response, function(index, slot) {
-                    var isPassedDay = $(".em-reservation-calendar tbody.month-days tr td[data-servicedateid='" + slot.booked_date_id +"']").hasClass("passed-day"); 
-                    var isWeeklyOffDay = $(".em-reservation-calendar tbody.month-days tr td[data-servicedateid='" + slot.booked_date_id +"']").hasClass("off-day"); 
+                    var isUnavailable = $(".em-reservation-calendar tbody.month-days tr td[data-servicedateid='" + slot.booked_date_id +"']").hasClass("unavailable"); 
                     
-                    if(!isPassedDay && !isWeeklyOffDay){
+                    if(!isUnavailable){
                         if(slot.available_orders == 0){
                             $(".em-reservation-calendar tbody.month-days tr td[data-servicedateid='" + slot.booked_date_id +"']").addClass("unavailable already-booked").attr('title', 'Already Booked');
                         } else {                      
                             $(".em-reservation-calendar tbody.month-days tr td[data-servicedateid='" + slot.booked_date_id +"']").attr('title', 'Available '+ slot.available_orders);
                         }
-                        
-                        console.log("Not passed date");
+
                     }
                     
                 });
@@ -372,10 +370,9 @@ $(document).ready(function() {
                 success: function(response) {
                     bookedDates = response;
                     $.each(response, function(index, slot) {
-                        var isPassedDay = $(".em-reservation-calendar tbody.month-days tr td[data-servicedateid='" + slot.booked_date_id +"']").hasClass("passed-day"); 
-                        var isWeeklyOffDay = $(".em-reservation-calendar tbody.month-days tr td[data-servicedateid='" + slot.booked_date_id +"']").hasClass("off-day"); 
-                        
-                        if(!isPassedDay && !isWeeklyOffDay){
+                        var isUnavailable = $(".em-reservation-calendar tbody.month-days tr td[data-servicedateid='" + slot.booked_date_id +"']").hasClass("unavailable"); 
+
+                        if(!isUnavailable){
                             if(slot.available_orders == 0){
                                 $(".em-reservation-calendar tbody.month-days tr td[data-servicedateid='" + slot.booked_date_id +"']").addClass("unavailable already-booked").attr('title', 'Already Booked');
                             } else {                      

@@ -22,9 +22,22 @@ get_header();
           <div class="col-lg-8 offset-lg-2"> 
 
           <?php
-          
+          $current_time_milliseconds = round(microtime(true) * 1000);
           /* Start the Loop */
           while ( have_posts() ) : the_post(); ?>
+            <?php 
+              $emsb_service_availability_ends_at = get_post_meta( get_the_ID(), 'emsb_service_availability_ends_at', true ); 
+              if($emsb_service_availability_ends_at){ 
+                $emsb_service_availability_ends_at = strtotime($emsb_service_availability_ends_at) * 1000;
+              } else { 
+                $emsb_service_availability_ends_at = $current_time_milliseconds;
+              } 
+              if($emsb_service_availability_ends_at <= $current_time_milliseconds){
+            ?>
+              <div class="alert alert-warning" role="alert">
+                   <?php _e( 'Ended availability of this service!!!', 'service-booking' ); ?>
+              </div>
+            <?php } ?>
             <article id="post-<?php the_ID(); ?>"  class="em-service">
                 
                   <div class="em-service-excerpt d-flex align-items-center">
@@ -77,7 +90,7 @@ get_header();
                               <input type="text" name="emsb_service_availability_ends_at" class="emsb_service_availability_ends_at" value="<?php echo $emsb_service_availability_ends_at; ?>"/>
                             <?php 
                               } else { ?>
-                                <input type="text" name="emsb_service_availability_ends_at" class="emsb_service_availability_ends_at" value="<?php echo date('Y-m-d', strtotime('+1 years')); ?>"/>
+                                <input type="text" name="emsb_service_availability_ends_at" class="emsb_service_availability_ends_at" value="<?php echo date('Y-m-d'); ?>"/>
                               <?php }
                             ?>
 
