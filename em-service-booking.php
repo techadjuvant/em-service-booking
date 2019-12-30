@@ -34,11 +34,24 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 if ( !class_exists( 'emsb_service_booking_plugin_base_class' ) ) {
     class emsb_service_booking_plugin_base_class {
+
         /**
-         * @var string
-         *
-         * Set post type params
+         * When class is instantiated
          */
+        public function __construct() {
+            
+            add_action('init', array($this, 'emsb_service_post_type'));// Register the post type
+            add_action('init', array($this, 'emsb_add_texonomy_to_booking_service'));// Register texonomy
+            add_action('add_meta_boxes', array($this,'emsb_add_meta_boxes_to_booking_service')); //add meta boxes
+            add_action('save_post', array($this,'emsb_save_all_posts_types_meta_fields_meta')); //add meta boxes
+            add_filter( 'archive_template',  array($this,'emsb_get_archive_template') ) ; 
+            add_filter( 'search_template',  array($this,'emsb_get_search_template') ) ; 
+            add_filter( 'single_template',  array($this,'emsb_get_single_template') ) ; 
+            add_filter( 'use_block_editor_for_post_type', array($this,'mytheme_disable_gutenberg_pages'), 10, 2 );
+            add_action( 'wp_enqueue_scripts', array($this,'em_reservation_enqueue_public_scripts')  );
+            
+            
+        }
 
         /**
          * Register post type
@@ -90,6 +103,29 @@ if ( !class_exists( 'emsb_service_booking_plugin_base_class' ) ) {
                 );
                 register_post_type( $type, $args );
                 flush_rewrite_rules();
+        }
+
+        //Add texonomy
+        public function emsb_add_texonomy_to_booking_service(){
+            $labels = array(
+                'name'              => _x( 'Service Categories', 'taxonomy general name' ),
+                'singular_name'     => _x( 'Service Category', 'taxonomy singular name' ),
+                'search_items'      => __( 'Search Service Categories' ),
+                'all_items'         => __( 'All Service Categories' ),
+                'parent_item'       => __( 'Parent Service Category' ),
+                'parent_item_colon' => __( 'Parent Service Category:' ),
+                'edit_item'         => __( 'Edit Service Category' ), 
+                'update_item'       => __( 'Update Service Category' ),
+                'add_new_item'      => __( 'Add New Service Category' ),
+                'new_item_name'     => __( 'New Service Category' ),
+                'menu_name'         => __( 'Service Categories' ),
+              );
+              $args = array(
+                'labels' => $labels,
+                'hierarchical' => true,
+              );
+              register_taxonomy( 'service_category', 'emsb_service', $args );
+            
         }
 
         //adding meta box to save additional meta data for the content type
@@ -426,6 +462,13 @@ if ( !class_exists( 'emsb_service_booking_plugin_base_class' ) ) {
             return $archive_template;
         }
 
+        public function emsb_get_search_template( $search_template ) {
+
+            $search_template = dirname( __FILE__ ) . '/search-emsb_service.php';
+
+            return $search_template;
+        }
+
         public function emsb_get_single_template( $emsb_single_service ) {
             global $post;
             // global $post_type;
@@ -471,28 +514,7 @@ if ( !class_exists( 'emsb_service_booking_plugin_base_class' ) ) {
             
 
         }
-
-
-
-
-        /**
-         * When class is instantiated
-         */
-        public function __construct() {
-            
-            add_action('init', array($this, 'emsb_service_post_type'));// Register the post type
-            add_action('add_meta_boxes', array($this,'emsb_add_meta_boxes_to_booking_service')); //add meta boxes
-            add_action('save_post', array($this,'emsb_save_all_posts_types_meta_fields_meta')); //add meta boxes
-            add_filter( 'archive_template',  array($this,'emsb_get_archive_template') ) ; 
-            add_filter( 'single_template',  array($this,'emsb_get_single_template') ) ; 
-            add_filter( 'use_block_editor_for_post_type', array($this,'mytheme_disable_gutenberg_pages'), 10, 2 );
-            add_action( 'wp_enqueue_scripts', array($this,'em_reservation_enqueue_public_scripts')  );
-            
-            
-        }
-
-        
-          
+   
           
                 
                 

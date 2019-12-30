@@ -30,28 +30,15 @@ get_header();
             <div>   
                 <h3>Search Products</h3>
                 <form role="search" action="<?php echo site_url('/'); ?>" method="get" id="searchform">
-                  <input type="text" name="s" placeholder="Search Service"/>
-                  <!-- <input type="hidden" name="post_type" value="emsb_service" /> // hidden 'products' value -->
-                  <input type="submit" alt="Search" value="Search" />
+                <input type="text" name="s" placeholder="Search Service"/>
+                <input type="hidden" name="post_type" value="emsb_service" /> <!-- // hidden 'products' value -->
+                <input type="submit" alt="Search" value="Search" />
               </form>
             </div>
-            <h4>Filter News by Category</h4>
-            <form action="" method="GET" id="emsb_sort_archive">
-              <select name="service_type" id="emsb_sort_archive_btn" onchange="submit();">
-                <option value="show-all" <?php if(isset($_GET['service_type']) && $_GET['service_type'] == 'show-all'){ echo 'selected="selected"'; } else {'';}; ?>> Show all </option>
-                <!-- <option value=""> Show all </option> -->
-                <?php 
-                    $categories = get_categories('taxonomy=service_category&post_type=emsb_service'); 
-                    foreach ($categories as $category) : 
-                    echo '<option value="'.$category->name.'"';
-                    if(isset($_GET['service_type']) && $_GET['service_type'] == ''.$category->name.'' ){ echo 'selected="selected"'; } else {echo '';};
-                    echo '>'.$category->name.'</option>';
-                    endforeach; 
-                ?> 
-              </select>
-            </form>
-            <?php 
 
+            <h3>Search Result for : <?php echo "$s"; ?> </h3> 
+
+            <?php
               //Protected against arbitrary paged values
 
               $current_time_milliseconds = round(microtime(true) * 1000);
@@ -65,49 +52,22 @@ get_header();
                 $offset = $page;
               }
 
-              if(isset($_GET['service_type'])){ 
-                $service_type = $_GET['service_type']; //get sort value
-                if($_GET['service_type'] == 'show-all'){
-                  $args = array(
-                    'posts_per_page' => $per_page,
-                    'post_type' => 'emsb_service',
-                    'status' => 'published',
-                    'offset' => $offset
-                  );
-                  $the_query = new WP_Query( $args );
-                } else {
-                  $args = array(
-                    'posts_per_page' => $per_page,
-                    'post_type' => 'emsb_service',
-                    'status' => 'published',
-                    'offset' => $offset,
-                    'tax_query' => array(
-                      array(
-                        'taxonomy' => 'service_category',
-                        'field' => 'name',
-                        'terms' => $_GET['service_type']
-                      ) 
-                    ) 
-                  );
-                  $the_query = new WP_Query( $args );
-                }
-                
-              } else {
-                $args = array(
-                  'posts_per_page' => $per_page,
-                  'post_type' => 'emsb_service',
-                  'status' => 'published',
-                  'offset' => $offset
-                );
-                $the_query = new WP_Query( $args );
-              }
+              $args = array(
+                's' => $s,
+                'posts_per_page' => $per_page,
+                'post_type' => 'emsb_service',
+                'status' => 'published',
+                'offset' => $offset
+              );
 
-              
+              $the_query = new WP_Query( $args );
 
               if ( $the_query->have_posts() ) :
-              /* Start the Loop */
-              while ( $the_query->have_posts() ) :
-                $the_query->the_post();
+            /* Start the Loop */
+            while ( $the_query->have_posts() ) :
+              $the_query->the_post();
+
+            // if ( have_posts() ) : while ( have_posts() ) : the_post(); 
 
               
                 $emsb_service_availability_ends_at = get_post_meta( get_the_ID(), 'emsb_service_availability_ends_at', true ); 
