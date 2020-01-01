@@ -492,6 +492,7 @@ if ( !class_exists( 'emsb_service_booking_plugin_base_class' ) ) {
         public function em_reservation_enqueue_public_scripts(){
   
             wp_enqueue_style('bootstrap-css', plugin_dir_url(__FILE__) . 'assets/css/bootstrap.min.css', array(), '1.1', false );
+            wp_enqueue_style('bootstrap-select-css', plugin_dir_url(__FILE__) . 'assets/css/chosen.css', array(), '1.1', false );
             wp_enqueue_style('aicon-style', plugin_dir_url(__FILE__) . 'calendar/aicon/style.css', array(), '1.1', false );
             wp_enqueue_style('pseudo-ripple', plugin_dir_url(__FILE__) . 'calendar/jquery-pseudo-ripple.css', array(), '1.1', false );
             wp_enqueue_style('nao-calendar', plugin_dir_url(__FILE__) . 'calendar/jquery-nao-calendar.css', array(), '1.1', false );
@@ -505,6 +506,7 @@ if ( !class_exists( 'emsb_service_booking_plugin_base_class' ) ) {
             );
             wp_enqueue_script('popper-js', plugin_dir_url(__FILE__) . 'assets/js/popper.min.js', array(), '1.1', true );
             wp_enqueue_script('bootstrap-js', plugin_dir_url(__FILE__) . 'assets/js/bootstrap.min.js', array(), '1.1', true );
+            wp_enqueue_script('chosen.jquery', plugin_dir_url(__FILE__) . 'assets/js/chosen.jquery.js', array(), '1.1', true );
             wp_enqueue_script('pseudo-ripple-js', plugin_dir_url(__FILE__) . 'calendar/jquery-pseudo-ripple.js', array(), '1.1', true );
             wp_enqueue_script('nao-calendar-js', plugin_dir_url(__FILE__) . 'calendar/jquery-nao-calendar.js', array(), '1.1', true );
             wp_enqueue_script('html2canvas', plugin_dir_url(__FILE__) . 'assets/public/js/html2canvas.js', array(), '1.1', true );

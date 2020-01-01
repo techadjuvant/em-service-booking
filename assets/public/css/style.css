@@ -64,9 +64,9 @@
 article.em-service {
     padding: 20px;
     overflow: hidden;
-    box-shadow: 5px 5px 20px rgba(49, 46, 255, 0.15);
     margin-bottom: 30px;
     border-radius: 5px;
+    box-shadow: 1px 1px 10px rgba(49, 46, 255, 0.15);
 }
 
 .em-service img, .em-selected-service img {
@@ -851,6 +851,157 @@ article.em-service main {
     border-width: 5px 5px 0;
     border-top-color: #fff;
 }
+
+/* BS select dropdown  */
+.emsb-serch-form  .input-group {
+    box-shadow: 1px 1px 10px rgba(49, 46, 255, 0.15);
+}
+.emsb-serch-form input.form-control {
+    font-size: 14px;
+    font-family: inherit;
+    line-height: 14px;
+    border-radius: 3px;
+    border: 0;
+    border-bottom: 1px solid #d0e0ff;
+}
+.emsb-serch-form input.form-control:focus, .emsb-serch-form input[type="text"]:focus {
+    border-color: rgb(243, 243, 243);
+    outline: 0;
+    outline-offset: 0;
+    box-shadow: none;
+    border-right: 0px;
+}
+button.btn.emsb-search-btn {
+    font-size: 14px;
+    font-family: inherit;
+    line-height: 14px;
+    border-radius: 3px;
+    border: 1px solid rgb(248, 249, 250);
+    color: #000;
+    background: rgb(248, 249, 250);
+    border-bottom: 1px solid #d0e0ff;
+}
+
+
+  /* chosen.js custom css */
+  .emsb-plugin-container .chosen-container-single .chosen-single {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    padding: 0 0 0 8px;
+    height: 25px;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    background-color: #fff;
+    background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(20%, #ffffff), color-stop(50%, #ffffff), color-stop(52%, #ffffff), color-stop(100%, #ffffff));
+    background: -webkit-linear-gradient(top, #ffffff 20%, #ffffff 50%, #ffffff 52%, #ffffff 100%);
+    background: -moz-linear-gradient(top, #ffffff 20%, #ffffff 50%, #eeeeee 52%, #ffffff 100%);
+    background: -o-linear-gradient(top, #ffffff 20%, #ffffff 50%, #eeeeee 52%, #ffffff 100%);
+    background: linear-gradient(top, #ffffff 20%, #ffffff 50%, #eeeeee 52%, #ffffff 100%);
+    background-clip: padding-box;
+    box-shadow: 0 0 3px white inset, 0 1px 1px rgba(0, 0, 0, 0.1);
+    color: #444;
+    text-decoration: none;
+    white-space: nowrap;
+    line-height: 24px;
+}
+
+.emsb-plugin-container .chosen-container-active.chosen-with-drop .chosen-single {
+    border: 1px solid #aaa;
+    -moz-border-radius-bottomright: 0;
+    border-bottom-right-radius: 0;
+    -moz-border-radius-bottomleft: 0;
+    border-bottom-left-radius: 0;
+    background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(20%, #eeeeee), color-stop(80%, #ffffff));
+    background-image: -webkit-linear-gradient(#eeeeee 20%, #ffffff 80%);
+    background-image: -moz-linear-gradient(#eeeeee 20%, #ffffff 80%);
+    background-image: -o-linear-gradient(#eeeeee 20%, #ffffff 80%);
+    background-image: linear-gradient(#ffffff 20%, #ffffff 80%);
+    box-shadow: 0 1px 0 #fff inset;
+}
+.emsb-plugin-container .chosen-container-active.chosen-with-drop .chosen-single div b {
+  background-position: 0px 2px;
+}
+.emsb-plugin-container .chosen-container-single .chosen-single div {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  display: block;
+  width: 25px;
+  height: 25px;
+}
+.emsb-plugin-container .chosen-container-single .chosen-single span {
+  display: block;
+  overflow: hidden;
+  margin-left: 25px;
+  margin-right: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.emsb-plugin-container .chosen-container-single .chosen-single {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  padding: 0 0 0 8px;
+  height: 38px;
+  border: 0;
+  border-radius: 3px;
+  background-color: #fff;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(20%, #ffffff), color-stop(50%, #ffffff), color-stop(52%, #ffffff), color-stop(100%, #ffffff));
+  background: -webkit-linear-gradient(top, #ffffff 20%, #ffffff 50%, #ffffff 52%, #ffffff 100%);
+  background: -moz-linear-gradient(top, #ffffff 20%, #ffffff 50%, #eeeeee 52%, #ffffff 100%);
+  background: -o-linear-gradient(top, #ffffff 20%, #ffffff 50%, #eeeeee 52%, #ffffff 100%);
+  background: linear-gradient(top, #ffffff 20%, #ffffff 50%, #eeeeee 52%, #ffffff 100%);
+  background-clip: padding-box;
+  box-shadow: 0 0 3px white inset, 0 1px 1px rgba(0, 0, 0, 0.1);
+  color: #444;
+  text-decoration: none;
+  white-space: nowrap;
+  line-height: 38px;
+}
+.emsb-plugin-container .chosen-container {
+  box-shadow: 1px 1px 10px rgba(49, 46, 255, 0.15);
+  border: 0px;
+  border-radius: 3px;
+}
+.emsb-plugin-container .chosen-container-active.chosen-with-drop .chosen-single {
+  border: 1px solid #ffffff;
+  -moz-border-radius-bottomright: 0;
+  border-bottom-right-radius: 0;
+  -moz-border-radius-bottomleft: 0;
+  border-bottom-left-radius: 0;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(20%, #ffffff), color-stop(80%, #ffffff));
+  background-image: -webkit-linear-gradient(#ffffff 20%, #ffffff 80%);
+  background-image: -moz-linear-gradient(#ffffff 20%, #ffffff 80%);
+  background-image: -o-linear-gradient(#ffffff 20%, #ffffff 80%);
+  background-image: linear-gradient(#ffffff 20%, #ffffff 80%);
+  box-shadow: 0 1px 0 #fff inset;
+}
+.emsb-plugin-container .chosen-container .chosen-drop {
+  position: absolute;
+  top: 100%;
+  left: -9999px;
+  z-index: 1010;
+  width: 100%;
+  border: 1px solid #fff;
+  border-top: 0;
+  background: #fff;
+}
+.emsb-plugin-container .chosen-container-single .chosen-search input[type="text"] {
+  margin: 1px 0;
+  padding: 4px 20px 4px 5px;
+  width: 100%;
+  height: auto;
+  outline: 0;
+  border: 1px solid #e5e5e5;
+  background: white url(chosen-sprite.png) no-repeat 100% -20px;
+  background: url(chosen-sprite.png) no-repeat 100% -20px;
+  font-size: 14px;
+  font-family: inherit;
+  line-height: normal;
+  border-radius: 3px;
+}
+
 
 /* Responsiveness */
 

@@ -27,16 +27,36 @@ get_header();
                 ?> 
             </h2> 
             </header>
-            <div>   
-                <h3>Search Products</h3>
-                <form role="search" action="<?php echo site_url('/'); ?>" method="get" id="searchform">
-                <input type="text" name="s" placeholder="Search Service"/>
-                <input type="hidden" name="post_type" value="emsb_service" /> <!-- // hidden 'products' value -->
-                <input type="submit" alt="Search" value="Search" />
-              </form>
-            </div>
-
-            <h3>Search Result for : <?php echo "$s"; ?> </h3> 
+            <div class="row py-3">   
+              <div class="col-sm-6">
+              <form action="" method="GET" id="emsb_sort_archive">
+                  <select class="form-control chosen-select" data-placeholder="Choose a Country..." name="service_type" id="emsb_sort_archive_btn" onchange="submit();">
+                    <option value="show-all" <?php if(isset($_GET['service_type']) && $_GET['service_type'] == 'show-all'){ echo 'selected="selected"'; } else {'';}; ?>> Show all </option>
+                    <?php 
+                        $categories = get_categories('taxonomy=service_category&post_type=emsb_service'); 
+                        foreach ($categories as $category) : 
+                          echo '<option value="'.$category->name.'"';
+                          if(isset($_GET['service_type']) && $_GET['service_type'] == ''.$category->name.'' ){ echo 'selected="selected"'; } else {echo '';};
+                          echo '>'.$category->name.'</option>';
+                        endforeach; 
+                    ?> 
+                  </select>
+                </form>
+                
+              </div>
+              <div class="col-sm-6">
+                <form role="search" class="emsb-serch-form" action="<?php echo site_url('book-service/'); ?>" method="get" id="searchform">
+                    <div class="input-group">
+                      <input type="text" class="form-control" name="s" placeholder="Search">
+                      <div class="input-group-append">
+                        <button class="btn emsb-search-btn" type="submit">
+                          Search
+                        </button>
+                      </div>
+                  </div>
+                </form>
+              </div>
+            </div> 
 
             <?php
               //Protected against arbitrary paged values
