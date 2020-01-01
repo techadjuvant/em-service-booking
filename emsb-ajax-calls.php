@@ -45,9 +45,11 @@ function emsb_booking_approval() {
     global $wpdb;
     $table_name = $wpdb->prefix . "emsb_bookings";
     $emsb_booking_approval_action_value = $_POST['emsb_booking_approval_action_value'];
+    $emsb_booking_update_availability = $_POST['emsb_booking_update_availability'];
+    $booked_slot_id = $_POST['booked_slot_id'];
     $emsb_booking_approval_id = $_POST['emsb_booking_approval_id'];
     $booking_approval_res = $wpdb->update($table_name, array( 'approve_booking' => $emsb_booking_approval_action_value), array( 'id' => $emsb_booking_approval_id ));
-
+    $booking_approval_res = $wpdb->update($table_name, array( 'available_orders' => $emsb_booking_update_availability), array( 'booked_slot_id' => $booked_slot_id ));
     echo json_encode($results);
 
     wp_die();
@@ -63,7 +65,7 @@ function emsb_fetch_pending_bookings() {
 
     global $wpdb;
     $table_name = $wpdb->prefix . "emsb_bookings";
-    $results = $wpdb->get_results("SELECT * FROM $table_name WHERE ( approve_booking = '0' AND starting_time_ms > $current_time_milliseconds) ORDER BY id DESC LIMIT 10", ARRAY_A);
+    $results = $wpdb->get_results("SELECT * FROM $table_name WHERE ( approve_booking = '0' AND starting_time_ms > $current_time_milliseconds) ORDER BY id ASC LIMIT 10", ARRAY_A);
 
     echo json_encode($results);
 

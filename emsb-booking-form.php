@@ -24,45 +24,34 @@
         $booked_time_slot = $_POST["emsb_selected_time_slot"];
         $emsb_booking_slot_starts_at = $_POST["emsb_booking_slot_starts_at"];
         $emsb_service_orders_per_slot = $_POST["emsb_service_orders_per_slot"];
-
-        // $emsb_bookings_availability = "";
-        // var_dump($emsb_service_orders_per_slot);
-        // wp_die(); 
-
+        
+        // Count the confirmed bookings
         $emsb_bookings_table = $wpdb->prefix . 'emsb_bookings';
         $emsb_bookings_table_data_fetch = $wpdb->get_row( "SELECT * FROM wp_emsb_bookings WHERE ( booked_slot_id = '$booked_slot_id') ORDER BY id DESC LIMIT 1" );
-
         if( is_object($emsb_bookings_table_data_fetch) ){ 
             $emsb_bookings_availability_string = $emsb_bookings_table_data_fetch->available_orders;
             $emsb_bookings_availability_int = (int)$emsb_bookings_availability_string;
-            $emsb_bookings_availability = $emsb_bookings_availability_int - 1;
- 
         }
         if(is_null($emsb_bookings_table_data_fetch)){
             $emsb_bookings_availability_string = $emsb_service_orders_per_slot; 
             $emsb_bookings_availability_int = (int)$emsb_bookings_availability_string;
-            $emsb_bookings_availability = $emsb_bookings_availability_int - 1;
-
         }
-
-        if($emsb_bookings_availability < 0){ ?>
+        if($emsb_bookings_availability_int <= 0){ ?>
             <div class="emsb-booking-ticket-container text-left">
             
             <div class="emsb-form-submission-error">
                 <h5> <?php _e( 'Sorry, the slot is booked, please try another available date or slot', 'service-booking' ); ?></h5>
-                <button id="goBackButton" class="btn btn-dark emsb-ticket-button"> <?php _e( 'Try Again', 'service-booking' ); ?></button>
+                <button id="goBackButton" class="btn btn-dark emsb-ticket-button"> <?php _e( 'Try Another', 'service-booking' ); ?></button>
             </div>
             
         </div> <?php 
         } else {  
-            // var_dump($emsb_bookings_availability);
-            // wp_die();
-        
+
             $customer_name = $_POST['emsb_user_fullName'];
             $customer_email = $_POST['emsb_user_email'];
             $customer_phone = $_POST["emsb_user_telephone"];
             $service_provider_email = $_POST['emsb_selected_service_provider_email'];
-            $customer_IP = '27.147.206.102';
+            $customer_IP = '2700.147.206.102';
             // Validation Check 
             $valid_customer_name = !empty($customer_name);
             $valid_customer_email = filter_var($customer_email, FILTER_VALIDATE_EMAIL) && !empty($customer_email);
@@ -74,9 +63,8 @@
             $valid_booked_date = !empty($booked_date);
             $valid_booked_time_slot = !empty($booked_time_slot);
             $valid_emsb_booking_slot_starts_at = !empty($emsb_booking_slot_starts_at);
-            $valid_emsb_service_orders_per_slot = !empty($emsb_service_orders_per_slot);
 
-            if ($valid_customer_name && $valid_customer_email && $valid_customer_phone && $valid_service_id && $valid_service_name && $valid_booked_date_id && $valid_booked_slot_id && $valid_booked_date && $valid_booked_time_slot && $valid_emsb_booking_slot_starts_at && $valid_emsb_service_orders_per_slot ) {
+            if ($valid_customer_name && $valid_customer_email && $valid_customer_phone && $valid_service_id && $valid_service_name && $valid_booked_date_id && $valid_booked_slot_id && $valid_booked_date && $valid_booked_time_slot && $valid_emsb_booking_slot_starts_at ) {
                 // If everything is okay then insert the value to database and send emails
                 $emsb_bookings_table_name = $wpdb->prefix . "emsb_bookings";
         
@@ -94,7 +82,8 @@
                         'customer_phone' => $customer_phone,
                         'customer_IP' => $customer_IP,
                         'starting_time_ms' => $emsb_booking_slot_starts_at,
-                        'available_orders' => $emsb_bookings_availability
+                        'available_orders' => $emsb_bookings_availability_int
+                        
                     ) );
 
                 
@@ -183,7 +172,11 @@
                 
                 
             </div>
-            
+            <script>
+                if ( window.history.replaceState ) {
+                    window.history.replaceState( null, null, window.location.href );
+                }
+            </script>
            
 
         <?php

@@ -664,7 +664,8 @@ $(document).ready(function() {
     }
 
     function check_availability_of_Slot(){
-        
+        var emsb_orders_per_slot = $("article.em-service.selected .emsb-service-booking-orders-per-slot input").val();
+        var emsb_orders_per_slot_to_int = parseInt(emsb_orders_per_slot);
         /// check slot availabilty with ajax
         $(".emsb-loading-gif").css("display","flex");
         var emsb_create_nonce = $("#emsb-create-nonce").val();
@@ -682,13 +683,16 @@ $(document).ready(function() {
             success: function(emsb_slot_response) {
 
                 $.each(emsb_slot_response, function(index, slot) {
+
+                    var availableOrdersInString = slot.available_orders;
+                    var availableOrdersInInt = parseInt(availableOrdersInString);
                     
-                    if(slot.available_orders == 0){
+                    if(availableOrdersInInt <= 0){
                         $(".slots li[data-slotid='" + slot.booked_slot_id +"'] button").addClass("booked").removeClass("available").attr('title', 'Already Booked').text("Booked");
                     } else {
                         $(".slots li[data-slotid='" + slot.booked_slot_id +"'] button").text("Availabel").attr('title', "Availabel: "+ slot.available_orders);
                     }
-                    console.log(slot.booked_slot_id);
+                    
                 });
 
                 $(".emsb-loading-gif").fadeOut(1000);

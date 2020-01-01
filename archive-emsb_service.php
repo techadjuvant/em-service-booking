@@ -66,7 +66,7 @@ get_header();
               }
 
               if(isset($_GET['service_type'])){ 
-                $service_type = $_GET['service_type']; //get sort value
+                $service_type = $_GET['service_type']; //get sort value 
                 if($_GET['service_type'] == 'show-all'){
                   $args = array(
                     'posts_per_page' => $per_page,
