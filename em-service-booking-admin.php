@@ -47,9 +47,6 @@ class emsb_Admin_Page
             'post-new.php?post_type=' . $emsb_post_type    // menu slug
         );
 
-        
-        
-
         $emsb_bookings = add_submenu_page(
 			'emsb_admin_page',                         // parent slug
 			'EMSB bookings',                           // page title
@@ -57,9 +54,18 @@ class emsb_Admin_Page
 			'manage_options',                          // capability
 			'emsb_admin_bookings_page',                // menu slug
 			array ( __CLASS__, 'emsb_admin_bookings_page_func' )         // callback function, same as above
+        );
+        
+        $emsb_settings = add_submenu_page(
+			'emsb_admin_page',                         // parent slug
+			'EMSB bookings',                           // page title
+			'Settings',                                // menu title
+			'manage_options',                          // capability
+			'emsb_admin_settings_page',                // menu slug
+			array ( __CLASS__, 'emsb_admin_settings_page_func' )         // callback function, same as above
 		);
         
-		foreach ( array ( $main, $sub, $emsb_bookings, $emsb_services_menu_page) as $slug )
+		foreach ( array ( $main, $sub, $emsb_bookings, $emsb_settings, $emsb_services_menu_page) as $slug )
 		{
 			// make sure the style callback is used on our page only
 			add_action(
@@ -78,7 +84,39 @@ class emsb_Admin_Page
         add_action( 'admin_enqueue_scripts', array ( __CLASS__, 'emsb_edit_services' ));
         add_action( 'admin_notices', array ( __CLASS__, 'emsb_services_header_html' ));
 
+        // Add custom column to service post type edit list
+        add_filter( 'manage_emsb_service_posts_columns', array ( __CLASS__, 'ST4_columns_head_only_emsb_services' ), 10);
+        add_action( 'manage_emsb_service_posts_custom_column', array ( __CLASS__, 'ST4_columns_content_only_emsb_services' ), 10, 2);
+
 		
+    }
+
+
+    // CREATE TWO FUNCTIONS TO HANDLE THE COLUMN
+    public static function ST4_columns_head_only_emsb_services($emsb_featured_image_column) {
+        unset($emsb_featured_image_column['taxonomy-emsb_service_type']);
+        unset($emsb_featured_image_column['title']);
+        unset($emsb_featured_image_column['date']);
+        
+        $emsb_featured_image_column['esmb_service_featured_image'] = 'Photo';
+        $emsb_featured_image_column['title'] = 'Name';
+        $emsb_featured_image_column['taxonomy-emsb_service_type'] = 'Service Type';
+        $emsb_featured_image_column['date'] = 'Date';
+        return $emsb_featured_image_column;
+    }
+    public static function ST4_columns_content_only_emsb_services($column_name, $post_ID) {
+        // show featured images in dashboard
+        add_image_size( 'emsb_service-admin-post-featured-image', 60, 60, false );
+        switch($column_name){
+            case 'esmb_service_featured_image':
+            if( function_exists('the_post_thumbnail') ) {
+                echo the_post_thumbnail('emsb_service-admin-post-featured-image');
+            }
+            else
+                echo 'No featured image';
+            break;
+        }
+        
     }
 
     public static function emsb_services_header_html() {
@@ -106,7 +144,7 @@ class emsb_Admin_Page
                                 <li><a href="edit.php?post_type=emsb_service" class="active"> <?php _e( 'All Services ', 'service-booking' ); ?></a></li>
                                 <li><a href="post-new.php?post_type=emsb_service"> <?php _e( 'Add Service ', 'service-booking' ); ?></a></li>
                                 <li><a href="admin.php?page=emsb_admin_bookings_page"> <?php _e( 'All Bookings ', 'service-booking' ); ?></a></li>
-                                
+                                <li><a href="admin.php?page=emsb_admin_settings_page"><?php _e( 'Settings  ', 'service-booking' ); ?></a></li>
                             </ul>
                         </div>
                         
@@ -135,7 +173,7 @@ class emsb_Admin_Page
                                 <li><a href="edit.php?post_type=emsb_service" > <?php _e( 'All Services ', 'service-booking' ); ?></a></li>
                                 <li><a href="post-new.php?post_type=emsb_service" class="active"> <?php _e( 'Add Service ', 'service-booking' ); ?></a></li>
                                 <li><a href="admin.php?page=emsb_admin_bookings_page"> <?php _e( 'All Bookings ', 'service-booking' ); ?></a></li>
-                                
+                                <li><a href="admin.php?page=emsb_admin_settings_page"><?php _e( 'Settings  ', 'service-booking' ); ?></a></li>
                             </ul>
                         </div>
                         
@@ -227,8 +265,7 @@ class emsb_Admin_Page
 	}
 
 
-	public static function emsb_admin_main_page()
-	{
+	public static function emsb_admin_main_page() { 
         global $wpdb;
         $emsb_settings_data = $wpdb->prefix . 'emsb_settings';
 
@@ -238,15 +275,24 @@ class emsb_Admin_Page
         if(isset($_POST['emsb_save_admin_email_data'])){
             $admin_mail_subject = stripslashes_deep($_POST['emsb_admin_email_subject']);
             $admin_mail_body = stripslashes_deep($_POST['emsb_admin_email_body']);
-            $customer_mail_subject = stripslashes_deep($_POST['emsb_customer_email_subject']);
-            $customer_mail_body = stripslashes_deep($_POST['emsb_customer_email_body']);
+            $emsb_customer_pending_email_subject = stripslashes_deep($_POST['emsb_customer_pending_email_subject']);
+            $emsb_customer_pending_email_body = stripslashes_deep($_POST['emsb_customer_pending_email_body']);
+            $emsb_customer_confirmed_email_subject = stripslashes_deep($_POST['emsb_customer_confirmed_email_subject']);
+            $emsb_customer_confirmed_email_body = stripslashes_deep($_POST['emsb_customer_confirmed_email_body']);
+            $emsb_customer_cancelled_email_subject = stripslashes_deep($_POST['emsb_customer_cancelled_email_subject']);
+            $emsb_customer_cancelled_email_body = stripslashes_deep($_POST['emsb_customer_cancelled_email_body']);
+            
             $customer_cookie_duration = stripslashes_deep($_POST['emsb_customer_cookie_duration']);
             // Securly insert data with $wpdb->inert method preventing the sql injection and also escaping strings
             $wpdb->insert($emsb_settings_data, array(
                 'admin_mail_subject' => $admin_mail_subject,
                 'admin_mail_body' => $admin_mail_body,
-                'customer_mail_subject' => $customer_mail_subject,
-                'customer_mail_body' => $customer_mail_body,
+                'customer_mail_pending_subject' => $emsb_customer_pending_email_subject,
+                'customer_mail_pending_body' => $emsb_customer_pending_email_body,
+                'customer_mail_confirmed_subject' => $emsb_customer_confirmed_email_subject,
+                'customer_mail_confirmed_body' => $emsb_customer_confirmed_email_body,
+                'customer_mail_cancel_subject' => $emsb_customer_cancelled_email_subject,
+                'customer_mail_cancel_body' => $emsb_customer_cancelled_email_subject,
                 'customer_cookie_duration' => $customer_cookie_duration
             ));
             
@@ -262,11 +308,15 @@ class emsb_Admin_Page
             $emsb_settings_data_fetch = $wpdb->get_row( "SELECT * FROM $emsb_settings_data ORDER BY id DESC LIMIT 1" );
         }
 
-        $admin_mail_subject = $emsb_settings_data_fetch->admin_mail_subject;
-        $admin_mail_body = $emsb_settings_data_fetch->admin_mail_body;
-        $customer_mail_subject = $emsb_settings_data_fetch->customer_mail_subject;
-        $customer_mail_body = $emsb_settings_data_fetch->customer_mail_body;
-        $customer_cookie_duration = $emsb_settings_data_fetch->customer_cookie_duration;
+        $fetch_admin_mail_subject = $emsb_settings_data_fetch->admin_mail_subject;
+        $fetch_admin_mail_body = $emsb_settings_data_fetch->admin_mail_body;
+        $fetch_emsb_customer_pending_email_subject = $emsb_settings_data_fetch->customer_mail_pending_subject;
+        $fetch_emsb_customer_pending_email_body = $emsb_settings_data_fetch->customer_mail_pending_body;
+        $fetch_emsb_customer_confirmed_email_subject = $emsb_settings_data_fetch->customer_mail_confirmed_subject;
+        $fetch_emsb_customer_confirmed_email_body = $emsb_settings_data_fetch->customer_mail_confirmed_body;
+        $fetch_emsb_customer_cancelled_email_subject = $emsb_settings_data_fetch->customer_mail_cancel_subject;
+        $fetch_emsb_customer_cancelled_email_body = $emsb_settings_data_fetch->customer_mail_cancel_body;
+        $fetch_customer_cookie_duration = $emsb_settings_data_fetch->customer_cookie_duration;
         
 
         ?>
@@ -286,6 +336,7 @@ class emsb_Admin_Page
                         <li><a href="edit.php?post_type=emsb_service"><?php _e( 'All Services  ', 'service-booking' ); ?></a></li>
                         <li><a href="post-new.php?post_type=emsb_service"><?php _e( 'Add Service  ', 'service-booking' ); ?></a></li>
                         <li><a href="admin.php?page=emsb_admin_bookings_page"><?php _e( 'All Bookings  ', 'service-booking' ); ?></a></li>
+                        <li><a href="admin.php?page=emsb_admin_settings_page"><?php _e( 'Settings  ', 'service-booking' ); ?></a></li>
                     </ul>
                 </div>
                 
@@ -318,79 +369,13 @@ class emsb_Admin_Page
                                 <div class="emsb-admin-loading-gif">
                                     <img src="<?php echo plugin_dir_url( __FILE__ ) . 'assets/img/loading.gif'; ?>">
                                 </div>
-                                <footer class="blockquote-footer emsb-pending-table-footer">  <?php _e( 'Newest 10 Pending Booking Orders only for upcoming slots from the current time.', 'service-booking' ); ?> </footer>
+                                <footer class="blockquote-footer emsb-pending-table-footer">  <?php _e( '10 Pending Booking Orders only for upcoming slots from the current time( Policy: Come first servied first )', 'service-booking' ); ?> </footer>
                             </form>                      
                                
                         </div> <!-- End of Container -->
 
                     </div>
 
-
-
-                <form method="post">
-                    <div class="emsb-email-notification-data-wrapper container">
-                    <!-- Admin Email Notification data starts-->
-                        <div class="emsb-admin-email-data-form">
-                            <div class="card">
-                                <div class="card-header">
-                                    <?php _e( 'DashboAdmin Email Notification ard ', 'service-booking' ); ?>
-                                </div>
-                                <div class="card-body">
-                                    <div class="form-group">
-                                        <label for="emsb_admin_email_subject"><?php _e( 'Admin Email Subject  ', 'service-booking' ); ?></label>
-                                        <input type="text" name="emsb_admin_email_subject" class="form-control" id="emsb_admin_email_subject" value="<?php echo $admin_mail_subject; ?>" placeholder="Example: A Booking has been placed">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="emsb_admin_email_body"><?php _e( 'Admin Email Body  ', 'service-booking' ); ?></label>
-                                        <textarea class="form-control" name="emsb_admin_email_body" id="emsb_admin_email_body" rows="5" placeholder="Your message body"><?php echo $admin_mail_body; ?></textarea>
-                                    </div>
-                                    <footer class="blockquote-footer"><?php _e( 'Check the bookings list to see the customer data ', 'service-booking' ); ?> </footer>
-                                </div>
-                            </div>
-                        </div>
-                         <!-- Admin Email Notification ends -->
-
-                        <!-- Customer Email Notification data starts -->
-                        <div class="emsb-customer-email-data-form mt-5">
-                            <div class="card">
-                                <div class="card-header">
-                                    <?php _e( 'Customer Email Notification ', 'service-booking' ); ?>
-                                </div>
-                                <div class="card-body">
-                                    <div class="form-group">
-                                        <label for="emsb_customer_email_subject"><?php _e( 'Customer Email Subject  ', 'service-booking' ); ?></label>
-                                        <input type="text" name="emsb_customer_email_subject" class="form-control" id="emsb_customer_email_subject" value="<?php echo $customer_mail_subject; ?>" placeholder="Example: A Booking is confirmed">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="emsb_customer_email_body"><?php _e( 'Customer Email Body  ', 'service-booking' ); ?></label>
-                                        <textarea class="form-control" name="emsb_customer_email_body" id="emsb_customer_email_body" rows="5" placeholder="Your message body"><?php echo $customer_mail_body; ?></textarea>
-                                    </div>
-                                    <footer class="blockquote-footer"> <?php _e( 'Customers will receive a token with booking details with the email ', 'service-booking' ); ?></footer>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Customer Email Notification data ends -->
-
-                        <!-- User Cookie data starts -->
-                        <div class="emsb-customer-email-data-form mt-5">
-                            <div class="card">
-                                <div class="card-header">
-                                    <?php _e( 'User Cookie  ', 'service-booking' ); ?>
-                                </div>
-                                <div class="card-body">
-                                    <div class="form-group">
-                                        <label for="emsb_customer_cookie_duration"><?php _e( 'How many days do you want to save the customer info on their browser cookie?  ', 'service-booking' ); ?></label>
-                                        <input type="number" name="emsb_customer_cookie_duration"id="emsb_customer_cookie_duration" value="<?php echo $customer_cookie_duration; ?>" class="form-control"  placeholder="30">
-                                    </div>
-                                    <footer class="blockquote-footer">  <?php _e( 'Don\'t change it freequently ', 'service-booking' ); ?> </footer>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- User Cookie data ends -->
-                        <button name="emsb_save_admin_email_data" type="submit" class="btn btn-primary mt-3"> <?php _e( 'Save Changes ', 'service-booking' ); ?></button>
-                    </div>
-                    
-                </form>
             </main>
         </div>
         
@@ -427,6 +412,7 @@ class emsb_Admin_Page
                             <li><a href="edit.php?post_type=emsb_service"> <?php _e( 'All Services', 'service-booking' ); ?></a></li>
                             <li><a href="post-new.php?post_type=emsb_service"><?php _e( 'Add Service  ', 'service-booking' ); ?></a></li>
                             <li><a href="admin.php?page=emsb_admin_bookings_page" class="active"><?php _e( 'All Bookings ', 'service-booking' ); ?></a></li>
+                            <li><a href="admin.php?page=emsb_admin_settings_page"><?php _e( 'Settings  ', 'service-booking' ); ?></a></li>
                         </ul>
                     </div>
                     <div class="emsb-table-wrapper container text-center">
@@ -507,6 +493,196 @@ class emsb_Admin_Page
                 </main>
             </div>
         <?php 
+    }
+
+
+    public static function emsb_admin_settings_page_func() {
+            global $wpdb;
+            $emsb_settings_data = $wpdb->prefix . 'emsb_settings';
+    
+            $emsb_plugin_path = plugin_dir_url( __FILE__ );
+            $emsb_icon_url = $emsb_plugin_path . 'assets/img/service-booking.png';
+            
+            if(isset($_POST['emsb_save_admin_email_data'])){
+                $admin_mail_subject = stripslashes_deep($_POST['emsb_admin_email_subject']);
+                $admin_mail_body = stripslashes_deep($_POST['emsb_admin_email_body']);
+                $emsb_customer_pending_email_subject = stripslashes_deep($_POST['emsb_customer_pending_email_subject']);
+                $emsb_customer_pending_email_body = stripslashes_deep($_POST['emsb_customer_pending_email_body']);
+                $emsb_customer_confirmed_email_subject = stripslashes_deep($_POST['emsb_customer_confirmed_email_subject']);
+                $emsb_customer_confirmed_email_body = stripslashes_deep($_POST['emsb_customer_confirmed_email_body']);
+                $emsb_customer_cancelled_email_subject = stripslashes_deep($_POST['emsb_customer_cancelled_email_subject']);
+                $emsb_customer_cancelled_email_body = stripslashes_deep($_POST['emsb_customer_cancelled_email_body']);
+                
+                $customer_cookie_duration = stripslashes_deep($_POST['emsb_customer_cookie_duration']);
+                // Securly insert data with $wpdb->inert method preventing the sql injection and also escaping strings
+                $wpdb->insert($emsb_settings_data, array(
+                    'admin_mail_subject' => $admin_mail_subject,
+                    'admin_mail_body' => $admin_mail_body,
+                    'customer_mail_pending_subject' => $emsb_customer_pending_email_subject,
+                    'customer_mail_pending_body' => $emsb_customer_pending_email_body,
+                    'customer_mail_confirmed_subject' => $emsb_customer_confirmed_email_subject,
+                    'customer_mail_confirmed_body' => $emsb_customer_confirmed_email_body,
+                    'customer_mail_cancel_subject' => $emsb_customer_cancelled_email_subject,
+                    'customer_mail_cancel_body' => $emsb_customer_cancelled_email_subject,
+                    'customer_cookie_duration' => $customer_cookie_duration
+                ));
+                
+            };
+    
+            // When the page loads fetch data from database
+            $emsb_settings_data_fetch = $wpdb->get_row( "SELECT * FROM $emsb_settings_data ORDER BY id DESC LIMIT 1" );
+    
+            // When settings data is changed fetch new data from database
+            $emsb_check_changes = isset($_POST['emsb_save_admin_email_data']);
+    
+            if($emsb_check_changes){
+                $emsb_settings_data_fetch = $wpdb->get_row( "SELECT * FROM $emsb_settings_data ORDER BY id DESC LIMIT 1" );
+            }
+    
+            $fetch_admin_mail_subject = $emsb_settings_data_fetch->admin_mail_subject;
+            $fetch_admin_mail_body = $emsb_settings_data_fetch->admin_mail_body;
+            $fetch_emsb_customer_pending_email_subject = $emsb_settings_data_fetch->customer_mail_pending_subject;
+            $fetch_emsb_customer_pending_email_body = $emsb_settings_data_fetch->customer_mail_pending_body;
+            $fetch_emsb_customer_confirmed_email_subject = $emsb_settings_data_fetch->customer_mail_confirmed_subject;
+            $fetch_emsb_customer_confirmed_email_body = $emsb_settings_data_fetch->customer_mail_confirmed_body;
+            $fetch_emsb_customer_cancelled_email_subject = $emsb_settings_data_fetch->customer_mail_cancel_subject;
+            $fetch_emsb_customer_cancelled_email_body = $emsb_settings_data_fetch->customer_mail_cancel_body;
+            $fetch_customer_cookie_duration = $emsb_settings_data_fetch->customer_cookie_duration;
+            
+    
+            ?>
+            <div class="emsb-container">
+                <header class="emsb-admin-main-page-header-wrapper">
+                    <div class="jumbotron text-center">
+                        <div class="emsb-admin-plugin-title">
+                            <img src="<?php echo $emsb_icon_url; ?>" alt="Service Booking Icon">
+                            <h2 class="display-5"> <?php _e( 'Service Booking ', 'service-booking' ); ?></h2>
+                        </div>
+                    </div>
+                </header>
+                <main class="emsb-admin-main-page-wrapper">
+                    <div class="tabs">
+                        <ul>
+                            <li><a href="admin.php?page=emsb_admin_page"> <?php _e( 'Dashboard ', 'service-booking' ); ?></a></li>
+                            <li><a href="edit.php?post_type=emsb_service"><?php _e( 'All Services  ', 'service-booking' ); ?></a></li>
+                            <li><a href="post-new.php?post_type=emsb_service"><?php _e( 'Add Service  ', 'service-booking' ); ?></a></li>
+                            <li><a href="admin.php?page=emsb_admin_bookings_page"><?php _e( 'All Bookings  ', 'service-booking' ); ?></a></li>
+                            <li><a href="admin.php?page=emsb_admin_settings_page" class="active"><?php _e( 'Settings  ', 'service-booking' ); ?></a></li>
+                        </ul>
+                    </div>
+                    
+                    <form method="post">
+                        <div class="emsb-email-notification-data-wrapper container">
+                        <!-- Admin Email Notification data starts-->
+                            <div class="emsb-admin-email-data-form">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <?php _e( 'Service Provier\'s Email Notification', 'service-booking' ); ?>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <label for="emsb_admin_email_subject"><?php _e( 'Admin Email Subject  ', 'service-booking' ); ?></label>
+                                            <input type="text" name="emsb_admin_email_subject" class="form-control" id="emsb_admin_email_subject" value="<?php echo $fetch_admin_mail_subject; ?>" placeholder="Example: A Booking has been placed">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="emsb_admin_email_body"><?php _e( 'Admin Email Body  ', 'service-booking' ); ?></label>
+                                            <textarea class="form-control" name="emsb_admin_email_body" id="emsb_admin_email_body" rows="5" placeholder="Your message body"><?php echo $fetch_admin_mail_body; ?></textarea>
+                                        </div>
+                                        <footer class="blockquote-footer"><?php _e( 'Check the bookings list to see the customer data ', 'service-booking' ); ?> </footer>
+                                    </div>
+                                </div>
+                            </div>
+                             <!-- Admin Email Notification ends -->
+    
+                            <!-- Customer Email Notification data starts -->
+                            <div class="emsb-customer-email-data-form mt-5">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <?php _e( 'Customer\'s Pending Booking Notification ', 'service-booking' ); ?>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <label for="emsb_customer_pending_email_subject"><?php _e( 'Customer Email Subject  ', 'service-booking' ); ?></label>
+                                            <input type="text" name="emsb_customer_pending_email_subject" class="form-control" id="emsb_customer_pending_email_subject" value="<?php echo $fetch_emsb_customer_pending_email_subject; ?>" placeholder="Example: Your Booking is Pending">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="emsb_customer_pending_email_body"><?php _e( 'Customer Email Body  ', 'service-booking' ); ?></label>
+                                            <textarea class="form-control" name="emsb_customer_pending_email_body" id="emsb_customer_pending_email_body" rows="5" placeholder="Your pending message body"><?php echo $fetch_emsb_customer_pending_email_body; ?></textarea>
+                                        </div>
+                                        <footer class="blockquote-footer"> <?php _e( 'Customers will receive this message on placing a booking ', 'service-booking' ); ?></footer>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Customer Email Notification data ends -->
+    
+                            <!-- Customer Email Notification on booking confirmation -->
+                            <div class="emsb-customer-email-data-form mt-5">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <?php _e( 'Customer\'s Booking Confirmation Notification ', 'service-booking' ); ?>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <label for="emsb_customer_confirmed_email_subject"><?php _e( 'Confirmed Email Subject  ', 'service-booking' ); ?></label>
+                                            <input type="text" name="emsb_customer_confirmed_email_subject" class="form-control" id="emsb_customer_confirmed_email_subject" value="<?php echo $fetch_emsb_customer_confirmed_email_subject; ?>" placeholder="Example: Your Booking is Confirmed">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="emsb_customer_confirmed_email_body"><?php _e( 'Confirmed Email Body  ', 'service-booking' ); ?></label>
+                                            <textarea class="form-control" name="emsb_customer_confirmed_email_body" id="emsb_customer_confirmed_email_body" rows="5" placeholder="Your confirmed message body"><?php echo $fetch_emsb_customer_confirmed_email_body; ?></textarea>
+                                        </div>
+                                        <footer class="blockquote-footer"> <?php _e( 'Customers will receive this message when you confirmed a booking from the admin dashboard', 'service-booking' ); ?></footer>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Customer Email Notification on booking confirmation ends -->
+    
+                            <!-- Customer Email Notification on booking Cancellation -->
+                            <div class="emsb-customer-email-data-form mt-5">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <?php _e( 'Customer\'s Booking Cancellation Notification ', 'service-booking' ); ?>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <label for="emsb_customer_cancelled_email_subject"><?php _e( 'Cancelled Booking Email Subject  ', 'service-booking' ); ?></label>
+                                            <input type="text" name="emsb_customer_cancelled_email_subject" class="form-control" id="emsb_customer_cancelled_email_subject" value="<?php echo $fetch_emsb_customer_cancelled_email_subject; ?>" placeholder="Example: Your Booking is Cancelled Booking">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="emsb_customer_cancelled_email_body"><?php _e( 'Cancelled Booking Email Body  ', 'service-booking' ); ?></label>
+                                            <textarea class="form-control" name="emsb_customer_cancelled_email_body" id="emsb_customer_cancelled_email_body" rows="5" placeholder="Your Cancelled Booking message body"><?php echo $fetch_emsb_customer_cancelled_email_body; ?></textarea>
+                                        </div>
+                                        <footer class="blockquote-footer"> <?php _e( 'Customers will receive this message when you cancel a booking from the admin dashboard', 'service-booking' ); ?></footer>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Customer Email Notification on booking Cancellation ends -->
+    
+                            <!-- User Cookie -->
+                            <div class="emsb-customer-email-data-form mt-5">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <?php _e( 'User Cookie  ', 'service-booking' ); ?>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <label for="emsb_customer_cookie_duration"><?php _e( 'How many days do you want to save the customer info on their browser cookie?  ', 'service-booking' ); ?></label>
+                                            <input type="number" name="emsb_customer_cookie_duration"id="emsb_customer_cookie_duration" value="<?php echo $fetch_customer_cookie_duration; ?>" class="form-control"  placeholder="30">
+                                        </div>
+                                        <footer class="blockquote-footer">  <?php _e( 'Don\'t change it freequently ', 'service-booking' ); ?> </footer>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- User Cookie data ends -->
+                            <button name="emsb_save_admin_email_data" type="submit" class="btn btn-primary mt-3"> <?php _e( 'Save Changes ', 'service-booking' ); ?></button>
+                        </div>
+                        
+                    </form>
+                </main>
+            </div>
+            
+                
+            <?php
+    
     }
 	
 

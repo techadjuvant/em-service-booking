@@ -108,23 +108,25 @@ if ( !class_exists( 'emsb_service_booking_plugin_base_class' ) ) {
         //Add texonomy
         public function emsb_add_texonomy_to_booking_service(){
             $labels = array(
-                'name'              => _x( 'Service Categories', 'taxonomy general name' ),
-                'singular_name'     => _x( 'Service Category', 'taxonomy singular name' ),
-                'search_items'      => __( 'Search Service Categories' ),
-                'all_items'         => __( 'All Service Categories' ),
-                'parent_item'       => __( 'Parent Service Category' ),
-                'parent_item_colon' => __( 'Parent Service Category:' ),
-                'edit_item'         => __( 'Edit Service Category' ), 
-                'update_item'       => __( 'Update Service Category' ),
-                'add_new_item'      => __( 'Add New Service Category' ),
-                'new_item_name'     => __( 'New Service Category' ),
-                'menu_name'         => __( 'Service Categories' ),
+                'name'              => _x( 'Service Types', 'taxonomy general name' ),
+                'singular_name'     => _x( 'Service Type', 'taxonomy singular name' ),
+                'search_items'      => __( 'Search Service Types' ),
+                'all_items'         => __( 'All Service Types' ),
+                'parent_item'       => __( 'Parent Service Type' ),
+                'parent_item_colon' => __( 'Parent Service Type:' ),
+                'edit_item'         => __( 'Edit Service Type' ), 
+                'update_item'       => __( 'Update Service Type' ),
+                'add_new_item'      => __( 'Add New Service Type' ),
+                'new_item_name'     => __( 'New Service Type' ),
+                'menu_name'         => __( 'Service Types' ),
               );
               $args = array(
                 'labels' => $labels,
                 'hierarchical' => true,
+                'show_ui'           => true,
+                'show_admin_column' => true,
               );
-              register_taxonomy( 'service_category', 'emsb_service', $args );
+              register_taxonomy( 'emsb_service_type', 'emsb_service', $args );
             
         }
 
@@ -594,8 +596,12 @@ class emsb_database {
             `date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
             `admin_mail_subject` text,
             `admin_mail_body` text,
-            `customer_mail_subject` text,
-            `customer_mail_body` text,
+            `customer_mail_pending_subject` text,
+            `customer_mail_pending_body` text,
+            `customer_mail_confirmed_subject` text,
+            `customer_mail_confirmed_body` text,
+            `customer_mail_cancel_subject` text,
+            `customer_mail_cancel_body` text,
             `customer_cookie_duration` int(11)
             ) ENGINE=MyISAM DEFAULT CHARSET=utf8";
 
@@ -610,8 +616,12 @@ class emsb_database {
 		$wpdb->insert($emsb_settings_data, array(
             'admin_mail_subject' => "Service provider's email subject",
             'admin_mail_body' => "Service provider's email message body",
-            'customer_mail_subject' => "Customer's email subject",
-            'customer_mail_body' => "Customer's email message body",
+            'customer_mail_pending_subject' => "Booking Pending",
+            'customer_mail_pending_body' => "pending booking email body",
+            'customer_mail_confirmed_subject' => "Booking Confirmed",
+            'customer_mail_confirmed_body' => "Confirmation email message body",
+            'customer_mail_cancel_subject' => "Booking Cancelled",
+            'customer_mail_cancel_body' => "Cancel email message body",
             'customer_cookie_duration' => 30
         ));
 

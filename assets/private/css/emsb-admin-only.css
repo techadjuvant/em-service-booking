@@ -1084,3 +1084,15 @@ legend.inline-edit-legend {
   text-align: right;
   padding: 15px 25px;
 }
+th#esmb_service_featured_image {
+  width: 130px;
+  padding-left: 33px;
+}
+td.esmb_service_featured_image.column-esmb_service_featured_image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+th#taxonomy-emsb_service_type {
+  width: 300px;
+}
