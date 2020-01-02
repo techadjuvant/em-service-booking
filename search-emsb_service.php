@@ -29,11 +29,11 @@ get_header();
             </header>
             <div class="row py-3">   
               <div class="col-sm-6">
-              <form action="" method="GET" id="emsb_sort_archive">
-                  <select class="form-control chosen-select" data-placeholder="Choose a Country..." name="service_type" id="emsb_sort_archive_btn" onchange="submit();">
-                    <option value="show-all" <?php if(isset($_GET['service_type']) && $_GET['service_type'] == 'show-all'){ echo 'selected="selected"'; } else {'';}; ?>> Show all </option>
+                <form action="<?php echo esc_url( home_url( '/book-service/') ); ?>" method="GET" id="emsb_sort_archive">
+                  <select class="form-control chosen-select" data-placeholder="<?php _e( 'Choose a Service Type... ', 'service-booking' ); ?>" name="service_type" id="emsb_sort_archive_btn" onchange="submit();">
+                    <option value="show-all" <?php if(isset($_GET['service_type']) && $_GET['service_type'] == 'show-all'){ echo 'selected="selected"'; } else {'';}; ?>> <?php _e( 'Show all ', 'service-booking' ); ?> </option>
                     <?php 
-                        $categories = get_categories('taxonomy=service_category&post_type=emsb_service'); 
+                        $categories = get_categories('taxonomy=emsb_service_type&post_type=emsb_service'); 
                         foreach ($categories as $category) : 
                           echo '<option value="'.$category->name.'"';
                           if(isset($_GET['service_type']) && $_GET['service_type'] == ''.$category->name.'' ){ echo 'selected="selected"'; } else {echo '';};
@@ -45,12 +45,12 @@ get_header();
                 
               </div>
               <div class="col-sm-6">
-                <form role="search" class="emsb-serch-form" action="<?php echo site_url('book-service/'); ?>" method="get" id="searchform">
+                <form action="<?php echo esc_url( home_url( '/book-service/') ); ?>" role="search" class="emsb-serch-form"  method="get" id="searchform">
                     <div class="input-group">
                       <input type="text" class="form-control" name="s" placeholder="Search">
                       <div class="input-group-append">
                         <button class="btn emsb-search-btn" type="submit">
-                          Search
+                           <?php _e( 'Search', 'service-booking' ); ?>
                         </button>
                       </div>
                   </div>
@@ -368,7 +368,7 @@ get_header();
           </div>
 
           <div class="em-booking-form-container">
-            <form method="post" class="needs-validation" novalidate <?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>>
+            <form method="post" class="needs-validation" novalidate >
               <div class="em-booking-form-fields">
                 <div class="form-row">
                   <div class="col-md-12 mb-3">

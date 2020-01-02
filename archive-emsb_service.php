@@ -28,11 +28,11 @@ get_header();
             </header>
             <div class="row py-3">   
               <div class="col-sm-6">
-              <form action="" method="GET" id="emsb_sort_archive">
-                  <select class="form-control chosen-select" data-placeholder="Choose a Country..." name="service_type" id="emsb_sort_archive_btn" onchange="submit();">
-                    <option value="show-all" <?php if(isset($_GET['service_type']) && $_GET['service_type'] == 'show-all'){ echo 'selected="selected"'; } else {'';}; ?>> Show all </option>
+              <form action="<?php echo esc_url( home_url( '/book-service/') ); ?>" method="GET" id="emsb_sort_archive">
+                  <select class="form-control chosen-select" data-placeholder="<?php _e( 'Choose a Service Type... ', 'service-booking' ); ?>" name="service_type" id="emsb_sort_archive_btn" onchange="submit();">
+                    <option value="show-all" <?php if(isset($_GET['service_type']) && $_GET['service_type'] == 'show-all'){ echo 'selected="selected"'; } else {'';}; ?>> <?php _e( 'Show all ', 'service-booking' ); ?> </option>
                     <?php 
-                        $categories = get_categories('taxonomy=service_category&post_type=emsb_service'); 
+                        $categories = get_categories('taxonomy=emsb_service_type&post_type=emsb_service'); 
                         foreach ($categories as $category) : 
                           echo '<option value="'.$category->name.'"';
                           if(isset($_GET['service_type']) && $_GET['service_type'] == ''.$category->name.'' ){ echo 'selected="selected"'; } else {echo '';};
@@ -44,12 +44,12 @@ get_header();
                 
               </div>
               <div class="col-sm-6">
-                <form role="search" class="emsb-serch-form" action="<?php echo site_url('book-service/'); ?>" method="get" id="searchform">
+                <form action="<?php echo esc_url( home_url( '/book-service/') ); ?>" role="search" class="emsb-serch-form"  method="get" id="searchform">
                     <div class="input-group">
                       <input type="text" class="form-control" name="s" placeholder="Search">
                       <div class="input-group-append">
                         <button class="btn emsb-search-btn" type="submit">
-                          Search
+                           <?php _e( 'Search', 'service-booking' ); ?>
                         </button>
                       </div>
                   </div>
@@ -90,7 +90,7 @@ get_header();
                     'offset' => $offset,
                     'tax_query' => array(
                       array(
-                        'taxonomy' => 'service_category',
+                        'taxonomy' => 'emsb_service_type',
                         'field' => 'name',
                         'terms' => $_GET['service_type']
                       ) 
@@ -174,10 +174,10 @@ get_header();
                                   <?php if($startingTimeToMs > $current_time_milliseconds){ ?>
                                         <input type="text" name="emsb_service_availability_starts_at" class="emsb_service_availability_starts_at" value="<?php echo $emsb_service_availability_starts_at; ?>"/>
                                   <?php } else { ?>
-                                        <input type="text" name="emsb_service_availability_starts_at" class="emsb_service_availability_starts_at" value="<?php echo date("Y-m-d 00:00:00"); ?>"/>
+                                        <input type="text" name="emsb_service_availability_starts_at" class="emsb_service_availability_starts_at" value="<?php echo date('Y-m-d 00:00:01'); ?>"/>
                                   <?php } ?>
                                 <?php } else { ?>
-                                  <input type="text" name="emsb_service_availability_starts_at" class="emsb_service_availability_starts_at" value="<?php echo date("Y-m-d 00:00:00"); ?>"/>
+                                  <input type="text" name="emsb_service_availability_starts_at" class="emsb_service_availability_starts_at" value="<?php echo date("Y-m-d 00:00:01"); ?>"/>
                                 <?php } ?>
                                   <!-- ending date  -->
                                 <?php $emsb_service_availability_ends_at = get_post_meta( get_the_ID(), 'emsb_service_availability_ends_at', true ); 
@@ -185,7 +185,7 @@ get_header();
                                   <input type="text" name="emsb_service_availability_ends_at" class="emsb_service_availability_ends_at" value="<?php echo $emsb_service_availability_ends_at; ?>"/>
                                 <?php 
                                   } else { ?>
-                                    <input type="text" name="emsb_service_availability_ends_at" class="emsb_service_availability_ends_at" value="<?php echo date("Y-m-d 00:00:00"); ?>"/>
+                                    <input type="text" name="emsb_service_availability_ends_at" class="emsb_service_availability_ends_at" value="<?php echo date("Y-m-d 00:00:01"); ?>"/>
                                   <?php } 
                                 ?>
 

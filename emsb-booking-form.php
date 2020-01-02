@@ -1,15 +1,17 @@
 <?php
 
     // When the page loads fetch data from database
-    global $wpdb;
-    $emsb_settings_data = $wpdb->prefix . 'emsb_settings';
-    $emsb_settings_data_fetch = $wpdb->get_row( "SELECT * FROM $emsb_settings_data ORDER BY id DESC LIMIT 1" );
-    $admin_mail_subject = $emsb_settings_data_fetch->admin_mail_subject;
-    $admin_mail_body = $emsb_settings_data_fetch->admin_mail_body;
-    $customer_mail_subject = $emsb_settings_data_fetch->customer_mail_subject;
-    $customer_mail_body = $emsb_settings_data_fetch->customer_mail_body;
+    
 
     if(isset($_POST['emsb_submit_booking'])){
+        global $wpdb;
+        $emsb_settings_data = $wpdb->prefix . 'emsb_settings';
+        $emsb_settings_data_fetch = $wpdb->get_row( "SELECT * FROM $emsb_settings_data ORDER BY id DESC LIMIT 1" );
+        $admin_mail_subject = $emsb_settings_data_fetch->admin_mail_subject;
+        $admin_mail_body = $emsb_settings_data_fetch->admin_mail_body;
+        $customer_mail_subject = $emsb_settings_data_fetch->customer_mail_pending_subject;
+        $customer_mail_body = $emsb_settings_data_fetch->customer_mail_pending_body;
+
 
         global $wpdb;
         
