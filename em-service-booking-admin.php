@@ -426,7 +426,7 @@ class emsb_Admin_Page
                                                 <option value="20"><?php _e( '20', 'service-booking' ); ?></option>
                                                 <option value="50"><?php _e( '50', 'service-booking' ); ?></option>
                                                 <option value="70"><?php _e( '70', 'service-booking' ); ?></option>
-                                                <option value="100"><?php _e( '10', 'service-booking' ); ?></option>
+                                                <option value="100"><?php _e( '100', 'service-booking' ); ?></option>
                                                 <option value="5000000"><?php _e( 'Show ALL Rows', 'service-booking' ); ?></option>
                                             </select>
                                         </div>

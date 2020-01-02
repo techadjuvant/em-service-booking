@@ -5,7 +5,7 @@ $(document).ready(function() {
     var emsb_pluginUrl = pluginsUrl +"/em-service-booking";
     var emsb_icon_url = emsb_pluginUrl +"/assets/img/service-booking.png";
     var emsb_loading_icon_url = emsb_pluginUrl +"/assets/img/loading.gif";
-    console.log(emsb_icon_url);
+
     $("li#toplevel_page_emsb_admin_page .dashicons-admin-generic").append("<span class='emsb-icon-wrapper'><img src='"+emsb_icon_url+"' alt='EMSB'></span>");
 
     if($("#emsb_service_full_day_reservation").is(":checked")) {
@@ -110,7 +110,6 @@ $(document).ready(function() {
             var availability_per_slot_to_int = parseInt(availability_per_slot);
             var update_availability = availability_per_slot_to_int - 1;
             var do_not_update_availability = availability_per_slot_to_int;
-            console.log(typeof(update_availability));
             if(availability_per_slot_to_int > 0){
                 $('#emsbPendingBookings').append("\
                 <tr> \
