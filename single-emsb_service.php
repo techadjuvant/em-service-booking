@@ -76,13 +76,20 @@ get_header();
                   </div>
                   <div class="em-service-meta-info">
                       <div class="emsb-service-available-on-calendar">
-                              <!-- starting date  -->
+                            <!-- starting date  -->
                             <?php $emsb_service_availability_starts_at = get_post_meta( get_the_ID(), 'emsb_service_availability_starts_at', true ); 
+                            
                             if($emsb_service_availability_starts_at){
+                                $current_time_milliseconds = round(microtime(true) * 1000);
+                                $startingTimeToMs = strtotime($emsb_service_availability_starts_at) * 1000;
                             ?>
-                              <input type="text" name="emsb_service_availability_starts_at" class="emsb_service_availability_starts_at" value="<?php echo $emsb_service_availability_starts_at; ?>"/>
+                              <?php if($startingTimeToMs > $current_time_milliseconds){ ?>
+                                    <input type="text" name="emsb_service_availability_starts_at" class="emsb_service_availability_starts_at" value="<?php echo $emsb_service_availability_starts_at; ?>"/>
+                              <?php } else { ?>
+                                    <input type="text" name="emsb_service_availability_starts_at" class="emsb_service_availability_starts_at" value="<?php echo date("Y-m-d 00:00:00"); ?>"/>
+                              <?php } ?>
                             <?php } else { ?>
-                              <input type="text" name="emsb_service_availability_starts_at" class="emsb_service_availability_starts_at" value="<?php echo date("Y-m-d"); ?>"/>
+                              <input type="text" name="emsb_service_availability_starts_at" class="emsb_service_availability_starts_at" value="<?php echo date("Y-m-d 00:00:00"); ?>"/>
                             <?php } ?>
                               <!-- ending date  -->
                             <?php $emsb_service_availability_ends_at = get_post_meta( get_the_ID(), 'emsb_service_availability_ends_at', true ); 
@@ -90,11 +97,10 @@ get_header();
                               <input type="text" name="emsb_service_availability_ends_at" class="emsb_service_availability_ends_at" value="<?php echo $emsb_service_availability_ends_at; ?>"/>
                             <?php 
                               } else { ?>
-                                <input type="text" name="emsb_service_availability_ends_at" class="emsb_service_availability_ends_at" value="<?php echo date('Y-m-d'); ?>"/>
-                              <?php }
+                                <input type="text" name="emsb_service_availability_ends_at" class="emsb_service_availability_ends_at" value="<?php echo date("Y-m-d 00:00:00"); ?>"/>
+                              <?php } 
                             ?>
-
-                      </div>
+                        </div>
                       <!-- weekly off-days  -->
                     <div class="em-off-days">
                       <?php $emsb_service_off_day_sun = get_post_meta( get_the_ID(), 'emsb_service_off_day_sun', true );
