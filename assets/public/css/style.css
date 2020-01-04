@@ -669,6 +669,7 @@ article.em-service main {
     border-radius: 5px;
     box-shadow: 5px 5px 20px rgba(49, 46, 255, 0.15);
     border: 1px solid #d5d5d5d9;
+    margin-bottom: 50px;
 }
 #emsb_booking_ticket p {
     font-size: 14px;
