@@ -510,10 +510,7 @@ if ( !class_exists( 'emsb_service_booking_plugin_base_class' ) ) {
             wp_enqueue_script('bootstrap-js', plugin_dir_url(__FILE__) . 'assets/js/bootstrap.min.js', array(), '1.1', true );
             wp_enqueue_script('chosen.jquery', plugin_dir_url(__FILE__) . 'assets/js/chosen.jquery.js', array(), '1.1', true );
             wp_enqueue_script('pseudo-ripple-js', plugin_dir_url(__FILE__) . 'calendar/jquery-pseudo-ripple.js', array(), '1.1', true );
-            wp_enqueue_script('nao-calendar-js', plugin_dir_url(__FILE__) . 'calendar/jquery-nao-calendar.js', array(), '1.1', true );
-            wp_enqueue_script('html2canvas', plugin_dir_url(__FILE__) . 'assets/public/js/html2canvas.js', array(), '1.1', true );
-            wp_enqueue_script('jsPDF', plugin_dir_url(__FILE__) . 'assets/public/js/jsPDF.js', array(), '1.1', true );
-            
+            wp_enqueue_script('nao-calendar-js', plugin_dir_url(__FILE__) . 'calendar/jquery-nao-calendar.js', array(), '1.1', true ); 
             wp_enqueue_script('emr-script-js', plugin_dir_url(__FILE__) . 'assets/public/js/script.js', array(), '1.1', true );
             
 
@@ -545,7 +542,7 @@ class emsb_database {
             global $wpdb;
             $sql_enquiry = "CREATE TABLE IF NOT EXISTS {$wpdb->prefix}emsb_bookings (
             `id` int(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-            `approve_booking` BOOLEAN NOT NULL,
+            `approve_booking` varchar(20),
             `service_id` int(11) NOT NULL,
             `service_name` varchar(200),
             `service_price` text,

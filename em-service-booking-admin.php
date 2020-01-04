@@ -577,7 +577,7 @@ class emsb_Admin_Page
                             <div class="emsb-admin-email-data-form">
                                 <div class="card">
                                     <div class="card-header">
-                                        <?php _e( 'Service Provier\'s Email Notification', 'service-booking' ); ?>
+                                        <?php _e( 'Service Provider\'s Email Notification', 'service-booking' ); ?>
                                     </div>
                                     <div class="card-body">
                                         <div class="form-group">

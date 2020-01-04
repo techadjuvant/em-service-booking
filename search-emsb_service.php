@@ -147,10 +147,10 @@ get_header();
                                   <?php if($startingTimeToMs > $current_time_milliseconds){ ?>
                                         <input type="text" name="emsb_service_availability_starts_at" class="emsb_service_availability_starts_at" value="<?php echo $emsb_service_availability_starts_at; ?>"/>
                                   <?php } else { ?>
-                                        <input type="text" name="emsb_service_availability_starts_at" class="emsb_service_availability_starts_at" value="<?php echo date("Y-m-d 00:00:00"); ?>"/>
+                                        <input type="text" name="emsb_service_availability_starts_at" class="emsb_service_availability_starts_at" value="<?php echo date("Y-m-d 00:00:01"); ?>"/>
                                   <?php } ?>
                                 <?php } else { ?>
-                                  <input type="text" name="emsb_service_availability_starts_at" class="emsb_service_availability_starts_at" value="<?php echo date("Y-m-d 00:00:00"); ?>"/>
+                                  <input type="text" name="emsb_service_availability_starts_at" class="emsb_service_availability_starts_at" value="<?php echo date("Y-m-d 00:00:01"); ?>"/>
                                 <?php } ?>
                                   <!-- ending date  -->
                                 <?php $emsb_service_availability_ends_at = get_post_meta( get_the_ID(), 'emsb_service_availability_ends_at', true ); 
@@ -158,7 +158,7 @@ get_header();
                                   <input type="text" name="emsb_service_availability_ends_at" class="emsb_service_availability_ends_at" value="<?php echo $emsb_service_availability_ends_at; ?>"/>
                                 <?php 
                                   } else { ?>
-                                    <input type="text" name="emsb_service_availability_ends_at" class="emsb_service_availability_ends_at" value="<?php echo date("Y-m-d 00:00:00"); ?>"/>
+                                    <input type="text" name="emsb_service_availability_ends_at" class="emsb_service_availability_ends_at" value="<?php echo date("Y-m-d 00:00:01"); ?>"/>
                                   <?php } 
                                 ?>
 

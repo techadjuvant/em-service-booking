@@ -901,21 +901,6 @@ $(document).ready(function() {
   
     })();
 
-
-    // Create PDF of Booking Ticket
-    $("#createPDF").on("click", function(){
-        
-        var pdf = new jsPDF('p', 'pt', 'letter');
-        var source = $("#emsb_booking_ticket")[0];
-        pdf.addHTML(
-            source, 
-            function (dispose) {
-                pdf.save('Ticket.pdf');
-            }
-        );
-
-    });
-
     $("#goBackButton").on("click", function(){
         history.back();
     });

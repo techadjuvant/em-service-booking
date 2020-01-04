@@ -5,8 +5,8 @@
 
     if(isset($_POST['emsb_submit_booking'])){
         global $wpdb;
-        $emsb_settings_data = $wpdb->prefix . 'emsb_settings';
-        $emsb_settings_data_fetch = $wpdb->get_row( "SELECT * FROM $emsb_settings_data ORDER BY id DESC LIMIT 1" );
+        $emsb_settings_data_table = $wpdb->prefix . 'emsb_settings';
+        $emsb_settings_data_fetch = $wpdb->get_row( "SELECT * FROM $emsb_settings_data_table ORDER BY id DESC LIMIT 1" );
         $admin_mail_subject = $emsb_settings_data_fetch->admin_mail_subject;
         $admin_mail_body = $emsb_settings_data_fetch->admin_mail_body;
         $customer_mail_subject = $emsb_settings_data_fetch->customer_mail_pending_subject;
@@ -29,7 +29,7 @@
         
         // Count the confirmed bookings
         $emsb_bookings_table = $wpdb->prefix . 'emsb_bookings';
-        $emsb_bookings_table_data_fetch = $wpdb->get_row( "SELECT * FROM wp_emsb_bookings WHERE ( booked_slot_id = '$booked_slot_id') ORDER BY id DESC LIMIT 1" );
+        $emsb_bookings_table_data_fetch = $wpdb->get_row( "SELECT * FROM $emsb_bookings_table WHERE ( booked_slot_id = '$booked_slot_id') ORDER BY id DESC LIMIT 1" );
         if( is_object($emsb_bookings_table_data_fetch) ){ 
             $emsb_bookings_availability_string = $emsb_bookings_table_data_fetch->available_orders;
             $emsb_bookings_availability_int = (int)$emsb_bookings_availability_string;
