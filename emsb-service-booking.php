@@ -1,12 +1,12 @@
 <?php
 /*
- * Plugin Name:	Service-Booking
+ * Plugin Name:	EMSB Service Booking
  * Description: 	Plugin for booking feature of your service.
  * Author: 		Motahar Hossain
  * Version:		1.1.0
  * Author URI: 	www.e-motohar.com
- * License:      	GNU GENERAL PUBLIC LICENSE Version 3,
- * License URI: 	https://www.gnu.org/licenses/gpl-3.0.txt
+ * License:     GNU GENERAL PUBLIC LICENSE Version 3,
+ * License URI: https://www.gnu.org/licenses/gpl-3.0.txt
  * Text Domain: service-booking
  * Domain Path: /languages
 */
