@@ -1,0 +1,594 @@
+# Copyright (C) 2020 Motahar Hossain
+# This file is distributed under the same license as the Service-Booking plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: Service-Booking 1.1.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/em-service-booking\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2020-01-05T02:41:22+01:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.3.0\n"
+"X-Domain: service-booking\n"
+
+#. Plugin Name of the plugin
+msgid "Service-Booking"
+msgstr ""
+
+#. Description of the plugin
+msgid "Plugin for booking feature of your service."
+msgstr ""
+
+#. Author of the plugin
+msgid "Motahar Hossain"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "www.e-motohar.com"
+msgstr ""
+
+#: archive-emsb_service.php:32
+#: search-emsb_service.php:33
+msgid "Choose a Service Type... "
+msgstr ""
+
+#: archive-emsb_service.php:33
+#: search-emsb_service.php:34
+msgid "Show all "
+msgstr ""
+
+#: archive-emsb_service.php:52
+#: search-emsb_service.php:53
+msgid "Search"
+msgstr ""
+
+#: archive-emsb_service.php:149
+#: emsb-booking-form.php:260
+#: search-emsb_service.php:122
+#: single-emsb_service.php:61
+msgid "Location: "
+msgstr ""
+
+#: archive-emsb_service.php:156
+#: emsb-booking-form.php:262
+#: search-emsb_service.php:129
+#: single-emsb_service.php:68
+msgid "Price: "
+msgstr ""
+
+#: archive-emsb_service.php:311
+#: search-emsb_service.php:284
+msgid "Select"
+msgstr ""
+
+#: archive-emsb_service.php:352
+#: search-emsb_service.php:325
+msgid "Change Service"
+msgstr ""
+
+#: archive-emsb_service.php:357
+#: search-emsb_service.php:330
+msgid "Change Date"
+msgstr ""
+
+#: archive-emsb_service.php:363
+#: search-emsb_service.php:336
+msgid "Change Slot"
+msgstr ""
+
+#: archive-emsb_service.php:384
+#: search-emsb_service.php:357
+msgid "Before noon ( AM )"
+msgstr ""
+
+#: archive-emsb_service.php:385
+#: search-emsb_service.php:358
+#: single-emsb_service.php:300
+msgid "After noon ( PM ) "
+msgstr ""
+
+#: archive-emsb_service.php:402
+#: search-emsb_service.php:375
+#: single-emsb_service.php:317
+msgid "Your Full Name "
+msgstr ""
+
+#: archive-emsb_service.php:404
+#: search-emsb_service.php:377
+#: single-emsb_service.php:319
+msgid "Please Enter Your Full Name "
+msgstr ""
+
+#: archive-emsb_service.php:411
+#: search-emsb_service.php:384
+msgid "Your Email Address "
+msgstr ""
+
+#: archive-emsb_service.php:413
+#: search-emsb_service.php:386
+msgid "Please Enter a Valid Email Address "
+msgstr ""
+
+#: archive-emsb_service.php:420
+#: search-emsb_service.php:393
+#: single-emsb_service.php:335
+msgid "+880 1812-345678 "
+msgstr ""
+
+#: archive-emsb_service.php:422
+#: search-emsb_service.php:395
+msgid "Please Enter Your Valid Phone Number "
+msgstr ""
+
+#: archive-emsb_service.php:446
+#: search-emsb_service.php:419
+msgid "Confirm Booking"
+msgstr ""
+
+#: em-service-booking-admin.php:135
+#: em-service-booking-admin.php:164
+#: em-service-booking-admin.php:328
+#: em-service-booking-admin.php:403
+#: em-service-booking-admin.php:559
+msgid "Service Booking "
+msgstr ""
+
+#: em-service-booking-admin.php:143
+#: em-service-booking-admin.php:172
+#: em-service-booking-admin.php:335
+#: em-service-booking-admin.php:566
+msgid "Dashboard "
+msgstr ""
+
+#: em-service-booking-admin.php:144
+#: em-service-booking-admin.php:173
+msgid "All Services "
+msgstr ""
+
+#: em-service-booking-admin.php:145
+#: em-service-booking-admin.php:174
+msgid "Add Service "
+msgstr ""
+
+#: em-service-booking-admin.php:146
+#: em-service-booking-admin.php:175
+#: em-service-booking-admin.php:414
+msgid "All Bookings "
+msgstr ""
+
+#: em-service-booking-admin.php:147
+#: em-service-booking-admin.php:176
+#: em-service-booking-admin.php:339
+#: em-service-booking-admin.php:415
+#: em-service-booking-admin.php:570
+msgid "Settings  "
+msgstr ""
+
+#: em-service-booking-admin.php:336
+#: em-service-booking-admin.php:567
+msgid "All Services  "
+msgstr ""
+
+#: em-service-booking-admin.php:337
+#: em-service-booking-admin.php:413
+#: em-service-booking-admin.php:568
+msgid "Add Service  "
+msgstr ""
+
+#: em-service-booking-admin.php:338
+#: em-service-booking-admin.php:569
+msgid "All Bookings  "
+msgstr ""
+
+#: em-service-booking-admin.php:354
+msgid "Select "
+msgstr ""
+
+#: em-service-booking-admin.php:355
+msgid "ID"
+msgstr ""
+
+#: em-service-booking-admin.php:356
+msgid "Service"
+msgstr ""
+
+#: em-service-booking-admin.php:357
+msgid "Customer"
+msgstr ""
+
+#: em-service-booking-admin.php:358
+#: em-service-booking-admin.php:449
+msgid "Phone"
+msgstr ""
+
+#: em-service-booking-admin.php:359
+#: em-service-booking-admin.php:450
+msgid "Email"
+msgstr ""
+
+#: em-service-booking-admin.php:360
+msgid "Date "
+msgstr ""
+
+#: em-service-booking-admin.php:361
+msgid "Time Slot"
+msgstr ""
+
+#: em-service-booking-admin.php:362
+#: em-service-booking-admin.php:453
+msgid "Status"
+msgstr ""
+
+#: em-service-booking-admin.php:372
+msgid "10 Pending Booking Orders only for upcoming slots from the current time( Policy: Come first servied first )"
+msgstr ""
+
+#: em-service-booking-admin.php:411
+msgid "Dashboard"
+msgstr ""
+
+#: em-service-booking-admin.php:412
+msgid "All Services"
+msgstr ""
+
+#: em-service-booking-admin.php:425
+msgid "15"
+msgstr ""
+
+#: em-service-booking-admin.php:426
+msgid "20"
+msgstr ""
+
+#: em-service-booking-admin.php:427
+msgid "50"
+msgstr ""
+
+#: em-service-booking-admin.php:428
+msgid "70"
+msgstr ""
+
+#: em-service-booking-admin.php:429
+msgid "100"
+msgstr ""
+
+#: em-service-booking-admin.php:430
+msgid "Show ALL Rows"
+msgstr ""
+
+#: em-service-booking-admin.php:445
+msgid "No. "
+msgstr ""
+
+#: em-service-booking-admin.php:446
+msgid "Booking ID "
+msgstr ""
+
+#: em-service-booking-admin.php:447
+msgid "Service Name "
+msgstr ""
+
+#: em-service-booking-admin.php:448
+msgid "Customer Name "
+msgstr ""
+
+#: em-service-booking-admin.php:451
+msgid "Booked Date "
+msgstr ""
+
+#: em-service-booking-admin.php:452
+msgid "Booked Time Slot"
+msgstr ""
+
+#: em-service-booking-admin.php:486
+msgid "Showing 11 to 20 of 91 entries "
+msgstr ""
+
+#: em-service-booking-admin.php:580
+msgid "Service Provider's Email Notification"
+msgstr ""
+
+#: em-service-booking-admin.php:584
+msgid "Admin Email Subject  "
+msgstr ""
+
+#: em-service-booking-admin.php:588
+msgid "Admin Email Body  "
+msgstr ""
+
+#: em-service-booking-admin.php:591
+msgid "Service provider will receive this message when a booking will be placed. Booking info will be added automatically. "
+msgstr ""
+
+#: em-service-booking-admin.php:601
+msgid "Customer's Pending Booking Notification "
+msgstr ""
+
+#: em-service-booking-admin.php:605
+msgid "Customer Email Subject  "
+msgstr ""
+
+#: em-service-booking-admin.php:609
+msgid "Customer Email Body  "
+msgstr ""
+
+#: em-service-booking-admin.php:612
+msgid "Customers will receive this message on placing a booking. Booking info will be added automatically. "
+msgstr ""
+
+#: em-service-booking-admin.php:622
+msgid "Customer's Booking Confirmation Notification "
+msgstr ""
+
+#: em-service-booking-admin.php:626
+msgid "Confirmed Email Subject  "
+msgstr ""
+
+#: em-service-booking-admin.php:630
+msgid "Confirmed Email Body  "
+msgstr ""
+
+#: em-service-booking-admin.php:633
+msgid "Customers will receive this message when you confirmed a booking from the admin dashboard"
+msgstr ""
+
+#: em-service-booking-admin.php:643
+msgid "Customer's Booking Cancellation Notification "
+msgstr ""
+
+#: em-service-booking-admin.php:647
+msgid "Cancelled Booking Email Subject  "
+msgstr ""
+
+#: em-service-booking-admin.php:651
+msgid "Cancelled Booking Email Body  "
+msgstr ""
+
+#: em-service-booking-admin.php:654
+msgid "Customers will receive this message when you cancel a booking from the admin dashboard"
+msgstr ""
+
+#: em-service-booking-admin.php:664
+msgid "User Cookie  "
+msgstr ""
+
+#: em-service-booking-admin.php:668
+msgid "How many days do you want to save the customer info on their browser cookie?  "
+msgstr ""
+
+#: em-service-booking-admin.php:671
+msgid "Don't change it freequently "
+msgstr ""
+
+#: em-service-booking-admin.php:676
+msgid "Save Changes "
+msgstr ""
+
+#: em-service-booking.php:70
+msgid "Add New"
+msgstr ""
+
+#: em-service-booking.php:138
+msgid "Add Service Info"
+msgstr ""
+
+#: em-service-booking.php:155
+msgid "Service Main Info"
+msgstr ""
+
+#: em-service-booking.php:157
+msgid "Service Sub Title:"
+msgstr ""
+
+#: em-service-booking.php:161
+msgid "Location:"
+msgstr ""
+
+#: em-service-booking.php:165
+msgid "Service Price:"
+msgstr ""
+
+#: em-service-booking.php:172
+msgid "Service Availability"
+msgstr ""
+
+#: em-service-booking.php:174
+msgid "Will be Available From: "
+msgstr ""
+
+#: em-service-booking.php:178
+msgid "Will be Unavailable From: "
+msgstr ""
+
+#: em-service-booking.php:181
+msgid "If you don't set these value, this service will not be available for booking."
+msgstr ""
+
+#: em-service-booking.php:186
+msgid "Weekly Off Days "
+msgstr ""
+
+#: em-service-booking.php:189
+msgid "Sunday:"
+msgstr ""
+
+#: em-service-booking.php:192
+msgid "Monday:"
+msgstr ""
+
+#: em-service-booking.php:195
+msgid "Tuesday:"
+msgstr ""
+
+#: em-service-booking.php:198
+msgid "Wednesday:"
+msgstr ""
+
+#: em-service-booking.php:201
+msgid "Thursday:"
+msgstr ""
+
+#: em-service-booking.php:204
+msgid "Friday:"
+msgstr ""
+
+#: em-service-booking.php:207
+msgid "Saturday:"
+msgstr ""
+
+#: em-service-booking.php:214
+msgid "Full Day Reservation "
+msgstr ""
+
+#: em-service-booking.php:216
+msgid "Is this service for full day reservation? ( 24 hours ) "
+msgstr ""
+
+#: em-service-booking.php:224
+msgid "AM Time Slot "
+msgstr ""
+
+#: em-service-booking.php:226
+#: em-service-booking.php:244
+msgid "Starting Time:"
+msgstr ""
+
+#: em-service-booking.php:230
+#: em-service-booking.php:248
+msgid "Ending Time:"
+msgstr ""
+
+#: em-service-booking.php:234
+#: em-service-booking.php:252
+msgid "Slot Duration in Munites:"
+msgstr ""
+
+#: em-service-booking.php:242
+msgid "PM Time Slot "
+msgstr ""
+
+#: em-service-booking.php:260
+msgid "Orders per Day or Time Slot "
+msgstr ""
+
+#: em-service-booking.php:262
+msgid "How many orders do you want per day or time slot? "
+msgstr ""
+
+#: em-service-booking.php:270
+msgid "Service Provider Email Address "
+msgstr ""
+
+#: em-service-booking.php:272
+msgid "Email Address: "
+msgstr ""
+
+#: em-service-booking.php:281
+msgid "Service Description "
+msgstr ""
+
+#: em-service-booking.php:283
+msgid "Has description for single service page? "
+msgstr ""
+
+#: emsb-booking-form.php:89
+msgid "Sorry, the slot is booked, please try another available date or slot"
+msgstr ""
+
+#: emsb-booking-form.php:91
+msgid "Try Another"
+msgstr ""
+
+#: emsb-booking-form.php:246
+msgid "Your Booking is Pending"
+msgstr ""
+
+#: emsb-booking-form.php:256
+msgid "Service: "
+msgstr ""
+
+#: emsb-booking-form.php:258
+msgid "Title: "
+msgstr ""
+
+#: emsb-booking-form.php:272
+msgid "Booking Info "
+msgstr ""
+
+#: emsb-booking-form.php:276
+msgid "Booking Id: "
+msgstr ""
+
+#: emsb-booking-form.php:282
+msgid "Booked Date: "
+msgstr ""
+
+#: emsb-booking-form.php:288
+msgid "Booked Time-slot: "
+msgstr ""
+
+#: emsb-booking-form.php:298
+msgid "Name: "
+msgstr ""
+
+#: emsb-booking-form.php:304
+msgid " Phone no: "
+msgstr ""
+
+#: emsb-booking-form.php:314
+msgid "Thank You"
+msgstr ""
+
+#: emsb-booking-form.php:316
+msgid "Go Back "
+msgstr ""
+
+#: emsb-booking-form.php:356
+msgid "Something went wrong. Please fill out the form accurately and then submit."
+msgstr ""
+
+#: emsb-booking-form.php:358
+msgid "Try Again"
+msgstr ""
+
+#: single-emsb_service.php:38
+msgid "Ended availability of this service!!!"
+msgstr ""
+
+#: single-emsb_service.php:74
+msgid "Book Now "
+msgstr ""
+
+#: single-emsb_service.php:267
+msgid "Again Details "
+msgstr ""
+
+#: single-emsb_service.php:272
+msgid "Change Date "
+msgstr ""
+
+#: single-emsb_service.php:278
+msgid "Change Slot "
+msgstr ""
+
+#: single-emsb_service.php:299
+msgid "Before noon ( AM ) "
+msgstr ""
+
+#: single-emsb_service.php:326
+msgid "Your Email Address  "
+msgstr ""
+
+#: single-emsb_service.php:328
+msgid "Please Enter Your Valid Email Address  "
+msgstr ""
+
+#: single-emsb_service.php:337
+msgid "Please Enter Your Valid Phone Number  "
+msgstr ""
+
+#: single-emsb_service.php:362
+msgid "Confirm Booking "
+msgstr ""
