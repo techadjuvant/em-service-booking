@@ -588,7 +588,7 @@ class emsb_Admin_Page
                                             <label for="emsb_admin_email_body"><?php _e( 'Admin Email Body  ', 'service-booking' ); ?></label>
                                             <textarea class="form-control" name="emsb_admin_email_body" id="emsb_admin_email_body" rows="5" placeholder="Your message body"><?php echo $fetch_admin_mail_body; ?></textarea>
                                         </div>
-                                        <footer class="blockquote-footer"><?php _e( 'Check the bookings list to see the customer data ', 'service-booking' ); ?> </footer>
+                                        <footer class="blockquote-footer"><?php _e( 'Service provider will receive this message when a booking will be placed. Booking info will be added automatically. ', 'service-booking' ); ?> </footer>
                                     </div>
                                 </div>
                             </div>
@@ -609,7 +609,7 @@ class emsb_Admin_Page
                                             <label for="emsb_customer_pending_email_body"><?php _e( 'Customer Email Body  ', 'service-booking' ); ?></label>
                                             <textarea class="form-control" name="emsb_customer_pending_email_body" id="emsb_customer_pending_email_body" rows="5" placeholder="Your pending message body"><?php echo $fetch_emsb_customer_pending_email_body; ?></textarea>
                                         </div>
-                                        <footer class="blockquote-footer"> <?php _e( 'Customers will receive this message on placing a booking ', 'service-booking' ); ?></footer>
+                                        <footer class="blockquote-footer"> <?php _e( 'Customers will receive this message on placing a booking. Booking info will be added automatically. ', 'service-booking' ); ?></footer>
                                     </div>
                                 </div>
                             </div>
