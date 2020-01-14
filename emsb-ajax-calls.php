@@ -83,10 +83,11 @@ add_action('wp_ajax_emsb_fetch_pending_bookings', 'emsb_fetch_pending_bookings')
 function emsb_fetch_pending_bookings() {
 
     $current_time_milliseconds = round(microtime(true) * 1000);
+    $current_time_minas_24_hours = $current_time_milliseconds - 86400000;
 
     global $wpdb;
     $table_name = $wpdb->prefix . "emsb_bookings";
-    $results = $wpdb->get_results("SELECT * FROM $table_name WHERE ( approve_booking = '0' AND starting_time_ms > $current_time_milliseconds) ORDER BY id ASC LIMIT 10", ARRAY_A);
+    $results = $wpdb->get_results("SELECT * FROM $table_name WHERE ( approve_booking = '0' AND starting_time_ms > $current_time_minas_24_hours) ORDER BY id ASC LIMIT 10", ARRAY_A);
 
     echo json_encode($results);
 
@@ -101,10 +102,11 @@ add_action('wp_ajax_emsb_fetch_pending_bookings_counts', 'emsb_fetch_pending_boo
 function emsb_fetch_pending_bookings_counts() {
 
     $current_time_milliseconds = round(microtime(true) * 1000);
+    $current_time_minas_24_hours = $current_time_milliseconds - 86400000;
 
     global $wpdb;
     $table_name = $wpdb->prefix . "emsb_bookings";
-    $result = $wpdb->get_var("SELECT COUNT(*) FROM $table_name WHERE ( approve_booking = '0' AND starting_time_ms > $current_time_milliseconds) ");
+    $result = $wpdb->get_var("SELECT COUNT(*) FROM $table_name WHERE ( approve_booking = '0' AND starting_time_ms > $current_time_minas_24_hours) ");
 
     echo $result;
 
