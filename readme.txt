@@ -8,12 +8,12 @@ License: GNU GENERAL PUBLIC LICENSE Version 3
 License URI:http://www.gnu.org/licenses/gpl-3.0.html
 
 
-EMSB Service Booking is a dynamic plugin which allows you to receive bookings from customers and then accept or cancel the orders.
+EMSB Service Booking is a dynamic plugin which allows you to accept bookings from customers and then accept or cancel the orders.
 You will set your service available time for a specific date or for any time length like for a month or year. And you are flexible to accept 1, 2, 3,... 100, etc any amount of orders on a specific time availability. And you can accept booking for specific time of date (AM or PM) or for date wise booking. You can set as many service as you want for accepting bookings. Service archive will be created.
 
 == Description ==
 
-EMSB Service Booking is a dynamic plugin which allows you to receive bookings from customers and then accept or cancel the orders.
+EMSB Service Booking is a dynamic plugin which allows you to accept bookings from customers and then accept or cancel the orders.
 You will set your service available time for a specific date or for any time length like for a month or year. And you are flexible to accept 1, 2, 3,... 100, etc any amount of orders on a specific time availability. And you can accept booking for specific time of date (AM or PM) or for date wise booking. You can set as many service as you want for accepting bookings. Service archive will be created.
 
 = Key Features =
