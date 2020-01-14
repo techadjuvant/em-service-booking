@@ -507,7 +507,13 @@ $(document).ready(function() {
     }
     
 
+
     function amSlotCalculate() {
+
+        // Return today's date and time
+        var currentTime = new Date();
+        // get current time in miliseconds
+        var currentTimeInMiliSeconds = currentTime.getTime();
         
         // Get Selected Service Slot Duration
         var amTimeSlotSelected = parseInt($("article.em-service.selected .am-time-slot .amSlotDuration").val(), 10);
@@ -586,11 +592,19 @@ $(document).ready(function() {
             }
 
             var emsb_orders_per_slot = $("article.em-service.selected .emsb-service-booking-orders-per-slot input").val();
-
             // Slot Id
             var emsb_selected_service_date_id_for_creating_slot_id = emsb_selected_service_date_id_for_db;
             var amSlotId = i + "-AM-"+ emsb_selected_service_date_id_for_creating_slot_id;
-            amSlot = $('#emShowAM').append('<li class="list-group-item" data-slotId="'+ amSlotId +'"> <label> <input class="d-none emsb-slotId" type="text" value="'+ amSlotId +'"> <input class="d-none emsb-slot-starts-at" type="text" value="'+ amShowStartingHour +':'+ amShowStartingMins +'"> '+ amShowStartingHour +':'+ amShowStartingMins +' AM - '+ showAmEndingHour +':'+ showAmEndingMins +' AM  </label> <button type="button" class="btn btn-light em-select-slot-button available" data-toggle="tooltip" title="Available '+ emsb_orders_per_slot +'"> Available </button>  </li>');
+
+            var dateMonthYearOnCalendar = selectedDateMonthYearTimestamp +' '+ amShowStartingHour +':'+ amShowStartingMins;
+            var selectedNewDate = new Date(dateMonthYearOnCalendar);
+            var timeOfSlotInMs = selectedNewDate.getTime();
+
+            if(timeOfSlotInMs > currentTimeInMiliSeconds){
+                amSlot = $('#emShowAM').append('<li class="list-group-item" data-slotId="'+ amSlotId +'"> <label> <input class="d-none emsb-slotId" type="text" value="'+ amSlotId +'"> <input class="d-none emsb-slot-starts-at" type="text" value="'+ amShowStartingHour +':'+ amShowStartingMins +'"> '+ amShowStartingHour +':'+ amShowStartingMins +' AM - '+ showAmEndingHour +':'+ showAmEndingMins +' AM  </label> <button type="button" class="btn btn-light em-select-slot-button available" data-toggle="tooltip" title="Available '+ emsb_orders_per_slot +'"> Available </button>  </li>');
+            } else {
+                amSlot = $('#emShowAM').append('<li class="list-group-item" data-slotId="'+ amSlotId +'"> <label> <input class="d-none emsb-slotId" type="text" value="'+ amSlotId +'"> <input class="d-none emsb-slot-starts-at" type="text" value="'+ amShowStartingHour +':'+ amShowStartingMins +'"> '+ amShowStartingHour +':'+ amShowStartingMins +' AM - '+ showAmEndingHour +':'+ showAmEndingMins +' AM  </label> <button type="button" class="btn btn-light em-select-slot-button booked" data-toggle="tooltip" title="Unavailable"> Time Passed </button>  </li>');
+            }         
             
         };
 
@@ -603,8 +617,13 @@ $(document).ready(function() {
     //***********************************************/ 
 
     function pmSlotCalculate() {
+
+        // Return today's date and time
+        var currentTime = new Date();
+        // get current time in miliseconds
+        var currentTimeInMiliSeconds = currentTime.getTime();
         
-            // Get Selected Service Slot Duration
+        // Get Selected Service Slot Duration
         var pmTimeSlotSelected = parseInt($("article.em-service.selected .pm-time-slot .pmSlotDuration").val(), 10);
         var pmTimeSlot = pmTimeSlotSelected;
 
@@ -700,7 +719,18 @@ $(document).ready(function() {
             var pmSlotId = i + "-PM-"+ emsb_selected_service_date_id_for_creating_slot_id;
             var pmSlotStartingTimeInt = parseInt(pmShowStartingHour);
             var pmSlotStartingTimeHour = 12 + pmSlotStartingTimeInt;
-            pmSlot = $('#emShowPM').append('<li class="list-group-item" data-slotId="'+ pmSlotId +'"> <label> <input class="d-none emsb-slotId" type="text" value="'+ pmSlotId +'"> <input class="d-none emsb-slot-starts-at" type="text" value="'+ pmSlotStartingTimeHour +':'+ pmShowStartingMins +'">  '+ pmShowStartingHour +':'+ pmShowStartingMins +' PM - '+ showPmEndingHour +':'+ showPmEndingMins +' PM </label> <button type="button" class="btn btn-light em-select-slot-button available" data-toggle="tooltip" title="Available '+ emsb_orders_per_slot +'"> Available </button>  </li>'); 
+
+
+            var dateMonthYearOnCalendar = selectedDateMonthYearTimestamp +' '+ pmSlotStartingTimeHour +':'+ pmShowStartingMins;
+            var selectedNewDate = new Date(dateMonthYearOnCalendar);
+            var timeOfSlotInMs = selectedNewDate.getTime();
+
+            if(timeOfSlotInMs > currentTimeInMiliSeconds){ 
+                pmSlot = $('#emShowPM').append('<li class="list-group-item" data-slotId="'+ pmSlotId +'"> <label> <input class="d-none emsb-slotId" type="text" value="'+ pmSlotId +'"> <input class="d-none emsb-slot-starts-at" type="text" value="'+ pmSlotStartingTimeHour +':'+ pmShowStartingMins +'">  '+ pmShowStartingHour +':'+ pmShowStartingMins +' PM - '+ showPmEndingHour +':'+ showPmEndingMins +' PM </label> <button type="button" class="btn btn-light em-select-slot-button available" data-toggle="tooltip" title="Available '+ emsb_orders_per_slot +'"> Available </button>  </li>'); 
+             } else {
+                pmSlot = $('#emShowPM').append('<li class="list-group-item" data-slotId="'+ pmSlotId +'"> <label> <input class="d-none emsb-slotId" type="text" value="'+ pmSlotId +'"> <input class="d-none emsb-slot-starts-at" type="text" value="'+ pmSlotStartingTimeHour +':'+ pmShowStartingMins +'">  '+ pmShowStartingHour +':'+ pmShowStartingMins +' PM - '+ showPmEndingHour +':'+ showPmEndingMins +' PM </label> <button type="button" class="btn btn-light em-select-slot-button booked" data-toggle="tooltip" title="Unavailable"> Time Passed </button>  </li>'); 
+             }
+
             
         };
 
@@ -709,6 +739,11 @@ $(document).ready(function() {
     }
 
     function check_availability_of_Slot(){
+        // Return today's date and time
+        var currentTime = new Date();
+        // get current time in miliseconds
+        var currentTimeInMiliSeconds = currentTime.getTime();
+
         var emsb_orders_per_slot = $("article.em-service.selected .emsb-service-booking-orders-per-slot input").val();
         var emsb_orders_per_slot_to_int = parseInt(emsb_orders_per_slot);
         /// check slot availabilty with ajax
@@ -730,13 +765,20 @@ $(document).ready(function() {
                 $.each(emsb_slot_response, function(index, slot) {
 
                     var availableOrdersInString = slot.available_orders;
+                    var starting_time_ms = slot.starting_time_ms;
                     var availableOrdersInInt = parseInt(availableOrdersInString);
-                    
-                    if(availableOrdersInInt <= 0){
-                        $(".slots li[data-slotid='" + slot.booked_slot_id +"'] button").addClass("booked").removeClass("available").attr('title', 'Already Booked').text("Booked");
+
+                    if(starting_time_ms > currentTimeInMiliSeconds){
+                        if(availableOrdersInInt <= 0){
+                            $(".slots li[data-slotid='" + slot.booked_slot_id +"'] button").addClass("booked").removeClass("available").attr('title', 'Already Booked').text("Booked");
+                        } else {
+                            $(".slots li[data-slotid='" + slot.booked_slot_id +"'] button").text("Availabel").attr('title', "Availabel: "+ slot.available_orders);
+                        }
                     } else {
-                        $(".slots li[data-slotid='" + slot.booked_slot_id +"'] button").text("Availabel").attr('title', "Availabel: "+ slot.available_orders);
+                        $(".slots li[data-slotid='" + slot.booked_slot_id +"'] button").text("Time Passed").attr('title', "Unavailable: ").addClass("booked").removeClass("available");
                     }
+                    
+                    
                     
                 });
 
