@@ -1096,3 +1096,7 @@ td.esmb_service_featured_image.column-esmb_service_featured_image {
 th#taxonomy-emsb_service_type {
   width: 300px;
 }
+
+.emsb-service-not-available {
+  color: red;
+}

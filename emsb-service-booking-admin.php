@@ -85,15 +85,15 @@ class emsb_Admin_Page
         add_action( 'admin_notices', array ( __CLASS__, 'emsb_services_header_html' ));
 
         // Add custom column to service post type edit list
-        add_filter( 'manage_emsb_service_posts_columns', array ( __CLASS__, 'ST4_columns_head_only_emsb_services' ), 10);
-        add_action( 'manage_emsb_service_posts_custom_column', array ( __CLASS__, 'ST4_columns_content_only_emsb_services' ), 10, 2);
+        add_filter( 'manage_emsb_service_posts_columns', array ( __CLASS__, 'emsb_columns_head_only_emsb_services' ), 10);
+        add_action( 'manage_emsb_service_posts_custom_column', array ( __CLASS__, 'emsb_columns_content_only_emsb_services' ), 10, 2);
 
 		
     }
 
 
     // CREATE TWO FUNCTIONS TO HANDLE THE COLUMN
-    public static function ST4_columns_head_only_emsb_services($emsb_featured_image_column) {
+    public static function emsb_columns_head_only_emsb_services($emsb_featured_image_column) {
         unset($emsb_featured_image_column['taxonomy-emsb_service_type']);
         unset($emsb_featured_image_column['title']);
         unset($emsb_featured_image_column['date']);
@@ -101,19 +101,32 @@ class emsb_Admin_Page
         $emsb_featured_image_column['esmb_service_featured_image'] = 'Photo';
         $emsb_featured_image_column['title'] = 'Name';
         $emsb_featured_image_column['taxonomy-emsb_service_type'] = 'Service Type';
+        $emsb_featured_image_column['emsb_availability'] = 'Available Till';
         $emsb_featured_image_column['date'] = 'Date';
         return $emsb_featured_image_column;
     }
-    public static function ST4_columns_content_only_emsb_services($column_name, $post_ID) {
-        // show featured images in dashboard
+    public static function emsb_columns_content_only_emsb_services($column_name, $post_ID) {
+
+        $today = date("Y-m-d");
+        $today_time = strtotime($today);
+
         add_image_size( 'emsb_service-admin-post-featured-image', 60, 60, false );
         switch($column_name){
             case 'esmb_service_featured_image':
             if( function_exists('the_post_thumbnail') ) {
                 echo the_post_thumbnail('emsb_service-admin-post-featured-image');
-            }
-            else
-                echo 'No featured image';
+            } 
+            break;
+
+            case 'emsb_availability':
+                $emsb_service_ending_date = get_post_meta( $post_ID, 'emsb_service_availability_ends_at', TRUE);
+                $expire_time = strtotime($emsb_service_ending_date);
+                if($expire_time > $today_time){
+                    echo $emsb_service_ending_date;
+                } else {
+                    echo "<div class='emsb-service-not-available'>Availability ended. Update availability to get booking orders. </div>";
+                }
+                
             break;
         }
         
