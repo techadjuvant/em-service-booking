@@ -380,8 +380,8 @@ get_header();
                 </div>
                 <div class="form-row">
                     <div class="col-md-12 mb-3">
-                      <div class="input-group">
-                        <input name="emsb_user_email" type="email" class="form-control" id="emsb_user_email" placeholder="<?php _e( 'Your Email Address ', 'service-booking' ); ?>" aria-describedby="inputGroupPrepend" required>
+                      <div>
+                        <input name="emsb_user_email" type="email" class="form-control" id="emsb_user_email" placeholder="<?php _e( 'Your Email Address ', 'service-booking' ); ?>" required>
                         <div class="invalid-feedback">
                           <?php _e( 'Please Enter a Valid Email Address ', 'service-booking' ); ?>
                         </div>

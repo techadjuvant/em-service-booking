@@ -350,11 +350,9 @@
 
         <div class="emsb-booking-ticket-container text-left">
 
-            
+            <div class="emsb-form-submission-error p-3">
 
-            <div class="emsb-form-submission-error">
-
-                <h5> <?php _e( 'Something went wrong. Please fill out the form accurately and then submit.', 'service-booking' ); ?></h5>
+                <span> <?php _e( 'Please fill out the form accurately and then submit', 'service-booking' ); ?></span>
 
                 <button id="goBackButton" class="btn btn-dark emsb-ticket-button"> <?php _e( 'Try Again', 'service-booking' ); ?></button>
 
