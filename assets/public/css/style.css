@@ -532,7 +532,7 @@ article.em-service main {
 }
 
 .emsb-loading-gif img {
-    width: 50px;
+    width: 30px;
 }
 
 .emsb-calender-loading-gif {
@@ -549,7 +549,7 @@ article.em-service main {
     opacity: .9;
 }
 .emsb-calender-loading-gif img {
-    width: 50px;
+    width: 30px;
 }
 #emsb_booking_ticket {
     margin: 0;
@@ -1003,6 +1003,30 @@ button.btn.emsb-search-btn {
   border-radius: 3px;
 }
 
+select.chosen-select {
+    box-shadow: 1px 1px 10px rgba(49, 46, 255, 0.15);
+    font-size: 14px;
+    font-family: inherit;
+    line-height: 14px;
+    border-radius: 3px;
+    border: 0;
+    border-bottom: 1px solid #d0e0ff;
+    margin-bottom: 15px;
+}
+
+select.chosen-select:focus {
+    box-shadow: 1px 1px 10px rgba(49, 46, 255, 0.15);
+    font-size: 14px;
+    font-family: inherit;
+    line-height: 14px;
+    border-radius: 3px;
+    border: 0;
+    border-bottom: 1px solid #d0e0ff;
+    margin-bottom: 15px;
+}
+.emsb-pending-notification {
+    font-weight: 700;
+}
 
 /* Responsiveness */
 
@@ -1024,8 +1048,8 @@ button.btn.emsb-search-btn {
         margin-left: 145px;
     }
     .em-selected-all-wrapper .em-service-excerpt-info h4 {
-        font-size: 32px;
-        line-height: 32px;
+        font-size: 22px;
+        line-height: 22px;
         text-align: center;
     }
     .em-selected-all-wrapper .date, .em-selected-all-wrapper .time-slot {
@@ -1057,10 +1081,10 @@ button.btn.emsb-search-btn {
         text-align: center;
         justify-content: center;
     }
-    .em-service .em-select-service-button {
+    .emsb-plugin-container .em-service button.btn.em-select-service-button {
         margin-left: 0;
         margin-top: 5px;
-        color: rgb(255, 255, 255);
+        color: #ffffff;
         background-color: #8382ff;
         border-color: rgb(255, 255, 255);
         transition: all .7s;
@@ -1092,13 +1116,14 @@ button.btn.emsb-search-btn {
         padding-bottom: 0;
     }
     .em-selected-all-wrapper .date, .em-selected-all-wrapper .time-slot {
-        font-size: 24px;
-        line-height: 24px;
-        margin-bottom: 15px;
+        font-size: 20px;
+        line-height: 20px;
+        margin-bottom: 0px;
         margin-left: 0;
     }
     .em-reservation-process-container .btn {
         width: auto;
+        font-size: 12px;
     }
     .em-reservation-process-container .btn-light {
         color: rgb(131, 130, 255);
@@ -1114,10 +1139,11 @@ button.btn.emsb-search-btn {
         width: 100%;
         margin: 30px auto;
     }
-    .em-booking-form-container input {
-        font-size: 20px;
-        font-weight: 300;
-        opacity: .8;
+    .em-booking-form-container input#emsb_user_fullName, .em-booking-form-container input#emsb_user_email, .em-booking-form-container input#emsb_user_telephone {
+        font-size: 18px;
+        line-height: 18px !important;
+        font-weight: 200;
+        height: 24px;
     }
     .em-reservation-process-container #amButton, .em-reservation-process-container #pmButton {
         margin: 5px 0px !important;
@@ -1168,8 +1194,9 @@ button.btn.emsb-search-btn {
         width: 20px;
     }
     .emsb-booking-ticket-container {
-        position: fixed;
         height: 100%;
+        width: 90%;
+        left: 5%;
     }
     #emsb_booking_ticket {
         padding: 5% 5% !important;
@@ -1179,6 +1206,9 @@ button.btn.emsb-search-btn {
         position: absolute;
         bottom: 10vh;
         left: 5%;
+    }
+    .emsb-ticket-button-wrapper {
+        width: 90%;
     }
     .emsb-ticket-button {
         margin: 0;
@@ -1210,6 +1240,29 @@ button.btn.emsb-search-btn {
     }
     .emsb-ticket-button-wrapper h4 {
         font-size: 18px;
+    }
+    .em-service img, .em-selected-service img {
+        width: 100px;
+        height: 100px;
+        margin-bottom: 5px;
+    }
+    .em-service-excerpt-info h4 {
+        font-size: 18px;
+        font-weight: 400;
+    }
+    .em-calendar-wrapper thead.month-week tr th {
+        font-size: 12px;
+        color: #9b9b9b;
+        font-weight: 300;
+    }
+    .em-reservation-calendar.nao-month td, .em-reservation-calendar.nao-month th {
+        font-size: 12px;
+    }
+    .em-selected-all-wrapper {
+        padding: 0px 0;
+    }
+    .em-reservation-process-container .btn-light.em-confirm-booking-button {
+        width: 100% !important;
     }
 
     

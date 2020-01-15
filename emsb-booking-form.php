@@ -243,8 +243,9 @@
 
                         <div  class="text-center" >
 
-                            <h5> <?php _e( 'Your Booking is Pending', 'service-booking' ); ?> </h5>
-
+                            <div class="emsb-pending-notification"> <?php _e( 'Booking Approval Status:', 'service-booking' ); ?> 
+                                <span class="text-warning"> <?php _e( 'Pending', 'service-booking' ); ?> </span>
+                            </div>
                         </div>
 
                         <div class="emsb-booked-service">
