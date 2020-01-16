@@ -1,0 +1,603 @@
+# Copyright (C) 2020 Motahar Hossain
+# This file is distributed under the same license as the EMSB Service Booking plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: EMSB Service Booking 1.1.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/emsb-service-"
+"booking\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2020-01-16T13:44:45+01:00\n"
+"PO-Revision-Date: 2020-01-16 20:35+0600\n"
+"X-Generator: Poedit 2.2.4\n"
+"X-Domain: emsb-service-booking\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=2; plural=(n==0 || n==1);\n"
+"Language: bn\n"
+
+#. Plugin Name of the plugin
+msgid "EMSB Service Booking"
+msgstr "EMSB সার্ভিস বুকিং"
+
+#. Description of the plugin
+msgid ""
+"EMSB Service Booking is a dynamic plugin which allows you to accept bookings "
+"from customers and then accept or cancel the orders. You will set your "
+"service available time for a specific date or for any time length like for a "
+"month or year. And you are flexible to accept 1, 2, 3,... 100, etc any "
+"amount of orders on a specific time availability. And you can accept booking "
+"for specific time of date (AM or PM) or for date wise booking. You can set "
+"as many service as you want for accepting bookings. Service archive will be "
+"created."
+msgstr ""
+"EMSB সার্ভিস বুকিং একটি Dynamic প্লাগইন যা আপনাকে গ্রাহকদের কাছ থেকে বুকিং গ্রহণ "
+"করতে দেয় এবং তারপর সেগুলোকে আপনি গ্রহন অথবা বাতিল করতে পারেন । আপনি একটি "
+"নির্দিষ্ট তারিখের জন্য অথবা একটি মাস অথবা বছরের মতো সময়ের জন্য আপনার সেবার সময় "
+"নির্ধারণ করবেন । এবং আপনি যেকোনো সংখ্যক পরিমান বুকিং গ্রহন করতে পারেন । এবং আপনি "
+"তারিখ নির্দিষ্ট সময় (AM বা PM) ভিত্তিক বা শুধু তারিখ ভিত্তিক বুকিং জন্য বুকিং গ্রহণ "
+"করতে পারেন। আপনি বুকিং গ্রহণ করতে চান এরকম অনেক সেবা সেট করতে পারেন। সার্ভিস "
+"আর্কাইভ তৈরি করা হবে । "
+
+#. Author of the plugin
+msgid "Motahar Hossain"
+msgstr "মোতাহার হোসেন"
+
+#. Author URI of the plugin
+msgid "www.e-motohar.com"
+msgstr "www.e-motohar.com"
+
+#: archive-emsb_service.php:32 search-emsb_service.php:33
+msgid "Choose a Service Type... "
+msgstr "একটি সেবা প্রকার চয়ন করুন... "
+
+#: archive-emsb_service.php:33 search-emsb_service.php:34
+msgid "Show all "
+msgstr "সব দেখান "
+
+#: archive-emsb_service.php:52 search-emsb_service.php:53
+msgid "Search"
+msgstr "অনুসন্ধান"
+
+#: archive-emsb_service.php:149 emsb-booking-form.php:261
+#: search-emsb_service.php:122 single-emsb_service.php:61
+msgid "Location: "
+msgstr "অবস্থান:"
+
+#: archive-emsb_service.php:156 emsb-booking-form.php:263
+#: search-emsb_service.php:129 single-emsb_service.php:68
+msgid "Price: "
+msgstr "সেবার মূল্য: "
+
+#: archive-emsb_service.php:311 search-emsb_service.php:284
+msgid "Select"
+msgstr "নির্বাচন করুন "
+
+#: archive-emsb_service.php:352 search-emsb_service.php:325
+msgid "Change Service"
+msgstr "সেবা পরিবর্তন করুন"
+
+#: archive-emsb_service.php:357 search-emsb_service.php:330
+msgid "Change Date"
+msgstr "দিন পরিবর্তন করুন"
+
+#: archive-emsb_service.php:363 search-emsb_service.php:336
+msgid "Change Slot"
+msgstr "সময় পরিবর্তন করুন"
+
+#: archive-emsb_service.php:384 search-emsb_service.php:357
+msgid "Before noon ( AM )"
+msgstr "দুপুরের আগে "
+
+#: archive-emsb_service.php:385 search-emsb_service.php:358
+#: single-emsb_service.php:300
+msgid "After noon ( PM ) "
+msgstr "দুপুরের পরে "
+
+#: archive-emsb_service.php:402 search-emsb_service.php:375
+#: single-emsb_service.php:317
+msgid "Your Full Name "
+msgstr "আপনার সম্পূর্ণ নাম "
+
+#: archive-emsb_service.php:404 search-emsb_service.php:377
+#: single-emsb_service.php:319
+msgid "Please Enter Your Full Name "
+msgstr "আপনার সম্পূর্ণ নাম টাইপ করুন "
+
+#: archive-emsb_service.php:411 search-emsb_service.php:384
+msgid "Your Email Address "
+msgstr "আপনার ইমেইল এড্রেস "
+
+#: archive-emsb_service.php:413 search-emsb_service.php:386
+msgid "Please Enter a Valid Email Address "
+msgstr "আপনার বৈধ ইমেইল এড্রেস টাইপ করুন "
+
+#: archive-emsb_service.php:420 search-emsb_service.php:393
+#: single-emsb_service.php:335
+msgid "+880 1812-345678 "
+msgstr "+৮৮০ ১৮০০ ০০০০০০ "
+
+#: archive-emsb_service.php:422 search-emsb_service.php:395
+msgid "Please Enter Your Valid Phone Number "
+msgstr "আপনার বৈধ ফোন নাম্বার টাইপ করুন "
+
+#: archive-emsb_service.php:446 search-emsb_service.php:419
+msgid "Confirm Booking"
+msgstr "বুকিং নিশ্চিত করুন "
+
+#: emsb-booking-form.php:89
+msgid "Sorry, the slot is booked, please try another available date or slot"
+msgstr "দুঃখিত, স্লট বুক হয়ে গেছে। অনুগ্রহপূর্বক অন্য কোন স্লট সিলেক্ট করুন"
+
+#: emsb-booking-form.php:91
+msgid "Try Another"
+msgstr "আবার চেষ্টা করুন"
+
+#: emsb-booking-form.php:246
+msgid "Booking Approval Status:"
+msgstr "বুকিং নিশ্চিতকরণঃ"
+
+#: emsb-booking-form.php:247
+msgid "Pending"
+msgstr "ঝুলন্ত"
+
+#: emsb-booking-form.php:257
+msgid "Service: "
+msgstr "সেবাঃ "
+
+#: emsb-booking-form.php:259
+msgid "Title: "
+msgstr "টাইটেলঃ "
+
+#: emsb-booking-form.php:273
+msgid "Booking Info "
+msgstr "বুকিংয়ের তথ্য "
+
+#: emsb-booking-form.php:277
+msgid "Booking Id: "
+msgstr "বুকিং আইডিঃ "
+
+#: emsb-booking-form.php:283
+msgid "Booked Date: "
+msgstr "বুকড তারিখঃ "
+
+#: emsb-booking-form.php:289
+msgid "Booked Time-slot: "
+msgstr "বুকড সময় স্লটঃ "
+
+#: emsb-booking-form.php:299
+msgid "Name: "
+msgstr "নামঃ "
+
+#: emsb-booking-form.php:305
+msgid " Phone no: "
+msgstr " ফোন নাম্বারঃ "
+
+#: emsb-booking-form.php:315
+msgid "Thank You"
+msgstr "ধন্যবাদ"
+
+#: emsb-booking-form.php:317
+msgid "Go Back "
+msgstr "ফিরে যান "
+
+#: emsb-booking-form.php:355
+msgid "Please fill out the form accurately and then submit"
+msgstr "অনুগ্রহপূর্বক ফর্মটি সঠিক ভাবে পূরণ করুন, তারপর বুকিং নিশ্চিত করুন"
+
+#: emsb-booking-form.php:357
+msgid "Try Again"
+msgstr "আবার চেষ্টা করুন"
+
+#: emsb-service-booking-admin.php:127
+msgid "Availability ended. Update availability to get booking orders."
+msgstr "এভাইলাবিলিটি শেষ হয়ে গেছে। বুকিং পেতে আপডেট করুন ।"
+
+#: emsb-service-booking-admin.php:149 emsb-service-booking-admin.php:178
+#: emsb-service-booking-admin.php:342 emsb-service-booking-admin.php:417
+#: emsb-service-booking-admin.php:573
+msgid "Service Booking "
+msgstr "সার্ভিস বুকিং "
+
+#: emsb-service-booking-admin.php:157 emsb-service-booking-admin.php:186
+#: emsb-service-booking-admin.php:349 emsb-service-booking-admin.php:580
+msgid "Dashboard "
+msgstr "ড্যাশবোর্ড "
+
+#: emsb-service-booking-admin.php:158 emsb-service-booking-admin.php:187
+msgid "All Services "
+msgstr "সেবা সমূহ "
+
+#: emsb-service-booking-admin.php:159 emsb-service-booking-admin.php:188
+msgid "Add Service "
+msgstr "সেবা তৈরি"
+
+#: emsb-service-booking-admin.php:160 emsb-service-booking-admin.php:189
+#: emsb-service-booking-admin.php:428
+msgid "All Bookings "
+msgstr "সকল বুকিং "
+
+#: emsb-service-booking-admin.php:161 emsb-service-booking-admin.php:190
+#: emsb-service-booking-admin.php:353 emsb-service-booking-admin.php:429
+#: emsb-service-booking-admin.php:584
+msgid "Settings  "
+msgstr "সেটিংস "
+
+#: emsb-service-booking-admin.php:350 emsb-service-booking-admin.php:581
+msgid "All Services  "
+msgstr "সেবা সমূহ "
+
+#: emsb-service-booking-admin.php:351 emsb-service-booking-admin.php:427
+#: emsb-service-booking-admin.php:582
+msgid "Add Service  "
+msgstr "সেবা তৈরি"
+
+#: emsb-service-booking-admin.php:352 emsb-service-booking-admin.php:583
+msgid "All Bookings  "
+msgstr "সকল বুকিং "
+
+#: emsb-service-booking-admin.php:368
+msgid "Select "
+msgstr "সিলেক্ট "
+
+#: emsb-service-booking-admin.php:369
+msgid "ID"
+msgstr "আইডি"
+
+#: emsb-service-booking-admin.php:370
+msgid "Service"
+msgstr "সেবা"
+
+#: emsb-service-booking-admin.php:371
+msgid "Customer"
+msgstr "গ্রাহক"
+
+#: emsb-service-booking-admin.php:372 emsb-service-booking-admin.php:463
+msgid "Phone"
+msgstr " ফোন"
+
+#: emsb-service-booking-admin.php:373 emsb-service-booking-admin.php:464
+msgid "Email"
+msgstr "ইমেইল"
+
+#: emsb-service-booking-admin.php:374
+msgid "Date "
+msgstr "তারিখ"
+
+#: emsb-service-booking-admin.php:375
+msgid "Time Slot"
+msgstr "সময় স্লট"
+
+#: emsb-service-booking-admin.php:376 emsb-service-booking-admin.php:467
+msgid "Status"
+msgstr "স্ট্যাটাস"
+
+#: emsb-service-booking-admin.php:386
+msgid ""
+"10 Pending Booking Orders only for upcoming slots from the current "
+"time( Policy: Come first servied first )"
+msgstr ""
+"১০ টা ঝুলন্ত বুকিং। অতীত সময়ের স্লটের বুকিং দেখাবে না। ( পলিসিঃ আগে আসলে আগে পাবে "
+"ভিত্তিতে দেখাবে )"
+
+#: emsb-service-booking-admin.php:425
+msgid "Dashboard"
+msgstr "ড্যাশবোর্ড "
+
+#: emsb-service-booking-admin.php:426
+msgid "All Services"
+msgstr "সেবা সমূহ "
+
+#: emsb-service-booking-admin.php:439
+msgid "15"
+msgstr "১৫"
+
+#: emsb-service-booking-admin.php:440
+msgid "20"
+msgstr "২০"
+
+#: emsb-service-booking-admin.php:441
+msgid "50"
+msgstr "৫০"
+
+#: emsb-service-booking-admin.php:442
+msgid "70"
+msgstr "৭০"
+
+#: emsb-service-booking-admin.php:443
+msgid "100"
+msgstr "১০০"
+
+#: emsb-service-booking-admin.php:444
+msgid "Show ALL Rows"
+msgstr "সব দেখান "
+
+#: emsb-service-booking-admin.php:459
+msgid "No. "
+msgstr "নং "
+
+#: emsb-service-booking-admin.php:460
+msgid "Booking ID "
+msgstr "বুকিং আইডি"
+
+#: emsb-service-booking-admin.php:461
+msgid "Service Name "
+msgstr "সেবার নাম"
+
+#: emsb-service-booking-admin.php:462
+msgid "Customer Name "
+msgstr "গ্রাহকের নাম"
+
+#: emsb-service-booking-admin.php:465
+msgid "Booked Date "
+msgstr "বুকড তারিখ"
+
+#: emsb-service-booking-admin.php:466
+msgid "Booked Time Slot"
+msgstr "বুকড সময় স্লট"
+
+#: emsb-service-booking-admin.php:500
+msgid "Showing 11 to 20 of 91 entries "
+msgstr ""
+
+#: emsb-service-booking-admin.php:594
+msgid "Service Provider's Email Notification"
+msgstr "সেবা দাতার ইমেইল নোটিফিকেশন "
+
+#: emsb-service-booking-admin.php:598
+msgid "Admin Email Subject  "
+msgstr "সেবা দাতার ইমেইলের বিষয়"
+
+#: emsb-service-booking-admin.php:602
+msgid "Admin Email Body  "
+msgstr "সেবা দাতার ইমেইলের বডি "
+
+#: emsb-service-booking-admin.php:605
+msgid ""
+"Service provider will receive this message when a booking will be placed. "
+"Booking info will be added automatically. "
+msgstr ""
+"সেবা( এডমিন ) দাতা এই ইমেইল পাবে যখন কোন বুকিং অর্ডার আসবে। বুকিং তথ্য স্বয়ংক্রিয় "
+"ভাবে যুক্ত থাকবে। "
+
+#: emsb-service-booking-admin.php:615
+msgid "Customer's Pending Booking Notification "
+msgstr "গ্রাহকের ঝুলন্ত বুকিং এর নোটিফিকেশন "
+
+#: emsb-service-booking-admin.php:619
+msgid "Customer Email Subject  "
+msgstr "আপনার বুকিং এখন ঝুলন্ত অবস্থায় আছে "
+
+#: emsb-service-booking-admin.php:623
+msgid "Customer Email Body  "
+msgstr "আপনার বুকিং এখন ঝুলন্ত অবস্থায় আছে ( বডি )"
+
+#: emsb-service-booking-admin.php:626
+msgid ""
+"Customers will receive this message on placing a booking. Booking info will "
+"be added automatically. "
+msgstr ""
+"গ্রহীতা এই ইমেইল পাবে যখন কোন বুকিং অর্ডার করবে। বুকিং তথ্য স্বয়ংক্রিয় ভাবে যুক্ত "
+"থাকবে। "
+
+#: emsb-service-booking-admin.php:636
+msgid "Customer's Booking Confirmation Notification "
+msgstr "গ্রাহকের বুকিং নিশ্চিতকরণ এর নোটিফিকেশন "
+
+#: emsb-service-booking-admin.php:640
+msgid "Confirmed Email Subject  "
+msgstr "আপনার বুকিং নিশ্চিত হয়েছে "
+
+#: emsb-service-booking-admin.php:644
+msgid "Confirmed Email Body  "
+msgstr "আপনার বুকিং নিশ্চিত হয়েছে ( বডি )"
+
+#: emsb-service-booking-admin.php:647
+msgid ""
+"Customers will receive this message when you confirmed a booking from the "
+"admin dashboard"
+msgstr ""
+"গ্রহীতা( ক্লায়েন্ট ) এই ইমেইল পাবে যখন সেবা দাতা তার বুকিং নিশ্চিত করবে। বুকিং তথ্য "
+"স্বয়ংক্রিয় ভাবে যুক্ত থাকবে। "
+
+#: emsb-service-booking-admin.php:657
+msgid "Customer's Booking Cancellation Notification "
+msgstr "গ্রহী্তার( ক্লায়েন্ট ) বুকিং বাদ করার নোটিফিকেশন "
+
+#: emsb-service-booking-admin.php:661
+msgid "Cancelled Booking Email Subject  "
+msgstr "আপনার বুকিং বাতিল করা হয়েছে "
+
+#: emsb-service-booking-admin.php:665
+msgid "Cancelled Booking Email Body  "
+msgstr "আপনার বুকিং বাতিল করা হয়েছে ( বডি )"
+
+#: emsb-service-booking-admin.php:668
+msgid ""
+"Customers will receive this message when you cancel a booking from the admin "
+"dashboard"
+msgstr "গ্রহীতা( ক্লায়েন্ট ) এই ইমেইল পাবে যখন সেবা দাতা তার বুকিং বাতিল করবে।"
+
+#: emsb-service-booking-admin.php:678
+msgid "User Cookie  "
+msgstr "ইউজার কুকি "
+
+#: emsb-service-booking-admin.php:682
+msgid ""
+"How many days do you want to save the customer info on their browser "
+"cookie?  "
+msgstr "গ্রহীতার( ক্লায়েন্ট ) ব্রাউজার কুকির মেয়াদ ?"
+
+#: emsb-service-booking-admin.php:685
+msgid "Don't change it freequently "
+msgstr "ঘন ঘন পরিবর্তন করবেন না "
+
+#: emsb-service-booking-admin.php:690
+msgid "Save Changes "
+msgstr "সেভ করুন "
+
+#: emsb-service-booking.php:70
+msgid "Add New"
+msgstr "তৈরি করুন "
+
+#: emsb-service-booking.php:138
+msgid "Add Service Info"
+msgstr "সেবার তথ্য যুক্ত করুন "
+
+#: emsb-service-booking.php:155
+msgid "Service Main Info"
+msgstr "সেবা বিষয়ক তথ্য"
+
+#: emsb-service-booking.php:157
+msgid "Service Sub Title:"
+msgstr "সেবার সাব টাইটেল "
+
+#: emsb-service-booking.php:161
+msgid "Location:"
+msgstr "অবস্থান: "
+
+#: emsb-service-booking.php:165
+msgid "Service Price:"
+msgstr "সেবার মূল্য: "
+
+#: emsb-service-booking.php:172
+msgid "Service Availability"
+msgstr "সেবার মেয়াদ"
+
+#: emsb-service-booking.php:174
+msgid "Will be Available From: "
+msgstr "শুরুঃ "
+
+#: emsb-service-booking.php:178
+msgid "Will be Unavailable From: "
+msgstr "শেষঃ "
+
+#: emsb-service-booking.php:181
+msgid ""
+"If you don't set these value, this service will not be available for booking."
+msgstr "মেয়াদ না যুক্ত করলে সেবা প্রদর্শিত হবে না "
+
+#: emsb-service-booking.php:186
+msgid "Weekly Off Days "
+msgstr "সাপ্তাহিক ছুটির দিন "
+
+#: emsb-service-booking.php:189
+msgid "Sunday:"
+msgstr "রবিবার "
+
+#: emsb-service-booking.php:192
+msgid "Monday:"
+msgstr "সোমবার "
+
+#: emsb-service-booking.php:195
+msgid "Tuesday:"
+msgstr "মঙ্গলবার "
+
+#: emsb-service-booking.php:198
+msgid "Wednesday:"
+msgstr "বুধবার "
+
+#: emsb-service-booking.php:201
+msgid "Thursday:"
+msgstr "বৃহস্পতিবার "
+
+#: emsb-service-booking.php:204
+msgid "Friday:"
+msgstr "শুক্রবার "
+
+#: emsb-service-booking.php:207
+msgid "Saturday:"
+msgstr "শনিবার "
+
+#: emsb-service-booking.php:214
+msgid "Full Day Reservation "
+msgstr "সম্পূর্ণ দিনের বুকিং "
+
+#: emsb-service-booking.php:216
+msgid "Is this service for full day reservation? ( 24 hours ) "
+msgstr "এটা কি সম্পূর্ণ দিনের জন্য বুকিং সেবা ?"
+
+#: emsb-service-booking.php:224
+msgid "AM Time Slot "
+msgstr "দুপুরের আগের সময় স্লট "
+
+#: emsb-service-booking.php:226 emsb-service-booking.php:244
+msgid "Starting Time:"
+msgstr "শুরুঃ"
+
+#: emsb-service-booking.php:230 emsb-service-booking.php:248
+msgid "Ending Time:"
+msgstr "শেষঃ "
+
+#: emsb-service-booking.php:234 emsb-service-booking.php:252
+msgid "Slot Duration in Munites:"
+msgstr "প্রত্যেক স্লটের জন্য বরাদ্দকৃত সময়ঃ ( মিনিটে হবে )"
+
+#: emsb-service-booking.php:242
+msgid "PM Time Slot "
+msgstr "দুপুরের পরের সময় স্লট "
+
+#: emsb-service-booking.php:260
+msgid "Orders per Day or Time Slot "
+msgstr "প্রত্যেক স্লটের বুকিং সংখ্যা "
+
+#: emsb-service-booking.php:262
+msgid "How many orders do you want per day or time slot? "
+msgstr "প্রত্যেক স্লটে কতটি বুকিং গ্রহন করবেন ?"
+
+#: emsb-service-booking.php:270
+msgid "Service Provider Email Address "
+msgstr "সেবার দাতার ইমেইল এড্রেস "
+
+#: emsb-service-booking.php:272
+msgid "Email Address: "
+msgstr "ইমেইল এড্রেসঃ "
+
+#: emsb-service-booking.php:281
+msgid "Service Description "
+msgstr "সেবা সম্পর্কিত বিস্তারিত বর্ণনা "
+
+#: emsb-service-booking.php:283
+msgid "Has description for single service page? "
+msgstr "সিংগেল পেজে এই সেবার বিস্তারিত বর্ণনা কি দেখাতে চান ?"
+
+#: single-emsb_service.php:38
+msgid "Ended availability of this service!!!"
+msgstr "এই সেবার মেয়াদ শেষ হয়ে গেছে!"
+
+#: single-emsb_service.php:74
+msgid "Book Now "
+msgstr "বুকিং করুন "
+
+#: single-emsb_service.php:267
+msgid "Again Details "
+msgstr "আবার দেখুন "
+
+#: single-emsb_service.php:272
+msgid "Change Date "
+msgstr "দিন পরিবর্তন করুন"
+
+#: single-emsb_service.php:278
+msgid "Change Slot "
+msgstr "সময় পরিবর্তন করুন"
+
+#: single-emsb_service.php:299
+msgid "Before noon ( AM ) "
+msgstr "দুপুরের আগে "
+
+#: single-emsb_service.php:326
+msgid "Your Email Address  "
+msgstr "আপনার ইমেইল এড্রেস "
+
+#: single-emsb_service.php:328
+msgid "Please Enter Your Valid Email Address  "
+msgstr "আপনার বৈধ ইমেইল এড্রেস টাইপ করুন "
+
+#: single-emsb_service.php:337
+msgid "Please Enter Your Valid Phone Number  "
+msgstr "আপনার বৈধ ফোন নাম্বার টাইপ করুন "
+
+#: single-emsb_service.php:362
+msgid "Confirm Booking "
+msgstr ""

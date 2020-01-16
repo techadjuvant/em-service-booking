@@ -86,9 +86,9 @@
 
             <div class="emsb-form-submission-error">
 
-                <h5> <?php _e( 'Sorry, the slot is booked, please try another available date or slot', 'service-booking' ); ?></h5>
+                <h5> <?php _e( 'Sorry, the slot is booked, please try another available date or slot', 'emsb-service-booking' ); ?></h5>
 
-                <button id="goBackButton" class="btn btn-dark emsb-ticket-button"> <?php _e( 'Try Another', 'service-booking' ); ?></button>
+                <button id="goBackButton" class="btn btn-dark emsb-ticket-button"> <?php _e( 'Try Another', 'emsb-service-booking' ); ?></button>
 
             </div>
 
@@ -243,8 +243,8 @@
 
                         <div  class="text-center" >
 
-                            <div class="emsb-pending-notification"> <?php _e( 'Booking Approval Status:', 'service-booking' ); ?> 
-                                <span class="text-warning"> <?php _e( 'Pending', 'service-booking' ); ?> </span>
+                            <div class="emsb-pending-notification"> <?php _e( 'Booking Approval Status:', 'emsb-service-booking' ); ?> 
+                                <span class="text-warning"> <?php _e( 'Pending', 'emsb-service-booking' ); ?> </span>
                             </div>
                         </div>
 
@@ -254,13 +254,13 @@
 
                                 <div class="emsb-booked-service-info">
 
-                                    <h4 id="emsb-service-name"> <?php _e( 'Service: ', 'service-booking' ); ?> <?php echo $service_name;?> </h4> 
+                                    <h4 id="emsb-service-name"> <?php _e( 'Service: ', 'emsb-service-booking' ); ?> <?php echo $service_name;?> </h4> 
 
-                                    <p> <?php _e( 'Title: ', 'service-booking' ); ?> <?php echo $service_title; ?>  </p>
+                                    <p> <?php _e( 'Title: ', 'emsb-service-booking' ); ?> <?php echo $service_title; ?>  </p>
 
-                                    <p> <?php _e( 'Location: ', 'service-booking' ); ?> <?php echo $service_location; ?> </p>
+                                    <p> <?php _e( 'Location: ', 'emsb-service-booking' ); ?> <?php echo $service_location; ?> </p>
 
-                                    <p class="em-reservation-service-price"> <?php _e( 'Price: ', 'service-booking' ); ?> <b> <?php echo $service_price; ?> </b> </p>  
+                                    <p class="em-reservation-service-price"> <?php _e( 'Price: ', 'emsb-service-booking' ); ?> <b> <?php echo $service_price; ?> </b> </p>  
 
                                 </div>
 
@@ -270,23 +270,23 @@
 
                         <div class="emsb-booking-info">
 
-                            <h4> <?php _e( 'Booking Info ', 'service-booking' ); ?></h4>
+                            <h4> <?php _e( 'Booking Info ', 'emsb-service-booking' ); ?></h4>
 
                             <div class="emsb-booked-id">
 
-                                <p><?php _e( 'Booking Id: ', 'service-booking' ); ?> <?php echo $emsb_booking_id; ?></p>
+                                <p><?php _e( 'Booking Id: ', 'emsb-service-booking' ); ?> <?php echo $emsb_booking_id; ?></p>
 
                             </div>
 
                             <div class="emsb-booked-date d-flex align-items-center">
 
-                                <p class="emsb-date"> <?php _e( 'Booked Date: ', 'service-booking' ); ?> <?php echo $booked_date; ?></p>
+                                <p class="emsb-date"> <?php _e( 'Booked Date: ', 'emsb-service-booking' ); ?> <?php echo $booked_date; ?></p>
 
                             </div>
 
                             <div class="em-booked-time-slot d-flex align-items-center">
 
-                                <p class="emsb-time-slot"> <?php _e( 'Booked Time-slot: ', 'service-booking' ); ?> <?php echo  $booked_time_slot; ?> </p>
+                                <p class="emsb-time-slot"> <?php _e( 'Booked Time-slot: ', 'emsb-service-booking' ); ?> <?php echo  $booked_time_slot; ?> </p>
 
                             </div>
 
@@ -296,13 +296,13 @@
 
                             <div class="d-flex align-items-center">
 
-                                <p class="emsb-user-name"> <?php _e( 'Name: ', 'service-booking' ); ?> <?php echo $customer_name; ?></p>
+                                <p class="emsb-user-name"> <?php _e( 'Name: ', 'emsb-service-booking' ); ?> <?php echo $customer_name; ?></p>
 
                             </div>
 
                             <div class="d-flex align-items-center">
 
-                                <p class="emsb-user-phone"><?php _e( ' Phone no: ', 'service-booking' ); ?> <?php echo $customer_phone; ?> </p>
+                                <p class="emsb-user-phone"><?php _e( ' Phone no: ', 'emsb-service-booking' ); ?> <?php echo $customer_phone; ?> </p>
 
                             </div>
 
@@ -312,9 +312,9 @@
 
                     <div class="emsb-ticket-button-wrapper">
 
-                        <h4> <?php _e( 'Thank You', 'service-booking' ); ?></h4>
+                        <h4> <?php _e( 'Thank You', 'emsb-service-booking' ); ?></h4>
 
-                        <button id="goBackButton" class="btn btn-dark emsb-ticket-button"> <?php _e( 'Go Back ', 'service-booking' ); ?></button>
+                        <button id="goBackButton" class="btn btn-dark emsb-ticket-button"> <?php _e( 'Go Back ', 'emsb-service-booking' ); ?></button>
 
                     </div>
 
@@ -352,9 +352,9 @@
 
             <div class="emsb-form-submission-error p-3">
 
-                <span> <?php _e( 'Please fill out the form accurately and then submit', 'service-booking' ); ?></span>
+                <span> <?php _e( 'Please fill out the form accurately and then submit', 'emsb-service-booking' ); ?></span>
 
-                <button id="goBackButton" class="btn btn-dark emsb-ticket-button"> <?php _e( 'Try Again', 'service-booking' ); ?></button>
+                <button id="goBackButton" class="btn btn-dark emsb-ticket-button"> <?php _e( 'Try Again', 'emsb-service-booking' ); ?></button>
 
             </div>
 
