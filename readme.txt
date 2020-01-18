@@ -46,20 +46,19 @@ You will set your service available time for a specific date or for any time len
 1.  Similarly add more service
 1.  Go to the page option of your admin dashboard. A page "Book Service" is created automatically. Name it as you want. And to add it to nav menu go to > Appearence > Menus. And then add it.
 1.	When a booking will be placed, Go to "Service Booking" dashboard and then accept or cancel the booking.
+1.  If you want to show a service on single page just add the post(service) to your expected menu list like others.
 
 == Screenshots ==
-1. On a full width widget
-2. On a full width widget
-3. On a sidebar widget
-4. Servie name & Price setup on widget
-5. Order form
-6. Paypal Pay Now button( Pro )
-7. Error notice( Pro )
-8. Paypal payment( Pro )
-9. Customers order list
-10. Your(admin) email template( Pro )
-11. Customers email template( Pro )
-11. Email Settings Page( Pro )
+1. Show all services
+2. Booking calendar
+3. Booking order submitted
+4. Booking approve or cancel 
+5. List of confirmed booking
+6. All services 
+7. Admin setting page 
+8. Edit service 
+9. Display service on single page 
+
 
 
 == Installation ==

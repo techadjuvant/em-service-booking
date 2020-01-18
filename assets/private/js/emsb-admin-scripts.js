@@ -2,7 +2,7 @@ $(document).ready(function() {
 
     
     var pluginsUrl = backend_ajax_object.pluginsUrl;
-    var emsb_pluginUrl = pluginsUrl +"/em-service-booking";
+    var emsb_pluginUrl = pluginsUrl +"/emsb-service-booking";
     var emsb_icon_url = emsb_pluginUrl +"/assets/img/service-booking.png";
     var emsb_loading_icon_url = emsb_pluginUrl +"/assets/img/loading.gif";
 

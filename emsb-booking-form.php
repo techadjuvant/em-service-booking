@@ -258,7 +258,7 @@
 
                                     <p> <?php _e( 'Title: ', 'emsb-service-booking' ); ?> <?php echo $service_title; ?>  </p>
 
-                                    <p> <?php _e( 'Location: ', 'emsb-service-booking' ); ?> <?php echo $service_location; ?> </p>
+                                    <p> <?php echo $service_location; ?> </p>
 
                                     <p class="em-reservation-service-price"> <?php _e( 'Price: ', 'emsb-service-booking' ); ?> <b> <?php echo $service_price; ?> </b> </p>  
 

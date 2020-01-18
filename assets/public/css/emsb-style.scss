@@ -27,8 +27,7 @@
 
   
 
-.em-services-container,
-.em-reservation-process-container {
+  .em-services-container, .em-reservation-process-container, .em-services-container h1, .em-services-container h2, .em-services-container h3, .em-services-container h4, .em-services-container h5, .em-services-container h6 {
     margin: 0;
     padding: 0;
     border: 0;
@@ -36,12 +35,10 @@
     font: inherit;
     vertical-align: baseline
 }
-.em-services-container,
-.em-reservation-process-container { 
+.em-services-container, .em-reservation-process-container, .em-services-container h1, .em-services-container h2, .em-services-container h3, .em-services-container h4, .em-services-container h5, .em-services-container h6 {
     overflow-x: visible !important;
     font-family: "Alegreya Sans", sans-serif;
     font-weight: 300;
-    
 }
 .em-services-container{
     opacity: 1;
@@ -782,7 +779,7 @@ article.em-service main {
     border-radius: 3px;
     text-align: left;
     font-size: 16px;
-    color: #000;
+    color: gray;
 }
 
 .emsb-plugin-container .em-confirm-booking-button {
@@ -799,6 +796,8 @@ article.em-service main {
     margin-bottom: 0 !important;
     margin-top: 25px;
     width: auto;
+    background: #7979ef;
+    color: #fff !important;
 }
 .emsb-single-service-page .emsb-service-description {
     font-size: 16px;
@@ -996,6 +995,10 @@ select.chosen-select:focus {
 .invalid-feedback {
     margin-top: 0;
     font-size: 14px;
+}
+
+.emsb-single-service-page .em-service-excerpt-info h4 {
+    font-size: 1.5em;
 }
 
 /* Responsiveness */

@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2020-01-16T13:44:45+01:00\n"
-"PO-Revision-Date: 2020-01-16 20:35+0600\n"
+"PO-Revision-Date: 2020-01-16 22:22+0600\n"
 "X-Generator: Poedit 2.2.4\n"
 "X-Domain: emsb-service-booking\n"
 "Last-Translator: \n"
@@ -63,7 +63,7 @@ msgstr "অনুসন্ধান"
 #: archive-emsb_service.php:149 emsb-booking-form.php:261
 #: search-emsb_service.php:122 single-emsb_service.php:61
 msgid "Location: "
-msgstr "অবস্থান:"
+msgstr "লোকেশনঃ "
 
 #: archive-emsb_service.php:156 emsb-booking-form.php:263
 #: search-emsb_service.php:129 single-emsb_service.php:68
@@ -455,7 +455,7 @@ msgstr "সেবার সাব টাইটেল "
 
 #: emsb-service-booking.php:161
 msgid "Location:"
-msgstr "অবস্থান: "
+msgstr "লোকেশনঃ "
 
 #: emsb-service-booking.php:165
 msgid "Service Price:"

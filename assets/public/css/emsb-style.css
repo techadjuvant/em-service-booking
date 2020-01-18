@@ -16,8 +16,7 @@
   /* IE9 Compat Modes */
   src: local("Alegreya Sans Light"), local("AlegreyaSans-Light"), url("../../fonts/alegreya-sans-v10-latin-300.eot?#iefix") format("embedded-opentype"), url("../../fonts/alegreya-sans-v10-latin-300.woff2") format("woff2"), url("../../fonts/alegreya-sans-v10-latin-300.woff") format("woff"), url("../../fonts/alegreya-sans-v10-latin-300.ttf") format("truetype"), url("../../fonts/alegreya-sans-v10-latin-300.svg#AlegreyaSans") format("svg");
   /* Legacy iOS */ }
-.em-services-container,
-.em-reservation-process-container {
+.em-services-container, .em-reservation-process-container, .em-services-container h1, .em-services-container h2, .em-services-container h3, .em-services-container h4, .em-services-container h5, .em-services-container h6 {
   margin: 0;
   padding: 0;
   border: 0;
@@ -25,8 +24,7 @@
   font: inherit;
   vertical-align: baseline; }
 
-.em-services-container,
-.em-reservation-process-container {
+.em-services-container, .em-reservation-process-container, .em-services-container h1, .em-services-container h2, .em-services-container h3, .em-services-container h4, .em-services-container h5, .em-services-container h6 {
   overflow-x: visible !important;
   font-family: "Alegreya Sans", sans-serif;
   font-weight: 300; }
@@ -720,7 +718,7 @@ article.em-service main {
   border-radius: 3px;
   text-align: left;
   font-size: 16px;
-  color: #000; }
+  color: gray; }
 
 .emsb-plugin-container .em-confirm-booking-button {
   width: 20rem !important; }
@@ -734,7 +732,9 @@ article.em-service main {
 .emsb-single-service-page .em-select-service-button {
   margin-bottom: 0 !important;
   margin-top: 25px;
-  width: auto; }
+  width: auto;
+  background: #7979ef;
+  color: #fff !important; }
 
 .emsb-single-service-page .emsb-service-description {
   font-size: 16px; }
@@ -918,6 +918,9 @@ select.chosen-select:focus {
 .invalid-feedback {
   margin-top: 0;
   font-size: 14px; }
+
+.emsb-single-service-page .em-service-excerpt-info h4 {
+  font-size: 1.5em; }
 
 /* Responsiveness */
 /* // Extra small devices (portrait phones, less than 576px) */

@@ -10,7 +10,7 @@ class emsb_Admin_Page
 	{
 		$main = add_menu_page(
 			'EMSB',                                         // page title
-			'Service Booking',                              // menu title
+			'EMSB',                                         // menu title
 			'manage_options',                               // capability
 			'emsb_admin_page',                              // menu slug
             array ( __CLASS__, 'emsb_admin_main_page' ),
@@ -146,7 +146,7 @@ class emsb_Admin_Page
                         <div class="jumbotron text-center">
                             <div class="emsb-admin-plugin-title">
                                 <img src="<?php echo $emsb_icon_url; ?>" alt="Service Booking Icon">
-                                <h2 class="display-5"> <?php _e( 'Service Booking ', 'emsb-service-booking' ); ?></h2>
+                                <h2 class="display-5"> <?php _e( 'EMSB Service Booking ', 'emsb-service-booking' ); ?></h2>
                             </div>
                         </div>
                     </header>
@@ -175,7 +175,7 @@ class emsb_Admin_Page
                         <div class="jumbotron text-center">
                             <div class="emsb-admin-plugin-title">
                                 <img src="<?php echo $emsb_icon_url; ?>" alt="Service Booking Icon">
-                                <h2 class="display-5"> <?php _e( 'Service Booking ', 'emsb-service-booking' ); ?></h2>
+                                <h2 class="display-5"> <?php _e( 'EMSB Service Booking ', 'emsb-service-booking' ); ?></h2>
                             </div>
                         </div>
                     </header>
@@ -339,7 +339,7 @@ class emsb_Admin_Page
                 <div class="jumbotron text-center">
                     <div class="emsb-admin-plugin-title">
                         <img src="<?php echo $emsb_icon_url; ?>" alt="Service Booking Icon">
-                        <h2 class="display-5"> <?php _e( 'Service Booking ', 'emsb-service-booking' ); ?></h2>
+                        <h2 class="display-5"> <?php _e( 'EMSB Service Booking ', 'emsb-service-booking' ); ?></h2>
                     </div>
                 </div>
             </header>
@@ -414,7 +414,7 @@ class emsb_Admin_Page
                     <div class="jumbotron text-center">
                         <div class="emsb-admin-plugin-title">
                             <img src="<?php echo $emsb_icon_url; ?>" alt="Service Booking Icon">
-                            <h2 class="display-5"> <?php _e( 'Service Booking ', 'emsb-service-booking' ); ?></h2>
+                            <h2 class="display-5"> <?php _e( 'EMSB Service Booking ', 'emsb-service-booking' ); ?></h2>
                         </div>
                     </div>
                 </header>
@@ -570,7 +570,7 @@ class emsb_Admin_Page
                     <div class="jumbotron text-center">
                         <div class="emsb-admin-plugin-title">
                             <img src="<?php echo $emsb_icon_url; ?>" alt="Service Booking Icon">
-                            <h2 class="display-5"> <?php _e( 'Service Booking ', 'emsb-service-booking' ); ?></h2>
+                            <h2 class="display-5"> <?php _e( 'EMSB Service Booking ', 'emsb-service-booking' ); ?></h2>
                         </div>
                     </div>
                 </header>
