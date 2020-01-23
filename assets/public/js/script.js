@@ -1,5 +1,4 @@
-
-$(document).ready(function() {
+jQuery( document ).ready(function( $ ) {
     'use strict';
 
     var offDay;
@@ -1010,7 +1009,7 @@ $(document).ready(function() {
 		for (var selector in configChosen) {
 		  $(selector).chosen(configChosen[selector]);
 		}
-	});
+    });
     
     
 });

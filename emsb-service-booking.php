@@ -3,7 +3,7 @@
  * Plugin Name:	EMSB Service Booking
  * Description: EMSB Service Booking is a dynamic plugin which allows you to accept bookings from customers and then accept or cancel the orders. You will set your service available time for a specific date or for any time length like for a month or year. And you are flexible to accept 1, 2, 3,... 100, etc any amount of orders on a specific time availability. And you can accept booking for specific time of date (AM or PM) or for date wise booking. You can set as many service as you want for accepting bookings. Service archive will be created.
  * Author: 		emsbservicebooking
- * Version:		1.1.1
+ * Version:		1.1.2
  * Author URI: 	www.e-motohar.com
  * License:     GNU GENERAL PUBLIC LICENSE Version 3,
  * License URI: https://www.gnu.org/licenses/gpl-3.0.txt
@@ -495,15 +495,14 @@ if ( !class_exists( 'emsb_service_booking_plugin_base_class' ) ) {
             wp_enqueue_style('emsb-calendar', plugin_dir_url(__FILE__) . 'calendar/emsb-calendar.css', array(), '1.1', false );
             wp_enqueue_style('emsb-all', plugin_dir_url(__FILE__) . 'assets/public/css/emsb-all.css', array(), '1.1', false );
             
-
-            wp_enqueue_script('jquery-js', plugin_dir_url(__FILE__) . 'assets/js/jquery.min.js', array(), '1.1', true );
-            wp_localize_script( 'jquery-js', 'frontend_ajax_object',
+            wp_enqueue_script("jquery");
+            wp_localize_script( 'jquery', 'frontend_ajax_object',
                 array( 
                     'ajaxurl' => admin_url( 'admin-ajax.php' )
                 )
             );
             wp_enqueue_script('popper-js', plugin_dir_url(__FILE__) . 'assets/js/popper.min.js', array(), '1.1', true );
-            wp_enqueue_script('bootstrap-js', plugin_dir_url(__FILE__) . 'assets/js/bootstrap.min.js', array(), '1.1', true );
+            wp_enqueue_script('bootstrap-js', plugin_dir_url(__FILE__) . 'assets/js/bootstrap-v4.3.1.min.js', array(), '1.1', true );
             wp_enqueue_script('chosen.jquery', plugin_dir_url(__FILE__) . 'assets/js/chosen.jquery.js', array(), '1.1', true );
             wp_enqueue_script('pseudo-ripple-js', plugin_dir_url(__FILE__) . 'calendar/jquery-pseudo-ripple.js', array(), '1.1', true );
             wp_enqueue_script('nao-calendar-js', plugin_dir_url(__FILE__) . 'calendar/jquery-nao-calendar.js', array(), '1.1', true ); 

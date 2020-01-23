@@ -1,4 +1,5 @@
-
+jQuery( document ).ready(function( $ ) {
+'use strict';
 // Booking list table 
 getPagination('#table-id');
 	$('#maxRows').trigger('change');
@@ -120,3 +121,4 @@ function FilterkeyWord_all_table() {
       $('#maxRows').trigger('change');
     }
 }
+});

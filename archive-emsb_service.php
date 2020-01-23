@@ -6,7 +6,6 @@ get_header();
   $customer_cookie_duration = $emsb_settings_data_fetch->customer_cookie_duration;
 
 ?>
-
 <!-- emsb container  -->
 <div class="emsb-plugin-container">
 <!-- emsb-services-and-form-container -->

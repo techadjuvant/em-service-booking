@@ -6,13 +6,15 @@ add_action('wp_ajax_nopriv_emsb_booked_dates', 'emsb_booked_dates');
 function emsb_booked_dates() {
     check_ajax_referer( 'emsb_booked_slot_nonce', 'security' );
     global $wpdb;
-    $table_name = $wpdb->prefix . "emsb_bookings";
+
+    $tablename = $wpdb->prefix . "emsb_bookings";
     $check_availability_of_date = $_POST['check_availability_of_date'];
-    $results = $wpdb->get_results("SELECT * FROM $table_name WHERE service_id = '$check_availability_of_date' ORDER BY id ASC", ARRAY_A);
-    
-    echo json_encode($results);
+    $prep_sql = $wpdb->prepare( "SELECT * FROM $tablename WHERE service_id = %d ORDER BY id ASC", $check_availability_of_date );
+    $results = $wpdb->get_results( $prep_sql , ARRAY_A );
+    echo wp_json_encode($results);
 
     wp_die();
+
 
 }
 
@@ -27,9 +29,9 @@ function emsb_booked_slot() {
     global $wpdb;
     $table_name = $wpdb->prefix . "emsb_bookings";
     $check_slots_availability = $_POST['check_slots_availability'];
-    $bookedSlotIds = $wpdb->get_results("SELECT * FROM $table_name WHERE booked_date_id = '$check_slots_availability' ORDER BY id ASC", ARRAY_A);
-
-    echo json_encode($bookedSlotIds);
+    $bookedSlotIds_prepare = $wpdb->prepare("SELECT * FROM $table_name WHERE booked_date_id = %s ORDER BY id ASC", $check_slots_availability );
+    $bookedSlotIds = $wpdb->get_results( $bookedSlotIds_prepare , ARRAY_A );
+    echo wp_json_encode($bookedSlotIds);
 
     wp_die();
 
@@ -48,14 +50,17 @@ function emsb_booking_approval() {
     $booked_slot_id = $_POST['booked_slot_id'];
     $emsb_booking_approval_id = $_POST['emsb_booking_approval_id'];
     // Update Booking table
-    $booking_approval_res = $wpdb->update($emsb_bookings_data_table, array( 'approve_booking' => $emsb_booking_approval_action_value), array( 'id' => $emsb_booking_approval_id ));
-    $booking_approval_res = $wpdb->update($emsb_bookings_data_table, array( 'available_orders' => $emsb_booking_update_availability), array( 'booked_slot_id' => $booked_slot_id ));
+
+    $wpdb->query($wpdb->prepare("UPDATE $emsb_bookings_data_table SET approve_booking=%s WHERE id=%d", $emsb_booking_approval_action_value, $emsb_booking_approval_id));
+
+    $wpdb->query($wpdb->prepare("UPDATE $emsb_bookings_data_table SET available_orders=%d WHERE booked_slot_id=%s", $emsb_booking_update_availability, $booked_slot_id));
+
     
-    // prepare email
-    $emsb_customer_email_address = $_POST['emsb_customer_email_address'];
     // Fetch data for sending email
     $emsb_settings_table = $wpdb->prefix . "emsb_settings";
     $emsb_settings_data_fetch = $wpdb->get_row( "SELECT * FROM $emsb_settings_table ORDER BY id DESC LIMIT 1" );
+
+    $emsb_customer_email_address = sanitize_email($_POST['emsb_customer_email_address']);
 
     $headers = array('Content-Type: text/html; charset=UTF-8');  
             
@@ -71,7 +76,7 @@ function emsb_booking_approval() {
         $emsb_booking_confirmation_email = wp_mail( $emsb_customer_email_address, $fetch_emsb_customer_confirmed_email_subject, $fetch_emsb_customer_confirmed_email_body, $headers );
     }
 
-    echo json_encode($emsb_settings_data_fetch);
+    echo wp_json_encode($emsb_customer_email_address);
 
     wp_die();
 
@@ -89,7 +94,7 @@ function emsb_fetch_pending_bookings() {
     $table_name = $wpdb->prefix . "emsb_bookings";
     $results = $wpdb->get_results("SELECT * FROM $table_name WHERE ( approve_booking = '0' AND starting_time_ms > $current_time_minas_24_hours) ORDER BY id ASC LIMIT 10", ARRAY_A);
 
-    echo json_encode($results);
+    echo wp_json_encode($results);
 
     wp_die();
 

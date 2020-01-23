@@ -207,8 +207,8 @@ class emsb_Admin_Page
 
         wp_enqueue_style('emsb-admin-css', plugin_dir_url(__FILE__) . 'assets/private/css/emsb-admin.css', array(), '1.1', false );
         
-        wp_enqueue_script('jquery-js', plugin_dir_url(__FILE__) . 'assets/js/jquery.min.js', array(), '1.1', true );
-        wp_localize_script( 'jquery-js', 'backend_ajax_object',
+        wp_enqueue_script('jquery');
+        wp_localize_script( 'jquery', 'backend_ajax_object',
             array( 
                 'ajaxurl' => admin_url( 'admin-ajax.php' ),
                 'pluginsUrl' => plugins_url()
@@ -221,11 +221,11 @@ class emsb_Admin_Page
         
         if ( $hook == 'post-new.php' || $hook == 'post.php' || $hook == 'edit.php' ) {
             if ( 'emsb_service' === $post_type ) {     
-                wp_enqueue_style('bootstrap-css', plugin_dir_url(__FILE__) . 'assets/css/bootstrap.min.css', array(), '1.1', false );
+                wp_enqueue_style('bootstrap-css', plugin_dir_url(__FILE__) . 'assets/css/bootstrap-v4.3.1.min.css', array(), '1.1', false );
                 wp_enqueue_style('style-css', plugin_dir_url(__FILE__) . 'assets/private/css/emsb-admin-only.css', array(), '1.1', false );
                 
                 wp_enqueue_script('popper-js', plugin_dir_url(__FILE__) . 'assets/js/popper.min.js', array(), '1.1', true );
-                wp_enqueue_script('bootstrap-js', plugin_dir_url(__FILE__) . 'assets/js/bootstrap.min.js', array(), '1.1', true );
+                wp_enqueue_script('bootstrap-js', plugin_dir_url(__FILE__) . 'assets/js/bootstrap-v4.3.1.min.js', array(), '1.1', true );
                
                 
             }
@@ -241,7 +241,7 @@ class emsb_Admin_Page
 	 */
 	public static function enqueue_style()
 	{
-		wp_register_style('emsb_bootstrap_css', plugins_url( 'assets/css/bootstrap.min.css', __FILE__ ));
+		wp_register_style('emsb_bootstrap_css', plugins_url( 'assets/css/bootstrap-v4.3.1.min.css', __FILE__ ));
         wp_enqueue_style( 'emsb_bootstrap_css' );
 
         wp_enqueue_style('style-css', plugin_dir_url(__FILE__) . 'assets/private/css/emsb-admin-only.css', array(), '1.1', false );
@@ -254,9 +254,8 @@ class emsb_Admin_Page
 	 */
 	public static function enqueue_script()
 	{
-		wp_register_script( 'emsb-jquery', plugins_url( 'assets/js/jquery.min.js', __FILE__ ), array(), FALSE, TRUE);
-        wp_enqueue_script( 'emsb-jquery' );
-        wp_localize_script( 'emsb-jquery', 'backend_ajax_object',
+        wp_enqueue_script( 'jquery' );
+        wp_localize_script( 'jquery', 'backend_ajax_object',
                     array( 
                         'ajaxurl' => admin_url( 'admin-ajax.php' ),
                         'pluginsUrl' => plugins_url()
@@ -266,7 +265,7 @@ class emsb_Admin_Page
         wp_register_script('popper', plugins_url( 'assets/js/popper.min.js', __FILE__ ), array(), FALSE, TRUE );
         wp_enqueue_script( 'popper' );
 
-        wp_register_script('bootstrap', plugins_url( 'assets/js/bootstrap.min.js', __FILE__ ), array(), FALSE, TRUE );
+        wp_register_script('bootstrap', plugins_url( 'assets/js/bootstrap-v4.3.1.min.js', __FILE__ ), array(), FALSE, TRUE );
         wp_enqueue_script( 'bootstrap' );
         
         wp_register_script( 'emsb-bookings', plugins_url( 'assets/private/js/emsb-bookings-table-scripts.js', __FILE__ ), array(), FALSE, TRUE);
