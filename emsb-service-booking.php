@@ -4,7 +4,7 @@
  * Description: EMSB Service Booking is a dynamic plugin which allows you to accept bookings from customers and then accept or cancel the orders. You will set your service available time for a specific date or for any time length like for a month or year. And you are flexible to accept 1, 2, 3,... 100, etc any amount of orders on a specific time availability. And you can accept booking for specific time of date (AM or PM) or for date wise booking. You can set as many service as you want for accepting bookings. Service archive will be created.
  * Author: 		emsbservicebooking
  * Version:		1.1.2
- * Author URI: 	www.e-motohar.com
+ * Author URI: 	www.e-motahar.com
  * License:     GNU GENERAL PUBLIC LICENSE Version 3,
  * License URI: https://www.gnu.org/licenses/gpl-3.0.txt
  * Text Domain: emsb-service-booking
@@ -44,10 +44,9 @@ if ( !class_exists( 'emsb_service_booking_plugin_base_class' ) ) {
             add_action('add_meta_boxes', array($this,'emsb_add_meta_boxes_to_booking_service')); //add meta boxes
             add_action('save_post', array($this,'emsb_save_all_posts_types_meta_fields_meta')); //add meta boxes
             add_filter( 'archive_template',  array($this,'emsb_get_archive_template') ) ; 
-            add_filter( 'search_template',  array($this,'emsb_get_search_template') ) ; 
             add_filter( 'single_template',  array($this,'emsb_get_single_template') ) ; 
-            add_filter( 'use_block_editor_for_post_type', array($this,'mytheme_disable_gutenberg_pages'), 10, 2 );
-            add_action( 'wp_enqueue_scripts', array($this,'em_reservation_enqueue_public_scripts')  );
+            add_filter( 'use_block_editor_for_post_type', array($this,'emsb_disable_gutenberg_pages'), 10, 2 );
+            add_action( 'wp_enqueue_scripts', array($this,'emsb_enqueue_public_scripts')  );
             
             
         }
@@ -463,13 +462,6 @@ if ( !class_exists( 'emsb_service_booking_plugin_base_class' ) ) {
             return $archive_template;
         }
 
-        public function emsb_get_search_template( $search_template ) {
-
-            $search_template = dirname( __FILE__ ) . '/search-emsb_service.php';
-
-            return $search_template;
-        }
-
         public function emsb_get_single_template( $emsb_single_service ) {
             global $post;
             // global $post_type;
@@ -480,7 +472,7 @@ if ( !class_exists( 'emsb_service_booking_plugin_base_class' ) ) {
             return $emsb_single_service;
         }
 
-        public function mytheme_disable_gutenberg_pages( $can_edit, $post_type ) {
+        public function emsb_disable_gutenberg_pages( $can_edit, $post_type ) {
             if ( 'emsb_service' === $post_type ) {
               return false;
             }
@@ -490,7 +482,7 @@ if ( !class_exists( 'emsb_service_booking_plugin_base_class' ) ) {
         
          
 
-        public function em_reservation_enqueue_public_scripts(){
+        public function emsb_enqueue_public_scripts(){
   
             wp_enqueue_style('emsb-calendar', plugin_dir_url(__FILE__) . 'calendar/emsb-calendar.css', array(), '1.1', false );
             wp_enqueue_style('emsb-all', plugin_dir_url(__FILE__) . 'assets/public/css/emsb-all.css', array(), '1.1', false );

@@ -87,8 +87,7 @@ article.em-service main {
   display: none; }
 
 .em-reservation-process-container {
-  position: relative;
-  background-color: #fff; }
+  position: relative; }
 
 .em-reservation-div-position {
   top: 50px;
@@ -183,7 +182,8 @@ article.em-service main {
   width: 40px;
   border-radius: 0px;
   font-size: 14px;
-  font-weight: 300; }
+  font-weight: 300;
+  background-color: #fff; }
 
 .em-reservation-calendar .month-head > div,
 .em-reservation-calendar .month-head > button {
@@ -795,14 +795,25 @@ article.em-service main {
   line-height: 14px;
   border-radius: 3px;
   border: 0;
-  border-bottom: 1px solid #d0e0ff; }
+  border-bottom: 1px solid #d0e0ff;
+  width: 70%;
+  background: #ffffff;
+  height: 40px;
+  padding-left: 10px;
+  font-weight: 100; }
 
-.emsb-serch-form input.form-control:focus, .emsb-serch-form input[type="text"]:focus {
+.emsb-serch-form input.form-control:focus,
+.emsb-serch-form input.form-control:active,
+.emsb-serch-form input.form-control:visited,
+.emsb-serch-form input[type="text"]:focus {
   border-color: #f3f3f3;
   outline: 0;
   outline-offset: 0;
   box-shadow: none;
-  border-right: 0px; }
+  border-right: 0px;
+  width: 70%;
+  background: #ffffff;
+  height: 40px; }
 
 button.btn.emsb-search-btn {
   font-size: 14px;
@@ -812,7 +823,8 @@ button.btn.emsb-search-btn {
   border: 1px solid #f8f9fa;
   color: #000;
   background: #f8f9fa;
-  border-bottom: 1px solid #d0e0ff; }
+  border-bottom: 1px solid #d0e0ff;
+  height: 40px; }
 
 /* chosen.js custom css */
 .emsb-plugin-container .chosen-container-active.chosen-with-drop .chosen-single div b {

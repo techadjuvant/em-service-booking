@@ -416,20 +416,25 @@ jQuery( document ).ready(function( $ ) {
             dataType:"json",
             success: function(response) {
                 bookedDates = response;
-                $.each(response, function(index, slot) {
-                    var isOffDay = $(".em-reservation-calendar tbody.month-days tr td[data-servicedateid='" + slot.booked_date_id +"']").hasClass("off-day"); 
-                    var isDatePassed = $(".em-reservation-calendar tbody.month-days tr td[data-servicedateid='" + slot.booked_date_id +"']").hasClass("passed-day"); 
-                    var isunavailable = $(".em-reservation-calendar tbody.month-days tr td[data-servicedateid='" + slot.booked_date_id +"']").hasClass("unavailable"); 
-                    
-                    if(!isOffDay && !isDatePassed && !isunavailable){ 
-                        if(slot.available_orders == 0){
-                            $(".em-reservation-calendar tbody.month-days tr td[data-servicedateid='" + slot.booked_date_id +"']").addClass("unavailable already-booked").attr('title', 'Already Booked');
-                        } else {                      
-                            $(".em-reservation-calendar tbody.month-days tr td[data-servicedateid='" + slot.booked_date_id +"']").attr('title', 'Available '+ slot.available_orders);
+                if(response == 'error'){
+                    $(".em-reservation-calendar tbody.month-days tr td").addClass("unavailable already-booked").attr('title', 'Already Booked');
+                } else {
+                    $.each(response, function(index, slot) {
+                        var isOffDay = $(".em-reservation-calendar tbody.month-days tr td[data-servicedateid='" + slot.booked_date_id +"']").hasClass("off-day"); 
+                        var isDatePassed = $(".em-reservation-calendar tbody.month-days tr td[data-servicedateid='" + slot.booked_date_id +"']").hasClass("passed-day"); 
+                        var isunavailable = $(".em-reservation-calendar tbody.month-days tr td[data-servicedateid='" + slot.booked_date_id +"']").hasClass("unavailable"); 
+                        
+                        if(!isOffDay && !isDatePassed && !isunavailable){ 
+                            if(slot.available_orders == 0){
+                                $(".em-reservation-calendar tbody.month-days tr td[data-servicedateid='" + slot.booked_date_id +"']").addClass("unavailable already-booked").attr('title', 'Already Booked');
+                            } else {                      
+                                $(".em-reservation-calendar tbody.month-days tr td[data-servicedateid='" + slot.booked_date_id +"']").attr('title', 'Available '+ slot.available_orders);
+                            }
                         }
-                    }
-                    
-                });
+                        
+                    });
+                }
+                
                 
                 $(".emsb-calender-loading-gif").fadeOut(1000);
 
@@ -761,25 +766,29 @@ jQuery( document ).ready(function( $ ) {
             dataType:"json",
             success: function(emsb_slot_response) {
 
-                $.each(emsb_slot_response, function(index, slot) {
+                if(emsb_slot_response == 'error'){
+                    $(".slots li button").addClass("booked").removeClass("available").attr('title', 'Already Booked').text("Booked");
+                } else {
+                    $.each(emsb_slot_response, function(index, slot) {
 
-                    var availableOrdersInString = slot.available_orders;
-                    var starting_time_ms = slot.starting_time_ms;
-                    var availableOrdersInInt = parseInt(availableOrdersInString);
-
-                    if(starting_time_ms > currentTimeInMiliSeconds){
-                        if(availableOrdersInInt <= 0){
-                            $(".slots li[data-slotid='" + slot.booked_slot_id +"'] button").addClass("booked").removeClass("available").attr('title', 'Already Booked').text("Booked");
+                        var availableOrdersInString = slot.available_orders;
+                        var starting_time_ms = slot.starting_time_ms;
+                        var availableOrdersInInt = parseInt(availableOrdersInString);
+    
+                        if(starting_time_ms > currentTimeInMiliSeconds){
+                            if(availableOrdersInInt <= 0){
+                                $(".slots li[data-slotid='" + slot.booked_slot_id +"'] button").addClass("booked").removeClass("available").attr('title', 'Already Booked').text("Booked");
+                            } else {
+                                $(".slots li[data-slotid='" + slot.booked_slot_id +"'] button").text("Availabel").attr('title', "Availabel: "+ slot.available_orders);
+                            }
                         } else {
-                            $(".slots li[data-slotid='" + slot.booked_slot_id +"'] button").text("Availabel").attr('title', "Availabel: "+ slot.available_orders);
+                            $(".slots li[data-slotid='" + slot.booked_slot_id +"'] button").text("Time Passed").attr('title', "Unavailable").addClass("booked").removeClass("available");
                         }
-                    } else {
-                        $(".slots li[data-slotid='" + slot.booked_slot_id +"'] button").text("Time Passed").attr('title', "Unavailable: ").addClass("booked").removeClass("available");
-                    }
-                    
-                    
-                    
-                });
+                        
+                    });
+                }
+
+                
 
                 $(".emsb-loading-gif").fadeOut(1000);
 

@@ -45,12 +45,13 @@ get_header();
               <div class="col-sm-6">
                 <form action="<?php echo esc_url( home_url( '/book-service/') ); ?>" role="search" class="emsb-serch-form"  method="get" id="searchform">
                     <div class="input-group">
-                      <input type="text" class="form-control" name="s" placeholder="Search">
+                      <input type="text" class="form-control" name="emsb_search" placeholder="Search">
                       <div class="input-group-append">
                         <button class="btn emsb-search-btn" type="submit">
                            <?php _e( 'Search', 'emsb-service-booking' ); ?>
                         </button>
                       </div>
+                      
                   </div>
                 </form>
               </div>
@@ -71,49 +72,67 @@ get_header();
                 $offset = $page;
               }
 
-              if(isset($_GET['service_type'])){ 
-                $service_type = $_GET['service_type']; //get sort value 
-                if($_GET['service_type'] == 'show-all'){
+              
+              
+
+              if(isset($_GET['service_type'])){
+                  $emsb_service_type = $_GET['service_type'];
+                  $emsb_service_type_xss_proof = htmlspecialchars($emsb_service_type);
+                  $emsb_service_type_xss_proof_and_sanitized = sanitize_text_field($emsb_service_type_xss_proof);
+                  if($_GET['service_type'] == 'show-all'){
+                      $args = array(
+                        'posts_per_page' => $per_page,
+                        'post_type' => 'emsb_service',
+                        'status' => 'published',
+                        'offset' => $offset
+                      );
+                      $emsb_query = new WP_Query( $args );
+                  } else {
+                      $args = array(
+                        'posts_per_page' => $per_page,
+                        'post_type' => 'emsb_service',
+                        'status' => 'published',
+                        'offset' => $offset,
+                        'tax_query' => array(
+                          array(
+                            'taxonomy' => 'emsb_service_type',
+                            'field' => 'name',
+                            'terms' => $emsb_service_type_xss_proof_and_sanitized
+                          ) 
+                        ) 
+                      );
+                      $emsb_query = new WP_Query( $args );
+                  }
+                
+              } else if(isset($_GET['emsb_search'])) {
+                  $emsb_search = $_GET['emsb_search'];
+                  $emsb_search_xss_proof = htmlspecialchars($emsb_search);
+                  $emsb_search_xss_proof_and_sanitized = sanitize_text_field($emsb_search_xss_proof);
+                  $args = array(
+                      's' => $emsb_search,
+                      'posts_per_page' => $per_page,
+                      'post_type' => 'emsb_service',
+                      'status' => 'published',
+                      'offset' => $offset
+                  );
+                  $emsb_query = new WP_Query( $args );
+
+              } else {
                   $args = array(
                     'posts_per_page' => $per_page,
                     'post_type' => 'emsb_service',
                     'status' => 'published',
                     'offset' => $offset
                   );
-                  $the_query = new WP_Query( $args );
-                } else {
-                  $args = array(
-                    'posts_per_page' => $per_page,
-                    'post_type' => 'emsb_service',
-                    'status' => 'published',
-                    'offset' => $offset,
-                    'tax_query' => array(
-                      array(
-                        'taxonomy' => 'emsb_service_type',
-                        'field' => 'name',
-                        'terms' => $_GET['service_type']
-                      ) 
-                    ) 
-                  );
-                  $the_query = new WP_Query( $args );
-                }
-                
-              } else {
-                $args = array(
-                  'posts_per_page' => $per_page,
-                  'post_type' => 'emsb_service',
-                  'status' => 'published',
-                  'offset' => $offset
-                );
-                $the_query = new WP_Query( $args );
+                  $emsb_query = new WP_Query( $args );
               }
 
               
 
-              if ( $the_query->have_posts() ) :
+              if ( $emsb_query->have_posts() ) :
               /* Start the Loop */
-              while ( $the_query->have_posts() ) :
-                $the_query->the_post();
+              while ( $emsb_query->have_posts() ) :
+                $emsb_query->the_post();
 
               
                 $emsb_service_availability_ends_at = get_post_meta( get_the_ID(), 'emsb_service_availability_ends_at', true ); 
@@ -314,7 +333,7 @@ get_header();
                 <!-- Ends the loop  -->
             <?php endwhile; 
 
-                $total_pages = $the_query->max_num_pages;
+                $total_pages = $emsb_query->max_num_pages;
 
                 echo '<div class="emsb-archive-pagination">';
                 echo paginate_links(array(
