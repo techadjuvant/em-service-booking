@@ -310,23 +310,33 @@ if ( !class_exists( 'emsb_service_booking_plugin_base_class' ) ) {
 
             // Checks for input and sanitizes/saves if needed 
             if( isset( $_POST[ 'emsb_display_service_title' ] ) ) {
-                update_post_meta( $post_id, 'emsb_display_service_title', $_POST[ 'emsb_display_service_title' ] );
+                $emsb_display_service_title = htmlspecialchars($_POST[ 'emsb_display_service_title']);
+                $emsb_display_service_title_sanitized = sanitize_text_field($emsb_display_service_title);
+                update_post_meta( $post_id, 'emsb_display_service_title', $emsb_display_service_title_sanitized );
             }
             if( isset( $_POST[ 'emsb_display_service_location' ] ) ) {
-                update_post_meta( $post_id, 'emsb_display_service_location', $_POST[ 'emsb_display_service_location' ] );
+                $emsb_display_service_location = htmlspecialchars($_POST[ 'emsb_display_service_location']);
+                $emsb_display_service_location_sanitized = sanitize_text_field($emsb_display_service_location);
+                update_post_meta( $post_id, 'emsb_display_service_location', $emsb_display_service_location_sanitized );
             }
             if( isset( $_POST[ 'emsb_display_service_price' ] ) ) {
-                update_post_meta( $post_id, 'emsb_display_service_price', $_POST[ 'emsb_display_service_price' ] );
+                $emsb_display_service_price = htmlspecialchars($_POST[ 'emsb_display_service_price']);
+                $emsb_display_service_price_sanitized = sanitize_text_field($emsb_display_service_price);
+                update_post_meta( $post_id, 'emsb_display_service_price', $emsb_display_service_price_sanitized );
             }
 
             // *************** Service Availability starts at **************//
             if( isset( $_POST[ 'emsb_service_availability_starts_at' ] ) ) {
-                update_post_meta( $post_id, 'emsb_service_availability_starts_at', $_POST[ 'emsb_service_availability_starts_at' ] );
+                $emsb_service_availability_starts_at = htmlspecialchars($_POST[ 'emsb_service_availability_starts_at']);
+                $emsb_service_availability_starts_at_sanitized = sanitize_text_field($emsb_service_availability_starts_at);
+                update_post_meta( $post_id, 'emsb_service_availability_starts_at', $emsb_service_availability_starts_at_sanitized );
             }
 
             // *************** Service Availability ends at **************//
             if( isset( $_POST[ 'emsb_service_availability_ends_at' ] ) ) {
-                update_post_meta( $post_id, 'emsb_service_availability_ends_at', $_POST[ 'emsb_service_availability_ends_at' ] );
+                $emsb_service_availability_ends_at = htmlspecialchars($_POST[ 'emsb_service_availability_ends_at']);
+                $emsb_service_availability_ends_at_sanitized = sanitize_text_field($emsb_service_availability_ends_at);
+                update_post_meta( $post_id, 'emsb_service_availability_ends_at', $emsb_service_availability_ends_at_sanitized );
             }
 
             // *************** Off-days **************//
@@ -386,17 +396,25 @@ if ( !class_exists( 'emsb_service_booking_plugin_base_class' ) ) {
             $default_emsb_service_am_ending_time = "11:00";
             $default_emsb_service_am_slot_duration = "60";
             if( isset( $_POST[ 'emsb_service_am_starting_time' ] ) ) {
-                update_post_meta( $post_id, 'emsb_service_am_starting_time', $_POST[ 'emsb_service_am_starting_time' ] );
+                $emsb_service_am_starting_time = htmlspecialchars($_POST[ 'emsb_service_am_starting_time']);
+                $emsb_service_am_starting_time_sanitized = sanitize_text_field($emsb_service_am_starting_time);
+                update_post_meta( $post_id, 'emsb_service_am_starting_time', $emsb_service_am_starting_time_sanitized );
             } else {
                 update_post_meta( $post_id, 'emsb_service_am_starting_time', $default_emsb_service_am_starting_time );
             }
+
             if( isset( $_POST[ 'emsb_service_am_ending_time' ] ) ) {
-                update_post_meta( $post_id, 'emsb_service_am_ending_time', $_POST[ 'emsb_service_am_ending_time' ] );
+                $emsb_service_am_ending_time = htmlspecialchars($_POST[ 'emsb_service_am_ending_time']);
+                $emsb_service_am_ending_time_sanitized = sanitize_text_field($emsb_service_am_ending_time);
+                update_post_meta( $post_id, 'emsb_service_am_ending_time', $emsb_service_am_ending_time_sanitized );
             } else {
                 update_post_meta( $post_id, 'emsb_service_am_ending_time', $default_emsb_service_am_ending_time );
             }
+
             if( isset( $_POST[ 'emsb_service_am_slot_duration' ] ) ) {
-                update_post_meta( $post_id, 'emsb_service_am_slot_duration', $_POST[ 'emsb_service_am_slot_duration' ] );
+                $emsb_service_am_slot_duration = htmlspecialchars($_POST[ 'emsb_service_am_slot_duration']);
+                $emsb_service_am_slot_duration_sanitized = absint($emsb_service_am_slot_duration);
+                update_post_meta( $post_id, 'emsb_service_am_slot_duration', $emsb_service_am_slot_duration_sanitized );
             } else {
                 update_post_meta( $post_id, 'emsb_service_am_slot_duration', $default_emsb_service_am_slot_duration );
             }
@@ -406,17 +424,24 @@ if ( !class_exists( 'emsb_service_booking_plugin_base_class' ) ) {
             $default_emsb_service_pm_ending_time = "22:00";
             $default_emsb_service_pm_slot_duration = "60";
             if( isset( $_POST[ 'emsb_service_pm_starting_time' ] ) ) {
-                update_post_meta( $post_id, 'emsb_service_pm_starting_time', $_POST[ 'emsb_service_pm_starting_time' ] );
+                $emsb_service_pm_starting_time = htmlspecialchars($_POST[ 'emsb_service_pm_starting_time']);
+                $emsb_service_pm_starting_time_sanitized = sanitize_text_field($emsb_service_pm_starting_time);
+                update_post_meta( $post_id, 'emsb_service_pm_starting_time', $emsb_service_pm_starting_time_sanitized );
             } else {
                 update_post_meta( $post_id, 'emsb_service_pm_starting_time', $default_emsb_service_pm_starting_time );
             }
+
             if( isset( $_POST[ 'emsb_service_pm_ending_time' ] ) ) {
-                update_post_meta( $post_id, 'emsb_service_pm_ending_time', $_POST[ 'emsb_service_pm_ending_time' ] );
+                $emsb_service_pm_ending_time = htmlspecialchars($_POST[ 'emsb_service_pm_ending_time']);
+                $emsb_service_pm_ending_time_sanitized = sanitize_text_field($emsb_service_pm_ending_time);
+                update_post_meta( $post_id, 'emsb_service_pm_ending_time', $emsb_service_pm_ending_time_sanitized );
             } else {
                 update_post_meta( $post_id, 'emsb_service_pm_ending_time', $default_emsb_service_pm_ending_time );
             }
             if( isset( $_POST[ 'emsb_service_pm_slot_duration' ] ) ) {
-                update_post_meta( $post_id, 'emsb_service_pm_slot_duration', $_POST[ 'emsb_service_pm_slot_duration' ] );
+                $emsb_service_pm_slot_duration = htmlspecialchars($_POST[ 'emsb_service_pm_slot_duration']);
+                $emsb_service_pm_slot_duration_sanitized = absint($emsb_service_pm_slot_duration);
+                update_post_meta( $post_id, 'emsb_service_pm_slot_duration', $emsb_service_pm_slot_duration_sanitized );
             } else {
                 update_post_meta( $post_id, 'emsb_service_pm_slot_duration', $default_emsb_service_pm_slot_duration );
             }
@@ -424,17 +449,21 @@ if ( !class_exists( 'emsb_service_booking_plugin_base_class' ) ) {
             // *************** Orders per slot **************//
             $default_order_per_slot = 1;
             if( isset( $_POST[ 'emsb_service_orders_per_slot' ] ) ) {
-                update_post_meta( $post_id, 'emsb_service_orders_per_slot', $_POST[ 'emsb_service_orders_per_slot' ] );
+                $emsb_service_orders_per_slot = htmlspecialchars($_POST[ 'emsb_service_orders_per_slot']);
+                $emsb_service_orders_per_slot_sanitized = absint($emsb_service_orders_per_slot);
+                update_post_meta( $post_id, 'emsb_service_orders_per_slot', $emsb_service_orders_per_slot_sanitized );
             } else {
                 update_post_meta( $post_id, 'emsb_service_orders_per_slot', $default_order_per_slot);
             }
 
             // *************** Service Provider Email Address **************//
-            $email_address = get_bloginfo('admin_email');
+            $emsb_service_provider_email_default = get_bloginfo('admin_email');
             if(isset( $_POST[ 'emsb_service_provider_email' ] )) {
-                update_post_meta( $post_id, 'emsb_service_provider_email', $_POST[ 'emsb_service_provider_email' ] );
+                $emsb_service_provider_email = htmlspecialchars($_POST[ 'emsb_service_provider_email']);
+                $emsb_service_provider_email_sanitized = sanitize_email($emsb_service_provider_email);
+                update_post_meta( $post_id, 'emsb_service_provider_email', $emsb_service_provider_email_sanitized );
             } else {
-                update_post_meta( $post_id, 'emsb_service_provider_email', $email_address );
+                update_post_meta( $post_id, 'emsb_service_provider_email', $emsb_service_provider_email_default );
             }
             
             // *************** emsbtexteditor **************//
@@ -445,7 +474,8 @@ if ( !class_exists( 'emsb_service_booking_plugin_base_class' ) ) {
             }
 
             if( isset( $_POST[ 'emsbtexteditor' ] ) ) {
-                update_post_meta( $post_id, 'emsbtexteditor', $_POST[ 'emsbtexteditor' ] );
+                $emsbtexteditor_sanitized = wp_kses_post($_POST[ 'emsbtexteditor']);
+                update_post_meta( $post_id, 'emsbtexteditor', $emsbtexteditor_sanitized );
             }
 
             

@@ -81,7 +81,7 @@
                 $customer_email_xss_proof_and_sanitized = sanitize_email($customer_email_xss_proof);
                 
                 $customer_phone_xss_proof = htmlspecialchars($customer_phone);
-                $customer_phone_xss_proof_and_sanitized = sanitize_text_field($customer_phone_xss_proof);
+                $customer_phone_xss_proof_and_sanitized = absint($customer_phone_xss_proof);
                 
                 $service_provider_email_xss_proof = htmlspecialchars($service_provider_email);
                 $service_provider_email_xss_proof_and_sanitized = sanitize_email($service_provider_email_xss_proof);
@@ -121,7 +121,7 @@
 
                 $emsb_insert_query = $wpdb->prepare("INSERT INTO $emsb_bookings_table_name 
                     (`approve_booking`, `service_id`, `service_name`, `service_price`, `booked_date_id`, `booked_slot_id`, `booked_date`, `booked_time_slot`, `customer_name`, `customer_email`, `customer_phone`, `customer_IP`, `starting_time_ms`, `available_orders`) 
-                    values (%s, %d, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %d)", 
+                    values (%s, %d, %s, %s, %s, %s, %s, %s, %s, %s, %d, %s, %s, %d)", 
                     0, 
                     $service_id_xss_proof_and_sanitized, 
                     $service_name_xss_proof_and_sanitized, 
