@@ -383,11 +383,7 @@ jQuery( document ).ready(function( $ ) {
             if(makeSmallerStartingDate <= makeSmallerCDate && makeSmallerCDate <= makeSmallerEndingDate){
                 $(".em-reservation-calendar tbody.month-days tr td[data-date='" + i +"']").attr('title', 'Has Slots').removeClass("unavailable emsb-service-date-unavailable").addClass("emsb-service-date-available"); 
             }
-            // Enable today as available only for time slot bookings
-            var isToday = $(".em-reservation-calendar tbody.month-days tr td[data-date='" + i +"']").hasClass("today");      
-            if(isToday){ 
-                $(".em-reservation-calendar tbody.month-days tr td[data-date='" + i +"']").attr('title', 'Has Slots').removeClass("unavailable emsb-service-date-unavailable").addClass("emsb-service-date-available"); 
-            }    
+                
         }
 
 
