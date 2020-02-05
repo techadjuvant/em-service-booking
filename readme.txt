@@ -42,13 +42,27 @@ You will set your service available time for a specific date or for any time len
 = HOW TO USE : =
  
 1.  Install & Activate the plugin
-1.  From Admin dashboard go to Service Book tab
+1.  From Admin dashboard go to EMSB tab
 1.  Click on Add Service to add a new service 
-1.  Provide your information for the service 
+1.  Provide information about the service
 1.  Similarly, add more service
-1.  Go to the page option of your admin dashboard. A page "Book Service" is created automatically. Name it as you want. And to add it to the nav menu go to > Appearance > Menus. And then add it.
-1.	When booking will be placed, Go to the "Service Booking" dashboard and then accept or cancel the booking.
+1.  Go to the page option of your admin dashboard. A page "Book Service" will be created automatically. Name it as you want. 
+1.  To add it to the nav menu go to > Appearance > Menus. And then add it to your expected menu.
+1.  All services will be displayed on this page.
+1.	When booking will be placed, the booking request will be shown on your dashboard tab.
+1.  Go to the "EMSB" dashboard and then accept or cancel the booking.
+1.  To see the list of your approved customers list, go to the "All Bookings" tab.
 1.  If you want to show service on a single page just add the post(service) to your expected menu list like others.
+
+= Settings =
+
+1.  Go to settings tab to set notification information.
+1.  User cookie: Set the duration of visitors browser cookie. When the visitors will re-fill the form within the duration, they will get the form filled with the values they entered before. This will make a good experience to your customers.
+
+= Serivice Unavailable? =
+
+1.  When your service availability will be ended, it will be disapeared from front-end. And on your dashboard from "All services" tab, you will be able to see the Unavailable services.
+1.  Edit the service to make it available again. Just change the service Unavailability date on the calendar. And then the service will be available again.
 
 == Screenshots ==
 1. Show all services
@@ -65,14 +79,14 @@ You will set your service available time for a specific date or for any time len
 
 == Installation ==
  
-AUTO INSTALLTION:
+AUTO INSTALLATION:
  
 1. From your admin dashboard click on Add New from plugins.
 1. Then search for EMSB Service Booking.
 1. Click on install & then activate.
 1. Then follow the steps of "How to Use" from description.
 
-MANUAL INSTALLTION:
+MANUAL INSTALLATION:
 
 1. Click on "Download" from right side. 
 1. Then go to your admin dashoard and click on add new from plugins.

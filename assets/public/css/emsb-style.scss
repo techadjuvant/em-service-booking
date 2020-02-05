@@ -27,7 +27,7 @@
 
   
 
-  .em-services-container, .em-reservation-process-container, .em-services-container h1, .em-services-container h2, .em-services-container h3, .em-services-container h4, .em-services-container h5, .em-services-container h6 {
+.em-services-container, .em-reservation-process-container, .em-services-container h1, .em-services-container h2, .em-services-container h3, .em-services-container h4, .em-services-container h5, .em-services-container h6 {
     margin: 0;
     padding: 0;
     border: 0;
@@ -39,6 +39,33 @@
     overflow-x: visible !important;
     font-family: "Alegreya Sans", sans-serif;
     font-weight: 300;
+}
+.emsb-single-service-page .em-services-container h1,
+.emsb-single-service-page .em-services-container h2 {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 24px !important;
+    font: inherit;
+    vertical-align: baseline
+}
+.emsb-single-service-page .em-services-container h3,
+.emsb-single-service-page .em-services-container h4 {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 20px !important;
+    font: inherit;
+    vertical-align: baseline
+}
+.emsb-single-service-page .em-services-container h5,
+.emsb-single-service-page .em-services-container h6 {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 16px !important;
+    font: inherit;
+    vertical-align: baseline
 }
 .em-services-container{
     opacity: 1;
