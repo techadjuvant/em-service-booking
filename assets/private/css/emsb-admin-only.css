@@ -1100,3 +1100,12 @@ th#taxonomy-emsb_service_type {
 .emsb-service-not-available {
   color: red;
 }
+
+.emsb-container {
+  min-height: 600px;
+}
+.emsb-doc-button {
+  position: absolute;
+  bottom: 0;
+  left: 48%;
+}

@@ -383,9 +383,16 @@ class emsb_Admin_Page
                                     <img src="<?php echo plugin_dir_url( __FILE__ ) . 'assets/img/loading.gif'; ?>">
                                 </div>
                                 <footer class="blockquote-footer emsb-pending-table-footer">  <?php _e( '10 Pending Booking Orders only for upcoming slots from the current time( Policy: Come first servied first )', 'emsb-service-booking' ); ?> </footer>
-                            </form>                      
+                            </form> 
                                
                         </div> <!-- End of Container -->
+
+                        <!-- Doc button  -->
+                        <div class="my-4 emsb-doc-button">
+                            <button type="button" class="btn btn-primary ">
+                                <a class="text-light" target="_blank" href="https://e-motahar.com/emsb-service-booking-wordpress-plugin/"> <?php _e( 'Documentation', 'emsb-service-booking' ); ?> </a>
+                            </button>
+                        </div>
 
                     </div>
 
