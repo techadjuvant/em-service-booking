@@ -226,7 +226,7 @@
                         </div>
                         <div class="emsb-ticket-button-wrapper">
                             <h4> <?php _e( 'Thank You', 'emsb-service-booking' ); ?></h4>
-                            <button id="goBackButton" class="btn btn-dark emsb-ticket-button"> <?php _e( 'Go Back ', 'emsb-service-booking' ); ?></button>
+                            <button id="goBackButton" class="btn btn-dark emsb-ticket-button"> <?php _e( 'Finish ', 'emsb-service-booking' ); ?></button>
                         </div>
                     </div>
                 </div>

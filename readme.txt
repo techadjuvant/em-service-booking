@@ -35,7 +35,7 @@ You will set your service available time for a specific date or for any time len
 * Your booking form will be modern and responsive for mobile and on all devices 
 
 = Demo =
-[Live Demo https://e-motahar.com/book-service/]
+[Live Demo http://emsb-health.e-motahar.com/book-service/]
 
 [youtube https://www.youtube.com/watch?v=JF2YDRRz-wI]
  
@@ -103,8 +103,8 @@ Yes, everything in this plugin can be translated using the standard translation 
 
 == Changelog ==
 
-
-
+= 1.1.3 =
+* Published first version after checking quality and safety by WordPress Plugin review team
 
 
 == Upgrade Notice ==

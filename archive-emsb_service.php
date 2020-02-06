@@ -16,7 +16,7 @@ get_header();
         <div class="row">
           <div class="col-lg-8 offset-lg-2"> 
             <header class="d-flex justify-content-center py-4"> 
-              <h2> 
+              <h2 class="emsb-archive-header"> 
                 <?php 
                       $emsb_page_slug = get_page_by_path( 'book-service' );
                       if($emsb_page_slug){
@@ -25,7 +25,7 @@ get_header();
                 ?> 
             </h2> 
             </header>
-            <div class="row py-3">   
+            <div class="row py-3 emsb-filter-search-container">   
               <div class="col-sm-6">
               <form action="<?php echo esc_url( home_url( '/book-service/') ); ?>" method="GET" id="emsb_sort_archive">
                   <select class="form-control chosen-select" data-placeholder="<?php _e( 'Choose a Service Type... ', 'emsb-service-booking' ); ?>" name="service_type" id="emsb_sort_archive_btn" onchange="submit();">
