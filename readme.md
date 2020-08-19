@@ -1,4 +1,4 @@
-# Appointment Booking WordPress Plugin - Free booking plugin - EMSB
+# Doctor Appointment Booking Plugin - Free booking plugin - EMSB
 Contributors: emsbservicebooking
 Tags: appointments, availability calendar, booking calendar, booking system, events calendar, reservation, appointment, service booking, service reservation, event booking, service, event, calendar, booking form, reservation form, service booking form, service booking system, reservation system, online reservations, online service booking, dinner reservations, restaurant form,  mobile reservations, responsive reservations, table reservations, easy reservations, simple reservations, quick service reservations, custom reservation form, custom service reservations
 Requires at Least: 3.5
@@ -13,10 +13,10 @@ A complete plugin for booking appointments, reservations, orders, services, even
 
 # Description
 
-EMSB Service Booking is a dynamic plugin that allows you to accept bookings from customers and then accept or cancel the orders.
+Doctor Appointment Booking Plugin is a dynamic plugin that allows you to accept bookings from customers and then accept or cancel the orders.
 You will set your service available time for a specific date or for any time length like for a month or year. And you are flexible to accept 1, 2, 3,... 100, etc any amount of orders on specific time availability. And you can accept the booking for a specific time of date (AM or PM) or for date wise booking. You can set as many services as you want for accepting bookings. A service archive will be created.
 
-# Key Features
+# Key Features of Doctor Appointment Booking Plugin
 
 *   Create one or multiple services for which you want to **receive booking orders**
 *   **Show a single service** on a single page or **multiple services** which are available only
@@ -40,7 +40,7 @@ https://www.youtube.com/watch?v=JF2YDRRz-wI
 
 
  
-# HOW TO USE :
+# How to use Doctor Appointment Booking Plugin :
  
 1.  Install & Activate the plugin
 1.  From Admin dashboard go to EMSB tab
@@ -79,16 +79,16 @@ https://www.youtube.com/watch?v=JF2YDRRz-wI
 
 
 
-# Installation 
+# Installation of Doctor Appointment Booking Plugin
 
-## AUTO INSTALLATION:
+## Auto Installation:
  
 1.  From your admin dashboard click on Add New from plugins.
 1.  Then search for "**Doctor Appointment Booking Calendar - EMSB**".
 1.  Click on install & then activate.
 1.  Then follow the steps of “How to Use” from the description.
 
-## MANUAL INSTALLATION:
+## Manual Installation:
 
 1.  Search for " **Doctor Appointment Booking Calendar - EMSB** " on https://wordpress.org/plugins/
 1.  Then click on the **Doctor Appointment Booking Calendar - EMSB** plugin.
@@ -100,7 +100,7 @@ https://www.youtube.com/watch?v=JF2YDRRz-wI
  
  
 ## Frequently Asked Questions 
-### Can I translate the EMSB plugin? 
+### Can I translate the Doctor Appointment Booking Plugin? 
 
 Yes, everything in this plugin can be translated using the standard translation process and software like PoEdit.
 
