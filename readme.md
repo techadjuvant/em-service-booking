@@ -66,7 +66,7 @@ https://www.youtube.com/watch?v=JF2YDRRz-wI
 1.  Edit the service to make it available again. Just change the service Unavailability date on the calendar. And then the service will be available again.
 
 
-== Screenshots ==
+### Screenshots 
 1. Show all services
 2. Booking calendar
 3. Booking order submitted
