@@ -88,7 +88,7 @@ https://www.youtube.com/watch?v=JF2YDRRz-wI
 1.  Click on install & then activate.
 1.  Then follow the steps of “How to Use” from the description.
 
-# MANUAL INSTALLATION:
+## MANUAL INSTALLATION:
 
 1.  Search for " **Doctor Appointment Booking Calendar - EMSB** " on https://wordpress.org/plugins/
 1.  Then click on the **Doctor Appointment Booking Calendar - EMSB** plugin.
@@ -100,14 +100,14 @@ https://www.youtube.com/watch?v=JF2YDRRz-wI
  
  
 ## Frequently Asked Questions 
-= Can I translate the EMSB plugin? =
+= Can I translate the EMSB plugin? 
 
 Yes, everything in this plugin can be translated using the standard translation process and software like PoEdit.
 
 
 ## Changelog 
 
-= 1.1.3 =
+### 1.1.3 
 * Published first version after checking quality and safety by WordPress Plugin review team
 
 
