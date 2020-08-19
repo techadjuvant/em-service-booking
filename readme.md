@@ -111,5 +111,5 @@ Yes, everything in this plugin can be translated using the standard translation 
 * Published first version after checking quality and safety by WordPress Plugin review team
 
 
-== Upgrade Notice ==
+## Upgrade Notice
 Upgrade to the latest version for the latest awesome features.
