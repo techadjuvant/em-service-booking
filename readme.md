@@ -100,7 +100,7 @@ https://www.youtube.com/watch?v=JF2YDRRz-wI
  
  
 ## Frequently Asked Questions 
-= Can I translate the EMSB plugin? 
+### Can I translate the EMSB plugin? 
 
 Yes, everything in this plugin can be translated using the standard translation process and software like PoEdit.
 
