@@ -1,4 +1,4 @@
-# Doctor Appointment Booking Plugin - EMSB 
+# Appointment Booking WordPress Plugin - Free booking plugin - EMSB
 Contributors: emsbservicebooking
 Tags: appointments, availability calendar, booking calendar, booking system, events calendar, reservation, appointment, service booking, service reservation, event booking, service, event, calendar, booking form, reservation form, service booking form, service booking system, reservation system, online reservations, online service booking, dinner reservations, restaurant form,  mobile reservations, responsive reservations, table reservations, easy reservations, simple reservations, quick service reservations, custom reservation form, custom service reservations
 Requires at Least: 3.5
